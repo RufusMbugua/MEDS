@@ -2,21 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <title>MEDS</title>
-  <link rel="icon" href="" />
+  <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon"/>
   <link href="<?php echo base_url().'style/core.css';?>" rel="stylesheet" type="text/css" />
    <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
    
   <link href="<?php echo base_url().'style/jquery.tooltip.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/jquery-ui.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/demo_table.css';?>" rel="stylesheet" type="text/css"/>
-  
-  <!-- bootstrap reference links  
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.css.map';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.min.css';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap.css.map'; ?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.css';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap.min.css';?>" rel="stylesheet" type="text/css"/>  
-   -->
+
   <!-- bootstrap reference library -->
   <link href="<?php echo base_url().'bootstrap/css/bootstrap.css'; ?>" rel="stylesheet" type="text/css"/>
 
@@ -27,26 +20,26 @@
   <!-- bootstrap reference library -->
   <script src="<?php echo base_url().'js/bootstrap.min.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/Jquery-datatables/jquery.dataTables.js';?>"></script>
-  <script>
-   $(document).ready(function() {
-    /* Init DataTables */
-    $('#list').dataTable({
-     "sScrollY":"270px",
-     "sScrollX":"100%"
-    });
-   });
-  </script>
+  <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'tinymce/tinymce.min.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'tinymce/textarea_script.js';?>"></script>
  </head>
  <body>
   <?php
    $user=$this->session->userdata;
-   $test_request_id=$user['logged_in']['test_request_id'];
    $user_type_id=$user['logged_in']['user_type'];
    $user_id=$user['logged_in']['id'];
    $department_id=$user['logged_in']['department_id'];
    $acc_status=$user['logged_in']['acc_status'];
    $id_temp=1;
    //var_dump($user);
+   if(empty($user['logged_in']['id'])) {
+       
+      redirect('login','location');  //1. loads the login page in current page div
+
+      echo '<meta http-equiv=refresh content="0;url=base_url();login">'; //3 doesn't work
+
+       }
   ?>
   <div id="header"> 
    <div id="logo" style="padding:8px;color: #0000ff;" align="center"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="35px" width="40px"/>MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</div>
@@ -76,7 +69,7 @@
               ?> <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="<?php echo base_url().'account_settings/index/'.$test_request_id.'/'.$user_type_id.'/'.$user_id.'/'.$department_id;?>"><i class="icon-wrench"></i> Settings <img src="<?php echo base_url().'images/icons/settings2.png';?>" height="20px" width="20px"></a></li>
+              <li><a href="<?php echo base_url().'account_settings/index/'.$user_type_id.'/'.$user_id.'/'.$department_id;?>"><i class="icon-wrench"></i> Settings <img src="<?php echo base_url().'images/icons/settings2.png';?>" height="20px" width="20px"></a></li>
               <li class="divider"></li>
               <li><a href="<?php echo base_url().'home/logout'?>"><i class="icon-share"></i>Logout</b> <img src="<?php echo base_url().'images/icons/door.png';?>" height="25px" width="25px"></a></li>
             </ul>
@@ -190,13 +183,13 @@
         <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
     </div>
     <div id="form_wrapper">
-    <div id="forms" >
-        <?php echo validation_errors(); ?>
-        <?php echo form_open('update_request_record/Submit/'.$test_request_id.'/'.$user_type_id, array('id'=>'update_request_view'));?>
+    <div id="forms">
+        <?php echo validation_errors();?>
+        <?php echo form_open('update_request_record/update_request/'.$query['id'].'/'.$user_type_id, array('id'=>'update_request_view'));?>
         <table class="table_form" bgcolor="#c4c4ff" width="65%"  border="0" cellpadding="8px" align="center">
         <!-- <input type="hidden" id="id" value="<?php echo"$user_type_id";?>" class="id" name="id"/> -->
         <input type="hidden" id="id" value="<?php echo"$user_id";?>" class="id" name="user_id"/>
-        <!-- <input type="hidden" id="test_req" value="<?php echo"$test_request_id";?>"name="test_req"/> -->
+        <input type="hidden" id="test_req" value="<?php echo $query['id'];?>"name="test_req"/>
         <tr>
           <td colspan="8" style="padding:8px;text-align:right;"><a href="<?php echo base_url().'home';?>"><img src="<?php echo base_url().'images/icons/view.png';?>"height="20px" width="20px">Back To Test Request Lists</a></td>
         </tr>
@@ -254,11 +247,11 @@
               </tr>
               <tr>
                   <td style="padding:4px;text-align:left;">Label Claim</td>
-                  <td colspan="4" style="padding:4px;text-align:left;"><input type="text" class="field" size="80" name="lable_claim" id="lable_claim" value="<?php echo $query['label_claim'];?>"><span id="lable_claim_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="lable_claim_r" style="color:red; display:none">Fill this</span></td>
+                  <td colspan="4" style="padding:4px;text-align:left;"><input type="text" class="field" size="80" name="label_claim" id="lable_claim" value="<?php echo $query['label_claim'];?>"><span id="lable_claim_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="lable_claim_r" style="color:red; display:none">Fill this</span></td>
               </tr>
               <tr>
-                  <td style="padding:4px;text-align: left;">Dosage from</td>
-                  <td style="text-align:left;padding:4px;"><input type="text" class="field" name="dosage_from" id="dosage_from" value="<?php echo $query['dosage_from'];?>"><span id="dosage_from_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="dosage_from_r" style="color:red; display:none">Fill this</span></td>
+                  <td style="padding:4px;text-align: left;">Dosage form</td>
+                  <td style="text-align:left;padding:4px;"><input type="text" class="field" name="dosage_form" id="dosage_from" value="<?php echo $query['dosage_form'];?>"><span id="dosage_from_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="dosage_from_r" style="color:red; display:none">Fill this</span></td>
                   <td style="padding:4px;"></td>
                   <td style="padding:4px;text-align:left;">Strength or concentration</td>
                   <td style="padding:4px;text-align:left;"><input type="text" class="field"  name="strength_concentration" id="strength_concentration" value="<?php echo $query['strength_concentration'];?>"><span id="strength_concentration_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="strength_concentration_r" style="color:red; display:none">Fill this</span></td>
@@ -286,10 +279,10 @@
               </tr>
               <tr>
                   <td style="padding:4px;text-align:left;">Date of Manufacture</td>
-                  <td style="padding:4px;text-align:left;"><input type="date"  name="date_of_manufacture" id="date_of_manufacture"><span id="date_of_manufacture_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="date_of_manufacture_r" style="color:red; display:none">Fill this</span></td>
+                  <td style="padding:4px;text-align:left;"><input type="text" class="datepicker" name="date_of_manufacture" id="datepicker" value="<?php echo $query['date_manufactured'];?>"><span id="date_of_manufacture_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="date_of_manufacture_r" style="color:red; display:none">Fill this</span></td>
                   <td style="padding:4px;"></td>
                   <td style="padding:4px;text-align:left;">Expiry/Retest Date</td>
-                  <td style="padding:4px;text-align:left;"><div id="exp_date"><input type="date" class="field" id="expiry_retest_date" name="expiry_retest_date" value="<?php echo $query['expiry_date'];?>"><span id="expiry_retest_date_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="expiry_retest_date_r" style="color:red; display:none">Fill this</span></td>
+                  <td style="padding:4px;text-align:left;"><input type="text" class="field datepicker" id="expiry_retest_date" name="expiry_retest_date" value="<?php echo $query['expiry_date'];?>"><span id="expiry_retest_date_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="expiry_retest_date_r" style="color:red; display:none">Fill this</span></td>
               </tr>
               <tr>
                   <td style="padding:4px;text-align: left;">Quantity Submitted</td>
@@ -323,10 +316,10 @@
           <td height="25px" colspan="8" style="padding:8px;background-color:#ffffff;border-bottom:solid 10px #c4c4ff;">Reason for Requesting Analysis(Tick as appropriate)</td>
         </tr>
         <tr>
-          <td colspan="8" style="padding:4px;background-color:#ffffff;"><input type='radio' checked="checked" name='reason' id='compliance_testing' value="Compliance Testing">Compliance Testing</td>
+          <td colspan="8" style="padding:4px;background-color:#ffffff;"><?php if($query['testing_reason']=='Compliance Testing'){echo"<input type='radio' name='reason' id='compliance_testing' value='Compliance Testing' checked>";}else{echo"<input type='radio' name='reason' id='compliance_testing' value='Compliance Testing'>";};?>Compliance Testing</td>
         </tr>
         <tr>
-          <td colspan="8" style="padding:4px;background-color:#ffffff;"><input type='radio' name='reason' id='investigative_testing' value="Investigative Testing">Investigative Testing</td>
+          <td colspan="8" style="padding:4px;background-color:#ffffff;"><?php if($query['testing_reason']=='Investigative Testing'){echo"<input type='radio' name='reason' id='investigative_testing' value='Investigative Testing' checked>";}else{echo"<input type='radio' name='reason' id='investigative_testing' value='Investigative Testing'>";};?>Investigative Testing</td>
         </tr>
         <tr>
           <td height="25px" colspan="8" style="padding:4px;background-color:#ffffff;">Other(Please Specify)</td>
@@ -339,71 +332,78 @@
         </tr>
         <tr>
           <td colspan="8" style="padding:8px;background-color:#ffffff;">
-              <table class ="inner_table" width="100%"  cellpadding="8px" height="150px" align="center" border="0">
+              <table class ="inner_table" width="100%" cellpadding="8px" height="150px" align="center" border="0">
                 <tr>
-                  <td style="padding:4px;border-bottom:solid 1px #f2f2f2;text-align:center;"><b>No</b></td>
-                  <td style="padding:4px;border-bottom:solid 1px #f2f2f2;text-align:center;"><b>Test</b></td>
-                  <td style="padding:4px;border-bottom:solid 1px #f2f2f2;text-align:center;"><b>Requirement</b></td>
-                  <td style="padding:4px;border-bottom:solid 1px #f2f2f2;text-align:center;"><b>No</b></td>
-                  <td style="padding:4px;border-bottom:solid 1px #f2f2f2;text-align:center;"><b>Test</b></td>
-                  <td style="padding:4px;border-bottom:solid 1px #f2f2f2;text-align:center;"><b>Requirement</b></td>
+                    <td style="padding:2px;border-bottom:solid 1px #f2f2f2;text-align:center;"><b>No</b></td>
+                    <td style="padding:2px;border-bottom:solid 1px #f2f2f2;text-align:center;"><b>Test</b></td>
+                    <td style="padding:2px;border-bottom:solid 1px #f2f2f2;text-align:center;"><b>Requirement</b></td>
+                    <td style="padding:2px;border-bottom:solid 1px #f2f2f2;text-align:center;"><b>No</b></td>
+                    <td style="padding:2px;border-bottom:solid 1px #f2f2f2;text-align:center;"><b>Test</b></td>
+                    <td style="padding:2px;border-bottom:solid 1px #f2f2f2;text-align:center;"><b>Requirement</b></td>
                 </tr>
                 <tr>
-                  <td style="padding:4px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">i.</td>
+                  <td style="padding:2px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">i.</td>
                   <td>Identification</td>
-                  <td style="padding:4px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='identifications' id='identification' value='1'></td>
-                  <td style="padding:4px;border-right:solid 1px #f2f2f2;text-align:center;">vii.</td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><?php if(in_array(1, $test)){echo "<input type='checkbox' name='tests[]' id='tests[]' value='1' checked>";}else{echo "<input type='checkbox' name='tests[]' id='tests[]' value='1'>";}?></td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;">vii.</td>
                   <td>Dissolution</td>
-                  <td style="padding:4px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='dissolution' id='dissolution' value='7'></td>
+                  <td style="border-right:solid 1px #f2f2f2;text-align:center;"><?php if(in_array(7, $test)){echo"<input type='checkbox' name='tests[]' id='tests[]' value='7' checked>";}else{echo"<input type='checkbox' name='tests[]' id='tests[]' value='7'>";}?></td>
                 </tr>
                 <tr>
-                  <td style="padding:4px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">ii.</td>
+                  <td style="padding:2px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">ii.</td>
                   <td>Friability</td>
-                  <td style="padding:4px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='friability' id='friability' value='2'></td>
-                  <td style="padding:4px;border-right:solid 1px #f2f2f2;text-align:center;">viii.</td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><?php if(in_array(2, $test)){echo"<input type='checkbox' name='tests[]' id='tests[]' value='2' checked>";}else{echo"<input type='checkbox' name='tests[]' id='tests[]' value='2'>";}?></td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;">viii.</td>
                   <td>Assay</td>
-                  <td style="padding:4px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='assay' id='assay' value='8'></td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><?php if(in_array(8, $test)){echo"<input type='checkbox' name='tests[]' id='tests[]' value='8' checked>";}else{echo"<input type='checkbox' name='tests[]' id='tests[]' value='8'>";}?></td>
                 </tr>
                 <tr>
-                  <td style="padding:4px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">iii.</td>
+                  <td style="padding:2px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">iii.</td>
                   <td>Disintegration</td>
-                  <td style="padding:4px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='disintergration' id='disintergration' value='3'></td>
-                  <td style="padding:4px;border-right:solid 1px #f2f2f2;text-align:center;">ix.</td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><?php if(in_array(3, $test)){echo"<input type='checkbox' name='tests[]' id='tests[]' value='3' checked>";}else{echo"<input type='checkbox' name='tests[]' id='tests[]' value='3'>";}?></td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;">ix.</td>
                   <td>Content Uniformity</td>
-                  <td style="padding:4px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='content_uniformity' id='content_uniformity' value='9'></td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><?php if(in_array(9, $test)){echo"<input type='checkbox' name='tests[]' id='tests[]' value='9' checked>";}else{echo"<input type='checkbox' name='tests[]' id='tests[]' value='9'>";}?></td>
                 </tr>
                 <tr>
-                  <td style="padding:4px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">iv.</td>
-                  <td>PH(Acidity/Alkalinity)</td>
-                  <td style="padding:4px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='ph_alkalinity_acidity' id='ph_alkalinity_acidity' value='4'></td>
-                  <td style="padding:4px;border-right:solid 1px #f2f2f2;text-align:center;">x.</td>
+                  <td style="padding:2px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">iv.</td>
+                  <td>ph(Acidity/Alkalinity)</td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><?php if(in_array(4, $test)){echo"<input type='checkbox' name='tests[]' id='tests[]' value='4' checked>";}else{echo"<input type='checkbox' name='tests[]' id='tests[]' value='4'>";}?></td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;">x.</td>
                   <td>Full Monograph</td>
-                  <td style="padding:4px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='full_monograph' id='full_monograph' value='10'></td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><?php if(in_array(10, $test)){echo"<input type='checkbox' name='tests[]' id='tests[]' value='10' checked>";}else{echo"<input type='checkbox' name='tests[]' id='tests[]' value='10'>";}?></td>
                 </tr>
-                <tr>
+                 <tr>
                   <td style="padding:4px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">v.</td>
                   <td>Related Substances</td>
-                  <td style="padding:4px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='related_substances' id='related_substances' value='5'></td>
+                  <td style="padding:4px;border-right:solid 1px #f2f2f2;text-align:center;"><?php if(in_array(5, $test)){echo"<input type='checkbox' name='tests[]' id='tests[]' value='5' checked>";}else{echo"<input type='checkbox' name='tests[]' id='tests[]' value='5'>";}?></td>
                   <td style="padding:4px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">xi.</td>
                   <td>Uniformity of Dosage</td>
-                  <td style="padding:4px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='uniformity_of_dosage' id='uniformity_of_dosage' value='11'></td>
+                  <td style="padding:4px;border-right:solid 1px #f2f2f2;text-align:center;"><?php if(in_array(11, $test)){echo"<input type='checkbox' name='tests[]' id='tests[]' value='11' checked>";}else{echo"<input type='checkbox' name='tests[]' id='tests[]' value='11'>";}?></td>
                 </tr>
                 <tr>
                   <td style="padding:4px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">vi</td>
                   <td>Weight Variation/Mass Uniformity</td>
-                  <td style="padding:4px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='weight_variation_mass_uniformity' id='weight_variation_mass_uniformity' value='6'></td>
+                  <td style="padding:4px;border-right:solid 1px #f2f2f2;text-align:center;"><?php if(in_array(6, $test)){echo"<input type='checkbox' name='tests[]' id='tests[]' value='6' checked>";}else{echo"<input type='checkbox' name='tests[]' id='tests[]' value='6'>";}?></td>
                   <td style="padding:4px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">xii.</td>
                   <td>Karl Fisher</td>
-                  <td style="padding:4px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='karl_fisher' id='karl_fisher' value='12'></td>
+                  <td style="padding:4px;border-right:solid 1px #f2f2f2;text-align:center;"><?php if(in_array(12, $test)){echo"<input type='checkbox' name='tests[]' id='tests[]' value='12' checked>";}else{echo"<input type='checkbox' name='tests[]' id='tests[]' value='12'>";}?></td>
                 </tr>
                 <tr>
-                <tr>
-                  <td style="padding:4px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;"></td>
+                  <td style="padding:2px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;"></td>
                   <td></td>
-                  <td style="padding:4px;border-right:solid 1px #f2f2f2;text-align:center;"></td>
-                  <td style="padding:4px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">xiii.</td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"></td>
+                  <td style="padding:2px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">xiii.</td>
                   <td>Microbiology</td>
-                  <td style="padding:4px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='microbiology' id='microbiology' value='13'></td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><?php if(in_array(13, $test)){echo"<input type='checkbox' name='tests[]' id='tests[]' value='13' checked>";}else{echo"<input type='checkbox' name='tests[]' id='tests[]' value='13'>";}?></td>
+                </tr>
+                <tr>
+                  <td style="padding:2px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;"></td>
+                  <td></td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"></td>
+                  <td style="padding:2px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">xiv.</td>
+                  <td>Loss and Drying</td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><?php if(in_array(14, $test)){echo"<input type='checkbox' name='tests[]' id='tests[]' value='14' checked>";}else{echo"<input type='checkbox' name='tests[]' id='tests[]' value='14'>";}?></td>
                 </tr>
             </table>
           </td>
@@ -417,19 +417,19 @@
             <td height="25px" colspan="8" style="padding:8px;background-color:#ffffff;border-bottom:solid 10px #c4c4ff;"><b>Specifications to be used for testing:</b>(Tick as appropriate)</td>
           </tr>
           <tr>
-            <td colspan="8" style="padding:4px;background-color:#ffffff;"><input type='radio' checked="checked" name='specification' id='usp' value='USP'>USP</td>
+            <td colspan="8" style="padding:4px;background-color:#ffffff;"><?php if($query['test_specification']=='USP'){echo"<input type='radio' name='specification' id='usp' value='USP' checked>";}else{echo"<input type='radio' name='specification' id='usp' value='USP'>";}?>USP</td>
           </tr>
           <tr>
-            <td colspan="8" style="padding:4px;background-color:#ffffff;"><input type='radio' name='specification' id='bp' value='BP'>BP</td>
+            <td colspan="8" style="padding:4px;background-color:#ffffff;"><?php if($query['test_specification']=='BP'){echo"<input type='radio' name='specification' id='bp' value='BP' checked>";}else{echo"<input type='radio' name='specification' id='bp' value='BP'>";}?>BP</td>
           </tr>
           <tr>
-            <td colspan="8" style="padding:4px;background-color:#ffffff;"><input type='radio' name='specification' id='european_pharmacopeia' value='European Pharmacopoeia'>European Pharmacopoeia</td>
+            <td colspan="8" style="padding:4px;background-color:#ffffff;"><?php if($query['test_specification']=='European Pharmacopoeia'){echo"<input type='radio' name='specification' id='european_pharmacopeia' value='European Pharmacopoeia' checked>";}else{echo"<input type='radio' name='specification' id='european_pharmacopeia' value='European Pharmacopoeia'>";}?>European Pharmacopoeia</td>
           </tr>
           <tr>
-            <td colspan="8" style="padding:4px;background-color:#ffffff;"><input type='radio' name='specification' id='international_pharmacopeia' value='International Pharmacopoeia'>International Pharmacopoeia</td>
+            <td colspan="8" style="padding:4px;background-color:#ffffff;"><?php if($query['test_specification']=='International Pharmacopoeia'){echo"<input type='radio' name='specification' id='international_pharmacopeia' value='International Pharmacopoeia' checked>";}else{echo"<input type='radio' name='specification' id='international_pharmacopeia' value='International Pharmacopoeia'>";}?>International Pharmacopoeia</td>
           </tr>
           <tr>
-            <td colspan="8" style="padding:4px;background-color:#ffffff;"><input type='radio' name='specification' id='manufacturers_specs' value='Manufacturer Specifications'>Manufacturer's Specifications</td>
+            <td colspan="8" style="padding:4px;background-color:#ffffff;"><?php if($query['test_specification']=='Manufacturer Specifications'){echo"<input type='radio' name='specification' id='manufacturers_specs' value='Manufacturer Specifications' checked>";}else{echo"<input type='radio' name='specification' id='manufacturers_specs' value='Manufacturer Specifications'>";}?>Manufacturer's Specifications</td>
           </tr>
           <tr>
             <td height="25px" colspan="8" style="padding:4px;background-color:#ffffff;border-bottom:solid 10px #c4c4ff;">Other(Please specify)</td>

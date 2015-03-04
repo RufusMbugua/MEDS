@@ -10,13 +10,6 @@
   <link href="<?php echo base_url().'style/jquery-ui.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/demo_table.css';?>" rel="stylesheet" type="text/css"/>
   
-  <!-- bootstrap reference links  
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.css.map';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.min.css';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap.css.map'; ?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.css';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap.min.css';?>" rel="stylesheet" type="text/css"/>  
-   -->
   <!-- bootstrap reference library -->
   <link href="<?php echo base_url().'bootstrap/css/bootstrap.css'; ?>" rel="stylesheet" type="text/css"/>
 
@@ -40,13 +33,19 @@
  <body>
   <?php
    $user=$this->session->userdata;
-   $test_request_id=$user['logged_in']['test_request_id'];
    $user_type_id=$user['logged_in']['user_type'];
    $user_id=$user['logged_in']['id'];
    $department_id=$user['logged_in']['department_id'];
    $acc_status=$user['logged_in']['acc_status'];
    $id_temp=1;
    //var_dump($user);
+   if(empty($user['logged_in']['id'])) {
+     
+    redirect('login','location');  //1. loads the login page in current page div
+
+    echo '<meta http-equiv=refresh content="0;url=base_url();login">'; //3 doesn't work
+
+     }
   ?>
   <div id="header"> 
    <div id="logo" style="padding:8px;color: #0000ff;" align="center"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="35px" width="40px"/>MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</div>
@@ -71,7 +70,7 @@
               ?> <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="<?php echo base_url().'account_settings/index/'.$test_request_id.'/'.$user_type_id.'/'.$user_id.'/'.$department_id;?>"><i class="icon-wrench"></i> Settings <img src="<?php echo base_url().'images/icons/settings2.png';?>" height="20px" width="20px"></a></li>
+              <li><a href="<?php echo base_url().'account_settings/index/'.$user_type_id.'/'.$user_id.'/'.$department_id;?>"><i class="icon-wrench"></i> Settings <img src="<?php echo base_url().'images/icons/settings2.png';?>" height="20px" width="20px"></a></li>
               <li class="divider"></li>
               <li><a href="<?php echo base_url().'home/logout'?>"><i class="icon-share"></i>Logout</b> <img src="<?php echo base_url().'images/icons/door.png';?>" height="25px" width="25px"></a></li>
             </ul>
@@ -197,11 +196,11 @@
     <thead bgcolor="#efefef">
       <tr>
         <th style="text-align:center;border-right: dotted 1px #ddddff;">No.</th>
-        <th style="text-align:center;border-right: dotted 1px #ddddff;">Product Name</th>
-        <th style="text-align:center;border-right: dotted 1px #ddddff;">Manufacturer</th>
-        <th style="text-align:center;border-right: dotted 1px #ddddff;">Batch Lot No.</th>
-        <th style="text-align:center;border-right: dotted 1px #ddddff;">Date of Manufacturing</th>
-        <th style="text-align:center;border-right: dotted 1px #ddddff;">Expiry Date</th>
+        <th style="text-align:center;border-right: dotted 1px #ddddff;">Test Type</th>
+        <th style="text-align:center;border-right: dotted 1px #ddddff;">Test Specification</th>
+        <th style="text-align:center;border-right: dotted 1px #ddddff;">Conclusion</th>
+        <th style="text-align:center;border-right: dotted 1px #ddddff;">Done By</th>
+        <th style="text-align:center;border-right: dotted 1px #ddddff;">Date Done</th>
         <th style="text-align:center;border-right: dotted 1px #ddddff;">View COA</th>
       </tr>
     </thead>
@@ -217,14 +216,31 @@
       ?>
       
         <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $i;?>.</td>
-        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->active_ingredients;?></td>
-        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->manufacturer_name;?></td>
-        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->batch_lot_number;?></td>
-        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->date_manufactured;?></td>
-        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->expiry_date;?></td>
-        <td style="text-align: center;"><a href="<?php echo base_url().'coa/view/'.$row->id?>" height="20px" width ="20px"><img src="<?php echo base_url().'images/icons/add_field.png';?>" height="10px" width="10px">Generate COA</a></td>
+        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->test_request_name;?></td>
+        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->specification;?></td>
+        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->conclusions;?></td>
+        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->done_by;?></td>
+        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->timestamp;?></td>        
+        <td 
+          <?php 
+
+          if($row->approve_status == 0){
         
-        
+              echo'style="text-align: center;"';
+              ?>>
+
+              <a href="<?php echo base_url().'coa/approve/'.$row->id.'/'.$row->test_request_id?>" height="20px" width ="20px"><img src="<?php echo base_url().'images/icons/add_field.png';?>" height="10px" width="10px">Approve COA </a>
+              <?php
+
+         }else{
+             echo'style="text-align:center;"';
+             ?>>
+             <a href="<?php echo base_url().'coa/final_coa/'.$row->id.'/'.$row->test_request_id?>" height="20px" width ="20px"><img src="<?php echo base_url().'images/icons/add_field.png';?>" height="10px" width="10px">View COA</a>
+            <?php
+            }
+            ?>
+         
+        </td>
         
         <?php $i++; ?>
 

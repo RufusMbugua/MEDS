@@ -10,13 +10,6 @@
   <link href="<?php echo base_url().'style/jquery-ui.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/demo_table.css';?>" rel="stylesheet" type="text/css"/>
   
-  <!-- bootstrap reference links  
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.css.map';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.min.css';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap.css.map'; ?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.css';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap.min.css';?>" rel="stylesheet" type="text/css"/>  
-   -->
   <!-- bootstrap reference library -->
   <link href="<?php echo base_url().'bootstrap/css/bootstrap.css'; ?>" rel="stylesheet" type="text/css"/>
 
@@ -40,7 +33,6 @@
  <body>
   <?php
    $user=$this->session->userdata;
-   $test_request_id=$user['logged_in']['test_request_id'];
    $user_type_id=$user['logged_in']['user_type'];
    $user_id=$user['logged_in']['id'];
    $department_id=$user['logged_in']['department_id'];
@@ -55,182 +47,32 @@
 
     }
   ?>
-  <div id="header"> 
-   <div id="logo" style="padding:8px;color: #0000ff;" align="center"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="35px" width="40px"/>MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</div>
-  <div id="log_bar">
-  <table  cellpadding="2px" align="center" width="100%">
-      <tr>
-        
-        <td style="border-bottom: solid 1px #c4c4ff;padding:4px;text-align: center;background-color: #ffffff;" width="20px">
-           <img src="<?php echo base_url().'images/icons/user_blue.png';?>" height="25px" width="24px">
-        </td>
-       <td style="border-bottom: solid 1px #c4c4ff;padding:2px;text-align: left;background-color: #ffffff;" width="130px">
-          <?php 
-           echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);
-         ?> 
-       </td>
-         <td height="10px"  style="border-bottom: solid 1px #c4c4ff;padding:8px;background-color: #ffffff;">
-          
-        </td>
-        <td style="border-bottom: solid 1px #c4c4ff;padding:4px;background-color: #ffffff;" width="200px"></td>
-         <td style="background-color:#ffffff;border-bottom: solid 1px #c4c4ff;padding:2px;" >
-          <div class="btn-group pull-right">
-            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-              <i class="icon-user"></i> 
-              <?php 
-               echo($user['logged_in']['role']);
-              ?> <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="<?php echo base_url().'account_settings/index/'.$test_request_id.'/'.$user_type_id.'/'.$user_id.'/'.$department_id;?>"><i class="icon-wrench"></i> Settings <img src="<?php echo base_url().'images/icons/settings2.png';?>" height="20px" width="20px"></a></li>
-              <li class="divider"></li>
-              <li><a href="<?php echo base_url().'home/logout'?>"><i class="icon-share"></i>Logout</b> <img src="<?php echo base_url().'images/icons/door.png';?>" height="25px" width="25px"></a></li>
-            </ul>
-          </div>
-        </td>
-      </tr>
-  </table> 
-  </div>
-</div>
-   <?php 
-    echo "<div id='system_nav'";
-      if($user['logged_in']['user_type'] !=6 && $user['logged_in']['user_type'] !=8){
-       echo"style='display:none'";
-      }
-      else{
-       echo "style='display:block;'>";
-      }
-     ?>
-     <a href="<?php echo base_url().'user_accounts/Get';?>" class="system_nav system_nav_link ">User Accounts</a>
-     <a href="<?php echo base_url().'client_list/Get';?>" class="system_nav system_nav_link">Client List</a>
-    </div>
-    <?php
-    echo"<div id='sub_menu'";
-    if($user['logged_in']['user_type'] ==6 && $user['logged_in']['department_id'] ==0){
-       echo"style='display:block;'>";
-      }
-      else{
-          echo "style='display:none'>";
-      }
-     ?>
-        <a href="<?php echo base_url().'home';?>"class="sub_menu sub_menu_link first_link active">Analysis Test Request</a>
-        <a href="<?php echo base_url().'equipment_maintenance_records/Get';?>"class="current sub_menu sub_menu_link first_link">Equipment & Maintenance</a>
-        <a href="<?php echo base_url().'reagents_inventory_record/Get';?>"class="sub_menu sub_menu_link first_link">Reagents & Inventory</a>
-        <a href="<?php echo base_url().'standard_register_records/Get';?>"class="sub_menu sub_menu_link first_link">Standard Register</a>
-        <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
-        <!-- <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a> -->
-        <a href="<?php echo base_url().'complaints_list/records';?>" class="sub_menu sub_menu_link first_link">Complaints</a>
-        <a href="<?php echo base_url().'coapresentation/mypresentation.pdf';?>"class="sub_menu sub_menu_link first_link">Certificate of Analysis</a>
-        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a>
-    </div>
-    <?php
-    echo"<div id='sub_menu'";
-    if($user['logged_in']['user_type'] ==7 && $user['logged_in']['department_id'] ==1){
-       echo"style='display:block;'>";
-      }
-      else{
-          echo "style='display:none'>";
-      }
-     ?>
-        <a href="<?php echo base_url().'home';?>"class="sub_menu sub_menu_link first_link">Analysis Test Request</a>
-        <a href="<?php echo base_url().'standard_register_records/Get';?>"class="sub_menu sub_menu_link first_link">Standard Register</a>
-    </div>
-    <?php
-    echo"<div id='sub_menu'";
-    if($user['logged_in']['user_type'] ==6 && $user['logged_in']['department_id'] ==8){
-       echo"style='display:block;'>";
-      }
-      else{
-          echo "style='display:none'>";
-      }
-     ?>
-        <a href="<?php echo base_url().'home';?>"class="sub_menu sub_menu_link first_link active">Analysis Test Request</a>
-        <a href="<?php echo base_url().'equipment_maintenance_records/Get';?>"class="current sub_menu sub_menu_link first_link">Equipment & Maintenance</a>
-        <a href="<?php echo base_url().'reagents_inventory_record/Get';?>"class="sub_menu sub_menu_link first_link">Reagents & Inventory</a>
-        <a href="<?php echo base_url().'standard_register_records/Get';?>"class="sub_menu sub_menu_link first_link">Standard Register</a>
-        <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
-        <!-- <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a> -->
-        <a href="<?php echo base_url().'complaints_list/records';?>"class="sub_menu sub_menu_link first_link">Complaints</a>
-        <a href="<?php echo base_url().'coapresentation/mypresentation.pdf';?>"class="sub_menu sub_menu_link first_link">Certificate of Analysis</a>
-        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a>
-    </div>
-    <?php
-    echo"<div id='sub_menu'";
-    if($user['logged_in']['user_type'] ==5 && $user['logged_in']['department_id'] ==3){
-       echo"style='display:block;'>";
-      }
-      else{
-          echo "style='display:none'>";
-      }
-     ?>
-        <a href="<?php echo base_url().'home';?>"class="sub_menu sub_menu_link first_link">Analysis Test Request</a>
-        <a href="<?php echo base_url().'reagents_inventory_record/Get';?>"class="sub_menu sub_menu_link first_link">Reagents & Inventory</a>
-        <a href="<?php echo base_url().'equipment_maintenance_records/Get';?>"class="sub_menu sub_menu_link first_link">Equipment</a>
-        <!-- <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a> -->
-        <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
-    </div>
-    <?php
-    echo"<div id='sub_menu'";
-    if($user['logged_in']['user_type'] ==5 && $user['logged_in']['department_id'] ==2){
-       echo"style='display:block;'>";
-      }
-      else{
-          echo "style='display:none'>";
-      }
-     ?>
-        <a href="<?php echo base_url().'home';?>"class="sub_menu sub_menu_link first_link">Analysis Test Request</a>
-        <a href="<?php echo base_url().'equipment_maintenance_records/Get';?>"class="current sub_menu sub_menu_link first_link">Equipment & Maintenance</a>
-        <!-- <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a> -->
-    </div>    
-    <?php
-    echo"<div id='sub_menu'";
-    if($user['logged_in']['user_type'] ==5 && $user['logged_in']['department_id'] ==4){
-       echo"style='display:block;'>";
-      }
-      else{
-          echo "style='display:none'>";
-      }
-     ?>
-        <a href="<?php echo base_url().'home';?>"class="sub_menu sub_menu_link first_link">Analysis Test Request</a>
-        <a href="<?php echo base_url().'equipment_maintenance_records/Get';?>"class="current sub_menu sub_menu_link first_link">Equipment</a>
-        <a href="<?php echo base_url().'standard_register_records/Get';?>"class="sub_menu sub_menu_link first_link">Standard Register</a>
-        <!-- <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a> -->
-        <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
-    </div>
+   <?php include_once('application/views/header_links.php') ?>
   <div id="form_wrapper_lists">
     <div id="account_lists" style="display: block;" name="menu">
+
       <table  class="subdivider" border="0" bgcolor="#ffffff"  width="100%" cellpadding="8px" align="center">
           
           <tr>
              <td align ="right">
-                  <a href="<?php echo base_url().'equipment_maintenance_records/Get';?>" class="current sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/equipmentinuse.png';?>" height="20px" width ="20px">Equipment In Use</a>
-                  <a href="<?php echo base_url().'equipment_maintenance_records/getDamaged';?>" class=" sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/withdrawn.png';?>" height="20px" width ="20px">Withdrawn/Damaged Equipment</a>
-                  <a href="<?php echo base_url().'equipment_maintenance_records/getmaintenance_calibration';?>" class="sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/maintenance.png';?>" height="20px" width ="20px">Equipment Scheduled for Maintenance/Calibration</a>
+                  <a href="<?php echo base_url().'equipment_maintenance_records/get';?>" class="current sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/equipmentinuse.png';?>" height="20px" width ="20px">Equipment In Use</a>
+                  <a href="<?php echo base_url().'equipment_maintenance_records/get_damaged';?>" class=" sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/withdrawn.png';?>" height="20px" width ="20px">Withdrawn/Damaged Equipment</a>
+                  <a href="<?php echo base_url().'equipment_maintenance_records/get_scheduled_maintenance_calibration';?>" class="sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/maintenance.png';?>" height="20px" width ="20px">Equipment Scheduled for Maintenance/Calibration</a>
               </td>
-              <td aling="left" width="120px"
-                  <?php
-                     if($user['logged_in']['user_type'] ==0 && $user['logged_in']['department_id'] ==0){
-                      echo "style='display:block;background-color:#ffffff;text-color:#00ff00;'";
-                      } else if($user['logged_in']['user_type'] ==8 || $user['logged_in']['user_type'] !=0){
-                       echo"style='display:none;'";
-                     }
-                  ?>>
-               <a href="<?php echo base_url().'columns/Get';?>"><b>Columns</b></a>
-              </td>
-             
               <td align="right"<?php
-                  if($user['logged_in']['user_type'] ==6  || $user['logged_in']['user_type'] ==5 && $user['logged_in']['department_id'] ==2 ){
+                  if($user['logged_in']['user_type'] ==6 || $user['logged_in']['user_type'] ==5 && $user['logged_in']['department_id'] ==2 ){
                    echo "style='padding:8px;display:block;background-color:#ffffff;text-color:#00ff00;'";
                    } else{
                     echo"style='display:none;'";
                   }
                ?>>
              <a data-target="#equipment_form" class="btn" role="button" data-toggle="modal"><img src="<?php echo base_url().'images/icons/add_field.png'?>" height="10px" width="10px">Add Equipment</a>
+             <a href="<?php echo base_url().'columns/Get';?>"><img src="<?php echo base_url().'images/icons/view.png'?>" height="25px" width="25px">Columns</a>
              <a href="<?php echo base_url().'equipment_report/index';?>"><img src="<?php echo base_url().'images/icons/reports.png';?>" height="25px" width ="25px">Reports</a>
              </td>
           </tr>
       </table>
-      <table width="100%">
+       <table width="100%">
           <tr>
             <td colspan="2" align="center" style="border-bottom: solid 10px #c4c4ff;color: #0000fb;background-color: #e8e8ff;"><h5>Equipment Records Scheduled for Maintenance/Calibration</h5></td>
           </tr>
@@ -311,7 +153,7 @@
                        echo " style='display:none;'";
                      }
                      ?>>
-                     <a href="<?php echo base_url().'update_equipment_maintenance_record/Update/'.$row->id;?>">Edit</a>&nbsp;
+                     <a href="<?php echo base_url().'equipment_maintenance_records/update/'.$row->id;?>">Edit</a>&nbsp;
                      <a href="<?php echo base_url().'view_equipment_maintenance_logs/logs/'.$row->id;?>">Log</a>&nbsp;
                      <a href="<?php echo base_url().'outoftolerance/index/'.$row->id;?>">Out of Tolerance</a>&nbsp;
                      <a href="<?php echo base_url().'maintenance/index/'.$row->id;?>">Calibration & Maintenance</a>
@@ -324,7 +166,7 @@
                        echo " style='display:none;'";
                      }
                      ?>>
-                     <a href="<?php echo base_url().'update_equipment_maintenance_record/Update/'.$row->id;?>">Edit</a>&nbsp;
+                     <a href="<?php echo base_url().'equipment_maintenance_records/update/'.$row->id;?>">Edit</a>&nbsp;
                      <a href="<?php echo base_url().'view_equipment_maintenance_logs/logs/'.$row->id;?>">Log</a>&nbsp;
                      <a href="<?php echo base_url().'maintenance/index/'.$row->id;?>">Calibration & Maintenance</a>
                      </td>
@@ -336,9 +178,7 @@
             </tbody>
         </table>
     <div id="equipment_form" class="modal fade" role="dialog" aria-labelledby="equipment" aria-hidden="true"><?php include_once "application/views/equipment_maintenance_form.php";?></div>
-    <div id="performance" name="menu" style="display:none;"><?php include_once "application/views/performance_form.php";?></div>  
-    <div id="calibration" name="menu" style="display:none;"><?php include_once "application/views/calibration_form.php";?></div>
-</div>
+    </div>
 </div>
 </body>
 </html>

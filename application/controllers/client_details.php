@@ -9,23 +9,28 @@ function client_details()
 
 function records(){
 	$client_id = $this->uri->segment(3);
+    $client_ref = $this->uri->segment(4);
     
-    $this->load->model('client_listmodel');
     
+    $data['invoice']=
+    $this->db->select('*')->get_where('invoice',array('customer_reference' => $client_ref))->result_array();
+
     $data['query'] = 
-        $this->client_listmodel->client_requests_get($client_id);
+    $this->db->select('*')->get_where('test_request',array('applicant_ref_number' => $client_ref))->result_array();
   
-        $this->load->view('client_account_details',$data);
+    $this->load->view('client_account_details',$data);
     
 }
 function invoices(){
 	$client_id = $this->uri->segment(3);
-    $data['client_id']=$this->uri->segment(3);
+    $client_ref = $this->uri->segment(4);
     
     $this->load->model('client_listmodel');
-   
+
+    $data['invoice']=$this->db->select('*')->get_where('invoice',array('customer_reference' => $client_ref))->result_array();
+
     $data['query'] =
-    	$this->client_listmodel->client_invoices($client_id);
+    	$this->client_listmodel->client_invoices_get($client_ref);
 
         $this->load->view('client_account_invoices',$data);
     

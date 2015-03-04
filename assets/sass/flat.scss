@@ -1,0 +1,910 @@
+// customize bootstrap  variables here:
+
+@import "variables";
+@import "bootstrap";
+@import "bourbon/bourbon";
+
+@import "typeplate/_typeplate";
+@import "CSS:../bower_components/animate.css/animate";
+@import "CSS:../bower_components/semantic-ui/build/packaged/css/semantic";
+@mixin inner-style($height){
+    overflow-y: auto;
+    height:$height;
+    padding:0 2% 2% 2%;
+    form, ul {
+        width: 100%;
+        height: 90%;
+        padding: 0 2% 0 2%;
+        overflow-y: auto;
+        @extend .epsilon;
+    }
+}
+@mixin tile{
+    background-color: #fff;
+}
+
+//Variables
+$stat-color:#428bca;
+$my-grey:#e7e7e7;
+
+//Body
+body{
+    font-family:Lato !important;
+    height:auto !important;
+    font-size:12px;
+    // @extend .zeta;
+}
+#menu{
+    position:fixed;
+    top:0;
+    width:100%;
+    z-index:100000000;
+    border-bottom:1.5px solid black;
+    .top-bar{
+        background:darkcyan !important;
+    }
+    a{
+        color:antiquewhite;
+    }
+    a:hover{
+        //color:black;
+    }
+}
+.row{
+    margin-left:0 !important;
+    margin-right:0 !important;
+    max-width:100%;
+    margin-top:1%;
+}
+#content{
+    padding-top:3em;
+}
+.main{
+    padding:0 5% 0 5%;
+}
+.login-container{
+    background:#ecf0f1;
+    padding:5% 10%;
+    #form-description,#form-login{
+        @extend .col-md-6;
+    }
+}
+.tile{
+    text-align: left;
+    background:white !important;
+    h5{
+        background:whitesmoke;
+        padding: 2%;
+        margin-bottom:5px;
+        i{
+            color:white;
+            font-weight:bold;
+            float:right;
+            cursor:pointer;
+            margin-left:1em;
+        }
+        i.selected{
+            color:antiquewhite;
+        }
+        i:hover{
+            color:antiquewhite;
+            cursor: hand;
+        }
+    }
+    .outer{
+        padding:2%;
+
+        li{
+            list-style: none;
+
+        }
+
+
+    }
+}
+.tile.map,.tile.map-info{
+    @extend .col-md-6;
+    height:80%;
+}
+.tile.link{
+    @extend .col-md-3;
+}
+.map-header{
+    .btn-group{
+        button{
+            @extend .btn;
+            @extend .btn-sm;
+            @extend .btn-default;
+        }
+    }
+}
+.map-info{
+    button{
+        i{
+            padding-right:5px;
+        }
+        @extend .btn;
+        @extend .btn-primary;
+        //background: #1abc9c;
+    }
+
+}
+#footer{
+    padding:1%;
+    background:whitesmoke;
+    text-align: center;
+    margin-bottom: -100px;
+}
+
+#firepad{
+    border:2px solid $my-grey;
+    width:95%;
+    margin:auto;
+    height:80%;
+}
+button{
+    i{
+        padding:0 2%;
+    }
+
+}
+form{
+    input,select,textarea{
+
+    }
+    button{
+        @extend .btn;
+        background:#1abc9c;
+        color:white;
+        i{
+            padding:0 5px;
+        }
+
+    }
+    input[type="radio"],input[type="checkbox"]{
+        display:inline-block;
+        vertical-align: top;
+        box-shadow: none;
+        width:auto;
+        -webkit-box-shadow:none;
+    }
+    input[type="radio"]{
+        height:auto;
+    }
+    label{
+        float: left !important;
+    }
+}
+.form-container{
+    width:98%;
+    margin:auto;
+}
+//Actual Form
+.actual-form{
+    width:100%;
+    overflow-x:auto;
+}
+
+.step{
+    padding-left: 25%;
+width: 100%;
+}
+#steps{
+    display:inline-block;
+    position:fixed;
+    top:29%;
+    width:20%;
+    z-index:100000000 !important;
+    div{
+        font-size:12px !important;
+        width:100% !important;
+
+    }
+}
+#logout{
+    margin-left:20px;
+    @extend .btn;
+    @extend .btn-sm;
+    background:#e74c3c;
+    color:white;
+}
+//Navbar
+#navigation{
+    nav{
+        @extend .navbar ;
+        @extend .navbar-default;
+        //@extend .navbar-embossed;
+    }
+}
+.open{
+    .dropdown-menu{
+        margin-top:0 !important;
+    }
+}
+#network{
+    @extend .breadcrumb;
+    margin-bottom:0;
+    li{
+        i{
+            padding-right:5px;
+        }
+    }
+}
+//Content
+#content{
+    padding-top:0;
+}
+//Table Styling
+td{
+    @extend .field;
+}
+table{
+    @extend .ui;
+    @extend .table;
+    @extend .segment;
+    @extend .celled;
+     @extend .small;
+    margin-top:1em;
+    margin-bottom:1em;
+    td{
+        .progress{
+            margin-bottom:0;
+            .progress-bar{
+                margin-bottom:0;
+            }
+        }
+    }
+    td{
+        .progress{
+            width:150px;
+            display:inline-block;
+            vertical-align: top;
+        }
+
+        max-width:200px !important;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+}
+.begin:hover{
+    cursor:hand;
+}
+.instruction{
+    background:#ffeacc;
+}
+.message.success{
+    padding:0.5%;
+    background:#ecf0f1;
+}
+#sectionNavigation{
+    width:40%;
+    margin:auto;
+    input{
+        @extend .btn;
+        @extend.btn-primary;
+        width:45%;
+        display: inline-block;
+    }
+}
+.x-large-graph{
+    @extend .col-md-12;
+    @extend .standard-graph;
+    .portlet-body{
+        height:500px;
+        overflow-y:auto;
+    }
+}
+.large-graph{
+    @extend .col-md-8;
+    @extend .standard-graph;
+    .portlet-body{
+        height:500px;
+        overflow-y:auto;
+    }
+}
+.medium-graph{
+    @extend .col-md-4;
+    @extend .standard-graph;
+    .portlet-body{
+        height:300px;
+        overflow-y:auto;
+    }
+}
+.small-graph{
+
+    @extend .standard-graph;
+    @extend .col-md-3;
+    .outer{
+        .inner{
+            @extend .row;
+         background:$stat-color;
+
+        // border-top:1px solid #ddd;
+        padding:6px 12px;
+        i.main{
+
+             color:white;
+            @extend .col-md-3;
+
+            @extend .mega;
+        }
+
+        .content{
+            color:white;
+            padding:0;
+            @extend .col-md-8;
+            height:13%;
+            .digit{
+                width:100%;
+height:80%;
+                @extend .gamma;
+                text-align:right;
+                margin-bottom:0;
+                span{
+                    cursor:pointer
+                }
+                span:hover{
+                    cursor:hand;
+                }
+                #targeted{
+                }
+#finished{
+    color:lawngreen;
+}
+#not-finished{
+    color:moccasin;
+}
+#not-started{
+    color:lightpink;
+}
+            }
+            .text{
+                text-align:right;
+            }
+        }
+    }
+    .modal-link{
+        cursor:pointer;
+            background:$my-grey;
+            color:#333;
+             @extend .col-md-12;
+             i{
+                padding-right:1em;
+             }
+        }
+    .modal-link:hover{
+        cursor:hand;
+        @extend .animated;
+        @extend .flash;
+    }
+
+
+}
+}
+.semi-large-graph{
+    @extend .standard-graph;
+    @extend .col-md-6;
+    .portlet-body{
+        height:300px;
+
+    }
+}
+
+.standard-graph{
+    .portlet-title{
+        h6{
+            margin-bottom:0;
+            padding: 5px 7.5px;
+            color: #333333;
+            background-color: whitesmoke;
+            border-color: $my-grey;
+            .graph-title{
+                @include ellipsis(50%);
+            }
+            .statistic{
+                display: inline-block;
+                font-weight: normal;
+            }
+            i{
+                padding-right:5px;
+            }
+            .statistic-free{
+                font-weight: normal;
+                padding-right:2%;
+            }
+            .compare{
+                width:30%;
+                float:right;
+                color:#999;
+                cursor:pointer;
+            }
+            .compare:hover{
+                color: #333333;
+                cursor: hand;
+            }
+
+        }
+    }
+    .portlet-body{
+        overflow-y:auto;
+    }
+}
+#sectionList{
+    li{
+        a{
+            padding:5px 7.5px !important;
+        }
+    }
+}
+#reporting {
+    overflow-y: auto;
+    height: 300px;
+    width: 97%;
+    padding: 1em;
+}
+
+#countyHeader {
+    width: 35%;
+}
+#countyHeader, #progressHeader {
+    display: inline-block;
+    vertical-align: top;
+}
+#progressHeader {
+    width: 64%;
+}
+.progressRow {
+    padding-top:1em;
+    border-bottom: 1px solid #ddd;
+    label,div{
+        display:inline-block;
+        vertical-align: top;
+    }
+    label{
+        width:40%;
+        line-height: 1em;
+        margin-bottom: 5px;
+    }
+    .progress{
+        margin-bottom:0;
+        width:55%;
+    }
+}
+
+#reportingLabel{
+    width:30%;
+    margin-bottom: 0 !important;
+}
+#reportingLabel #reportingBar{
+    width:60%;
+    margin-bottom: 0 !important;
+}
+#reportingLabel #reportingBar .progressRow{
+    border-bottom:none;
+}
+
+#county_select_label select{
+    max-width:55% !important;
+    height:auto;
+    margin-bottom: 0 !important;
+}
+
+#reportingBar {
+    display: inline-block;
+    max-width: 70% !important;
+    margin-bottom: 0 !important;
+}
+//Icons
+.statistic{
+    display: block;
+    margin-bottom:5px;
+    .icon{
+
+        vertical-align: top;
+        display:inline-block;
+        border-radius:50%;
+
+        background:$stat_color;
+        color:white;
+        span{display: table-cell;
+            width:50px;
+            height:50px;
+            vertical-align: middle;
+            text-align: center;
+            i{
+                font-size:1.5em;
+            }
+
+        }
+    }
+    .data{
+
+        margin-left:1em;
+        .text,.data{
+            display:block;
+            text-align: center;
+        }
+        display:inline-block;
+        vertical-align: top;
+    }
+    #county_name{
+        margin-top:10%;
+        @extend .epsilon;
+    }
+}
+//Analytics Overrides
+h4.page-title{
+    @extend .delta;
+    padding-left:15px;
+}
+h4{
+    @extend .epsilon;
+    padding-left:15px;
+}
+#page-crumb{
+    @extend .ui;
+    @extend .breadcrumb;
+    @extend .zeta
+}
+.breadcrumb{
+    border-color: $my-grey !important;
+    .ui.button{
+        font-size:1em !important;
+        a{
+            color:#555 !important;
+        }
+    }
+.ui.label{
+        font-size:1em !important;
+    }
+    .ui.dropdown{
+        font-size:14px;
+        .menu{
+            font-size:12px !important;
+        }
+    }
+}
+#page_sidebar{
+    @extend .col-md-3;
+    border-right:1px solid $my-grey;
+    height:100%;
+    padding:0;
+    padding-left:15px;
+    h6{
+        padding:1em 15px;
+        background: $my-grey;
+        margin-bottom:0;
+    }
+}
+.container-fluid{
+    padding:0 !important;
+}
+h6{
+    font-size:16px;
+}
+//SideBar
+.panel{
+    border:none !important;
+}
+ul.sub{
+    @extend .nav;
+    @extend .nav-pills;
+    @extend .nav-stacked;
+    li{
+        a{
+            border-radius: 0 !important;
+        }
+    }
+    li.active{
+        a{
+            background:whitesmoke !important;
+            color:#333;
+        }
+
+    }
+}
+.panel-heading{
+    h4{
+        a{
+            i{
+                float:right;
+                color:#333;
+            }
+        }
+    }
+}
+.panel-heading.active{
+    background-color: $stat-color;
+    color:white;
+    i{
+        color:white;
+    }
+}
+
+.panel-body{
+    padding:0 !important;
+    li{
+        a{
+            color: $stat-color !important;
+            i{
+                float:right;
+                color:#999;
+            }
+        }
+    }
+}
+
+
+.chart{
+    ul{
+        @extend .nav;
+        @extend .nav-stacked;
+        @extend .nav-pills;
+    }
+}
+.btn-primary{
+    background:$stat_color !important;
+    border-color: #27ae60 !important;
+}
+.select .btn .filter-option{
+    top:5px !important;
+}
+.open > .dropdown-arrow {
+    display:none !important;
+}
+.breadcrumb{
+    .dropdown-menu{
+        width:100% !important;
+        top:100% !important;
+        font-size:14px !important;
+    }
+    .dropdown-toggle{
+        font-size:14px;
+        width:200px !important;
+    }
+    li.selected{
+        color:white !important;
+    }
+}
+//Loader
+.loader,
+.loader:before,
+.loader:after {
+    background: #ddd;
+    -webkit-animation: load1 1s infinite ease-in-out;
+    animation: load1 1s infinite ease-in-out;
+    width: 1em;
+    height: 4em;
+}
+.loader:before,
+.loader:after {
+    position: absolute;
+    top: 0;
+    content: '';
+}
+.loader:before {
+    left: -1.5em;
+}
+.loader {
+    text-indent: -9999em;
+    margin: 8em auto;
+    position: relative;
+    font-size: 11px;
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+}
+.loader:after {
+    left: 1.5em;
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+}
+@-webkit-keyframes load1 {
+    0%,
+    80%,
+    100% {
+        box-shadow: 0 0 #ddd;
+        height: 4em;
+    }
+    40% {
+        box-shadow: 0 -2em #ddd;
+        height: 5em;
+    }
+}
+@keyframes load1 {
+    0%,
+    80%,
+    100% {
+        box-shadow: 0 0 #ddd;
+        height: 4em;
+    }
+    40% {
+        box-shadow: 0 -2em #ddd;
+        height: 5em;
+    }
+}
+
+//Null Message
+.null_message{
+    line-height:200px;
+    text-align: center;
+    color: crimson;
+    i{
+        padding-right:5px;
+    }
+}
+
+//Select
+.select2-container{
+    width:100%;
+}
+//Datatables Overrides
+#DataTables_Table_0_wrapper{
+  padding:1% !important;
+}
+
+
+.paging_full_numbers{
+    @extend .ui;
+    @extend .pagination;
+    @extend .menu;
+    float:right;
+}
+a.paginate_button{
+    @extend .item;
+    font-size:12px !important;
+}
+.dataTables_length{
+    width:200px;
+    display:inline-block;
+    vertical-align:top;
+    font-size:1em !important;
+    label{
+        font-size:1em !important;
+        select{
+            font-size:1em !important;
+            display:inherit;
+            width:50px !important;
+            padding:0 !important;
+            @extend .form-control;
+        }
+    }
+}
+.dataTables_filter{
+    font-size:1em !important;
+    display:inline-block;
+    vertical-align:top;
+    float:right;
+    label{
+        font-size:1em !important;
+        input{
+            font-size:1em !important;
+            display: initial;
+            width:200px;
+
+            @extend .form-control;
+        }
+    }
+}
+.dataTables_info,.paging_full_numbers{
+  display:inline-block;
+  vertical-align:top;
+}
+.dataTables_info{
+    font-size:1em;
+}
+//X-editable
+.editable-click:hover{
+    cursor: hand !important;
+}
+.modal{
+    z-index:2000000000000000000000000;
+}
+//Resize Icons
+.sizer, .show-collapse{
+    float:right;
+    color:#ccc;
+    cursor:pointer;
+}
+.sizer:hover, .show-collapse:hover{
+    color:#333;
+    cursor:hand;
+}
+//Enlarged Graphs
+#graph{
+    height:300px;
+    overflow:auto;
+}
+h6.table-header{
+    margin-bottom: 2px !important;
+    padding:5px 7.5px;
+    background:$my-grey;
+    span{
+        padding-left:30%;
+        button{
+            margin-left:5px;
+            @extend .btn;
+            @extend .btn-primary;
+            @extend .btn-xs;
+        }
+    }
+}
+//Hijacking Panels
+.analytics_row{
+  margin-top: 1em;
+  padding-top: 1em;
+  @extend .col-md-12;
+  margin-bottom:0;
+    border-top: 1px solid #ddd !important;
+    box-shadow: none !important;
+    .panel-heading{
+        border-top:1px solid #ddd;
+        background-color: #fff !important;
+        border:none;
+        h4.panel-title{
+            padding-left:0;
+            @extend .epsilon;
+            margin-bottom:5px !important;
+            a{
+                text-decoration: none !important;
+            }
+            i{
+                color:inherit;
+                padding-left:1em;
+            }
+        }
+    }
+    .panel-collapse{
+        .panel-body{
+            border:none !important;
+            box-shadow: 0;
+        }
+    }
+
+}
+//Activity
+.activity{
+    font-size:1em !important;
+    .activity-text{
+        font-style: italic;
+        font-weight: bold;
+    }
+}
+.status{
+    @extend .activity;
+    float:right;
+}
+#district_progress{
+    display:inline-block;
+    vertical-align: middle;
+    width:5%;
+    margin-bottom:0;
+    height:20px !important;
+    padding:3px;
+}
+
+/**
+ * Image Styles
+ */
+img{
+    @extend .img-responsive;
+}
+img#coat_of_arms{
+    width:8%;
+}
+
+/**
+ * Banner Styles
+ */
+img#coat_of_arms,#description{
+    display:inline-block;
+    vertical-align:middle;
+}
+#description{
+    #project_name{
+        @extend .zeta;
+        margin-bottom:0;
+    }
+    #ministry{
+        font-weight:800;
+    }
+}

@@ -48,5 +48,10 @@ class Reagents_Inventorymodel extends CI_Model{
   $this->db->insert('reagents_inventory_record',$data);
   
  }
+ function process_print($id){
+
+ $data['query']=$this->db->select('*')->get_where('reagents_inventory_record',array('id'=>$id))->result_array();
+  
+}
 }
 ?>

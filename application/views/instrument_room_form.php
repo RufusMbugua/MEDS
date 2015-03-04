@@ -19,136 +19,135 @@
        }
 </script>
 <script>
-    $(document).ready(function(){
+  //   $(document).ready(function(){
   
         
-  $('#instrument_min_temp').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#instrument_min_temp_g').show();
-            $('#instrument_min_temp_r').hide();
-          }else{
-            $('#instrument_min_temp_g').hide();
-            $('#instrument_min_temp_r').show();
-          }
-        })
+  // $('#instrument_min_temp').change('live',function(){
+  //         if ($.trim(this.value)!=""){
+  //           $('#instrument_min_temp_g').show();
+  //           $('#instrument_min_temp_r').hide();
+  //         }else{
+  //           $('#instrument_min_temp_g').hide();
+  //           $('#instrument_min_temp_r').show();
+  //         }
+  //       })
         
   
-  $('#instrument_max_temp').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#instrument_max_temp_g').show();
-            $('#instrument_max_temp_r').hide();
-          }else{
-            $('#instrument_max_temp_g').hide();
-            $('#instrument_max_temp_r').show();
-          }
-        })
-  $('#instrument_min_humidity').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#instrument_min_humidity_g').show();
-            $('#instrument_min_humidity_r').hide();
-          }else{
-            $('#instrument_min_humidity_g').hide();
-            $('#instrument_min_humidity_r').show();
-          }
-        })
+  // $('#instrument_max_temp').change('live',function(){
+  //         if ($.trim(this.value)!=""){
+  //           $('#instrument_max_temp_g').show();
+  //           $('#instrument_max_temp_r').hide();
+  //         }else{
+  //           $('#instrument_max_temp_g').hide();
+  //           $('#instrument_max_temp_r').show();
+  //         }
+  //       })
+  // $('#instrument_min_humidity').change('live',function(){
+  //         if ($.trim(this.value)!=""){
+  //           $('#instrument_min_humidity_g').show();
+  //           $('#instrument_min_humidity_r').hide();
+  //         }else{
+  //           $('#instrument_min_humidity_g').hide();
+  //           $('#instrument_min_humidity_r').show();
+  //         }
+  //       })
         
   
-  $('#instrument_max_humidity').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#instrument_max_humidity_g').show();
-            $('#instrument_max_humidity_r').hide();
-          }else{
-            $('#instrument_max_humidity_g').hide();
-            $('#instrument_max_humidity_r').show();
-          }
-        })
-  $('#instrument_standard_max_temp').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#instrument_standard_max_temp_g').show();
-            $('#instrument_standard_max_temp_r').hide();
-          }else{
-            $('#instrument_standard_max_temp_g').hide();
-            $('#instrument_standard_max_temp_r').show();
-          }
-        })
-  $('#instrument_standard_min_temp').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#instrument_standard_min_temp_g').show();
-            $('#instrument_standard_min_temp_r').hide();
-          }else{
-            $('#instrument_standard_min_temp_g').hide();
-            $('#instrument_standard_min_temp_r').show();
-          }
-        })
+  // $('#instrument_max_humidity').change('live',function(){
+  //         if ($.trim(this.value)!=""){
+  //           $('#instrument_max_humidity_g').show();
+  //           $('#instrument_max_humidity_r').hide();
+  //         }else{
+  //           $('#instrument_max_humidity_g').hide();
+  //           $('#instrument_max_humidity_r').show();
+  //         }
+  //       })
+  // $('#instrument_standard_max_temp').change('live',function(){
+  //         if ($.trim(this.value)!=""){
+  //           $('#instrument_standard_max_temp_g').show();
+  //           $('#instrument_standard_max_temp_r').hide();
+  //         }else{
+  //           $('#instrument_standard_max_temp_g').hide();
+  //           $('#instrument_standard_max_temp_r').show();
+  //         }
+  //       })
+  // $('#instrument_standard_min_temp').change('live',function(){
+  //         if ($.trim(this.value)!=""){
+  //           $('#instrument_standard_min_temp_g').show();
+  //           $('#instrument_standard_min_temp_r').hide();
+  //         }else{
+  //           $('#instrument_standard_min_temp_g').hide();
+  //           $('#instrument_standard_min_temp_r').show();
+  //         }
+  //       })
        
-  $('#instrument_standard_min_humidity').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#instrument_standard_min_humidity_g').show();
-            $('#instrument_standard_min_humidity_r').hide();
-          }else{
-            $('#instrument_standard_min_humidity_g').hide();
-            $('#instrument_standard_min_humidity_r').show();
-          }
-        })
+  // $('#instrument_standard_min_humidity').change('live',function(){
+  //         if ($.trim(this.value)!=""){
+  //           $('#instrument_standard_min_humidity_g').show();
+  //           $('#instrument_standard_min_humidity_r').hide();
+  //         }else{
+  //           $('#instrument_standard_min_humidity_g').hide();
+  //           $('#instrument_standard_min_humidity_r').show();
+  //         }
+  //       })
   
-  $('#instrument_standard_max_humidity').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#instrument_standard_max_humidity_g').show();
-            $('#instrument_standard_max_humidity_r').hide();
-          }else{
-            $('#instrument_standard_max_humidity_g').hide();
-            $('#instrument_standard_max_humidity_r').show();
-          }
-        })
-  $('#instrument_equipment_used').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#instrument_equipment_used_g').show();
-            $('#instrument_equipment_used_r').hide();
-          }else{
-            $('#instrument_equipment_used_g').hide();
-            $('#instrument_equipment_used_r').show();
-          }
-        })
-  $('#instrument_ht_date').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#instrument_ht_date_g').show();
-            $('#instrument_ht_date_r').hide();
-          }else{
-            $('#instrument_ht_date_g').hide();
-            $('#instrument_ht_date_r').show();
-          }
-        });
-  $('#save_humidtemp_instrument').click(function(){         
-            count =0;
-            $('.fieldinstrument').each(function(){
-               if ($.trim(this.value)=="")
-               count ++;
-            });
-            if(count >0){
-              alert( count+'  field(s) are not filled.')
-               return false;
-            }else{
+  // $('#instrument_standard_max_humidity').change('live',function(){
+  //         if ($.trim(this.value)!=""){
+  //           $('#instrument_standard_max_humidity_g').show();
+  //           $('#instrument_standard_max_humidity_r').hide();
+  //         }else{
+  //           $('#instrument_standard_max_humidity_g').hide();
+  //           $('#instrument_standard_max_humidity_r').show();
+  //         }
+  //       })
+  // $('#instrument_equipment_used').change('live',function(){
+  //         if ($.trim(this.value)!=""){
+  //           $('#instrument_equipment_used_g').show();
+  //           $('#instrument_equipment_used_r').hide();
+  //         }else{
+  //           $('#instrument_equipment_used_g').hide();
+  //           $('#instrument_equipment_used_r').show();
+  //         }
+  //       })
+  // $('#instrument_ht_date').change('live',function(){
+  //         if ($.trim(this.value)!=""){
+  //           $('#instrument_ht_date_g').show();
+  //           $('#instrument_ht_date_r').hide();
+  //         }else{
+  //           $('#instrument_ht_date_g').hide();
+  //           $('#instrument_ht_date_r').show();
+  //         }
+  //       });
+  // $('#save_humidtemp_instrument').click(function(){         
+  //           count =0;
+  //           $('.fieldinstrument').each(function(){
+  //              if ($.trim(this.value)=="")
+  //              count ++;
+  //           });
+  //           if(count >0){
+  //             alert( count+'  field(s) are not filled.')
+  //              return false;
+  //           }else{
               
-            $.ajax({
-                type:"post",
-                url:"<?php echo base_url();?>temperature_humidity/submit",
-                data:$('#instrument_room_form').serialize(),
-                success:function(data){
-        redirect_url = "<?temperature_humidity_list/records/'.$id_temp"
-                    data='Success';
-                    window.location.href = redirect_url;
-                },
-                //error:function(){
-                  // alert('an error occured'); 
-               //}
-            })
-            }
-            })
-    })
+  //           $.ajax({
+  //               type:"post",
+  //               url:"<?php echo base_url();?>temperature_humidity/submit",
+  //               data:$('#instrument_room_form').serialize(),
+  //               success:function(data){
+  //       redirect_url = "<?temperature_humidity_list/records/'.$id_temp"
+  //                   data='Success';
+  //                   window.location.href = redirect_url;
+  //               },
+  //               //error:function(){
+  //                 // alert('an error occured'); 
+  //              //}
+  //           })
+  //           }
+  //           })
+  //   })
 </script>
 <?php
    $user=$this->session->userdata;
-   $test_request_id=$user['logged_in']['test_request_id'];
    $user_type_id=$user['logged_in']['user_type'];
    $user_id=$user['logged_in']['id'];
    $department_id=$user['logged_in']['department_id'];
@@ -175,11 +174,11 @@
     </tr>    
 		<tr>
 			<td colspan = "6" align ="center" style="border-bottom: solid 10px #c4c4ff;color: #0000fb;background-color: #e8e8ff;"> 
-				<h4>Humidity and Temperature</h4>
+				<h4>Instrument Room Humidity and Temperature</h4>
 			</td>
 		</tr>
 		<tr>
-			<td align="center" colspan="6" style="background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
+			<td align="center" colspan="6" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
 			<a href="javascript:slide('freezer');" class="sub_menu sub_menu_link first_link"><b>Freezer</b></a>
 			<a href="javascript:slide('sample_store');" class="sub_menu sub_menu_link first_link"><b>Sample Stores</b></a>
 			<a href="javascript:slide('laboratory_area');" class="sub_menu sub_menu_link first_link"><b>Laboratory Working Area</b></a>
@@ -189,19 +188,30 @@
 		</tr>
 		<tr>
 			<td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Date</td>
-			<td colspan ="2"style="background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
-			<input type ="date" name ="ht_date" id ="instrument_ht_date" class ="fieldinstrument">
+			<td colspan ="2"style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
+			<input type ="text" name ="ht_date" id ="instrument_ht_date" class =" datepicker fieldinstrument">
 			<span id="instrument_ht_date_g" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
 			<span id="instrument_ht_date_r" style="color:white;background-color:red;padding:4px;display:none">field required</span></td>
 
 			<td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Equipment Used</td>
-			<td colspan ="2" style="background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
-		        <input type="text" id="instrument_equipment_used" name ="i_equipment_used"class ="fieldinstrument" >
+			<td colspan ="2" style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
+		        <input type="text" id="equipmentusedc" name ="equipmentusedc" class ="reg fieldfreezer" >
+         <select id="theremometerused_c" name="theremometerused_c" >
+          <option selected></option>
+           <?php
+           foreach($sql_equipment as $c_name):
+          ?>
+           
+           <option value="<?php  echo $c_name['id_number'];?>" data-equipmentusedc="<?php echo $c_name['description']; ?>"><?php  echo $c_name['id_number'];?></option>
+            <?php
+            endforeach
+            ?>
+          </select>
 		        <span id="instrument_equipment_used_g" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
 		        <span id="instrument_equipment_used_r" style="color:white;background-color:red;padding:4px;display:none">field required</span></td>
 		</tr>
 		<tr>
-			<td colspan ="6" align ="center" style="text-align:center;background-color:#ffffff;padding-right:40px;border-bottom: solid 1px #f0f0ff;color: #0000fb;"><b>Temperature</b></td>
+			<td colspan ="6" align ="center" style="padding:8px;text-align:center;background-color:#ffffff;padding-right:40px;border-bottom: solid 1px #f0f0ff;color: #0000fb;"><b>Temperature</b></td>
 		</tr>
     <tr>
         <td colspan="8" style="padding:8px;border-bottom:solid 1px #c4c4ff;">
@@ -216,7 +226,7 @@
 		<tr>
 			<td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Minimum Temperature</td>
 			<td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
-				<input type "text" name ="i_min_temp" id="instrument_min_temp" class ="fieldinstrument">
+				<input type="text" name ="i_min_temp" id="instrument_min_temp" class ="fieldinstrument">
 				<span id="instrument_min_temp_g" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
 				<span id="instrument_min_temp_r" style="color:white;background-color:red;padding:4px;display:none">field required</span></td>
 
@@ -249,14 +259,14 @@
 			</td>
 		</tr>
 		<tr>
-			<td colspan ="6" align ="center" style="text-align:center;background-color:#ffffff;padding-right:40px;border-bottom: solid 1px #f0f0ff;color: #0000fb;"><b>Humidity</b></td>
+			<td colspan ="6" align ="center" style="padding:8px;text-align:center;background-color:#ffffff;padding-right:40px;border-bottom: solid 1px #f0f0ff;color: #0000fb;"><b>Humidity</b></td>
 		</tr>
     <tr>
         <td colspan="8" style="padding:8px;border-bottom:solid 1px #c4c4ff;">
           <table border="0" width="80%" class="table_form" cellpadding="8px" align="center">            
             <tr>
             <td colspan ="6" align ="center" style="padding:8px;text-align:center;padding-right:40px;border-bottom: solid 1px #f0f0ff;color:#0000fb;">
-              Standard Humidity Limit: 25% to 85%C
+               Standard Humidity Limit: 65% (+/-5%)
             </td>
             </tr>                        
           </table>

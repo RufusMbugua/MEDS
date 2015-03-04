@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <title>MEDS</title>
-  <link rel="icon" href="" />
+  <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon">
   <link href="<?php echo base_url().'style/core.css';?>" rel="stylesheet" type="text/css" />
    <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
    
@@ -10,10 +10,8 @@
   <link href="<?php echo base_url().'style/jquery-ui.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/demo_table.css';?>" rel="stylesheet" type="text/css"/>
   <link href="datatables/extensions/Tabletools/css/dataTables.tableTools.css" type="text/css" rel="stylesheet"/>
-  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css"> -->
   <link rel="stylesheet" href="<?php echo base_url().'jquery-ui.css';?>">
-  
-  
+
   <!-- bootstrap reference library -->
   <link href="<?php echo base_url().'bootstrap/css/bootstrap.css'; ?>" rel="stylesheet" type="text/css"/>
 
@@ -45,7 +43,6 @@
  <body>
   <?php
    $user=$this->session->userdata;
-   $test_request_id=$user['logged_in']['test_request_id'];
    $user_type_id=$user['logged_in']['user_type'];
    $user_id=$user['logged_in']['id'];
    $department_id=$user['logged_in']['department_id'];
@@ -87,7 +84,7 @@
               ?> <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="<?php echo base_url().'account_settings/index/'.$test_request_id.'/'.$user_type_id.'/'.$user_id.'/'.$department_id;?>"><i class="icon-wrench"></i> Settings <img src="<?php echo base_url().'images/icons/settings2.png';?>" height="20px" width="20px"></a></li>
+              <li><a href="<?php echo base_url().'account_settings/index/'.$user_type_id.'/'.$user_id.'/'.$department_id;?>"><i class="icon-wrench"></i> Settings <img src="<?php echo base_url().'images/icons/settings2.png';?>" height="20px" width="20px"></a></li>
               <li class="divider"></li>
               <li><a href="<?php echo base_url().'home/logout'?>"><i class="icon-share"></i>Logout</b> <img src="<?php echo base_url().'images/icons/door.png';?>" height="25px" width="25px"></a></li>
             </ul>
@@ -199,31 +196,32 @@
     </div>
     <div id="form_wrapper_lists">
      <div id="account_lists">
-       <table class="subdivider" border="0" bgcolor="#ffffff" width="50%" cellpadding="8px" align="center">
+        <table class="subdivider" border="0" bgcolor="#ffffff" width="100%" cellpadding="8px" align="center">
+        
         <tr>
-            <td height="25px" align="center"
-            <?php
-            if($user['logged_in']['user_type'] ==8 || $user['logged_in']['user_type'] ==6 ||$user['logged_in']['user_type'] ==7){
-             echo "style='display:block;'>";
-             }else{
-                 echo"style='display:none;'>"; 
-              }
-            ?>
-            <a href="<?php echo base_url().'home';?>"class="sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/circle_orange.png';?>" height="20px" width="20px">Unassigned Test Requests</a>
-            <a href="<?php echo base_url().'test_request_list/GetA/'.$test_request_id.'/'.$user_type_id;?>"class="sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/assign.png';?>" height="20px" width="20px">Assigned Test Requests</a>
-            <a href="<?php echo base_url().'test_request_list/GetC/'.$test_request_id.'/'.$user_type_id;?>"class="current sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/tick.png';?>" height="20px" width="20px">Completed Test Requests</a>
-            <!-- <a href="<?php echo base_url().'test_request_list/GetQ/'.$test_request_id.'/'.$user_type_id;?>"class="sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/ot.png';?>" height="20px" width="20px">Quarantined Test Requests</a> -->
-            <div id="add"
+            <td height="25px" align="left"
+             <?php
+             if($user['logged_in']['user_type'] ==8 || $user['logged_in']['user_type'] ==6 ||$user['logged_in']['user_type'] ==7){
+              echo "style='display:block;'";
+              }else{
+                  echo"style='display:none;'"; 
+               }
+             ?>>
+             &nbsp;<a href="<?php echo base_url().'home';?>"class="sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/circle_orange.png';?>" height="20px" width ="20px">UNASSIGNED</a>
+             <a href="<?php echo base_url().'test_request_list/GetA/'.$user_type_id.'/'.$department_id;?>"class="sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/assign.png';?>" height="20px" width ="20px">ASSIGNED</a>&nbsp; &nbsp;
+             <a href="<?php echo base_url().'test_request_list/GetC/'.$user_type_id.'/'.$department_id;?>"class="current sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/tick.png';?>" height="20px" width="20px">COMPLETED</a>&nbsp; &nbsp;
+             <a href="<?php echo base_url().'test_request_list/GetQ/'.$user_type_id.'/'.$department_id;?>"class="sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/ot.png';?>" height="20px" width="20px">QUARANTINED</a>
+             <a href="<?php echo base_url().'test_request_list/GetW/'.$user_type_id.'/'.$department_id;?>"class="sub_menu sub_menu_link first_link">WITHDRAWN</a>
+             <div id="add" height="25px"
              <?php
              if($user['logged_in']['user_type'] ==7 && $user['logged_in']['department_id'] ==1 ){
-                   echo "style='display:block;text-align:right;text-color:#00ff00;'";
+                   echo "style='padding-top:10px;display:block;text-align:right;text-color:#00ff00;'";
                 }else{
                    echo "style='display:none;'";
                 }
              ?>
              >
-              <a data-target="#test_request" role="button" class="btn" data-toggle="modal"><img src="<?php echo base_url().'images/icons/add.png'?>" height="25px" width="25px">Add MEDS Request</a>  
-              <a data-target="#clients_request" role="button" class="btn" data-toggle="modal"><img src="<?php echo base_url().'images/icons/add.png'?>" height="25px" width="25px">Add Client Request</a>
+              <a data-target="#test_request" role="button" class="sub_menu sub_menu_link first_link" data-toggle="modal"><img src="<?php echo base_url().'images/icons/add_field.png'?>" height="10px" width="10px">Add MEDS Request</a>
             </div>
             </td>
         </tr>
@@ -239,10 +237,9 @@
          <tr>
             <th style="text-align:center;border-right: dotted 1px #ddddff;"></th>
             <th style="text-align:center;border-right: dotted 1px #ddddff;">Lab Reg.No</th>
-            <th style="text-align:center;border-right: dotted 1px #ddddff;">Product Name</th>
             <th style="text-align:center;border-right: dotted 1px #ddddff;">Batch No</th>
+            <th style="text-align:center;border-right: dotted 1px #ddddff;">Sample Name</th>
             <th style="text-align:center;border-right: dotted 1px #ddddff;">Client</th>
-            <th style="text-align:center;border-right: dotted 1px #ddddff;">Manufacturer</th>
             <th style="text-align:center;border-right: dotted 1px #ddddff;">Manufacture Date</th>
             <th style="text-align:center;border-right: dotted 1px #ddddff;">Expiry Date</th>
             <th 
@@ -283,22 +280,13 @@
             >Issued By</th>
             <th 
             <?php 
-              if($user['logged_in']['user_type']==6){
+              if($user['logged_in']['user_type']==6||$user['logged_in']['user_type']==7){
                 echo"style='dsiplay:block;text-align:center;border-right: dotted 1px #ddddff;'";
               }else{
                 echo"style='display:none;'";
               }
             ?>
             >Qoute</th>
-            <th
-            <?php 
-              if($user['logged_in']['user_type']==6){
-                echo"style='dsiplay:block;text-align:center;border-right: dotted 1px #ddddff;'";
-              }else{
-                echo"style='display:none;'";
-              }
-            ?> 
-            >Print Label</th>
             <th 
             <?php
               if($user['logged_in']['user_type']==6){
@@ -322,12 +310,11 @@
 
         <td style="border-right: dotted 1px #c0c0c0;text-align: center;border-bottom: solid 1px #c0c0c0;" width="20px"><?php echo $i;?>.</td>
         <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row->laboratory_number;?></td>
-        <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row->active_ingredients;?></td>
         <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row->batch_lot_number;?></td>
+        <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row->active_ingredients;?></td>
         <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row->applicant_name;?></td>
-        <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row->manufacturer_name;?></td>
-        <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row->date_manufactured;?></td>
-        <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row->expiry_date;?></td>
+        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->date_manufactured;?></td>
+        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->expiry_date;?></td>
         <td 
           <?php 
           if($user['logged_in']['user_type']==5){
@@ -366,10 +353,9 @@
             echo"style='display:none;'";
           }
         ?>>
-          <?php echo $row->assignment_name;?>
+          <?php echo $row->analyst_name;?>
         </td>
-        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><a href="<?php echo base_url().'quote_test_request/'.$row->id;?>"><img src="<?php echo base_url().'images/icons/quote.png';?>" height="30px" width="30px"/>Quote</a></td>
-        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><a href="<?php echo base_url().'print_lable/'.$row->id;?>"><img src="<?php echo base_url().'images/icons/print.png';?>" height="30px" width="30px"/>Print</a></td>
+        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><a href="<?php echo base_url().'quote_test_request/'.$row->id;?>">Quote</a></td>
         <td
         <?php
         if($user['logged_in']['user_type']==6){
@@ -380,12 +366,12 @@
         ?>>
           <div
               <?php
-              if($row->assignment_name!="0"){
+              if($row->analyst_name!="0"){
                   echo"style='display:block;text-align: center;'>";
               ?><a href="<?php echo base_url().'worksheet/'.$row->id;?>"><img src="<?php echo base_url().'images/icons/worksheet.png';?>" height="30px" width="30px"/>Worksheet</a>
           </div>
               <?php
-              }elseif($row->assignment_name==0){
+              }elseif($row->analyst_name==0){
               ?>
           <div
               <?php
@@ -396,8 +382,8 @@
             }
             ?>
         </td>
-        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><a href="<?php echo base_url().'update_request_record/Update/'.$row->id.'/'.$test_request_id.'/'.$user_type_id;?>"><img src="<?php echo base_url().'images/icons/edit.png';?>" height="30px" width="30px"/>edit</a></td>
-        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><a href="<?php echo base_url().'view_logs/logs/'.$row->id;?>"><img src="<?php echo base_url().'images/icons/view.png';?>" height="30px" width="30px"/>Log</a></td>
+        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><a href="<?php echo base_url().'update_request_record/Update/'.$row->id.'/'.'/'.$user_type_id;?>">edit</a></td>
+        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><a href="<?php echo base_url().'view_logs/logs/'.$row->id;?>">Log</a></td>
            <?php
              $i++;
            ?>
@@ -405,8 +391,8 @@
                <?php endforeach; ?>
           </tbody>           
       </table>
-    <div id="test_request" name="menu" style="display:none;"><?php include_once "application/views/test_request_form.php";?></div>  
-    <div id="client" name="menu" style="display:none;"><?php include_once "application/views/client_test_request_form.php";?></div>
+    <div id="test_request" class="modal fade" role="dialog" aria-labelledby="meds" aria-hidden="true"><?php include_once "application/views/test_request_form.php";?></div>  
+    <div id="clients_request" class="modal fade" role="dialog" aria-labelledby="client" aria-hidden="true"><?php include_once "application/views/client_test_request_form.php";?></div>
 </div>
 </div>
 </body>

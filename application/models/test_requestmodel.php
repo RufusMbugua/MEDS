@@ -5,28 +5,32 @@ class Test_Requestmodel extends CI_Model{
   parent::__construct();
  }
  function process(){
-  $test_req=$this->input->post('test_req');
+  $status=1;
   $user_type_id=$this->input->post('id');
-  
-  // $data=$this->db->select_max('id')->get('client_ref')->result();
-  // $e= $data[0]->id;
-  // $test_type_id= $e++;
-  
+  $Q=1;
 
   $data=$this->db->select_max('id')->get('client_ref')->result();
   $request_type= 'MED/CL/#'.$data[0]->id;
-  //$new_code= 'MED/CL/#'.$data[0]->id;
+  
   $new_code=$applicant_reference_number=$this->input->post('applicant_reference_number');
   $client_id_data=$this->db->select_max('id')->get('client')->result();
   $client_id= $client_id_data[0]->id;
   
-  //$old_ref=$this->getRefNo();
-  //$old_ref_no=$old_ref[0]->applicant_ref_number;
+  $data=$this->db->select_max('id')->get('test_request')->result();
+  $test_request_id=$data[0]->id;
+  $test_request_id++;
+  
+  $data_one=$this->db->select_max('id')->get('invoice')->result();
+  $invoice_id=$data_one[0]->id;
+  //$invoice_id++;
 
+  $sql=$this->db->select('*')->get_where('invoice', array('id' => $invoice_id))->result();
+  $invoice_test_request_id=$sql[0]->test_request_id;
 
 //Sample Insertion
   $data_two = array(
 
+   'test_request_id'=>$test_request_id,
    'reference_number'=>$this->input->post('reference_number'),
    'active_ingredients'=>$this->input->post('active_ingredients'),
    'manufacturer_name'=>$this->input->post('manufacturer_name'),
@@ -51,13 +55,6 @@ class Test_Requestmodel extends CI_Model{
    'specification'=>$this->input->post('specify_text1')
   );
   $this->db->insert('test_reason',$data_three);
-  
-  //Test Insertion
-   //$data_four = array(
-   //'test'=>$tests,
-   //'specification'=>$this->input->post('specify_text2')
-  //);
-  //$this->db->insert('test',$data_four);
   
   //Specification Insertion
    $data_five = array(
@@ -89,29 +86,36 @@ class Test_Requestmodel extends CI_Model{
    'date_authorized'=>$this->input->post('date_authorized'),
    'lab_reg_number'=>$this->input->post('lab_reg_number')
   );
+
+  
+
+  $data_nine = array(
+   'quotation_status'=>$Q
+  );
   $this->db->insert('laboratory',$data_eight);
+  $this->db->update('test_request', $data_nine, array('id' => $invoice_test_request_id ));
+    
  
- 
- 
- //Test_request Data Insertion
  $this->post();
- //$this->output->enable_profiler();
 }
 
 function post(){
   
   $test_req=$this->input->post('test_req');
   $user_type_id=$this->input->post('id');
-  
-  
+  $actual_test=0;
+  $Q=1;
+  $status=1;
+
  //Client Insertion
   $data_one = array(
    'applicant_name'=>$this->input->post('applicant_name'),
-   'applicant_address'=>$this->input->post('applicant_address')
+   'applicant_address'=>$this->input->post('applicant_address'),
+   'client_reference_number'=>$this->input->post('applicant_reference_number')
   );
   $this->db->insert('client',$data_one);
   
- $data=$this->db->select_max('id')->get('client_ref')->result();
+  $data=$this->db->select_max('id')->get('client_ref')->result();
   $request_type= 'MED/CL/#'.$data[0]->id;
   $new_code=$this->input->post('applicant_reference_number');
   $client_id_data=$this->db->select_max('id')->get('client')->result();
@@ -120,27 +124,28 @@ function post(){
   $data_ntr=$this->db->select_max('id')->get('test_request')->result();
   $test_request_id= $data_ntr[0]->id;
   $test_request_id++;  
- 
-  //$old_ref=$this->getRefNo();
-  //$old_ref_no=$old_ref[0]->applicant_ref_number;
-  //
   
-$user_id = $this->input->post('user_id');  
-$applicant_reference_number=$this->input->post('applicant_reference_number');
-$data= $this->db->where('applicant_ref_number',$applicant_reference_number)->get('test_request')->num_rows();
+  $user_id = $this->input->post('user_id');  
+  $applicant_reference_number=$this->input->post('applicant_reference_number');
+  $data= $this->db->where('applicant_ref_number',$applicant_reference_number)->get('test_request')->num_rows();
+  
+  $data_query=$this->db->select_max('id')->get('invoice')->result();
+  $invoice_id=$data_query[0]->id;
+  //$invoice_id++;
 
+  $sql=$this->db->select('*')->get_where('invoice', array('id' => $invoice_id))->result();
+  $invoice_test_request_id=$sql[0]->test_request_id;
+
+  $testsa=$this->input->post('tests');
+  $tests= implode( ",", $testsa );
+
+  $laboratory_number=$this->input->post('laboratory_number');
 if($data==1){
+  
+  if($laboratory_number==""){
 
-$assay=$this->input->post('hplc_internal_method');
- 
-  if($assay='6a'){
-    $actual_test=6;
-  }
-  if($assay='6b'){
-    $actual_test=6;
-  }
-
- $data = array(
+    $status=4;
+    $data = array(
 
    'request_type'=>$request_type,
    'client_id'=>$client_id,
@@ -148,69 +153,11 @@ $assay=$this->input->post('hplc_internal_method');
    'applicant_name'=>$this->input->post('applicant_name'),
    'applicant_address'=>$this->input->post('applicant_address'),
    'active_ingredients'=>$this->input->post('active_ingredients'),
-   'manufacturer_name'=>$this->input->post('manufacturer_name'),
-   'manufacturer_address'=>$this->input->post('manufacturer_address'),
-   'brand_name'=>$this->input->post('brand_name'),
-   'marketing_authorization_number'=>$this->input->post('marketing_authorization_number'),
-   'batch_lot_number'=>$this->input->post('batch_lot_number'),
-   'date_manufactured'=>$this->input->post('date_of_manufacture'),
-   'expiry_date'=>$this->input->post('expiry_retest_date'),
-   'storage_conditions'=>$this->input->post('storage_conditions'),
-   'quantity_submitted'=>$this->input->post('quantity_submitted'),
-   'quantity_remaining'=>$this->input->post('quantity_submitted'),
-   'quantity_type'=>$this->input->post('quantity_type'),
-   'applicant_ref_number'=>$new_code,
-   'sample_source'=>$this->input->post('sample_source'),
-   'testing_reason'=>$this->input->post('reason'),
-   'other_reason'=>$this->input->post('other_reason'),
-   'other_test_required'=>$this->input->post('other_test'),
-   'other_specification'=>$this->input->post('other_specification'),
-   'identification'=>$this->input->post('identification'),
-   'dissolution'=>$this->input->post('dissolution'),  
-   'friability'=>$this->input->post('friability'),  
-   'assay'=>$actual_test,  
-   'disintegration'=>$this->input->post('disintegration'),  
-   'content_uniformity'=>$this->input->post('content_uniformity'),  
-   'ph_alkalinity'=>$this->input->post('ph_alkalinity'), 
-   'full_monograph'=>$this->input->post('full_monograph'), 
-   'microbiology'=>$this->input->post('microbiology'),    
-   'test_specification'=>$this->input->post('specification'),
-   'authorizer_name'=>$this->input->post('authorizing_name'),
-   'authorizer_designation'=>$this->input->post('designation'),
-   'date_authorized'=>$this->input->post('date_authorized'),
-   'findings_comments'=>$this->input->post('findings_comment'),
-   'received_by'=>$this->input->post('received_by'),
-   'date_received'=>$this->input->post('date_received'),
-   'laboratory_number'=>$this->input->post('lab_reg_number')
-   );
-  
-  $datab = array(
-   'test_request_id'=>$test_request_id, 
-   'user_id'=>$user_id,
-   'client_id'=>$client_id,
-   'identification'=>$this->input->post('identification'),
-   'dissolution'=>$this->input->post('dissolution'),  
-   'friability'=>$this->input->post('friability'),  
-   'assay'=>$this->input->post('assay'),  
-   'disintegration'=>$this->input->post('disintegration'),  
-   'content_uniformity'=>$this->input->post('content_uniformity'),  
-   'ph_alkalinity'=>$this->input->post('ph_alkalinity'), 
-   'full_monograph'=>$this->input->post('full_monograph'), 
-   'microbiology'=>$this->input->post('microbiology'),
-  );
-  $this->db->insert('test_request',$data);
-  $this->db->insert('test',$datab);
- 
-
-
-}else{
-$data = array(
-   'request_type'=>$request_type, 
-   'client_id'=>$client_id,
-   'reference_number'=>$this->input->post('reference_number'),
-   'applicant_name'=>$this->input->post('applicant_name'),
-   'applicant_address'=>$this->input->post('applicant_address'),
-   'active_ingredients'=>$this->input->post('active_ingredients'),
+   'dosage_form'=>$this->input->post('dosage_form'),
+   'strength_concentration'=>$this->input->post('strength_concentration'),
+   'measure'=>$this->input->post('measure'),
+   'pack_size'=>$this->input->post('pack_size'),
+   'label_claim'=>$this->input->post('label_claim'),
    'manufacturer_name'=>$this->input->post('manufacturer_name'),
    'manufacturer_address'=>$this->input->post('manufacturer_address'),
    'brand_name'=>$this->input->post('brand_name'),
@@ -228,15 +175,100 @@ $data = array(
    'other_reason'=>$this->input->post('other_reason'),
    'other_test_required'=>$this->input->post('other_test'),
    'other_specification'=>$this->input->post('other_specification'),
-   'identification'=>$this->input->post('identification'),
-   'dissolution'=>$this->input->post('dissolution'),  
-   'friability'=>$this->input->post('friability'),  
-   'assay'=>$actual_test,  
-   'disintegration'=>$this->input->post('disintegration'),  
-   'content_uniformity'=>$this->input->post('content_uniformity'),  
-   'ph_alkalinity'=>$this->input->post('ph_alkalinity'), 
-   'full_monograph'=>$this->input->post('full_monograph'), 
-   'microbiology'=>$this->input->post('microbiology'),      
+   'request_status'=>$status,
+   'tests'=>$tests,
+   'test_specification'=>$this->input->post('specification'),
+   'authorizer_name'=>$this->input->post('authorizing_name'),
+   'authorizer_designation'=>$this->input->post('designation'),
+   'date_authorized'=>$this->input->post('date_authorized'),
+   'findings_comments'=>$this->input->post('findings_comment'),
+   'received_by'=>$this->input->post('received_by'),
+   'date_received'=>$this->input->post('date_received'),
+   'laboratory_number'=>$this->input->post('lab_reg_number')
+   );
+  
+  $this->db->insert('test_request',$data);   
+
+  }else{
+    $data = array(
+
+   'request_type'=>$request_type,
+   'client_id'=>$client_id,
+   'reference_number'=>$this->input->post('reference_number'),
+   'applicant_name'=>$this->input->post('applicant_name'),
+   'applicant_address'=>$this->input->post('applicant_address'),
+   'active_ingredients'=>$this->input->post('active_ingredients'),
+   'dosage_form'=>$this->input->post('dosage_form'),
+   'strength_concentration'=>$this->input->post('strength_concentration'),
+   'measure'=>$this->input->post('measure'),
+   'pack_size'=>$this->input->post('pack_size'),
+   'label_claim'=>$this->input->post('label_claim'),
+   'manufacturer_name'=>$this->input->post('manufacturer_name'),
+   'manufacturer_address'=>$this->input->post('manufacturer_address'),
+   'brand_name'=>$this->input->post('brand_name'),
+   'marketing_authorization_number'=>$this->input->post('marketing_authorization_number'),
+   'batch_lot_number'=>$this->input->post('batch_lot_number'),
+   'date_manufactured'=>$this->input->post('date_of_manufacture'),
+   'expiry_date'=>$this->input->post('expiry_retest_date'),
+   'storage_conditions'=>$this->input->post('storage_conditions'),
+   'quantity_submitted'=>$this->input->post('quantity_submitted'),
+   'quantity_remaining'=>$this->input->post('quantity_submitted'),
+   'quantity_type'=>$this->input->post('quantity_type'),
+   'applicant_ref_number'=>$this->input->post('applicant_reference_number'),
+   'sample_source'=>$this->input->post('sample_source'),
+   'testing_reason'=>$this->input->post('reason'),
+   'other_reason'=>$this->input->post('other_reason'),
+   'other_test_required'=>$this->input->post('other_test'),
+   'other_specification'=>$this->input->post('other_specification'),
+   'tests'=>$tests,
+   'test_specification'=>$this->input->post('specification'),
+   'authorizer_name'=>$this->input->post('authorizing_name'),
+   'authorizer_designation'=>$this->input->post('designation'),
+   'date_authorized'=>$this->input->post('date_authorized'),
+   'findings_comments'=>$this->input->post('findings_comment'),
+   'received_by'=>$this->input->post('received_by'),
+   'date_received'=>$this->input->post('date_received'),
+   'laboratory_number'=>$this->input->post('lab_reg_number')
+   );
+  
+  $this->db->insert('test_request',$data);   
+  }
+ 
+
+}else{
+  if($laboratory_number==""){
+    $status=4;
+    $data = array(
+   'request_type'=>$request_type,
+   'client_id'=>$client_id,
+   'reference_number'=>$this->input->post('reference_number'),
+   'applicant_name'=>$this->input->post('applicant_name'),
+   'applicant_address'=>$this->input->post('applicant_address'),
+   'active_ingredients'=>$this->input->post('active_ingredients'),
+   'dosage_form'=>$this->input->post('dosage_form'),
+   'strength_concentration'=>$this->input->post('strength_concentration'),
+   'measure'=>$this->input->post('measure'),
+   'pack_size'=>$this->input->post('pack_size'),
+   'label_claim'=>$this->input->post('label_claim'),
+   'manufacturer_name'=>$this->input->post('manufacturer_name'),
+   'manufacturer_address'=>$this->input->post('manufacturer_address'),
+   'brand_name'=>$this->input->post('brand_name'),
+   'marketing_authorization_number'=>$this->input->post('marketing_authorization_number'),
+   'batch_lot_number'=>$this->input->post('batch_lot_number'),
+   'date_manufactured'=>$this->input->post('date_of_manufacture'),
+   'expiry_date'=>$this->input->post('expiry_retest_date'),
+   'storage_conditions'=>$this->input->post('storage_conditions'),
+   'quantity_submitted'=>$this->input->post('quantity_submitted'),
+   'quantity_remaining'=>$this->input->post('quantity_submitted'),
+   'quantity_type'=>$this->input->post('quantity_type'),
+   'applicant_ref_number'=>$this->input->post('applicant_reference_number'),
+   'sample_source'=>$this->input->post('sample_source'),
+   'testing_reason'=>$this->input->post('reason'),
+   'other_reason'=>$this->input->post('other_reason'),
+   'other_test_required'=>$this->input->post('other_test'),
+   'other_specification'=>$this->input->post('other_specification'),
+   'request_status'=>$status,
+   'tests'=>$tests,
    'test_specification'=>$this->input->post('specification'),
    'authorizer_name'=>$this->input->post('authorizing_name'),
    'authorizer_designation'=>$this->input->post('designation'),
@@ -247,22 +279,52 @@ $data = array(
    'laboratory_number'=>$this->input->post('lab_reg_number')
    );
 
-  $datab = array(
-   'test_request_id'=>$test_request_id, 
-   'user_id'=>$user_id,
-   'client_id'=>$client_id,
-   'identification'=>$this->input->post('identification'),
-   'dissolution'=>$this->input->post('dissolution'),  
-   'friability'=>$this->input->post('friability'),  
-   'assay'=>$this->input->post('assay'),  
-   'disintegration'=>$this->input->post('disintegration'),  
-   'content_uniformity'=>$this->input->post('content_uniformity'),  
-   'ph_alkalinity'=>$this->input->post('ph_alkalinity'), 
-   'full_monograph'=>$this->input->post('full_monograph'), 
-   'microbiology'=>$this->input->post('microbiology'),
-  );
   $this->db->insert('test_request',$data);
-  $this->db->insert('test',$datab);
+ 
+
+  }else{
+    $data = array(
+   'request_type'=>$request_type,
+   'client_id'=>$client_id,
+   'reference_number'=>$this->input->post('reference_number'),
+   'applicant_name'=>$this->input->post('applicant_name'),
+   'applicant_address'=>$this->input->post('applicant_address'),
+   'active_ingredients'=>$this->input->post('active_ingredients'),
+   'dosage_form'=>$this->input->post('dosage_form'),
+   'strength_concentration'=>$this->input->post('strength_concentration'),
+   'measure'=>$this->input->post('measure'),
+   'pack_size'=>$this->input->post('pack_size'),
+   'label_claim'=>$this->input->post('label_claim'),
+   'manufacturer_name'=>$this->input->post('manufacturer_name'),
+   'manufacturer_address'=>$this->input->post('manufacturer_address'),
+   'brand_name'=>$this->input->post('brand_name'),
+   'marketing_authorization_number'=>$this->input->post('marketing_authorization_number'),
+   'batch_lot_number'=>$this->input->post('batch_lot_number'),
+   'date_manufactured'=>$this->input->post('date_of_manufacture'),
+   'expiry_date'=>$this->input->post('expiry_retest_date'),
+   'storage_conditions'=>$this->input->post('storage_conditions'),
+   'quantity_submitted'=>$this->input->post('quantity_submitted'),
+   'quantity_remaining'=>$this->input->post('quantity_submitted'),
+   'quantity_type'=>$this->input->post('quantity_type'),
+   'applicant_ref_number'=>$this->input->post('applicant_reference_number'),
+   'sample_source'=>$this->input->post('sample_source'),
+   'testing_reason'=>$this->input->post('reason'),
+   'other_reason'=>$this->input->post('other_reason'),
+   'other_test_required'=>$this->input->post('other_test'),
+   'other_specification'=>$this->input->post('other_specification'),
+   'tests'=>$tests,
+   'test_specification'=>$this->input->post('specification'),
+   'authorizer_name'=>$this->input->post('authorizing_name'),
+   'authorizer_designation'=>$this->input->post('designation'),
+   'date_authorized'=>$this->input->post('date_authorized'),
+   'findings_comments'=>$this->input->post('findings_comment'),
+   'received_by'=>$this->input->post('received_by'),
+   'date_received'=>$this->input->post('date_received'),
+   'laboratory_number'=>$this->input->post('lab_reg_number')
+   );
+
+  $this->db->insert('test_request',$data);
+  }
 
  if($this->getClient($client_id)==1){
   echo '';
@@ -276,7 +338,7 @@ $data = array(
   $this->db->insert('client_ref',$data_client);
  }
 }
-redirect('test_request_list/GetA/'.$test_req.'/'.$user_type_id);
+redirect('home');
 }
 
 

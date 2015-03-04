@@ -21,10 +21,10 @@ div#logo_container{
     
 }
 body{
-    background: -webkit-radial-gradient(circle, #ffffff, #f9f9fa, #f9f9fa); /* For Safari 5.1 to 6.0 */
-    background: -o-radial-gradient(circle,#ffffff, #f9f9fa, #f9f9fa); /* For Opera 11.6 to 12.0 */
-    background: -moz-radial-gradient(circle,#ffffff, #f9f9fa, #f9f9fa); /* For Fx 3.6 to 15 */
-    background: radial-gradient(circle,#ffffff, #f9f9fa, #f9f9fa); /* Standard syntax (must be last) */
+    background: -webkit-radial-gradient(circle, #ffffff, #f9f9fa, #f9f9fa); /* For Safari 5.1 to 6.0 */*/
+    background: -o-radial-gradient(circle,#ffffff, #f9f9fa, #f9f9fa); /* For Opera 11.6 to 12.0 */*/
+    background: -moz-radial-gradient(circle,#ffffff, #f9f9fa, #f9f9fa); /* For Fx 3.6 to 15 */*/
+    background: radial-gradient(circle,#ffffff, #f9f9fa, #f9f9fa); /* Standard syntax (must be last) */*/
 
 }
 body.modal-open #wrap{
@@ -246,20 +246,20 @@ div.scroll{
 	left:0px;
 	border-right:1px dotted Gray;
 	background-color: transparent;
-	height: 40px !important;
-	line-height: 30px !important;
+	height: 20px !important;
+	line-height: 10px !important;
 	padding: 4px;
 	word-spacing: 2px !important;
-	font-size: 12px !important;
-	letter-spacing: 1px !important;
+	font-size: 13px !important;
+	letter-spacing: 2px !important;
 	
 }
 #mid_sub_menu {
     width:100%;
-   /* padding: 4px;*/
+    padding: 4px;
     position: relative;
     margin: 0 auto;
-    background-color: #0000ff;
+    background-color: #ffffff;
     border-bottom:1px solid #f2f2f2;
     overflow: hidden;
     margin-bottom: 0px;
@@ -270,13 +270,13 @@ div.scroll{
 .mid_sub_menu_link {
     left:0px;
     border-radius: 4px;
-    background-color: #000000;
-    height: 40px !important;
-    line-height: 30px !important;
+    background-color: #ffffff;
+    height: 20px !important;
+    line-height: 20px !important;
     padding: 4px;
     word-spacing: 2px !important;
     font-size: 12px !important;
-    letter-spacing: 1px !important;
+    letter-spacing: 2px !important;
     
 }
 .mid_sub_menu:hover{
@@ -389,17 +389,47 @@ margin-top:-32767px;/* thank you Erik J - negate effect of float*/
     color:#ffffff;
     border-radius:4px;
 }
+.monograph{
+    padding: 6px;
+    background-color:#ffffff;
+    color:#7cc6ff;
+    border-radius:1px;
+    height: 40px !important;
+    line-height: 30px !important;
+    padding: 4px;
+    font-family: sans-serif;
+    font-weight: lighter;
+    word-spacing: 2px !important;
+    font-size: 14px !important;
+    
+}
+.monograph:hover{
+    padding: 6px;
+    background-color:#f3f3f3;
+    color:#7cc6ff;
+    border-radius:1px;
+}
 .reagents{
-    padding: 2px;
+    padding: 6px;
     background-color:#ff6724;
     color:#ffffff;
-    border-radius:4px;
-}
-.reagents:hover{
-    padding: 2px;
+    border-radius:1px;
+}.coa{
+    padding: 6px;
+    background-color:#00ff00;
+    color:#ffffff;
+    border-radius:1px;
+}.coa:hover{
+    padding: 6px;
     background-color:#ffffff;
     color:#0000ff;
-    border-radius:4px;
+    border-radius:1px;
+}
+.reagents:hover{
+    padding: 6px;
+    background-color:#ffffff;
+    color:#0000ff;
+    border-radius:1px;
 }
 .results{
     background-color:#000;
@@ -446,4 +476,18 @@ margin-top:-32767px;/* thank you Erik J - negate effect of float*/
     -ms-transform: perspective(700px) rotateX(60deg);
     -o-transform: perspective(700px) rotateX(60deg);
     transform: perspective(700px) rotateX(60deg);
+}
+.hide_data {
+      display: none; 
+    }
+.print_data{
+    font-size: 14px !important;
+    border-left: 1px dotted #ccc;
+    border-top: 1px dotted #ccc;
+    border-bottom: 1px dotted #ccc;
+    border-right: 1px dotted #ccc;
+    padding: 12px;
+    text-align: center;
+    font-size:14px; font-family: Arial, Helvetica, sans-serif;
+    
 }

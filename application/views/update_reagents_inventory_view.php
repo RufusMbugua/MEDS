@@ -3,20 +3,15 @@
  <head>
   <title>MEDS</title>
   <link rel="icon" href="" />
+  <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon">
   <link href="<?php echo base_url().'style/core.css';?>" rel="stylesheet" type="text/css" />
    <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
    
   <link href="<?php echo base_url().'style/jquery.tooltip.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/jquery-ui.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/demo_table.css';?>" rel="stylesheet" type="text/css"/>
-  
-  <!-- bootstrap reference links  
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.css.map';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.min.css';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap.css.map'; ?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.css';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap.min.css';?>" rel="stylesheet" type="text/css"/>  
-   -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+
   <!-- bootstrap reference library -->
   <link href="<?php echo base_url().'bootstrap/css/bootstrap.css'; ?>" rel="stylesheet" type="text/css"/>
 
@@ -27,6 +22,7 @@
   <!-- bootstrap reference library -->
   <script src="<?php echo base_url().'js/bootstrap.min.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/Jquery-datatables/jquery.dataTables.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
   <script>
    $(document).ready(function() {
     /* Init DataTables */
@@ -40,7 +36,6 @@
  <body>
   <?php
    $user=$this->session->userdata;
-   $test_request_id=$user['logged_in']['test_request_id'];
    $user_type_id=$user['logged_in']['user_type'];
    $user_id=$user['logged_in']['id'];
    $department_id=$user['logged_in']['department_id'];
@@ -76,7 +71,7 @@
               ?> <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="<?php echo base_url().'account_settings/index/'.$test_request_id.'/'.$user_type_id.'/'.$user_id.'/'.$department_id;?>"><i class="icon-wrench"></i> Settings <img src="<?php echo base_url().'images/icons/settings2.png';?>" height="20px" width="20px"></a></li>
+              <li><a href="<?php echo base_url().'account_settings/index/'.$user_type_id.'/'.$user_id.'/'.$department_id;?>"><i class="icon-wrench"></i> Settings <img src="<?php echo base_url().'images/icons/settings2.png';?>" height="20px" width="20px"></a></li>
               <li class="divider"></li>
               <li><a href="<?php echo base_url().'home/logout'?>"><i class="icon-share"></i>Logout</b> <img src="<?php echo base_url().'images/icons/door.png';?>" height="25px" width="25px"></a></li>
             </ul>
@@ -181,18 +176,70 @@
                 <tr>
                     <td colspan="4" style="padding:8px;">
                         <table class="inner_table" width="100%" cellpadding="8px">
-                          <tr>
-                              <td colspan="2" style="padding:4px;"><input type="radio" name="location" value="Toxic Store"/> Toxic Store</td>
-                          </tr>
-                          <tr>
-                              <td colspan="2" style="padding:4px;"><input type="radio" name="location" value="Non-Toxic Store"/> Non-Toxic Store</td>
-                          </tr>
-                          <tr>
-                              <td colspan="2" style="padding:4px;"><input type="radio" name="location" value="Inflammable Store"/> Inflammable Store</td>
-                          </tr>
-                          <tr>
-                              <td colspan="2" style="padding:4px;"><input type="radio" name="location" value="Fridge"/> Fridge</td>
-                          </tr>
+                           <?php
+                              if($query['location']=='Toxic Store'){
+                                ?>
+                                  <tr>
+                                      <td colspan="2" style="padding:4px;"><input type="radio" name="location" value="Toxic Store" checked/> Toxic Store</td>
+                                  </tr>
+                                  <tr>
+                                      <td colspan="2" style="padding:4px;"><input type="radio" name="location" value="Non-Toxic Store" /> Non-Toxic Store</td>
+                                  </tr>
+                                  <tr>
+                                      <td colspan="2" style="padding:4px;"><input type="radio" name="location" value="Inflammable Store"/> Inflammable Store</td>
+                                  </tr>
+                                  <tr>
+                                      <td colspan="2" style="padding:4px;"><input type="radio" name="location" value="Fridge"/> Fridge</td>
+                                  </tr>
+                              <?php
+
+                              }else if($query['location']=='Non-Toxic Store'){
+                                ?>
+                                  <tr>
+                                      <td colspan="2" style="padding:4px;"><input type="radio" name="location" value="Toxic Store"/> Toxic Store</td>
+                                  </tr>
+                                  <tr>
+                                      <td colspan="2" style="padding:4px;"><input type="radio" name="location" value="Non-Toxic Store" checked/> Non-Toxic Store</td>
+                                  </tr>
+                                  <tr>
+                                      <td colspan="2" style="padding:4px;"><input type="radio" name="location" value="Inflammable Store"/> Inflammable Store</td>
+                                  </tr>
+                                  <tr>
+                                      <td colspan="2" style="padding:4px;"><input type="radio" name="location" value="Fridge"/> Fridge</td>
+                                  </tr>
+                              <?php
+                            }else if($query['location']=='Inflammable Store'){
+                                ?>
+                                  <tr>
+                                      <td colspan="2" style="padding:4px;"><input type="radio" name="location" value="Toxic Store" /> Toxic Store</td>
+                                  </tr>
+                                  <tr>
+                                      <td colspan="2" style="padding:4px;"><input type="radio" name="location" value="Non-Toxic Store" /> Non-Toxic Store</td>
+                                  </tr>
+                                  <tr>
+                                      <td colspan="2" style="padding:4px;"><input type="radio" name="location" value="Inflammable Store" checked/> Inflammable Store</td>
+                                  </tr>
+                                  <tr>
+                                      <td colspan="2" style="padding:4px;"><input type="radio" name="location" value="Fridge"/> Fridge</td>
+                                  </tr>
+                              <?php
+                              }else if($query['location']=='Fridge'){
+                                ?>
+                                  <tr>
+                                      <td colspan="2" style="padding:4px;"><input type="radio" name="location" value="Toxic Store" /> Toxic Store</td>
+                                  </tr>
+                                  <tr>
+                                      <td colspan="2" style="padding:4px;"><input type="radio" name="location" value="Non-Toxic Store" /> Non-Toxic Store</td>
+                                  </tr>
+                                  <tr>
+                                      <td colspan="2" style="padding:4px;"><input type="radio" name="location" value="Inflammable Store"/> Inflammable Store</td>
+                                  </tr>
+                                  <tr>
+                                      <td colspan="2" style="padding:4px;"><input type="radio" name="location" value="Fridge" checked/> Fridge</td>
+                                  </tr>
+                              <?php
+                              }
+                            ?>
                         </table>
                     </td>
                   </tr>
@@ -212,6 +259,7 @@
                                 </td>
                                 <td height="5px" align="left" style="padding:4px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><b>Re-order Quantity</b><span id="reorder_quantity_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="reorder_quantity_r" style="color:white;background-color:red;padding:4px;display:none">field required</span>
                                 <input type="text" id="reorder_quantity" name="reorder_quantity" class="field" value="<?php echo $query['reorder_quantity'];?>"/>
+
                                   <select type="text" name="reorder_units" >
                                       <option><?php echo $query['reorder_units'];?></option>
                                       <option value = "Kgs"> Kgs</option>
@@ -223,7 +271,7 @@
                            </tr>
                            <tr>
                                <td height="5px"  align="left" style="padding:4px;background-color:#ffffff;border-left: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><b>Expiry Date</b><span id="expiry_date_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="expiry_date_r" style="color:white;background-color:red;padding:4px;display:none">field required</span></td>
-                               <td style="padding:4px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><input type="date" id="expiry_date" name="expiry_date" class="field" value="<?php echo $query['expiry_date'];?>"/></td>
+                               <td style="padding:4px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><input type="text" class="datepicker" id="expiry_date" name="expiry_date" class="field" value="<?php echo $query['expiry_date'];?>"/></td>
                                <td colspan ="2"style="padding:4px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><b>Quantity</b> <input type ="text" name="quantity" value ="<?php echo $query['quantity'];?>"></td>
                            </tr>
                            <tr>

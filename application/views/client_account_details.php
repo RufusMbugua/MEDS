@@ -3,40 +3,51 @@
  <head>
   <title>MEDS</title>
   <link rel="icon" href="" />
+  <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon">
   <link href="<?php echo base_url().'style/core.css';?>" rel="stylesheet" type="text/css" />
-   <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
+  <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
    
   <link href="<?php echo base_url().'style/jquery.tooltip.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/jquery-ui.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/demo_table.css';?>" rel="stylesheet" type="text/css"/>
-  <link href="datatables/extensions/Tabletools/css/dataTables.tableTools.css" type="text/css" rel="stylesheet"/>
+  <link href="<?php echo base_url().'datatables/extensions/Tabletools/css/dataTables.tableTools.css';?>" type="text/css" rel="stylesheet"/>
   <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css"> -->
-  <link rel="stylesheet" href="<?php echo base_url().'jquery-ui.css';?>">
+  <link rel="stylesheet" href="<?php echo base_url().'style/jquery-ui.css';?>">
   
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
   
-  <!-- bootstrap reference library -->
+  <!-- bootstrap reference css library -->
   <link href="<?php echo base_url().'bootstrap/css/bootstrap.css'; ?>" rel="stylesheet" type="text/css"/>
-
-  <script src="<?php echo base_url().'js/jquery.js';?>"></script>
   <script src="<?php echo base_url().'js/jquery-1.11.0.js';?>"></script>
   <script src="<?php echo base_url().'js/jquery.js';?>"></script>
+  <!-- Datepicker reference js library -->
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="<?php echo base_url().'js/jquery-ui.js';?>"></script>
-  <script type="text/javascript" src="<?php echo base_url().'js/tabs.js';?>"></script>
-  <script type="text/javascript" src="<?php echo base_url().'js/Jquery-datatables/jquery.dataTables.js';?>"></script>
-  <script src="datatables/extensions/Tabletools/js/dataTables.tableTools.js" type="text/javascript"></script>
-  <script src="datatables/extensions/Tabletools/js/ZeroClipboard.js" type="text/javascript"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
+ 
   
-  <!-- bootstrap reference library -->
+  
+  <!-- Tinymce reference js library -->
+  <script type="text/javascript" src="<?php echo base_url().'tinymce/tinymce.min.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'tinymce/textarea_script.js';?>"></script>
+  
+  <!-- bootstrap reference js library -->
   <script src="<?php echo base_url().'js/bootstrap.min.js';?>"></script>
+  
+  <!-- custom js reference js library -->
+  <script type="text/javascript" src="<?php echo base_url().'js/tabs.js';?>"></script>
+ 
+  <!-- printing reference js library -->
+  <script src="<?php echo base_url().'datatables/media/js/jquery.dataTables.js';?>" type="text/javascript"></script>
+  <script src="<?php echo base_url().'datatables/extensions/TableTools/js/dataTables.tableTools.js';?>" type="text/javascript"></script>
   
   <script>
    $(document).ready(function() {
     /* Init DataTables */
-    $('#list').dataTable({
+    $('#list').DataTable({
+     "sScrollY": "100%",
+     "sScrollX": "100%",
      "sDom": "T lfrtip",
-     "sScrollY":"270px",
-     "sScrollX":"100%",
      "oTableTools": {
       "aButtons": [      
       
@@ -46,7 +57,7 @@
         "aButtons": ["csv", "xls", "pdf"]
       }
       ],
-      "sSwfPath": "/meds/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf"
+      "sSwfPath": "<?php echo base_url().'datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf';?>"
     }
     });
    });
@@ -55,7 +66,6 @@
  <body>
   <?php
    $user=$this->session->userdata;
-   $test_request_id=$user['logged_in']['test_request_id'];
    $user_type_id=$user['logged_in']['user_type'];
    $user_id=$user['logged_in']['id'];
    $department_id=$user['logged_in']['department_id'];
@@ -97,7 +107,7 @@
               ?> <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="<?php echo base_url().'account_settings/index/'.$test_request_id.'/'.$user_type_id.'/'.$user_id.'/'.$department_id;?>"><i class="icon-wrench"></i> Settings <img src="<?php echo base_url().'images/icons/settings2.png';?>" height="20px" width="20px"></a></li>
+              <li><a href="<?php echo base_url().'account_settings/index/'.$user_type_id.'/'.$user_id.'/'.$department_id;?>"><i class="icon-wrench"></i> Settings <img src="<?php echo base_url().'images/icons/settings2.png';?>" height="20px" width="20px"></a></li>
               <li class="divider"></li>
               <li><a href="<?php echo base_url().'home/logout'?>"><i class="icon-share"></i>Logout</b> <img src="<?php echo base_url().'images/icons/door.png';?>" height="25px" width="25px"></a></li>
             </ul>
@@ -116,6 +126,8 @@
        echo "style='display:block;'>";
       }
      ?>
+     
+     <a href="<?php echo base_url().'home';?>"class="system_nav system_nav_link">Analysis Test Request</a>
      <a href="<?php echo base_url().'user_accounts/Get';?>" class="system_nav system_nav_link ">User Accounts</a>
      <a href="<?php echo base_url().'client_list/Get';?>" class="system_nav system_nav_link">Client List</a>
     </div>
@@ -128,15 +140,9 @@
           echo "style='display:none'>";
       }
      ?>
-        <a href="<?php echo base_url().'home';?>"class="current sub_menu sub_menu_link first_link active">Analysis Test Request</a>
-        <a href="<?php echo base_url().'equipment_maintenance_records/Get';?>"class="sub_menu sub_menu_link first_link">Equipment & Maintenance</a>
-        <a href="<?php echo base_url().'reagents_inventory_record/Get';?>"class="sub_menu sub_menu_link first_link">Reagents & Inventory</a>
-        <a href="<?php echo base_url().'standard_register_records/Get';?>"class="sub_menu sub_menu_link first_link">Standard Register</a>
-        <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
-        <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a>
         <a href="<?php echo base_url().'complaints_list/records';?>" class="sub_menu sub_menu_link first_link">Complaints</a>
         <a href="<?php echo base_url().'coa_list/records';?>"class="sub_menu sub_menu_link first_link">Certificate of Analysis</a>
-        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a>
+        <a href="<?php echo base_url().'client_billing/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a>
     </div>
     <?php
     echo"<div id='sub_menu'";
@@ -159,15 +165,9 @@
           echo "style='display:none'>";
       }
      ?>
-        <a href="<?php echo base_url().'home';?>"class="current sub_menu sub_menu_link first_link active">Analysis Test Request</a>
-        <a href="<?php echo base_url().'equipment_maintenance_records/Get';?>"class="sub_menu sub_menu_link first_link">Equipment & Maintenance</a>
-        <a href="<?php echo base_url().'reagents_inventory_record/Get';?>"class="sub_menu sub_menu_link first_link">Reagents & Inventory</a>
-        <a href="<?php echo base_url().'standard_register_records/Get';?>"class="sub_menu sub_menu_link first_link">Standard Register</a>
-        <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
-        <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a>
         <a href="<?php echo base_url().'complaints_list/records';?>"class="sub_menu sub_menu_link first_link">Complaints</a>
         <a href="<?php echo base_url().'coa_list/records';?>"class="sub_menu sub_menu_link first_link">Certificate of Analysis</a>
-        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a>
+        <a href="<?php echo base_url().'client_billing/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a>
     </div>
     <?php
     echo"<div id='sub_menu'";
@@ -231,8 +231,8 @@
                   echo"style='display:none;'"; 
                }
              ?>>
-             <a href="<?php echo base_url().'client_details/records/'.$query[0]->client_id;?>"class="sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/view.png';?>" height="20px" width="20px">Client Samples/Test Requests</a>
-             <a href="<?php echo base_url().'client_details/invoices/'.$query[0]->client_id;?>"class="sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/invoice.png';?>" height="20px" width="20px">Client Invoices</a>
+             <a href="<?php echo base_url().'client_details/records/';?>"class="sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/view.png';?>" height="20px" width="20px">Client Samples/Test Requests</a>
+             <a href="<?php echo base_url().'client_details/invoices/';?>"class="sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/invoice.png';?>" height="20px" width="20px">Client Invoices</a>
             </td>
           </tr>
         </table>
@@ -240,85 +240,56 @@
               <thead bgcolor="#efefef">
               <tr>
                   <th style="text-align:center;border-right: dotted 1px #ddddff;"></th>
-                  <th style="text-align:center;border-right: dotted 1px #ddddff;">Product Name</th>
+
                   <th style="text-align:center;border-right: dotted 1px #ddddff;">Batch No</th>
+                  <th style="text-align:center;border-right: dotted 1px #ddddff;">Sample Name</th>
+                  <th style="text-align:center;border-right: dotted 1px #ddddff;">reference number</th>
                   <th style="text-align:center;border-right: dotted 1px #ddddff;">Manufacturer</th>
                   <th style="text-align:center;border-right: dotted 1px #ddddff;">Manufacture Date</th>
                   <th style="text-align:center;border-right: dotted 1px #ddddff;">Expiry Date</th>
-                  <th
-                  <?php 
-                    if($user['logged_in']['user_type']==6||$user['logged_in']['user_type']==7){
-                      echo"style='dsiplay:block;text-align:center;border-right: dotted 1px #ddddff;'";
-                    }else{
-                      echo"style='display:none;'";
-                    }
-                  ?> 
-                  >Quantity Submitted</th>
-                  <th 
-                  <?php
-                      if($user['logged_in']['user_type']==5||$user['logged_in']['user_type']==7){
-                        echo"style='dsiplay:block;text-align:center;border-right: dotted 1px #ddddff;'";
-                      }else{
-                        echo"style='display:none;'";    
-                      }
-                    ?>
-                  >Quantity Remaining</th>
-                  <th
-                  <?php 
-                    if($user['logged_in']['user_type']==6){
-                      echo"style='dsiplay:block;text-align:center;border-right: dotted 1px #ddddff;'";
-                    }else{
-                      echo"style='display:none;'";
-                    }
-                  ?> 
-                  >Print</th>
+                  <th style="dsiplay:block;text-align:center;border-right: dotted 1px #ddddff;">status</th>
+
+                  <th style="dsiplay:block;text-align:center;border-right: dotted 1px #ddddff;">View Quote</th>
               </tr>
               </thead>
               <tbody>
               <?php
                 $i=1;
+
+                if(empty($query)){
+
+                  echo "There are No proforma Invoices"; 
+                }else{
+
+                }
                 foreach ($query as $row):
                  
               ?>
               <tr>
 
               <td style="border-right: dotted 1px #c0c0c0;text-align: center;border-bottom: solid 1px #c0c0c0;" width="20px"><?php echo $i;?>.</td>
-              <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row->active_ingredients;?></td>
-              <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row->batch_lot_number;?></td>
-              <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row->manufacturer_name;?></td>
-              <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php if($row->date_manufactured==""){echo"No Previous Data";}elseif($row->date_manufactured=="NULL"){echo"No Previous Data";}elseif($row->date_manufactured=="0000-00-00"){echo"Not Yet Set";}else{echo $row->date_manufactured;}?></td>
-              <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php if($row->expiry_date==""){echo"No Previous Data";}elseif($row->expiry_date=="NULL"){echo"No Previous Data";}elseif($row->expiry_date=="0000-00-00"){echo"Not Yet Set";}else{echo $row->expiry_date;}?></td>
-              <td
+              <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row['batch_lot_number'];?></td>
+              <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row['active_ingredients'];?></td>
+              <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row['reference_number'];?></td>
+              <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row['manufacturer_name'];?></td>
+              <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php if($row['date_manufactured']==""){echo"No Previous Data";}elseif($row['date_manufactured']=="NULL"){echo"No Previous Data";}elseif($row['date_manufactured']=="0000-00-00"){echo"Not Yet Set";}else{echo $row['date_manufactured'];}?></td>
+              <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php if($row['expiry_date']==""){echo"No Previous Data";}elseif($row['expiry_date']=="NULL"){echo"No Previous Data";}elseif($row['expiry_date']=="0000-00-00"){echo"Not Yet Set";}else{echo $row['expiry_date'];}?></td>
               <?php 
-                if($user['logged_in']['user_type']==6||$user['logged_in']['user_type']==7){
-                  echo"style='dsiplay:block;text-align:center;border-bottom: solid 1px #c0c0c0;'";
+                if(empty($invoice[0]['status'])){
+                  echo "<td style='text-align:center;border-bottom: solid 1px #c0c0c0;background-color:#ff0000;'>";
+                  echo"Not Paid</td>";
                 }else{
-                  echo"style='display:none;'";
+                  echo "<td style='text-align:center;border-bottom: solid 1px #c0c0c0;background-color:#00ff00;'>";
+                  echo"Paid</td>";
+                  
                 }
+              
               ?>
-              ><?php echo $row->quantity_submitted;?></td>
-              <td 
-                <?php 
-                if($user['logged_in']['user_type']==5||$user['logged_in']['user_type']==7){
-                  echo"style='text-align: center;border-bottom: solid 1px #c0c0c0;'";
-                }else{
-                  echo"style='display:none;'";
-                }
-                ?>>
-                <?php echo $row->quantity_remaining;?>
-              </td>
-              <td
-              <?php 
-                if($user['logged_in']['user_type']==6||$user['logged_in']['user_type']==5){
-                  echo"style='dsiplay:block;text-align:center;border-bottom: solid 1px #c0c0c0;'";
-                }else{
-                  echo"style='display:none;'";
-                }
-              ?>
-              ><a href="<?php echo base_url().'print_lable/'.$row->id;?>"><img src="<?php echo base_url().'images/icons/print.png';?>" height="25px" width="25px"/>Print</a>
-            </td>
+              <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><a href="<?php echo base_url().'finance/quote/'.$row['id'].'/'.$row['id'];?>">View Quote</a></td>
+            
               <?php
                    $i++;
+                 
                  ?>
                  </tr>
                      <?php endforeach; ?>

@@ -13,7 +13,8 @@ function Update($id){
         'email'=>$this->input->post('email'),
         'telephone'=>$this->input->post('telephone'),
         'location'=>$this->input->post('location'),
-        'status'=>$this->input->post('status')
+        'status'=>$this->input->post('status'),
+        'client_reference_number'=>$this->input->post('client_reference_number')
         
     );
     $this->db->update('client', $new_data,array('id' => $id));

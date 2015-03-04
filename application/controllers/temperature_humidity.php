@@ -8,7 +8,11 @@ class Temperature_Humidity extends CI_Controller {
  }
  function index()
  {
-  $this->load->view('humidtemp_form');
+  $status=0;
+  $data['sql_equipment']=
+  $this->db->select('*')->get_where('equipment_maintenance', array('status' => $status))->result_array();
+
+  $this->load->view('humidtemp_form',$data);
  }
  function submit(){
   $this->load->model('temperature_humidity_model');

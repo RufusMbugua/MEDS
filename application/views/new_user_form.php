@@ -82,55 +82,82 @@
                 <td colspan="4" align="right" style="padding:8px;border-bottom: solid 1px #bfbfbf;color:#ffffff;background-color:#ffffff;"><a href="<?php echo base_url().'user_accounts/Get';?>"><img src="<?php echo base_url().'images/icons/back.png';?>" height="20px" width="20px"/>Back</a></td>
             </tr>
             <tr>
-                <td colspan="4" align="center" style="padding:8px;border-bottom: solid 1px #bfbfbf;color:#0000ff;background-color:#e8e8ff;"><h5>New User Form</h5></td>
+              <td colspan="8" align="center" style="padding:8px;">
+                <table class="table_form" border="0" align="center" cellpadding="8px" width="100%" >
+                  <tr>
+                      <td rowspan="0" style="border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="80px" width="90px"/></td>
+                      <td colspan="7" style="padding:4px;color:#0000ff;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;">MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</td>
+                  </tr>
+                  <tr>    
+                      <td height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">Document: Analytical Worksheet</td>
+                      <td colspan="4" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;">TITLE:ADDING NEW USER</td>
+                      <td height="25px" colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;color:#000000;">SENIOR MANAGEMENT</td>
+                      <td style="padding:4px;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"></td>
+                  </tr>
+                  <tr>
+                        <td style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-left:solid 1px #bfbfbf;">EFFECTIVE DATE: <?php echo date("d/m/Y")?></td>
+                        <td colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-left:solid 1px #bfbfbf;">DEPARTMENT</td>
+                        <td height="25px"colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">LIMBS</td>
+                        <td height="25px" colspan="3" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">PAGE 1 of 1</td>
+                    </tr>
+                </table>
+              </td>
             </tr>
             <tr>
-                <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>First Name</b></td>
-                <td style="padding:8px;background-color:#ffffff;border-left: solid 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;">
-                    <input type="text" name="fname" id  ="fname" class="fielduser"></input>
-                    <span id="fname_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
-                    <span id="fname_r" style="color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
-            </tr>   
-            <tr>
-                <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Last Name</b></td>
-                <td style="padding:8px;background-color:#ffffff;border-left: solid 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;">
-                    <input type="text" name="lname" id ="lname" class="fielduser"></input>
-                    <span id="lname_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
-                    <span id="lname_r" style="color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
-            </tr>
-             <tr>
-                <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Username</b></td>
-                <td style="padding:8px;background-color:#ffffff;border-left: solid 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;">
-                    <input type="text" name="uname" id ="uname"class="fielduser"></input>
-                    <span id="uname_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
-                    <span id="uname_r" style="color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
-             </tr>
-             <tr>
-                <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Email</b></td>
-                <td style="padding:8px;background-color:#ffffff;border-left: solid 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;">
-                    <input type="text" name="email" id ="email" class="fielduser"></input>
-                <span id="email_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
-                <span id="email_r" style="color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
+                <td colspan="4" align="center" style="padding:8px;border-bottom: solid 1px #bfbfbf;color:#0000ff;background-color:#e8e8ff;"></td>
             </tr>
             <tr>
-                <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Telephone</b></td>
-                <td style="padding:8px;background-color:#ffffff;border-left: solid 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;">
-                    <input type="text" name="telephone" id ="telephone" class="fielduser"></input>
-                <span id="telephone_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
-                <span id="telephone_r" style="color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
+                <td colspan="4" sytle="padding:10px;text-aling:center;">
+                    <table width="80%" align="center" cellpadding="4px">
+                        <tr>
+                            <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>First Name</b></td>
+                            <td style="padding:8px;background-color:#ffffff;border-left: solid 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;">
+                                <input type="text" name="fname" id  ="fname" class="fielduser"></input>
+                                <span id="fname_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
+                                <span id="fname_r" style="color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
+                        </tr>   
+                        <tr>
+                            <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Last Name</b></td>
+                            <td style="padding:8px;background-color:#ffffff;border-left: solid 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;">
+                                <input type="text" name="lname" id ="lname" class="fielduser"></input>
+                                <span id="lname_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
+                                <span id="lname_r" style="color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
+                        </tr>
+                         <tr>
+                            <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Username</b></td>
+                            <td style="padding:8px;background-color:#ffffff;border-left: solid 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;">
+                                <input type="text" name="uname" id ="uname"class="fielduser"></input>
+                                <span id="uname_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
+                                <span id="uname_r" style="color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
+                         </tr>
+                         <tr>
+                            <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Email</b></td>
+                            <td style="padding:8px;background-color:#ffffff;border-left: solid 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;">
+                                <input type="text" name="email" id ="email" class="fielduser"></input>
+                            <span id="email_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
+                            <span id="email_r" style="color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
+                        </tr>
+                        <tr>
+                            <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Telephone</b></td>
+                            <td style="padding:8px;background-color:#ffffff;border-left: solid 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;">
+                                <input type="text" name="telephone" id ="telephone" class="fielduser"></input>
+                            <span id="telephone_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
+                            <span id="telephone_r" style="color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" height="25px" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;"><b>Set Role</b></td>
+                        </tr>
+                        <tr>
+                            <td style="padding:8px;background-color:#ffffff;border-left: solid 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><input type="radio" checked="checked" name="user_type" value="7"/>Laboratory Assistant</td>
+                            <td style="padding:8px;background-color:#ffffff;border-left: solid 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-right: solid 1px #bfbfbf;"><input type="radio" name="user_type" value="6"/>Laboratory Supervisor</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:8px;background-color:#ffffff;border-left: solid 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><input type="radio" name="user_type" value="5" checked=""/>Laboratory Analyst</td>
+                            <td style="padding:8px;background-color:#ffffff;border-left: solid 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-right: solid 1px #bfbfbf;"><input type="radio" name="user_type" value="8"/>Quality Assurance Manager</td>       
+                        </tr>
+                    </table>
+                </td>
             </tr>
-            <tr>
-                <td colspan="4" height="25px" style="padding:8px;background-color:#ffffff;border-right: solid 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><b>Set Role</b></td>
-            </tr>
-            <tr>
-                <td style="padding:8px;background-color:#ffffff;border-left: solid 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><input type="radio" checked="checked" name="user_type" value="7"/>Laboratory Assistant</td>
-                <td style="padding:8px;background-color:#ffffff;border-left: solid 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><input type="radio" name="user_type" value="6"/>Laboratory Supervisor</td>
-            </tr>
-            <tr>
-                <td style="padding:8px;background-color:#ffffff;border-left: solid 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><input type="radio" name="user_type" value="5" checked=""/>Laboratory Analyst</td>
-                <td style="padding:8px;background-color:#ffffff;border-left: solid 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><input type="radio" name="user_type" value="8"/>Quality Assurance Manager</td>       
-            </tr>
-            
             <tr>
                 <td align="center" style="padding:12px;background-color:#ffffff;border-top: dotted 1px #bfbfbf;" colspan="4" ><input type="submit" class="btn" id ="submit" name="submit" value="Submit"></td>
             </tr>

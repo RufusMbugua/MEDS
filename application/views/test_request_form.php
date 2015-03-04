@@ -207,154 +207,200 @@
 </script>
 <div class="modal-dialog">
 <div class="modal-content">
-<div class="modal-header">
+
+<div class="modal-body">
+  <div class="modal-header">
   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
   <h4 class="modal-title" id="meds">MEDS Analysis Test Request Form</h4>
-</div>
+
 <?php echo validation_errors(); ?>
 <?php echo form_open('test_request/save',array('id'=>'test_request_form'));?>
 <table bgcolor="#c4c4ff" width="100%"  border="0" cellpadding="8px" align="center">
   <input type="hidden" id="id" value="<?php echo"$user_type_id";?>" class="id" name="id"/>
   <input type="hidden" id="id" value="<?php echo"$user_id";?>" class="id" name="user_id"/>
-	<input type="hidden" id="test_req" value="<?php echo"$test_request_id";?>"name="test_req"/>
 	<tr>
     <td colspan="8" style="padding:8px;text-align:center;">
-      <table class="" width="100%"  cellpadding="8px" align="center" border="0"> 
+      <table class="table_form" width="100%"  cellpadding="8px" align="center" border="0"> 
           <tr>
-              <td rowspan="2" style="padding:4px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="80px" width="90px"/></td>
-              <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><b>Document: Form</b></td>
-              <td width="150px" height="25px" colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;color:#000000;"><b>REFERENCE NUMBER</b></td>
-              <td colspan="3" style="padding:4px;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">
-                <input type="text" id="reference_number" name="reference_number" class="fieldc"/>
+              <td rowspan="2" style="padding:8px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="80px" width="90px"/></td>
+              <td colspan="2" height="25px" style="padding:8px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><b>DOCUMENT: FORM</b></td>
+              <td width="150px" height="25px" colspan="2" style="padding:8px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;color:#000000;"><b>REFERENCE NUMBER</b></td>
+              <td colspan="3" style="padding:8px;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">
+                <input type="text" id="reference_number" name="reference_number" value="MEDS/QC/RE/01-01" class="fieldc"/>
                 <span id="creference_number_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
                 <span id="creference_number_r" style="color:red; display:none">Fill this field</span>
               </td>
           </tr>
           <tr>
-              <td colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><b>EFFECTIVE DATE: <?php echo date("d/m/Y")?></b></td>
-              <td height="25px"colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><b>REVISION NUMBER</b></td>
-              <td height="25px" colspan="3" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><b>PAGE 1 of 1</b></td>
+              <td colspan="2" style="padding:8px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><b>EFFECTIVE DATE: <?php echo date("d/m/Y")?></b></td>
+              <td height="25px"colspan="2" style="padding:8px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><b>REVISION NUMBER</b></td>
+              <td height="25px" colspan="3" style="padding:8px;border-bottom:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><b>PAGE 1 of 1</b></td>
           </tr>
           <tr>
-              <td width="150px" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;"><b>Form Authorized By:</b></td>
-              <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><b><?php echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);?></b></td>
-              <td colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><b>USER TYPE</b></td>
-              <td colspan="3" style="padding:4px;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><?php echo("<b>".$user['logged_in']['role']);?></td>
+              <td width="150px" height="25px" style="padding:8px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;"><b>AUTHORIZED BY:</b></td>
+              <td colspan="2" height="25px" style="padding:8px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><b><?php echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);?></b></td>
+              <td colspan="2" style="padding:8px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><b>USER TYPE</b></td>
+              <td colspan="3" style="padding:8px;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><?php echo("<b>".$user['logged_in']['role']);?></td>
+          </tr>
+        </table>
+      </td>
+  </tr>
+	</div>
+    <tr>
+        <td colspan="8" style="padding:8px;border-bottom:solid 1px #c4c4ff;background-color:#ffffff;text-align:left;"><b>CLIENT INFORMATION</b></td>
+    </tr>
+    <tr>
+      <td colspan="8" style="padding:8px;">
+        <table width="100%" class="inner_table">
+          <tr>
+            <td height="25px" colspan="2" style="padding:8px;">Name of Applicant</td>
+            <td height="25px" colspan="6" style="padding:8px;"><input type="text" id="applicant_name" class="field" size="80" name="applicant_name"/><span id="applicant_name_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png'?>" height="10px" width="10px"></span><span id="applicant_name_r" style="color:red; display:none">Fill in this field</span></td>
+          </tr>
+          <tr>
+            <td height="25px" colspan="2" style="padding:8px;">Address of Applicant</td>
+            <td height="25px" colspan="6" style="padding:8px;"><input type="text" class="field" size="80"  id="applicant_address" name="applicant_address" value=""/><span id="applicant_address_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="applicant_address_r" style="color:red; display:none">Fill in this field</span></td>
           </tr>
         </table>
       </td>
     </tr>
-	
-<div class="modal-body">
-<tr>
-        <td colspan="8" style="text-align:right;padding:8px;border-bottom: solid 10px #c4c4ff;color:#0000fb;background-color:#ffffff;"><input class="btn" type="button" name="newDataC" id="newDataC" value="Refresh"/></td>
+    <tr>
+        <td colspan="8" style="padding:8px;border-bottom:solid 1px #c4c4ff;background-color:#ffffff;text-align:left;"><b>SAMPLE DESCRIPTION</b></td>
     </tr>
     <tr>
-        <td height="25px" colspan="2" style="padding:4px;background-color:#ffffff;">Name of Applicant</td>
-        <td height="25px" colspan="6" style="padding:4px;background-color:#ffffff;text-align:left;"><input type="text" id="applicant_name" class="field" size="80" name="applicant_name"/><span id="applicant_name_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png'?>" height="10px" width="10px"></span><span id="applicant_name_r" style="color:red; display:none">Fill in this field</span></td>
-    </tr>
-    <tr>
-        <td height="25px" colspan="2" style="padding:4px;background-color:#ffffff;">Address of Applicant</td>
-        <td height="25px" colspan="6" style="padding:4px;background-color:#ffffff;text-align:left;"><input type="text" class="field" size="80"  id="applicant_address" name="applicant_address" value=""/><span id="applicant_address_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="applicant_address_r" style="color:red; display:none">Fill in this field</span></td>
-    </tr>
-    <tr>
-        <td colspan="8" style="padding:4px;border-bottom:solid 1px #c4c4ff;background-color:#ffffff;text-align:left;"><b>Sample Description</b></td>
-    </tr>
-    <tr>
-        <td height="25px" style="padding:8px;border-bottom:solid 10px #c4c4ff;background-color:#ffffff;text-align: center;text-align:left;" colspan="8"><b>(*Provide International Non-Proprietary Name of Active Ingredient'(s) if available)</b></td>
+        <td height="25px" style="padding:8px;border-bottom:dashed 1px #c4c4ff;background-color:#ffffff;text-align: center;text-align:left;" colspan="8"><b>(*Provide International Non-Proprietary Name of Active Ingredient'(s) if available)</b></td>
     </tr>
     <tr>
         <td colspan="8" style="padding:8px;text-align:center;border-bottom:solid 1px #c4c4ff;">
           <table  class="inner_table" width="100%"  cellpadding="8px" align="center" border="0">
               <tr>
-                  <td height="25px" width="200px" style="padding:4px;text-align:left;">Active ingredient(s)</td>
-                  <td height="25px" colspan="4" style="padding:4px;text-align:left;"><input type="text"  class="field" size="80" name="active_ingredients" id="active_ingredients"><span id="active_ingredients_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="active_ingredients_r" style="color:red; display:none">Fill this</span></td>
+                  <td height="25px" width="200px" style="padding:8px;text-align:left;">Active ingredient(s)</td>
+                  <td height="25px" colspan="4" style="padding:8px;text-align:left;"><input type="text"  class="field" size="80" name="active_ingredients" id="active_ingredients"><span id="active_ingredients_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="active_ingredients_r" style="color:red; display:none">Fill this</span></td>
+              </tr>
+              
+              <tr>
+                  <td height="25px" width="200px" style="padding:8px;text-align: left;">Label Claim</td>
+                  <td height="25px" colspan="4" style="padding:8px;text-align:left;"><input type="text" class="field" size="80" name="label_claim" id="label_claim"><span id="lable_claim_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="lable_claim_r" style="color:red; display:none">Fill this</span></td>
               </tr>
               <tr>
-                  <td height="25px" width="200px" style="padding:4px;text-align: left;">Label Claim</td>
-                  <td height="25px" colspan="4" style="padding:4px;text-align:left;"><input type="text" class="field" size="80" name="lable_claim" id="lable_claim"><span id="lable_claim_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="lable_claim_r" style="color:red; display:none">Fill this</span></td>
-              </tr>
-               <tr>
-                  <td height="25px" style="padding:4px;text-align: left;">Dosage From</td>
-                  <td height="25px" style="padding:4px;text-align: left;"><input type="text" class="field" name="dosage_from"  id="dosage_from"/><span id="dosage_from_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="dosage_from_r" style="color:red; display:none">Fill this</span></td>
-                  <td style="padding:4px;"></td>
-                  <td height="25px" style="padding:4px;text-align: left;">Strength or Concentration</td>
-                  <td height="25px" style="padding:4px;text-align: left;"><input type="text" class="field" name="strength_concentration"  id="strength_concentration"/><span id="strength_concentration_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="strength_concentration_r" style="color:red; display:none">Fill this</span></td>
-              </tr>
-              <tr>    
-                  <td height="25px" style="padding:4px;text-align: left;">Pack Size</td>
-                  <td height="25px" style="padding:4px;text-align: left;"><input type="text" class="field" id="pack_size" name="pack_size"/><span id="pack_size_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="pack_size_r" style="color:red; display:none">Fill this</span></td>
-                  <td style="padding:4px;"></td>
-                  <td height="25px" style="padding:4px;text-align: left;">Name of Manufacturer</td>
-                  <td height="25px" style="padding:4px;text-align: left;"><input type="text" class="field" name="manufacturer_name"  id="manufacturer_name"/><span id="manufacturer_name_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="manufacturer_name_r" style="color:red; display:none">Fill this</span></td>
-              </tr>
-              <tr>    
-                  <td height="25px" style="padding:4px;text-align: left;">Address of Manufacturer</td>
-                  <td height="25px" style="padding:4px;text-align: left;"><input type="text" class="field" id="manufacturer_address" name="manufacturer_address"/><span id="manufacturer_address_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="manufacturer_address_r" style="color:red; display:none">Fill this</span></td>
-                  <td height="25px" style="padding:4px;"></td>
-                  <td height="25px" style="padding:4px;text-align: left;">Brand Name</td>
-                  <td height="25px" style="padding:4px;text-align: left;"><input type="text" class="field" name="brand_name" id="brand_name"><span id="cbrand_name_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="brand_name_r" style="color:red; display:none">Fill this</span></td>
-              </tr>
-              <tr>   
-                  <td height="25px" style="padding:4px;text-align: left;">Marketing Authorization Number</td>
-                  <td height="25px" style="padding:4px;text-align: left;"><input type="text"  id="marketing_authorization_number" name="marketing_authorization_number"></td>
-                  <td style="padding:4px;"></td>
-                  <td height="25px" style="padding:4px;text-align: left;">Batch/Lot Number</td>
-                  <td height="25px" style="padding:4px;text-align: left;"><input type="text" class="field" name="batch_lot_number" id="batch_lot_number"><span id="batch_lot_number_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="batch_lot_number_r" style="color:red; display:none">Fill this</span></td>
+                <td colspan="8" style="padding:8px;">
+                  <table width="100%" cellpadding="8px" align="center" border="0">
+                       <tr>
+                          <td height="25px" style="padding:8px;text-align: left;">Dosage Form</td>
+                          <td height="25px" style="padding:8px;text-align: left;">
+                            <select name="dosage_form" id="dosage_form" class="field"><span id="dosage_from_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="dosage_from_r" style="color:red; display:none">Fill this</span>
+                                <option selected></option>
+                                <option value="LIQUID">LIQUID</option>
+                                <option value="SOLID">SOLID</option>
+                                <option value="POWDER">POWDER</option>
+                                <option value="GEL">GEL</option>
+                                <option value="CREAM">CREAM</option>
+                                <option value="OINTMENT">OINTMENT</option>
+                            </select>
+                          </td>
+                          <td style="padding:8px;"></td>
+                          <td height="25px" style="padding:8px;text-align: left;">Strength/Concentration</td>
+                          <td style="padding:8px;text-align:center;"><input type="text" size="5" class="field" name="strength_concentration"  id="strength_concentration"/>
+                          <select name="measure">
+                            <option selected></option>
+                            <option value="MILLIGRAMS">Mg</option>
+                            <option value="GRAMS">grms</option>
+                            <option value="MILLILITER">Mls</option>
+                            <option value="LITERS">ls</option>
+                          </select>
+                          </td>
+                      </tr>
+                      <tr>    
+                          <td height="25px" style="padding:8px;text-align: left;">Pack Size</td>
+                          <td height="25px" style="padding:8px;text-align: left;"><input type="text" class="field" id="pack_size" name="pack_size"/><span id="pack_size_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="pack_size_r" style="color:red; display:none">Fill this</span></td>
+                          <td style="padding:8px;"></td>
+                          <td height="25px" style="padding:8px;text-align: left;">Manufacturer</td>
+                          <td height="25px" style="padding:8px;text-align: left;"><input type="text" class="field" name="manufacturer_name"  id="manufacturer_name"/><span id="manufacturer_name_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="manufacturer_name_r" style="color:red; display:none">Fill this</span></td>
+                          
+                      </tr>
+                      <tr>    
+                          <td height="25px" style="padding:8px;text-align: left;">Manufacturer Address</td>
+                          <td height="25px" style="padding:8px;text-align: left;"><input type="text" class="field" id="manufacturer_address" name="manufacturer_address"/><span id="manufacturer_address_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="manufacturer_address_r" style="color:red; display:none">Fill this</span></td>
+                          <td height="25px" style="padding:8px;"></td>
+                          <td height="25px" style="padding:8px;text-align: left;">Brand</td>
+                          <td height="25px" style="padding:8px;text-align: left;"><input type="text" class="field" name="brand_name" id="brand_name"><span id="cbrand_name_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="brand_name_r" style="color:red; display:none">Fill this</span></td>
+                          
+                      </tr>
+                      <tr>   
+                          <td height="25px" style="padding:8px;text-align: left;">Marketing Authorization Number</td>
+                          <td height="25px" style="padding:8px;text-align: left;"><input type="text"  id="marketing_authorization_number" name="marketing_authorization_number"></td>
+                          <td style="padding:8px;"></td>
+                          <td height="25px" style="padding:8px;text-align: left;">Batch Number</td>
+                          <td height="25px" style="padding:8px;text-align: left;"><input type="text" class="field" name="batch_lot_number" id="batch_lot_number"><span id="batch_lot_number_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="batch_lot_number_r" style="color:red; display:none">Fill this</span></td>
+                          
+                      </tr>
+                      <tr>
+                          <td height="25px" style="padding:8px;text-align: left;">Manufacture Date</td>
+                          <td height="25px" style="padding:8px;text-align: left;"><input type="text" class="datepicker" name="date_of_manufacture" id="datepicker"><span id="date_of_manufacture_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="date_of_manufacture_r" style="color:red; display:none">Fill this</span></td>
+                          <td style="padding:8px;"></td>
+                          <td style="padding:8px;text-align: left;">Expiry/Retest Date</td>
+                          <td style="padding:8px;text-align: left;"><input type="text" class="field datepicker" id="" name="expiry_retest_date"><span id="expiry_retest_date_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="expiry_retest_date_r" style="color:red; display:none">Fill this</span></td>
+                          
+                      <tr>
+                      </tr>
+                          <td style="padding:8px;text-align:left;">Quantity Submitted</td>
+                          <td colspan="2" style="padding:8px;text-align:left;"><input type="text" size="7" class="field" id="quantity_submitted" name="quantity_submitted"><span id="quantity_submitted_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="quantity_submitted_r" style="color:red; display:none">Fill this</span>
+                            <select name="quantity_type">
+                              <option>-------</option>
+                              <option value="TABLETS">TABLETS</option>
+                              <option value="CAPSULES">CAPSULES</option>
+                              <option value="AMPOULES">AMPOULES</option>
+                              <option value="VIALS">VIALS</option>
+                              <option value="TUBES">TUBES</option>
+                              <option value="BOTTLES">BOTTLES</option>
+                            </select>
+                          </td>
+                          <td style="padding:8px;text-align:left;">Storage Conditions</td>
+                          <td style="padding:8px;text-align:left;"><input type="text" id="storage_conditions" name="storage_conditions"></td>
+                      </tr>
+                          <td style="padding:8px;text-align: left;">Applicant's Reference Number</td>
+                          <td colspan="4" style="padding:8px;text-align: left;"><input type="text" id="applicant_reference_number" name="applicant_reference_number"></td>
+                      </tr>
+                  </table>
+                </td>
               </tr>
               <tr>
-                  <td height="25px" style="padding:4px;text-align: left;">Date of Manufacture</td>
-                  <td height="25px" style="padding:4px;text-align: left;"><input type="text" class="datepicker" name="date_of_manufacture" id="datepicker"><span id="date_of_manufacture_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="date_of_manufacture_r" style="color:red; display:none">Fill this</span></td>
-                  <td style="padding:4px;"></td>
-                  <td style="padding:4px;text-align: left;">Expiry/Retest Date</td>
-                  <td style="padding:4px;text-align: left;"><input type="text" class="field datepicker" id="" name="expiry_retest_date"><span id="expiry_retest_date_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="expiry_retest_date_r" style="color:red; display:none">Fill this</span></td>
-              <tr>
-              </tr>
-                  <td style="padding:4px;text-align:left;">Quantity Submitted</td>
-                  <td colspan="2" style="padding:4px;text-align:left;"><input type="text" class="field" id="quantity_submitted" name="quantity_submitted"><span id="quantity_submitted_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="quantity_submitted_r" style="color:red; display:none">Fill this</span>
-                    <select name="quantity_type">
-                      <option>-------</option>
-                      <option value="Tablets">Tablets</option>
-                      <option value="Capsules">Capsules</option>
-                      <option value="Syrup">Syrup</option>
-                      <option value="Injections">Injections</option>
-                      <option value="Suspensions">Suspensions</option>
-                      <option value="Bottles">Bottles</option>
-                    </select>
-                  </td>
-                  <td style="padding:4px;text-align:left;">Storage Conditions</td>
-                  <td style="padding:4px;text-align:left;"><input type="text" id="storage_conditions" name="storage_conditions"></td>
-              </tr>
-                  <td style="padding:4px;text-align: left;">Applicant's Reference Number</td>
-                  <td colspan="4" style="padding:4px;text-align: left;"><input type="text" id="applicant_reference_number" name="applicant_reference_number"></td>
-              </tr>
-              <tr>
-                  <td height="25px" style="padding:4px;text-align:left;">Sample Source</td>
-                  <td height="25px" colspan="4" style="padding:4px;text-align:left;"><textarea rows="1" cols="80" class="field" id="sample_source" name="sample_source"></textarea><span id="csample_source_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="csample_source_r" style="color:red; display:none">Fill this</span></td>
+                  <td height="25px" style="padding:8px;text-align:left;">Sample Source</td>
+                  <td height="25px" colspan="4" style="padding:8px;text-align:left;"><input type="text" size="80" class="field" id="sample_source" name="sample_source"><span id="csample_source_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="csample_source_r" style="color:red; display:none">Fill this</span></td>
               </tr>
           </table>
         </td>
     </tr>
       <tr>
-        <td height="25px" colspan="8" style="padding:8px;background-color:#ffffff;border-bottom:solid 10px #c4c4ff;"><b>Reason for Requesting Analysis</b> (Tick as appropriate)</td>
+        <td height="25px" colspan="8" style="padding:8px;background-color:#ffffff;border-bottom:dashed 1px #c4c4ff;"><b>Reason for Requesting Analysis</b> (Select as appropriate)</td>
       </tr>
       <tr>
-          <td colspan="8" style="padding:4px;background-color:#ffffff;"><input type='radio' checked="checked" name='reason' id='compliance_testing' value="Compliance Testing">Compliance Testing</td>
+          <td colspan="8" style="padding:8px;background-color:#ffffff;">
+            <table class="inner_table" width="100%">
+            <tr>
+              <td style="padding:8px;"><input type='radio' checked="checked" name='reason' id='compliance_testing' value="Compliance Testing">Compliance Testing</td>
+            </tr>
+            <tr>
+              <td style="padding:8px;"><input type='radio' name='reason' id='investigative_testing' value="Investigative Testing">Investigative Testing</td>
+            </tr>
+            </table>  
       </tr>
       <tr>
-          <td colspan="8" style="padding:4px;background-color:#ffffff;"><input type='radio' name='reason' id='investigative_testing' value="Investigative Testing">Investigative Testing</td>
+         <td height="25px" colspan="8" style="padding:8px;background-color:#ffffff;"><b>Other(Please Specify)</b></td>
       </tr>
       <tr>
-         <td height="25px" colspan="8" style="padding:4px;background-color:#ffffff;">Other(Please Specify)</td>
+        <td colspan="8" style="text-align:center;padding:8px;background-color:#ffffff;">
+          <table align="center" width="100%" border="0">
+            <tr>
+              <td><textarea rows="3" cols="130" name='other_reason' id='other_reason'></textarea></td>
+            </tr>
+          </table>
+        </td>
       </tr>
       <tr>
-        <td height="25px" colspan="8" style="padding:4px;background-color:#ffffff;"><textarea rows="3" cols="130" name='other_reason' id='other_reason'></textarea></td>
+        <td height="25px" colspan="8" style="padding:8px;background-color:#ffffff;border-bottom:solid 1px #c4c4ff;"><b>Test(s) Required:</b> (Select as appropriate)</td>
       </tr>
       <tr>
-        <td height="25px" colspan="8" style="padding:8px;background-color:#ffffff;border-bottom:solid 1px #c4c4ff;"><b>Test(s) Required:</b> (Tick as appropriate)</td>
-      </tr>
-      <tr>
-        <td colspan="8" style="padding:2px;background-color:#ffffff;">
+        <td colspan="8" style="padding:8px;background-color:#ffffff;">
             <table class ="inner_table" width="100%" cellpadding="8px" height="150px" align="center" border="0">
                 <tr>
                     <td style="padding:2px;border-bottom:solid 1px #f2f2f2;text-align:center;"><b>No</b></td>
@@ -367,50 +413,50 @@
                 <tr>
                   <td style="padding:2px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">i.</td>
                   <td>Identification</td>
-                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='identifications' id='identification' value='1'></td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='tests[]' id='tests[]' value='1'></td>
                   <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;">vii.</td>
                   <td>Dissolution</td>
-                  <td style="border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='dissolution' id='dissolution' value='7'></td>
+                  <td style="border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='tests[]' id='tests[]' value='7'></td>
                 </tr>
                 <tr>
                   <td style="padding:2px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">ii.</td>
                   <td>Friability</td>
-                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='friability' id='friability' value='2'></td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='tests[]' id='tests[]' value='2'></td>
                   <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;">viii.</td>
                   <td>Assay</td>
-                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='assay' id='assay' value='8'></td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='tests[]' id='tests[]' value='8'></td>
                 </tr>
                 <tr>
                   <td style="padding:2px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">iii.</td>
                   <td>Disintegration</td>
-                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='disintergration' id='disintergration' value='3'></td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='tests[]' id='tests[]' value='3'></td>
                   <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;">ix.</td>
                   <td>Content Uniformity</td>
-                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='content_uniformity' id='content_uniformity' value='9'></td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='tests[]' id='tests[]' value='9'></td>
                 </tr>
                 <tr>
                   <td style="padding:2px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">iv.</td>
                   <td>ph(Acidity/Alkalinity)</td>
-                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='ph_alkalinity_acidity' id='ph_alkalinity_acidity' value='4'></td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='tests[]' id='tests[]' value='4'></td>
                   <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;">x.</td>
                   <td>Full Monograph</td>
-                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='full_monograph' id='full_monograph' value='10'></td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='tests[]' id='tests[]' value='10'></td>
                 </tr>
                  <tr>
-                  <td style="padding:4px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">v.</td>
+                  <td style="padding:2px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">v.</td>
                   <td>Related Substances</td>
-                  <td style="padding:4px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='related_substances' id='related_substances' value='5'></td>
-                  <td style="padding:4px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">xi.</td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='tests[]' id='tests[]' value='5'></td>
+                  <td style="padding:2px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">xi.</td>
                   <td>Uniformity of Dosage</td>
-                  <td style="padding:4px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='uniformity_of_dosage' id='uniformity_of_dosage' value='11'></td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='tests[]' id='tests[]' value='11'></td>
                 </tr>
                 <tr>
-                  <td style="padding:4px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">vi</td>
+                  <td style="padding:2px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">vi</td>
                   <td>Weight Variation/Mass Uniformity</td>
-                  <td style="padding:4px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='weight_variation_mass_uniformity' id='weight_variation_mass_uniformity' value='6'></td>
-                  <td style="padding:4px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">xii.</td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='tests[]' id='tests[]' value='6'></td>
+                  <td style="padding:2px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">xii.</td>
                   <td>Karl Fisher</td>
-                  <td style="padding:4px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='karl_fisher' id='karl_fisher' value='12'></td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='tests[]' id='tests[]' value='12'></td>
                 </tr>
                 <tr>
                   <td style="padding:2px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;"></td>
@@ -418,74 +464,87 @@
                   <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"></td>
                   <td style="padding:2px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">xiii.</td>
                   <td>Microbiology</td>
-                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='microbiology' id='microbiology' value='13'></td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='tests[]' id='tests[]' value='13'></td>
+                </tr>
+                <tr>
+                  <td style="padding:2px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;"></td>
+                  <td></td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"></td>
+                  <td style="padding:2px;border-left:solid 1px #f2f2f2;border-right:solid 1px #f2f2f2;text-align:center;">xiv.</td>
+                  <td>Loss and Drying</td>
+                  <td style="padding:2px;border-right:solid 1px #f2f2f2;text-align:center;"><input type='checkbox' name='tests[]' id='tests[]' value='14'></td>
+                </tr>
+                <tr>
+                  <td height="25px" colspan="8"  style="padding:8px;"><b>Other(Please specify)</b></td>
+                </tr>
+                <tr>
+                  <td colspan="8" style="padding:8px;"><textarea rows="3" cols="130" name="other_test" id="other_test" ></textarea></td>
                 </tr>
             </table>
         </td>
       </tr>
+      
       <tr>
-        <td height="25px" colspan="8"  style="padding:4px;background-color:#ffffff;">Other(Please specify)</td>
-      </tr>
-      <tr>
-        <td colspan="8" style="padding:4px;background-color:#ffffff;"><textarea rows="3" cols="130" name="other_test" id="other_test" ></textarea></td>
-      </tr>
-      <tr>
-        <td height="25px" colspan="8" style="padding:4px;background-color:#ffffff;border-bottom:solid 10px #c4c4ff;"><b>Specifications to be used for testing:</b>(Tick as appropriate)</td>
+        <td height="25px" colspan="8" style="padding:8px;background-color:#ffffff;border-bottom:dashed 1px #c4c4ff;"><b>Specifications to be used for testing:</b>(Select as appropriate)</td>
       </tr>
       <tr>
        <td colspan="8" style="padding:8px;text-align:center;">
         <table class ="inner_table" width="100%"  cellpadding="8px" align="center" border="0">
           <tr>
-            <td colspan="8" style="padding:4px;text-align:left;background-color:#ffffff;"><input type='radio' checked="checked" name='specification' id='usp' value='USP'>USP</td>
+            <td colspan="8" style="padding:8px;text-align:left;"><input type='radio' checked="checked" name='specification' id='usp' value='USP'>USP</td>
           </tr>
           <tr>
-            <td colspan="8" style="padding:4px;text-align:left;background-color:#ffffff;"><input type='radio' name='specification' id='bp' value='BP'>BP</td>
+            <td colspan="8" style="padding:8px;text-align:left;"><input type='radio' name='specification' id='bp' value='BP'>BP</td>
           </tr>
           <tr>
-            <td colspan="8" style="padding:4px;text-align:left;background-color:#ffffff;"><input type='radio' name='specification' id='european_pharmacopeia' value='European Pharmacopoeia'>European Pharmacopoeia</td>
+            <td colspan="8" style="padding:8px;text-align:left;"><input type='radio' name='specification' id='european_pharmacopeia' value='European Pharmacopoeia'>European Pharmacopoeia</td>
           </tr>
           <tr>
-            <td colspan="8" style="padding:4px;text-align:left;background-color:#ffffff;"><input type='radio' name='specification' id='international_pharmacopeia' value='International Pharmacopoeia'>International Pharmacopoeia</td>
+            <td colspan="8" style="padding:8px;text-align:left;"><input type='radio' name='specification' id='international_pharmacopeia' value='International Pharmacopoeia'>International Pharmacopoeia</td>
           </tr>
           <tr>
-              <td colspan="8" style="padding:4px;text-align:left;background-color:#ffffff;"><input type='radio' name='specification' id='manufacturers_specs' value='Manufacturer's Specifications'>Manufacturer's Specifications</td>
+              <td colspan="8" style="padding:8px;text-align:left;"><input type='radio' name='specification' id='manufacturers_specs' value='Manufacturer's Specifications'>Manufacturer's Specifications</td>
           </tr>
           <tr>
-            <td height="25px" colspan="8" style="text-align:left;background-color:#ffffff;border-bottom:solid 1px #c4c4ff;">Other(Please specify)</td>
+            <td height="25px" colspan="8" style="padding:8px;text-align:left;"><b>Other(Please specify)</b></td>
           </tr>
           <tr>
-              <td colspan="8" style="text-align:center;padding:4px;background-color:#ffffff;"><textarea rows="3" cols="130" id="other_specification" name="other_specification"></textarea></td>
+              <td colspan="8" style="text-align:center;padding:8px;"><textarea rows="3" cols="130" id="other_specification" name="other_specification"></textarea></td>
+          </tr>
+          <tr>
+            <td height="25px" colspan="8" style="padding:8px;background-color:#ffffff;border-bottom:solid 1px #c4c4ff;"><h5><b><p>Note:</b> If manufacturer's or 'other', please provide methods of analysis and specifications</p></h5></td>
           </tr>
         </table>
         </td>
       </tr>
       </div>  
       <tr>
-        <td height="25px" colspan="8" style="padding:2px;background-color:#ffffff;border-bottom:solid 1px #c4c4ff;"><h6><b><p>Note:</b> If manufacturer's or 'other', please provide methods of analysis and specifications</p></h6></td>
+        <td height="25px" colspan="8" style="padding:8px;background-color:#ffffff;border-bottom:solid 1px #c4c4ff;"><b>DETAILS OF PERSON AUTHORIZING REQUEST FOR ANALYSIS</b></td>
       </tr>
       <tr>
-        <td height="25px" colspan="8" style="padding:4px;background-color:#ffffff;border-bottom:solid 10px #c4c4ff;"><b>Details of person authorizing request for analysis</b></td>
-      </tr>
-      <tr>
-          <td height="25px" style="padding:4px;background-color:#ffffff;">Name</td>
-          <td height="25px" style="padding:4px;background-color:#ffffff;"><input type="text" class="field" id="authorizing_name" name="authorizing_name"/><span id="authorizing_name_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="authorizing_name_r" style="color:red; display:none">Fill this</span></td>
-          <td height="25px" style="padding:4px;text-align:right;background-color:#ffffff;">Designation:</td>
-          <td height="25px" colspan="5" style="padding:4px;background-color:#ffffff;"><input type="text" class="field" id="designation" name="designation"/><span id="designation_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="designation_r" style="color:red; display:none">Fill this</span></td>
-      </tr>
-      <tr>
-          <td height="25px" width="120px" style="padding:4px;text-align:left;background-color:#ffffff;border-bottom:solid 1px #c4c4ff;">Lab Registration No</td>
-          <td height="25px" colspan="7" style="padding:4px;background-color:#ffffff;border-bottom:solid 1px #c4c4ff;"><input type="text" class="field" id="lab_reg_number" name="lab_reg_number"/><span id="lab_reg_number_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="lab_reg_number_r" style="color:red; display:none">Fill this</span></td>
-          <input type="hidden" id="creceived_by" name="creceived_by" value="<?php echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);?>"/>
-      </tr>
-      <tr>
-        <td height="25px" colspan="8" width="120px" style="padding:4px;text-align:left;background-color:#ffffff;border-bottom:solid 1px #c4c4ff;"><b>Comments</b> <span id="findings_comment_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="findings_comment_r" style="color:red; display:none">Fill this</span></td>
-      </tr>
-      <tr>
-        <td height="25px" colspan="8" style="padding:4px;background-color:#ffffff;"><textarea rows="3" cols="130" type="text" class="field" id="findings_comment" name="findings_comment"/></textarea></td>  
+        <td height="25px" colspan="8" style="padding:8px;background-color:#ffffff;">
+          <table class="inner_table" width="100%" border="0">
+            <tr>
+              <td height="25px" style="padding:8px;">Name: <input type="text" class="field" id="authorizing_name" name="authorizing_name"/><span id="authorizing_name_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="authorizing_name_r" style="color:red; display:none">Fill this</span></td>
+              <td height="25px" style="padding:8px;text-align:right;;">Designation: 
+                <input class="field" id="designation" name="designation"/><span id="designation_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="designation_r" style="color:red; display:none">Fill this</span>
+              </td>
+              <td height="25px" style="padding:8px;text-align:left;">Lab Reg Number: <input type="text" class="field" id="lab_reg_number" name="lab_reg_number"/><span id="lab_reg_number_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
+                <span id="lab_reg_number_r" style="color:red; display:none">Fill this</span></td>
+                <input type="hidden" id="creceived_by" name="creceived_by" value="<?php echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);?>"/>
+            </tr>
+            <tr>
+              <td height="25px" colspan="3" style="padding:8px;text-align:left;background-color:#ffffff;border-bottom:solid 1px #c4c4ff;"><b>Comments</b> <span id="findings_comment_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="findings_comment_r" style="color:red; display:none">Fill this</span></td>
+            </tr>
+             <tr>
+              <td height="25px" colspan="3" style="padding:8px;"><textarea rows="3" cols="130" type="text" class="field" id="findings_comment" name="findings_comment"/></textarea></td>  
+            </tr>
+          </table>
+        </td>
       </tr>
       <div class="modal-footer">
         <tr>
-          <td height="25px" style="padding:4px;background-color:#ffffff;border-top: solid 1px #bfbfbf;text-align: center;" colspan="8" ><input type="submit" name="submit" id="submit" value="Submit"></td>
+          <td height="25px" style="padding:8px;background-color:#ffffff;border-top: solid 1px #bfbfbf;text-align: center;" colspan="8" ><input type="submit" name="submit" id="submit" value="Submit"></td>
         </tr>
       </div>
     </table>

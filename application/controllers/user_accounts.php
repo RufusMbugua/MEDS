@@ -4,7 +4,8 @@ class User_Accounts extends CI_Controller {
     
   function User_Accounts(){
      parent::__construct();
-   }	
+   }
+   	
   
   function Get(){
       $this->load->model('useraccount_listmodel');

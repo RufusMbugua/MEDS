@@ -106,6 +106,8 @@ class Test_Vs_Solution_Model extends CI_Model{
 			'status'=>$status,	
 
 			'choice'=>$this->input->post('choice'),
+			'done_by'=>$this->input->post('done_by'),
+			'date_done'=>$this->input->post('date_done'),
 			'supervisor'=>$this->input->post('supervisor'),
 			'date'=>$this->input->post('date'),
 			'further_comments'=>$this->input->post('further_comments'),			
@@ -124,7 +126,7 @@ class Test_Vs_Solution_Model extends CI_Model{
 			'test_type'=>$test_type,
 			'analyst'=>$analyst,
 			);
-		$this->db->insert('coa', $coa_data);
+		//$this->db->insert('coa', $coa_data);
 
 		redirect('test/index/'.$assignment.'/'.$test_request);	
 	}

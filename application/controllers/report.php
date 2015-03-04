@@ -14,6 +14,8 @@ class Report extends CI_Controller {
 				ORDER BY DATE_FORMAT(ht_date,'%v/%x') asc";
 		$query = $this -> db -> query($sql);
 		$results = $query -> result_array();
+		echo "$sql";
+			print_r($results);die;
 		$weeks = array();
 		foreach ($results as $result) {
 			$weeks[] = $result['period'];
@@ -21,14 +23,16 @@ class Report extends CI_Controller {
 		foreach ($weeks as $week) {
 			$freezer = 0;
 
-			$sql = "SELECT ht_location as location,min_temp as total
+			$sql2 = "SELECT ht_location as location,collected_temp as total
 				    FROM humiditytemp 
 				    WHERE DATE_FORMAT(ht_date,'%v/%x')='$week'
 				    GROUP BY ht_location";
 			$query = $this -> db -> query($sql);
-			$results = $query -> result_array();
+			$results2 = $query -> result_array();
+			
+
 			if ($results) {
-				foreach ($results as $result) {
+				foreach ($results2 as $result) {
 					if ($result['location'] == "Freezer") {
 						$freezer = intval($result['total']);
 					}

@@ -150,142 +150,149 @@
 <div class="modal-content">
 <div class="modal-header">
   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-  <h4 class="modal-title" id="meds">MEDS Reference Standard Register Form</h4>
+  <h4 class="modal-title" id="meds">MEDS Primary Reference Standard Register Form</h4>
 </div>
     <?php echo validation_errors(); ?>
     <?php echo form_open('standard_register/save',array('name'=>'standard_register_form'));?>
-	<table class="table_form" width="900px" bgcolor="#c4c4ff" border="0" cellpadding="4" align="center">
-	   <tr>
-      <td rowspan="2" style="padding:4px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="80px" width="90px"/></td>
-      <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><b>Document:Official Form</b></td>
-      <td width="150px" height="25px" colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;color:#000000;"><b>REFERENCE NUMBER</b></td>
-      <td colspan="3" style="padding:4px;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">
-        <input type="text" id="reference_number" name="reference_number" class="field"/>
-        <span id="reference_number_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
-        <span id="reference_number_r" style="color:red; display:none">Fill this field</span>
-      </td>
-  </tr>
-  <tr>
-      <td colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><b>EFFECTIVE DATE: <?php echo date("d/m/Y")?></b></td>
-      <td height="25px"colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><b>REVISION NUMBER</b></td>
-      <td height="25px" colspan="3" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><b>PAGE 1 of 1</b></td>
-  </tr>
-  <tr>
-      <td width="150px" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;"><b>Form Authorized By:</b></td>
-      <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><b><?php echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);?></b></td>
-      <td colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><b>USER TYPE</b></td>
-      <td colspan="3" style="padding:4px;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><?php echo("<b>".$user['logged_in']['role']);?></td>
-  </tr>
-  <tr>
-      <td colspan="8" height="25px" align="center" style="border-right:solid 1px #bfbfbf;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #c4c4ff;">
-      </td>
-  </tr>
-      <tr>
-		<td colspan="8" style="padding:8px;text-align:center;background-color:#ffffff;padding-right:40px;border-bottom: solid 1px #f0f0ff;color: #0000fb;background-color: #ffffff;"></td>
-	    </tr>
-      <div class="modal-body">
-
-	     <tr>
-		<td height="5px" colspan="2" align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Batch Number/ Lot Number</b></td>
-		<td colspan="2" style="padding:4px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;">
-			<input type="text" name="batch_number" id ="batch_number" class ="fieldsr"/>
-			<span id="batch_number_1" style="padding:4px;color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
-			<span id="batch_number_r" style="padding:4px;color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
-
-		<td height="5px" colspan="2"  align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Location/Store</b></td>
-		<td colspan="2" style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;">
-			<input type="text" name="location_store" id ="location_store" class ="fieldsr" class ="fieldsr" />
-			<span id="location_store_1" style="padding:4px;color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
-			<span id="location_store_r" style="padding:4px;color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
-		
-	     </tr> 
-       <tr>
-        <td height="5px" colspan="2" align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>Reference Number</b></td>
-        <td colspan="2" style="padding:4px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
-          <input type="text" name="reference_number" id ="reference_number" class ="fieldsr"/>
-          <span id="reference_number_1" style="padding:4px;color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
-          <span id="reference_number_r" style="padding:4px;color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
-
-        <td height="5px" colspan="2"  align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Certificate Number</b></td>
-        <td colspan="2" style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;">
-          <input type="text" name="certificate_number" id ="certificate_number" class ="fieldsr"/>
-          <span id="certificate_number_1" style="padding:4px;color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
-          <span id="certificate_number_r" style="padding:4px;color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
-    
+	<table width="100%" bgcolor="#c4c4ff" border="0" cellpadding="4" align="center">
+    <tr>
+      <td style="padding:8px;">      
+          <table width="100%" bgcolor="#c4c4ff" border="0" cellpadding="4" align="center">
+            <tr>
+                <td rowspan="2" style="padding:4px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="80px" width="90px"/></td>
+                <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><b>Document:Official Form</b></td>
+                <td width="150px" height="25px" colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;color:#000000;"><b>REFERENCE NUMBER</b></td>
+                <td colspan="3" style="padding:4px;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">
+                  <input type="text" id="reference_number" name="reference_number" class="field"/>
+                  <span id="reference_number_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
+                  <span id="reference_number_r" style="color:red; display:none">Fill this field</span>
+                </td>
+            </tr>
+            <tr>
+              <td colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><b>EFFECTIVE DATE: <?php echo date("d/m/Y")?></b></td>
+              <td height="25px"colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><b>REVISION NUMBER</b></td>
+              <td height="25px" colspan="3" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><b>PAGE 1 of 1</b></td>
+            </tr>
+            <tr>
+                <td width="150px" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;"><b>Form Authorized By:</b></td>
+                <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><b><?php echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);?></b></td>
+                <td colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><b>USER TYPE</b></td>
+                <td colspan="3" style="padding:4px;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><?php echo("<b>".$user['logged_in']['role']);?></td>
+            </tr>
+          </table>
+        </td>
       </tr>
-	     <tr>
-		<td height="5px" colspan="2"  align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>Item Description</b></td>
-		<td colspan="2" style="padding:4px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
-			<textarea rows="3" cols="40" name="item_description" id ="item_description" class ="fieldsr"></textarea>
-			<span id="item_description_1" style="padding:4px;color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
-			<span id="item_description_r" style="padding:4px;color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
-
-
-		<td height="5px" colspan="2" align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>MSDS (Material Saftey Data Sheet)</b></td>
-		<td colspan="2" style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
-			<textarea rows="3"  cols="40" name="msds" id ="msds" class ="fieldsr"/></textarea>
-			<span id="msds_1" style="padding:4px;color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
-			<span id="msds_r" style="padding:4px;color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
-	     </tr>
-	    
-	    <tr>
-		<td height="5px" colspan="2"  align="left" style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Expiry Date</b></td>
-		<td colspan="2" style="padding:4px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;">
-			<input type="date" name="expiry_date" id ="expiry_date" class ="fieldsr"/>
-			<span id="expiry_date_1" style="padding:4px;color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
-			<span id="expiry_date_r" style="padding:4px;color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
-
-		<td height="5px" colspan="2"  align="left" style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Date Received</b></td>
-		<td colspan="2" style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;">
-			<input type="date" name="date_received" id ="date_received" class ="fieldsr"/>
-			<span id="date_received_1" style="padding:4px;color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
-			<span id="date_received_r" style="padding:4px;color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
-		
+      <tr>
+		    <td colspan="8" style="padding:8px;text-align:center;background-color:#ffffff;padding-right:40px;border-bottom: solid 1px #f0f0ff;color: #0000fb;background-color: #ffffff;"></td>
 	    </tr>
-	    <tr>
-		<td height="5px" colspan="2"  align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Supplier</b></td>
-		<td colspan="2" style="padding:4px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;">
-			<input type="text" name="source" id ="source" class ="fieldsr"/>
-			<span id="source_1" style="padding:4px;color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
-			<span id="source_r" style="padding:4px;color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
-		
-		<td height="5px" colspan="2"  align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Physical Appearance</b></td>
-		<td colspan="2" style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;">
-			<textarea rows="3" cols="40" name="physical_appearance" id="physical_appearance" class ="fieldsr"></textarea>
-			<span id="physical_appearance_1" style="padding:4px;color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
-			<span id="physical_appearance_r" style="padding:4px;color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
-	    </tr>
-	 <tr>
-		<td height="5px" colspan="2"  align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Intended Use</b></td>
-		<td colspan="6" style="padding:4px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;">
-			<textarea rows="3" cols="40" name="intended_use" id="intended_use" class ="fieldsr"></textarea>
-			<span id="intended_use_1" style="padding:4px;color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
-			<span id="intended_use_r" style="padding:4px;color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
-	 
-        </tr>
+    <div class="modal-body">
+      <tr>
+            <td style="padding:8px;">
+              <table width="100%" bgcolor="#c4c4ff" border="0" cellpadding="4" align="center">
+                <tr> 
+                  		<td height="5px" colspan="2" align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Batch Number/ Lot Number</b></td>
+                  		<td colspan="2" style="padding:4px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;">
+                  			<input type="text" name="batch_number" id ="batch_number" class ="fieldsr"/>
+                  			<span id="batch_number_1" style="padding:4px;color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
+                  			<span id="batch_number_r" style="padding:4px;color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
+
+                  		<td height="5px" colspan="2"  align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Location/Store</b></td>
+                  		<td colspan="2" style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;">
+                  			<input type="text" name="location_store" id ="location_store" class ="fieldsr" class ="fieldsr" />
+                  			<span id="location_store_1" style="padding:4px;color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
+                  			<span id="location_store_r" style="padding:4px;color:white;background-color:red;padding:4px;display:none">Field Required</span>
+                      </td>	
+                   </tr> 
+                     <tr>
+                      <td height="5px" colspan="2" align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>Reference Number</b></td>
+                      <td colspan="2" style="padding:4px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
+                        <input type="text" name="reference_number" id ="reference_number" class ="fieldsr"/>
+                        <span id="reference_number_1" style="padding:4px;color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
+                        <span id="reference_number_r" style="padding:4px;color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
+
+                      <td height="5px" colspan="2"  align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Certificate Number</b></td>
+                      <td colspan="2" style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;">
+                        <input type="text" name="certificate_number" id ="certificate_number" class ="fieldsr"/>
+                        <span id="certificate_number_1" style="padding:4px;color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
+                        <span id="certificate_number_r" style="padding:4px;color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
+                  
+                    </tr>
+              	     <tr>
+              		<td height="5px" colspan="2"  align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>Item Description</b></td>
+              		<td colspan="2" style="padding:4px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
+              			<textarea rows="3" cols="40" name="item_description" id ="item_description" class ="fieldsr"></textarea>
+              			<span id="item_description_1" style="padding:4px;color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
+              			<span id="item_description_r" style="padding:4px;color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
 
 
-        <tr>
-            <td height="5px" colspan="2"  align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Quantity</b></td>
-            <td colspan="2" style="padding:4px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;">
-              <input type="text" name="quantity" id ="quantity" class ="fieldsr"/>
-              <span id="quantity_1" style="padding:4px;color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
-              <span id="quantity_r" style="padding:4px;color:white;background-color:red;padding:4px;display:none">Field Required</span></td>       
-	      
-        <td height="5px" colspan="2"  align="left" style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Status</b></td>
-	      <td colspan="2" style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;">
-	        <select type="text" name="status" id ="status" class ="fieldsr">
-	          <option>-----</option>
-	          <option value = 0> In Use</option>
-	          <option value = 1> Expired</option>
-	          <option value = 2> Damaged</option>
-	          <option value = 3> Exhausted</option>
-	      </select>
-	      	<span id="status_1" style="padding:4px;color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
-			   <span id="status_r" style="padding:4px;color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
-	     
-	            </tr>
-      </div>
+              		<td height="5px" colspan="2" align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>MSDS (Material Saftey Data Sheet)</b></td>
+              		<td colspan="2" style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
+              			<textarea rows="3"  cols="40" name="msds" id ="msds" class ="fieldsr"/></textarea>
+              			<span id="msds_1" style="padding:4px;color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
+              			<span id="msds_r" style="padding:4px;color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
+              	     </tr>
+              	    
+              	    <tr>
+              		<td height="5px" colspan="2"  align="left" style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Expiry Date</b></td>
+              		<td colspan="2" style="padding:4px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;">
+              			<input type="text" class="datepicker" name="expiry_date" id ="expiry_date" class ="fieldsr"/>
+              			<span id="expiry_date_1" style="padding:4px;color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
+              			<span id="expiry_date_r" style="padding:4px;color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
+
+              		<td height="5px" colspan="2"  align="left" style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Date Received</b></td>
+              		<td colspan="2" style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;">
+              			<input type="text" class="datepicker" name="date_received" id ="date_received" class ="fieldsr"/>
+              			<span id="date_received_1" style="padding:4px;color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
+              			<span id="date_received_r" style="padding:4px;color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
+              		
+              	    </tr>
+              	    <tr>
+              		<td height="5px" colspan="2"  align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Supplier</b></td>
+              		<td colspan="2" style="padding:4px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;">
+              			<input type="text" name="source" id ="source" class ="fieldsr"/>
+              			<span id="source_1" style="padding:4px;color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
+              			<span id="source_r" style="padding:4px;color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
+              		
+              		<td height="5px" colspan="2"  align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Physical Appearance</b></td>
+              		<td colspan="2" style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;">
+              			<textarea rows="3" cols="40" name="physical_appearance" id="physical_appearance" class ="fieldsr"></textarea>
+              			<span id="physical_appearance_1" style="padding:4px;color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
+              			<span id="physical_appearance_r" style="padding:4px;color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
+              	    </tr>
+              	 <tr>
+              		<td height="5px" colspan="2"  align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Intended Use</b></td>
+              		<td colspan="6" style="padding:4px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;">
+              			<textarea rows="3" cols="40" name="intended_use" id="intended_use" class ="fieldsr"></textarea>
+              			<span id="intended_use_1" style="padding:4px;color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
+              			<span id="intended_use_r" style="padding:4px;color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
+              	 
+                      </tr>
+
+
+                      <tr>
+                          <td height="5px" colspan="2"  align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Quantity</b></td>
+                          <td colspan="2" style="padding:4px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;">
+                            <input type="text" name="quantity" id ="quantity" class ="fieldsr"/>
+                            <span id="quantity_1" style="padding:4px;color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
+                            <span id="quantity_r" style="padding:4px;color:white;background-color:red;padding:4px;display:none">Field Required</span></td>       
+              	      
+                      <td height="5px" colspan="2"  align="left" style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Status</b></td>
+              	      <td colspan="2" style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;">
+              	        <select type="text" name="status" id ="status" class ="fieldsr">
+              	          <option>-----</option>
+              	          <option value = 0> In Use</option>
+              	          <option value = 1> Expired</option>
+              	          <option value = 2> Damaged</option>
+              	          <option value = 3> Exhausted</option>
+              	      </select>
+              	      	<span id="status_1" style="padding:4px;color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
+              			   <span id="status_r" style="padding:4px;color:white;background-color:red;padding:4px;display:none">Field Required</span></td>
+              	     
+              	            </tr>
+                    </div>
+                </table>
+              </td>
+            </tr>
       <div class="modal-footer">
 	    <tr>
 		    <td colspan="8"  style="padding:4px;background-color:#ffffff;text-align: center;" align="right"><input class = "btn"id ="submit" type="submit" name="submit" value="Submit"/></td>

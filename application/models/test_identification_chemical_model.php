@@ -6,15 +6,18 @@ class Test_Identification_Chemical_Model extends CI_Model{
 	}
 
 	function save_worksheet(){
-		
-		$coa_method_used=$this->input->post('coa_method_used');
-		$coa_results=$this->input->post('coa_results');
-		$coa_specification=$this->input->post('coa_specification');
+				
 		$status =1;
 		$test_request=$this->input->post('test_request');
 		$assignment=$this->input->post('assignment');
-		$test_type='Identification: Chemical Method';
+		$test_name='Identification: Chemical Method';
 		$analyst= $this->input->post('analyst');
+		$test_type = '1f';
+
+		$data=$this->db->select_max('id')->get('identification_chemical_method')->result();
+        $test_id=$data[0]->id;
+        $test_id++;
+
 		
 		$data =array(			
 			
@@ -34,19 +37,6 @@ class Test_Identification_Chemical_Model extends CI_Model{
 			'standard_container_2'=>$this->input->post('standard_container_2'),
 			'container_2'=>$this->input->post('container_2'),
 			'standard_weight_2'=>$this->input->post('standard_weight_2'),
-
-			// 'standard_container_3'=>$this->input->post('standard_container_3'),
-			// 'container_3'=>$this->input->post('container_3'),
-			// 'standard_weight_3'=>$this->input->post('standard_weight_3'),
-
-			// 'standard_container_4'=>$this->input->post('standard_container_4'),
-			// 'container_4'=>$this->input->post('container_4'),
-			// 'standard_weight_4'=>$this->input->post('standard_weight_4'),
-
-			// 'standard_container_5'=>$this->input->post('standard_container_5'),
-			// 'container_5'=>$this->input->post('container_5'),
-			// 'standard_weight_5'=>$this->input->post('standard_weight_5'),
-
 			'standard_dilution'=>$this->input->post('standard_dilution'),
 
 			'reagent_description'=>$this->input->post('reagent_description'),
@@ -67,23 +57,20 @@ class Test_Identification_Chemical_Model extends CI_Model{
 			'choice'=>$this->input->post('choice'),
 			'date_done'=>$this->input->post('date_done'),
 			'analyst'=>$this->input->post('analyst'),
-			'supervisor'=>$this->input->post('supervisor'),
-			'date'=>$this->input->post('date'),
+			'date_done'=>$this->input->post('date_done'),
 			'further_comments'=>$this->input->post('further_comments'),				
 
 			);
 		$this->db->insert('identification_chemical_method', $data);
 
-		$coa_data = array(
-			'coa_method_used'=>$coa_method_used,
-			'coa_results'=>$coa_results,
-			'coa_specification'=>$coa_specification,
-			'test_request_id'=>$test_request,
-			'assignment_id'=>$assignment,
-			'test_type'=>$test_type,
-			'analyst'=>$analyst,
+		$result_data = array(
+			'test_id'=>$test_id,
+			'test_name'=>$test_name,
+			'remarks'=>$this->input->post('choice'),
+			'method'=>$this->input->post('method'),
+			'results'=>$this->input->post('results'),
 			);
-		$this->db->insert('coa', $coa_data);
+		$this->db->update('test_results', $result_data, array('test_request_id'=>$test_request,'test_type'=>$test_type));
 
 		redirect('test/index/'.$assignment.'/'.$test_request);	
 	}
@@ -92,20 +79,29 @@ class Test_Identification_Chemical_Model extends CI_Model{
 		$assignment=$this->input->post('assignment');
 		$test_name='Chemical Method';
 		$analyst= $this->input->post('analyst');
-		$identification_chemical_method_id= 1;
+		$test_type= '1f';
 
+
+		$data=$this->db->select_max('id')->get('identification_chemical_method')->result();
+        $test_id=$data[0]->id;
+        $test_id++;
 
 		$data = array(
-			'monograph' => $this->input->post('chemical_monograph'),
 			'test_request_id' => $this->input->post('test_request'),
-			'assignment_id' => $this->input->post('assignment'),
+			'test_id' => $test_id,
+			'test_type' => $test_type,
 			'test_name' => $test_name,
-			'analyst' => $this->input->post('analyst'),
-			'identification_chemical_method_id' => $identification_chemical_method_id,
-
+			'monograph_specifications' => $this->input->post('specification'),
 
 			);
-		$this->db->insert('identification_chemical_method_monograph', $data);
+		$this->db->insert('monograph_specifications', $data);
+		$data2 = array(
+			'test_request_id' => $this->input->post('test_request'),
+			'test_type' => $test_type,
+			'specifications' => $this->input->post('specification'),
+
+			);
+		$this->db->insert('test_results', $data2);
 		redirect('test/index/'.$assignment.'/'.$test_request);	
 
 	}

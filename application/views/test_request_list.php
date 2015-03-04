@@ -1,42 +1,48 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
  <head>
   <title>MEDS</title>
-  <link rel="icon" href="" />
+  <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon">
   <link href="<?php echo base_url().'style/core.css';?>" rel="stylesheet" type="text/css" />
-   <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
+  <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
    
   <link href="<?php echo base_url().'style/jquery.tooltip.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/jquery-ui.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/demo_table.css';?>" rel="stylesheet" type="text/css"/>
-  <link href="datatables/extensions/Tabletools/css/dataTables.tableTools.css" type="text/css" rel="stylesheet"/>
-  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css"> -->
-  <link rel="stylesheet" href="<?php echo base_url().'jquery-ui.css';?>">
+  <link href="<?php echo base_url().'datatables/extensions/Tabletools/css/dataTables.tableTools.css';?>" type="text/css" rel="stylesheet"/>
+  <link rel="stylesheet" href="<?php echo base_url().'style/jquery-ui.css';?>">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
   
-  
-  <!-- bootstrap reference library -->
+  <!-- bootstrap reference css library -->
   <link href="<?php echo base_url().'bootstrap/css/bootstrap.css'; ?>" rel="stylesheet" type="text/css"/>
-
-  <script src="<?php echo base_url().'js/jquery.js';?>"></script>
   <script src="<?php echo base_url().'js/jquery-1.11.0.js';?>"></script>
   <script src="<?php echo base_url().'js/jquery.js';?>"></script>
+  <!-- Datepicker reference js library -->
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="<?php echo base_url().'js/jquery-ui.js';?>"></script>
-  <script type="text/javascript" src="<?php echo base_url().'js/tabs.js';?>"></script>
-  <script type="text/javascript" src="<?php echo base_url().'js/Jquery-datatables/jquery.dataTables.js';?>"></script>
-  <script src="<?php echo base_url().'datatables/extensions/Tabletools/js/dataTables.tableTools.js';?>" type="text/javascript"></script>
-  <script src="<?php echo base_url().'datatables/extensions/Tabletools/js/ZeroClipboard.js" type="text/javascript';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
+
+  <!-- Tinymce reference js library -->
+  <script type="text/javascript" src="<?php echo base_url().'tinymce/tinymce.min.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'tinymce/textarea_script.js';?>"></script>
   
-  <!-- bootstrap reference library -->
+  <!-- bootstrap reference js library -->
   <script src="<?php echo base_url().'js/bootstrap.min.js';?>"></script>
+  
+  <!-- custom js reference js library -->
+  <script type="text/javascript" src="<?php echo base_url().'js/tabs.js';?>"></script>
+ 
+  <!-- printing reference js library -->
+  <script src="<?php echo base_url().'datatables/media/js/jquery.dataTables.js';?>" type="text/javascript"></script>
+  <script src="<?php echo base_url().'datatables/extensions/TableTools/js/dataTables.tableTools.js';?>" type="text/javascript"></script>
   
   <script>
    $(document).ready(function() {
     /* Init DataTables */
-    $('#list').dataTable({
+    $('#list').DataTable({
+     "sScrollY": "100%",
+     "sScrollX": "100%",
      "sDom": "T lfrtip",
-     "sScrollY":"270px",
-     "sScrollX":"100%",
      "oTableTools": {
       "aButtons": [      
       
@@ -46,16 +52,15 @@
         "aButtons": ["csv", "xls", "pdf"]
       }
       ],
-      "sSwfPath": "meds/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf"
+      "sSwfPath": "<?php echo base_url().'datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf';?>"
     }
     });
    });
   </script>
  </head>
  <body>
-  <?php
+ <?php
    $user=$this->session->userdata;
-   $test_request_id=$user['logged_in']['test_request_id'];
    $user_type_id=$user['logged_in']['user_type'];
    $user_id=$user['logged_in']['id'];
    $department_id=$user['logged_in']['department_id'];
@@ -70,7 +75,8 @@
 
        }
   ?>
-  <div id="header"> 
+<?php //$this->load->view('header_links') ?>
+<div id="header"> 
    <div id="logo" style="padding:8px;color: #0000ff;" align="center"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="35px" width="40px"/>MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</div>
   <div id="log_bar">
   <table  cellpadding="2px" align="center" width="100%">
@@ -97,7 +103,7 @@
               ?> <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="<?php echo base_url().'account_settings/index/'.$test_request_id.'/'.$user_type_id.'/'.$user_id.'/'.$department_id;?>"><i class="icon-wrench"></i> Settings <img src="<?php echo base_url().'images/icons/settings2.png';?>" height="20px" width="20px"></a></li>
+              <li><a href="<?php echo base_url().'account_settings/index/'.$user_type_id.'/'.$user_id.'/'.$department_id;?>"><i class="icon-wrench"></i> Settings <img src="<?php echo base_url().'images/icons/settings2.png';?>" height="20px" width="20px"></a></li>
               <li class="divider"></li>
               <li><a href="<?php echo base_url().'home/logout'?>"><i class="icon-share"></i>Logout</b> <img src="<?php echo base_url().'images/icons/door.png';?>" height="25px" width="25px"></a></li>
             </ul>
@@ -128,15 +134,15 @@
           echo "style='display:none'>";
       }
      ?>
-        <a href="<?php echo base_url().'home';?>"class="current sub_menu sub_menu_link first_link active">Analysis Test Request</a>
+        <a href="<?php echo base_url().'home';?>"class="sub_menu sub_menu_link first_link current">Analysis Test Request</a>
         <a href="<?php echo base_url().'equipment_maintenance_records/Get';?>"class="sub_menu sub_menu_link first_link">Equipment & Maintenance</a>
         <a href="<?php echo base_url().'reagents_inventory_record/Get';?>"class="sub_menu sub_menu_link first_link">Reagents & Inventory</a>
         <a href="<?php echo base_url().'standard_register_records/Get';?>"class="sub_menu sub_menu_link first_link">Standard Register</a>
         <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
-        <!-- <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a> -->
+        <!-- <a href="<?php echo base_url().'outoftolerance_list/oot_list';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a> --><!-- 
         <a href="<?php echo base_url().'complaints_list/records';?>" class="sub_menu sub_menu_link first_link">Complaints</a>
-        <a href="coapresentation/mypresentation.pdf"class="sub_menu sub_menu_link first_link">Certificate of Analysis</a>
-        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a>
+        <a href="<?php echo base_url().'coa/index';?>"class="sub_menu sub_menu_link first_link">Certificate of Analysis</a>
+        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a> -->
     </div>
     <?php
     echo"<div id='sub_menu'";
@@ -147,7 +153,7 @@
           echo "style='display:none'>";
       }
      ?>
-        <a href="<?php echo base_url().'home';?>"class="current sub_menu sub_menu_link first_link">Analysis Test Request</a>
+        <a href="<?php echo base_url().'home';?>"class="sub_menu sub_menu_link first_link">Analysis Test Request</a>
         <a href="<?php echo base_url().'standard_register_records/Get';?>"class="sub_menu sub_menu_link first_link">Standard Register</a>
     </div>
     <?php
@@ -159,15 +165,16 @@
           echo "style='display:none'>";
       }
      ?>
-        <a href="<?php echo base_url().'home';?>"class="current sub_menu sub_menu_link first_link active">Analysis Test Request</a>
-        <a href="<?php echo base_url().'equipment_maintenance_records/Get';?>"class="sub_menu sub_menu_link first_link">Equipment & Maintenance</a>
+        <a href="<?php echo base_url().'home';?>"class="sub_menu sub_menu_link first_link current">Analysis Test Request</a>
+        <a href="<?php echo base_url().'equipment_maintenance_records/Get';?>"class=" sub_menu sub_menu_link first_link">Equipment & Maintenance</a>
         <a href="<?php echo base_url().'reagents_inventory_record/Get';?>"class="sub_menu sub_menu_link first_link">Reagents & Inventory</a>
         <a href="<?php echo base_url().'standard_register_records/Get';?>"class="sub_menu sub_menu_link first_link">Standard Register</a>
         <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
-        <!-- <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a> -->
-        <a href="<?php echo base_url().'complaints_list/records';?>"class="sub_menu sub_menu_link first_link">Complaints</a>
-        <a href="coapresentation/mypresentation.pdf"  class="sub_menu sub_menu_link first_link">Certificate of Analysis</a>
+        <!-- <a href="<?php echo base_url().'outoftolerance_list/oot_list';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a> -->
+        <a href="<?php echo base_url().'complaints_list/records';?>"class="sub_menu sub_menu_link first_link">Complaints</a><!-- 
+        <a href="<?php echo base_url().'coa/index';?>"class="sub_menu sub_menu_link first_link">Certificate of Analysis</a>
         <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a>
+        <a href="<?php echo base_url().'analytics';?>" class="sub_menu sub_menu_link first_link">Analytics</a> -->
     </div>
     <?php
     echo"<div id='sub_menu'";
@@ -178,10 +185,10 @@
           echo "style='display:none'>";
       }
      ?>
-        <a href="<?php echo base_url().'home';?>"class="current sub_menu sub_menu_link first_link">Analysis Test Request</a>
+        <a href="<?php echo base_url().'home';?>"class="sub_menu sub_menu_link first_link current">Analysis Test Request</a>
         <a href="<?php echo base_url().'reagents_inventory_record/Get';?>"class="sub_menu sub_menu_link first_link">Reagents & Inventory</a>
         <a href="<?php echo base_url().'equipment_maintenance_records/Get';?>"class="sub_menu sub_menu_link first_link">Equipment</a>
-        <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a>
+        <!-- <a href="<?php echo base_url().'outoftolerance_list/oot_list';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a> -->
         <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
     </div>
     <?php
@@ -193,9 +200,9 @@
           echo "style='display:none'>";
       }
      ?>
-        <a href="<?php echo base_url().'home';?>"class="current sub_menu sub_menu_link first_link">Analysis Test Request</a>
-        <a href="<?php echo base_url().'equipment_maintenance_records/Get';?>"class="sub_menu sub_menu_link first_link">Equipment & Maintenance</a>
-        <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a>
+        <a href="<?php echo base_url().'home';?>"class="sub_menu sub_menu_link first_link current">Analysis Test Request</a>
+        <a href="<?php echo base_url().'equipment_maintenance_records/Get';?>"class=" sub_menu sub_menu_link first_link">Equipment & Maintenance</a>
+        <a href="<?php echo base_url().'outoftolerance/oot_list';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a>
     </div>    
     <?php
     echo"<div id='sub_menu'";
@@ -206,10 +213,10 @@
           echo "style='display:none'>";
       }
      ?>
-        <a href="<?php echo base_url().'home';?>"class="current sub_menu sub_menu_link first_link">Analysis Test Request</a>
+        <a href="<?php echo base_url().'home';?>"class="sub_menu sub_menu_link first_link current">Analysis Test Request</a>
         <a href="<?php echo base_url().'equipment_maintenance_records/Get';?>"class="sub_menu sub_menu_link first_link">Equipment</a>
         <a href="<?php echo base_url().'standard_register_records/Get';?>"class="sub_menu sub_menu_link first_link">Standard Register</a>
-        <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a>
+        <!-- <a href="<?php echo base_url().'outoftolerance_list/oot_list';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a> -->
         <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
     </div>
     <div id="form_wrapper_lists">
@@ -217,7 +224,7 @@
        <table class="subdivider" border="0" bgcolor="#ffffff" width="100%" cellpadding="8px" align="center">
         
         <tr>
-            <td height="25px" align="center"
+            <td height="25px" align="left"
              <?php
              if($user['logged_in']['user_type'] ==8 || $user['logged_in']['user_type'] ==6 ||$user['logged_in']['user_type'] ==7){
               echo "style='display:block;'";
@@ -225,21 +232,24 @@
                   echo"style='display:none;'"; 
                }
              ?>>
-             &nbsp; &nbsp;<a href="<?php echo base_url().'home';?>"class="current sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/circle_orange.png';?>" height="20px" width ="20px">Unassigned Test Requests</a>
-             <a href="<?php echo base_url().'test_request_list/GetA/'.$test_request_id.'/'.$user_type_id.'/'.$department_id;?>"class="sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/assign.png';?>" height="20px" width ="20px">Assigned Test Requests</a>&nbsp; &nbsp;
-             <a href="<?php echo base_url().'test_request_list/GetC/'.$test_request_id.'/'.$user_type_id.'/'.$department_id;?>"class="sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/tick.png';?>" height="20px" width="20px">Completed Test Requests</a>&nbsp; &nbsp;
-             <!-- <a href="<?php echo base_url().'test_request_list/GetQ/'.$test_request_id.'/'.$user_type_id.'/'.$department_id;?>"class="sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/ot.png';?>" height="20px" width="20px">Quarantined Test Requests</a> -->
+             &nbsp;<a href="<?php echo base_url().'home';?>"class="current sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/circle_orange.png';?>" height="20px" width ="20px">UNASSIGNED</a>
+             <a href="<?php echo base_url().'test_request_list/GetA/'.$user_type_id.'/'.$department_id;?>"class="sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/assign.png';?>" height="20px" width ="20px">ASSIGNED</a>&nbsp; &nbsp;
+             <a href="<?php echo base_url().'test_request_list/GetC/'.$user_type_id.'/'.$department_id;?>"class="sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/tick.png';?>" height="20px" width="20px">COMPLETE</a>&nbsp; &nbsp;
+             <a href="<?php echo base_url().'test_request_list/GetQ/'.$user_type_id.'/'.$department_id;?>"class="sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/ot.png';?>" height="20px" width="20px">QUARANTINED </a>&nbsp; &nbsp;
+             <a href="<?php echo base_url().'test_request_list/GetW/'.$user_type_id.'/'.$department_id;?>"class="sub_menu sub_menu_link first_link">WITHDRAWN</a>
+
+             
              <div id="add" height="25px"
              <?php
              if($user['logged_in']['user_type'] ==7 && $user['logged_in']['department_id'] ==1 ){
-                   echo "style=';display:block;text-align:right;text-color:#00ff00;'";
+                   echo "style='padding-top:10px;display:block;text-align:right;text-color:#00ff00;'";
                 }else{
                    echo "style='display:none;'";
                 }
              ?>
              >
-              <a data-target="#test_request" role="button" class="sub_menu sub_menu_link first_link" data-toggle="modal"><img src="<?php echo base_url().'images/icons/add_field.png'?>" height="10px" width="10px">Add MEDS Request</a>&nbsp; &nbsp; 
-              <a data-target="#clients_request" role="button" class="sub_menu sub_menu_link first_link" data-toggle="modal"><img src="<?php echo base_url().'images/icons/add_field.png'?>" height="10px" width="10px">Add Client Request</a>
+              <a data-target="#test_request" role="button" class="sub_menu sub_menu_link first_link" data-toggle="modal"><img src="<?php echo base_url().'images/icons/add_field.png'?>" height="10px" width="10px">Add MEDS Request</a>
+            </div>
             </td>
         </tr>
         <?php
@@ -247,15 +257,14 @@
           ?>
           <div id="assigned_test_requests" name="menu" style="display:none;"><?php include_once "application/views/assigned_analyst_tests.php";?></div>
       <?php
-        }elseif($user['logged_in']['user_type'] ==6){
+        }elseif($user['logged_in']['user_type'] ==6 || $user['logged_in']['user_type'] ==7){
       ?>
           <div id="unassigned_test_requests" name="menu" style="display:none;"><?php include_once "application/views/unassigned_test_request_list.php";?></div>
           <div id="test_request" class="modal fade" role="dialog" aria-labelledby="meds" aria-hidden="true"><?php include_once "application/views/test_request_form.php";?></div>  
-          <div id="clients_request" class="modal fade" role="dialog" aria-labelledby="client" aria-hidden="true"><?php include_once "application/views/client_test_request_form.php";?></div>
+          <div id="client" class="modal fade" role="dialog" aria-labelledby="client" aria-hidden="true"><?php include_once "application/views/client_test_request_form.php";?></div>
       <?php
         }
       ?>   
-</div>
 </div>
 </body>
 </html>

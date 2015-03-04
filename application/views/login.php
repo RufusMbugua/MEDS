@@ -1,8 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html class="home"  xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <title>MEDS</title>
   <link rel="icon" href="" />
+  <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon">
   <link href="<?php echo base_url().'style/core.css';?>" rel="stylesheet" type="text/css" />
   <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="<?php echo base_url().'style/transition.css';?>"> 
@@ -21,13 +22,14 @@
 
   <script src="<?php echo base_url().'js/jquery.js';?>"></script>
   <script src="<?php echo base_url().'js/jquery-ui.js';?>"></script>
-  <script src="http://localhost/MEDS/js/jquery-1.10.2.min.map.js"></script>
+  <script src="<?php echo base_url().'js/jquery-1.10.2.min.map.js';?>"></script>
   <script src="<?php echo base_url().'js/jquery-1.10.2.min.js';?>"></script>
   <script src="<?php echo base_url().'bootstrap/js/bootstrap.min.js';?>"></script>
   <link href="<?php echo base_url().'style/font-awesome.min.css';?>" rel="stylesheet">
   <link href="<?php echo base_url().'style/homepg.style.css';?>" rel="stylesheet" type="text/css">
   <script src="<?php echo base_url().'js/home.snippet.js';?>"></script>
   <script src="<?php echo base_url().'js/transition.js';?>"></script>
+  <script src="<?php echo base_url().'js/grid_style.js';?>"></script>
 
   <!-- bootstrap reference library -->
   <link href="<?php echo base_url().'bootstrap/css/bootstrap.css'; ?>" rel="stylesheet" type="text/css"/>
@@ -35,7 +37,8 @@
   <script type="text/javascript" src="<?php echo base_url().'js/tabs.js';?>"></script>
   <script src="<?php echo base_url().'js/loginform.validation.js';?>"></script> 
  </head>
- <div id="header"> 
+ <body >
+ <div  id="header" > 
    <div id="logo" style="padding:8px;color: #0000ff;" align="center"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="35px" width="40px"/>MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</div>
  </div>
 
@@ -134,98 +137,6 @@
       </table>
     </div>
 </div>
-
-
-
-<!-- <div style="padding-top:240px;margin:0 auto;width:480px;">
-  <div class="board">
-      <div class="hex-row">
-        <div class="hex">
-          <div class="left"></div>
-          <div class="middle"></div>
-          <div class="right"></div>
-        </div>
-        <div class="hex even">
-          <div class="left"></div>
-          <div class="middle"></div>
-          <div class="right"></div>
-        </div>
-        <div class="hex">
-          <div class="left"></div>
-          <div class="middle"></div>
-          <div class="right"></div>
-        </div>
-        <div class="hex even">
-          <div class="left"></div>
-          <div class="middle"></div>
-          <div class="right"></div>
-        </div>
-        <div class="hex">
-          <div class="left"></div>
-          <div class="middle"></div>
-          <div class="right"></div>
-        </div>
-
-        
-      </div>
-      <div class="hex-row">
-        <div class="hex">
-          <div class="left"></div>
-          <div class="middle"></div>
-          <div class="right"></div>
-        </div>
-        <div class="hex even">
-          <div class="left"></div>
-          <div class="middle"></div>
-          <div class="right"></div>
-        </div>
-        <div class="hex">
-          <div class="left"></div>
-          <div class="middle"></div>
-          <div class="right"></div>
-        </div>
-        <div class="hex even">
-          <div class="left"></div>
-          <div class="middle"></div>
-          <div class="right"></div>
-        </div>
-        <div class="hex">
-          <div class="left"></div>
-          <div class="middle"></div>
-          <div class="right"></div>
-        </div>
-      </div>
-      <div class="hex-row">
-        <div class="hex">
-          <div class="left"></div>
-          <div class="middle"></div>
-          <div class="right"></div>
-        </div>
-        <div class="hex even">
-          <div class="left"></div>
-          <div class="middle"></div>
-          <div class="right"></div>
-        </div>
-        <div class="hex">
-          <div class="left"></div>
-          <div class="middle"></div>
-          <div class="right"></div>
-        </div>
-        <div class="hex even">
-          <div class="left"></div>
-          <div class="middle"></div>
-          <div class="right"></div>
-        </div>
-        <div class="hex">
-          <div class="left"></div>
-          <div class="middle"></div>
-          <div class="right"></div>
-        </div>
-      </div>
-      
-    </div>
-  </div> -->
-
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="container">
@@ -276,3 +187,5 @@
     </div>
   </div>
 </div>
+</body>
+</html>

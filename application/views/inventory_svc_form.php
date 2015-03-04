@@ -1,11 +1,15 @@
 <div id="analysis_request" class="analysis_request" >
 	<script>
-	function calc() {
-  	var total = document.getElementById('quantity').value - document.getElementById('quantity_issued').value;
-  	document.getElementById('balance').value = total;
+	// function calc() {
+ //  	var total = document.getElementById('quantity').value - document.getElementById('quantity_issued').value;
+ //  	document.getElementById('balance').value = total;
 	
-	}
+	// }
 	$(document).ready(function(){
+        $('#quantity_issued').keyup(function(){
+          $('#balance').val(($('#quantity').val()-$('#quantity_issued').val()).toFixed(2));
+          alert('gfd');
+        });
 	
         $('#requisition').change('live',function(){
           if ($.trim(this.value)!=""){
@@ -16,14 +20,14 @@
             $('#requisition_r').show();
           }
         })
-	$('#lpo').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#lpo_1').show();
-            $('#lpo_r').hide();
-          }else{
-            $('#lpo_1').hide();
-            $('#lpo_r').show();
-lpo_r          }
+    	$('#lpo').change('live',function(){
+              if ($.trim(this.value)!=""){
+                $('#lpo_1').show();
+                $('#lpo_r').hide();
+              }else{
+                $('#lpo_1').hide();
+                $('#lpo_r').show();
+    lpo_r          }
         })
         $('#received_by').change('live',function(){
           if ($.trim(this.value)!=""){
@@ -103,7 +107,7 @@ lpo_r          }
     <form action="<?php echo base_url().'inventory_standard_vial_card/save/'?>" method="POST" >
     <table class="table_form" width="950px" height="250px" bgcolor="#c4c4ff" border="0" cellpadding="4px" align="center">
         <input type="hidden" name="item_name" value="<?php echo $item_name;?>"/>
-<tr>	    <td colspan="12" style="text-align:right;background-color:#ffffff;text-color:#00ff00;"><a href="<?php echo base_url().'inventory_standard_vial_card_record/Get/'.$id.'/'.$item_name;?>"><img src="<?php echo base_url().'images/icons/back.png'?>" height="20px" wieght="20px"><b>Back</b></a></td>
+<tr>	    <td colspan="12" style="text-align:right;background-color:#ffffff;text-color:#00ff00;"><a href="<?php echo base_url().'inventory_standard_vial_card/get/'.$id.'/'.$item_name;?>"><img src="<?php echo base_url().'images/icons/back.png'?>" height="20px" wieght="20px"><b>Back</b></a></td>
 	</tr>
 	<tr>
         <input type="hidden" name="id" value="<?php echo $id;?>"/>

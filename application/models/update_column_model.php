@@ -7,8 +7,10 @@ function __construct() {
 }
 
 
-function Update($id)
+function Update()
 {
+    $id = $this->input->post('my_id');
+
     $new_data = array(
         
     'column_type'=>$this->input->post('column_type'),

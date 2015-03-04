@@ -38,8 +38,6 @@ class Verification extends CI_Controller {
      {
        $sess_array = array(
          'id' => $row->id,
-         'test_request_id'=>$row->test_request_id,
-         'client_id'=>$row->client_id,
          'username' => $row->username,
          'fname'=> $row->fname,
          'lname'=> $row->lname,

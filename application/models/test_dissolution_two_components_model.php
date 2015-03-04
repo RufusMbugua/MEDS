@@ -257,15 +257,13 @@ class Test_Dissolution_Two_Components_Model extends CI_Model{
 			);
 		$this->db->insert('diss_two_component_two', $data);
 
-		$coa_data = array(
-			'coa_method_used'=>$coa_method_used,
-			'coa_results'=>$coa_results,
-			'coa_specification'=>$coa_specification,
-			'test_request_id'=>$test_request,
-			'assignment_id'=>$assignment,
-			'test_type'=>$test_type,
-			'analyst'=>$analyst,
+		$result_data = array(
+			'test_id'=>$test_id,
+			'test_name'=>$test_name,
+			'remarks'=>$this->input->post('choice'),
+			'results'=>$results,
 			);
+		$this->db->update('test_results', $result_data, array('test_request_id'=>$test_request,'test_type'=>$test_type));
 		$this->db->insert('coa', $coa_data);
 		$determinations_data = array(
 			'test_request'=>$this->input->post('test_request'),

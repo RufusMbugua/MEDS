@@ -19,5 +19,14 @@ function save(){
 	}
 	redirect('standard_register_records/Get');
 	}	
+function save_secondary(){
+$this->load->model('standard_register_model');        
+
+if($this->input->post('submit')){
+	$this->standard_register_model->process_secondary();
+
+}
+redirect('standard_register_records/Get');
+}	
 }
 ?>

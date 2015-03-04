@@ -4,16 +4,26 @@ class Test_Dissolution_Normal_Model extends CI_Model{
 	function Test_Dissolution_Normal_Model(){
 		parent::__construct();
 	}
-function save_worksheet(){
+function save_worksheet(){	
 		
-		$coa_method_used=$this->input->post('coa_method_used');
-		$coa_results=$this->input->post('coa_results');
-		$coa_specification=$this->input->post('coa_specification');
 		$status =1;
 		$test_request=$this->input->post('test_request');
 		$assignment=$this->input->post('assignment');
-		$test_type='Dissolution Test Normal';
+		$test_name='Dissolution';
+		$test_type='32';
 		$analyst= $this->input->post('analyst');
+		$results = 'Range from '.$this->input->post('range_min').' to '.$this->input->post('range_max').'. <br/>Average: '.$this->input->post('average');
+
+		$data=$this->db->select_max('id')->get('diss_normal')->result();
+        $test_id=$data[0]->id;
+        $test_id++;
+
+        $q = "select results, remarks from test_results where test_request_id = '$test_request'";
+        $r = $this->db->query($q)->result_array();
+        $result_prev = $r[0]['results'];
+        $remark_prev = $r[0]['remarks'];
+
+        $result_next =$result_prev." <br/>". $results;
 		
 		$data =array(			
 			'equipment_make'=>$this->input->post('equipment_make'),
@@ -59,7 +69,9 @@ function save_worksheet(){
 			'serial_no'=>$this->input->post('serial_no'),
 			'manufacturer'=>$this->input->post('manufacturer'),
 			'column_pressure'=>$this->input->post('column_pressure'),
-			'column_oven_pressure'=>$this->input->post('column_oven_pressure'),
+			'column_pressure_select'=>$this->input->post('column_pressure_select'),
+			'column_oven_temp'=>$this->input->post('column_oven_temp'),
+			'column_oven_temp_select'=>$this->input->post('column_oven_temp_select'),
 			'flow_rate'=>$this->input->post('flow_rate'),
 			'wavelength'=>$this->input->post('wavelength'),
 
@@ -67,55 +79,55 @@ function save_worksheet(){
 			'peak_area_1'=>$this->input->post('peak_area_1'),
 			'asymmetry_1'=>$this->input->post('asymmetry_1'),
 			'resolution_1'=>$this->input->post('resolution_1'),		
-			'other_1'=>$this->input->post('other_1'),
+			// 'other_1'=>$this->input->post('other_1'),
 			'rt_2'=>$this->input->post('rt_2'),
 			'peak_area_2'=>$this->input->post('peak_area_2'),
 			'asymmetry_2'=>$this->input->post('asymmetry_2'),
 			'resolution_2'=>$this->input->post('resolution_2'),		
-			'other_2'=>$this->input->post('other_2'),
+			// 'other_2'=>$this->input->post('other_2'),
 			'rt_3'=>$this->input->post('rt_3'),
 			'peak_area_3'=>$this->input->post('peak_area_3'),
 			'asymmetry_3'=>$this->input->post('asymmetry_3'),
 			'resolution_3'=>$this->input->post('resolution_3'),		
-			'other_3'=>$this->input->post('other_3'),
+			// 'other_3'=>$this->input->post('other_3'),
 			'rt_4'=>$this->input->post('rt_4'),
 
 			'peak_area_4'=>$this->input->post('peak_area_4'),
 			'asymmetry_4'=>$this->input->post('asymmetry_4'),
 			'resolution_4'=>$this->input->post('resolution_4'),		
-			'other_4'=>$this->input->post('other_4'),
+			// 'other_4'=>$this->input->post('other_4'),
 			'rt_5'=>$this->input->post('rt_5'),
 			'peak_area_5'=>$this->input->post('peak_area_5'),
 			'asymmetry_5'=>$this->input->post('asymmetry_5'),
 			'resolution_5'=>$this->input->post('resolution_5'),		
-			'other_5'=>$this->input->post('other_5'),
+			// 'other_5'=>$this->input->post('other_5'),
 			'rt_6'=>$this->input->post('rt_6'),
 			'peak_area_6'=>$this->input->post('peak_area_6'),
 			'asymmetry_6'=>$this->input->post('asymmetry_6'),
 			'resolution_6'=>$this->input->post('resolution_6'),		
-			'other_6'=>$this->input->post('other_6'),
+			// 'other_6'=>$this->input->post('other_6'),
 			'rt_avg'=>$this->input->post('rt_avg'),
 			'peak_area_avg'=>$this->input->post('peak_area_avg'),
 			'asymmetry_avg'=>$this->input->post('asymmetry_avg'),
 			'resolution_avg'=>$this->input->post('resolution_avg'),		
-			'other_avg'=>$this->input->post('other_avg'),
+			// 'other_avg'=>$this->input->post('other_avg'),
 			'rt_sd'=>$this->input->post('rt_sd'),
 			'peak_area_sd'=>$this->input->post('peak_area_sd'),
 			'asymmetry_sd'=>$this->input->post('asymmetry_sd'),
 			'resolution_sd'=>$this->input->post('resolution_sd'),			
-			'other_sd'=>$this->input->post('other_sd'),
+			// 'other_sd'=>$this->input->post('other_sd'),
 
 			'rt_rsd'=>$this->input->post('rt_rsd'),
 			'peak_area_rsd'=>$this->input->post('peak_area_rsd'),
 			'asymmetry_rsd'=>$this->input->post('asymmetry_rsd'),
 			'resolution_rsd'=>$this->input->post('resolution_rsd'),
-			'other_rsd'=>$this->input->post('other_rsd'),
+			// 'other_rsd'=>$this->input->post('other_rsd'),
 
 			'rt_comment'=>$this->input->post('rt_comment'),
 			'peak_area_comment'=>$this->input->post('peak_area_comment'),
 			'asymmetry_comment'=>$this->input->post('asymmetry_comment'),
 			'resolution_comment'=>$this->input->post('resolution_comment'),
-			'other_comment'=>$this->input->post('other_comment'),
+			// 'other_comment'=>$this->input->post('other_comment'),
 
 			'sample_1'=>$this->input->post('sample_1'),
 			'sample_1_s1'=>$this->input->post('sample_1_s1'),
@@ -181,7 +193,7 @@ function save_worksheet(){
 			'chromatograms_attached_comment'=>$this->input->post('chromatograms_attached_comment'),
 			'chromatograms_attached'=>$this->input->post('chromatograms_attached'),
 			'sample_injection_sequence_comment'=>$this->input->post('Sample_injection_sequence_comment'),
-			'choice'=>$this->input->post('choice'),
+			'choice'=>$this->input->post('conclusion'),
 			'supervisor'=>$this->input->post('supervisor'),
 			'date'=>$this->input->post('date'),
 			'further_comments'=>$this->input->post('further_comments'),			
@@ -189,16 +201,14 @@ function save_worksheet(){
 			);
 		$this->db->insert('diss_normal', $data);
 
-		$coa_data = array(
-			'coa_method_used'=>$coa_method_used,
-			'coa_results'=>$coa_results,
-			'coa_specification'=>$coa_specification,
-			'test_request_id'=>$test_request,
-			'assignment_id'=>$assignment,
-			'test_type'=>$test_type,
-			'analyst'=>$analyst,
+		$result_data = array(
+			'test_id'=>$test_id,
+			'test_name'=>$test_name,
+			'remarks'=>$this->input->post('conclusion'),
+			'method'=>$this->input->post('method'),
+			'results'=>$result_next,
 			);
-		$this->db->insert('coa', $coa_data);
+		$this->db->update('test_results', $result_data, array('test_request_id'=>$test_request,'test_type'=>$test_type));
 
 		$determination_data = array(
 			'test_request'=>$this->input->post('test_request'),
@@ -645,16 +655,16 @@ function save_worksheet(){
 			);
 		$this->db->insert('diss_normal', $data);
 
-		$coa_data = array(
-			'coa_method_used'=>$coa_method_used,
-			'coa_results'=>$coa_results,
-			'coa_specification'=>$coa_specification,
-			'test_request_id'=>$test_request,
-			'assignment_id'=>$assignment,
-			'test_type'=>$test_type,
-			'analyst'=>$analyst,
-			);
-		$this->db->insert('coa', $coa_data);
+		// $coa_data = array(
+		// 	'coa_method_used'=>$coa_method_used,
+		// 	'coa_results'=>$coa_results,
+		// 	'coa_specification'=>$coa_specification,
+		// 	'test_request_id'=>$test_request,
+		// 	'assignment_id'=>$assignment,
+		// 	'test_type'=>$test_type,
+		// 	'analyst'=>$analyst,
+		// 	);
+		// $this->db->insert('coa', $coa_data);
 
 			$samples_data = array(
 			'sample_1'=>$this->input->post('sample_1'),
@@ -804,22 +814,37 @@ function save_worksheet(){
 	function save_monograph(){
 		$test_request=$this->input->post('test_request');
 		$assignment=$this->input->post('assignment');
-		$test_name='Normal HPLC';
 		$analyst= $this->input->post('analyst');
-		$dissolution_hplc_normal_id= 1;
+		$test_type= '32';
 
+		$data=$this->db->select_max('id')->get('diss_normal')->result();
+        $test_id=$data[0]->id;
+        $test_id++;
 
+        $monograph_specifications = $this->input->post('specification');
+		$component = $this->input->post('component_name');
+
+		for ($i=0; $i <sizeof($component) ; $i++) { 
+			$value[] = $component[$i].': '.$monograph_specifications[$i];
+		}
+		
+ 
 		$data = array(
-			'monograph' => $this->input->post('normal_monograph'),
 			'test_request_id' => $this->input->post('test_request'),
-			'assignment_id' => $this->input->post('assignment'),
-			'test_name' => $test_name,
-			'analyst' => $this->input->post('analyst'),
-			'dissolution_hplc_normal_id' => $dissolution_hplc_normal_id
-
+			'test_id' => $test_id,
+			'test_type' => $test_type,
+			'monograph_specifications' => implode(';', $value),
+			
+			);
+		$data2 = array(
+			'test_request_id' => $this->input->post('test_request'),
+			'test_type' => $test_type,
+			'specifications' => implode(';', $value),
 
 			);
-		$this->db->insert('diss_normal_hplc_monograph', $data);
+
+		$this->db->insert('monograph_specifications', $data);
+		$this->db->insert('test_results', $data2);
 		redirect('test/index/'.$assignment.'/'.$test_request);	
 
 	}

@@ -13,8 +13,15 @@ class Test_Loss_Drying_Model extends CI_Model{
 		$status =1;
 		$test_request=$this->input->post('test_request');
 		$assignment=$this->input->post('assignment');
-		$test_type='Loss on Drying';
+		$test_name='Loss on Drying';
 		$analyst= $this->input->post('analyst');
+		$test_type = '14';
+
+		$data=$this->db->select_max('id')->get('loss_drying')->result();
+        $test_id=$data[0]->id;
+        $test_id++;
+
+        $results= $this->input->post('range_min') .' to '.$this->input->post('range_max');
 		
 		$data =array(
 			
@@ -24,9 +31,9 @@ class Test_Loss_Drying_Model extends CI_Model{
 			'lot_no'=>$this->input->post('lot_no'),
 			'id_no'=>$this->input->post('id_no'),
 			
-			'potency_standard_container'=>$this->input->post('potency_standard_container'),
-			'potency_container'=>$this->input->post('potency_container'),
-			'standard_weight_1'=>$this->input->post('standard_weight_1'),
+			'standard_container'=>$this->input->post('standard_container'),
+			'container'=>$this->input->post('container'),
+			'standard_weight'=>$this->input->post('standard_weight_1'),
 			'standard_dilution'=>$this->input->post('standard_dilution'),
 			'equipment_make'=>$this->input->post('equipment_make'),
 			'equipment_number'=>$this->input->post('equipment_number'),
@@ -37,14 +44,15 @@ class Test_Loss_Drying_Model extends CI_Model{
 			'actual_temperature'=>$this->input->post('actual_temperature'),
 			'temperature_comment'=>$this->input->post('temperature_comment'),
 
-			'potency_standard_container_1'=>$this->input->post('potency_standard_container_1'),
-			'potency_standard_container_2'=>$this->input->post('potency_standard_container_2'),
-			'potency_standard_container_3'=>$this->input->post('potency_standard_container_3'),			
-			'potency_container_1'=>$this->input->post('potency_container_1'),
-			'potency_container_2'=>$this->input->post('potency_container_2'),
-			'potency_container_3'=>$this->input->post('potency_container_3'),
-			'standard_weight_2'=>$this->input->post('standard_weight_2'),
-			'standard_weight_3'=>$this->input->post('standard_weight_3'),
+			'sample_container_1'=>$this->input->post('sample_container_1'),
+			'sample_container_2'=>$this->input->post('sample_container_2'),
+			'sample_container_3'=>$this->input->post('sample_container_3'),			
+			'container_1'=>$this->input->post('container_1'),
+			'container_2'=>$this->input->post('container_2'),
+			'container_3'=>$this->input->post('container_3'),
+			'sample_weight_1'=>$this->input->post('sample_weight_1'),
+			'sample_weight_2'=>$this->input->post('sample_weight_2'),
+			'sample_weight_3'=>$this->input->post('sample_weight_3'),
 
 			'time_11'=>$this->input->post('time_11'),
 			'time_12'=>$this->input->post('time_12'),
@@ -88,8 +96,17 @@ class Test_Loss_Drying_Model extends CI_Model{
 
 			'average'=>$this->input->post('average'),
 			'equivalent'=>$this->input->post('equivalent'),
-			'range'=>$this->input->post('range'),
+			'range_min'=>$this->input->post('range_min'),
+			'range_max'=>$this->input->post('range_max'),
 			'rsd'=>$this->input->post('rsd'),
+
+			'min_tolerance'=>$this->input->post('min_tolerance'),
+			'max_tolerance'=>$this->input->post('max_tolerance'),
+			'min_tolerance_comment'=>$this->input->post('min_tolerance_comment'),
+			'max_tolerance_comment'=>$this->input->post('max_tolerance_comment'),
+			'tolerance_range_from'=>$this->input->post('tolerance_range_from'),
+			'tolerance_range_to'=>$this->input->post('tolerance_range_to'),
+			'tolerance_range_comment'=>$this->input->post('tolerance_range_comment'),
 
 			'acceptance_criteria'=>$this->input->post('acceptance_criteria'),
 			'results'=>$this->input->post('results'),
@@ -99,25 +116,22 @@ class Test_Loss_Drying_Model extends CI_Model{
 			'status'=>$status,	
 			
 			'choice'=>$this->input->post('choice'),
-			'supervisor'=>$this->input->post('supervisor'),
+			'done_by'=>$this->input->post('supervisor'),
 			'date'=>$this->input->post('date'),
 			'further_comments'=>$this->input->post('further_comments'),	
 
 			);
 		$this->db->insert('loss_drying', $data);
 		
-
-
-		$coa_data = array(
-			'coa_method_used'=>$coa_method_used,
-			'coa_results'=>$coa_results,
-			'coa_specification'=>$coa_specification,
-			'test_request_id'=>$test_request,
-			'assignment_id'=>$assignment,
-			'test_type'=>$test_type,
-			'analyst'=>$analyst,
+		$result_data = array(
+			'test_id'=>$test_id,
+			'test_name'=>$test_name,
+			'remarks'=>$this->input->post('choice'),
+			'method'=>$this->input->post('method'),
+			'results'=>$results,
 			);
-		$this->db->insert('coa', $coa_data);
+		$this->db->update('test_results', $result_data, array('test_request_id'=>$test_request,'test_type'=>$test_type));
+
 
 		redirect('test/index/'.$assignment.'/'.$test_request);	
 	}
@@ -126,20 +140,29 @@ class Test_Loss_Drying_Model extends CI_Model{
 		$assignment=$this->input->post('assignment');
 		$test_name='Loss on Drying';
 		$analyst= $this->input->post('analyst');
-		$loss_drying_id= 1;
+		$test_type= '14';
 
+		$data=$this->db->select_max('id')->get('loss_drying')->result();
+        $test_id=$data[0]->id;
+        $test_id++;
 
 		$data = array(
-			'monograph' => $this->input->post('loss_drying_monograph'),
 			'test_request_id' => $this->input->post('test_request'),
-			'assignment_id' => $this->input->post('assignment'),
-			'test_name' => $this->input->post('test_name'),
-			'analyst' => $this->input->post('analyst'),
-			'loss_drying_id' => $loss_drying_id
-			
+			'test_id' => $test_id,
+			'test_type' => $test_type,
+			'test_name' => $test_name,
+			'monograph_specifications' => $this->input->post('specification'),
 
 			);
-		$this->db->insert('loss_drying_monograph', $data);
+		$this->db->insert('monograph_specifications', $data);
+
+		$data2 = array(
+			'test_request_id' => $this->input->post('test_request'),
+			'test_type' => $test_type,
+			'specifications' => $this->input->post('specification'),
+
+			);
+		$this->db->insert('test_results', $data2);
 		redirect('test/index/'.$assignment.'/'.$test_request);	
 
 	}

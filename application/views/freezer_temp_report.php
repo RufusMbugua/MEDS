@@ -60,7 +60,6 @@
 	<body>
 		<?php
 		   $user=$this->session->userdata;
-		   $test_request_id=$user['logged_in']['test_request_id'];
 		   $user_type_id=$user['logged_in']['user_type'];
 		   $user_id=$user['logged_in']['id'];
 		   $department_id=$user['logged_in']['department_id'];
@@ -78,7 +77,7 @@
 		        </td>
 		       <td style="border-bottom: solid 1px #c4c4ff;padding:2px;text-align: left;background-color: #ffffff;" width="130px">
 		          <?php 
-		           echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);
+		           //echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);
 		         ?> 
 		       </td>
 		         <td height="10px"  style="border-bottom: solid 1px #c4c4ff;padding:8px;background-color: #ffffff;">

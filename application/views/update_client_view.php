@@ -55,7 +55,6 @@
  <body>
   <?php
    $user=$this->session->userdata;
-   $test_request_id=$user['logged_in']['test_request_id'];
    $user_type_id=$user['logged_in']['user_type'];
    $user_id=$user['logged_in']['id'];
    $department_id=$user['logged_in']['department_id'];
@@ -97,7 +96,7 @@
               ?> <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="<?php echo base_url().'account_settings/index/'.$test_request_id.'/'.$user_type_id.'/'.$user_id.'/'.$department_id;?>"><i class="icon-wrench"></i> Settings <img src="<?php echo base_url().'images/icons/settings2.png';?>" height="20px" width="20px"></a></li>
+              <li><a href="<?php echo base_url().'account_settings/index/'.$user_type_id.'/'.$user_id.'/'.$department_id;?>"><i class="icon-wrench"></i> Settings <img src="<?php echo base_url().'images/icons/settings2.png';?>" height="20px" width="20px"></a></li>
               <li class="divider"></li>
               <li><a href="<?php echo base_url().'home/logout'?>"><i class="icon-share"></i>Logout</b> <img src="<?php echo base_url().'images/icons/door.png';?>" height="25px" width="25px"></a></li>
             </ul>
@@ -261,6 +260,10 @@
             <tr>
                 <td style="background-color:#ffffff;border-bottom: dotted 1px #bfbfbf; border-right: dotted 1px #bfbfbf;"><b>Change Status</b></td>
                 <td colspan="5" style="background-color:#ffffff;border-right: dashed 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><input type="radio" name="status" checked="checked" value="1">Activate<input type="radio" name="status" value="0"/>Deactivate</td>
+            </tr>
+            <tr>
+                <td style="background-color:#ffffff;border-bottom: dotted 1px #bfbfbf; border-right: dotted 1px #bfbfbf;"><b>Give Client Reference number</b></td>
+                <td colspan="5" style="background-color:#ffffff;border-right: dashed 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><input type="text" name="client_reference_number"></td>
             </tr>
             <tr>
                 <td  style="background-color:#ffffff;border-top: dotted 1px #bfbfbf;text-align: center;" colspan="6" ><input type="submit" name="submit" value="Submit"></td>

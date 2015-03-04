@@ -7,14 +7,16 @@ class Test_Identification_Thin_Layer_Model extends CI_Model{
 
 	function save_worksheet(){
 		
-		$coa_method_used=$this->input->post('coa_method_used');
-		$coa_results=$this->input->post('coa_results');
-		$coa_specification=$this->input->post('coa_specification');
 		$status =1;
 		$test_request=$this->input->post('test_request');
 		$assignment=$this->input->post('assignment');
-		$test_type='Identification Test: Thin Layer Chromatography Method';
+		$test_name='Identification Test: Thin Layer Chromatography Method';
 		$analyst= $this->input->post('analyst');
+		$test_type = '1d';
+
+		$data=$this->db->select_max('id')->get('identification_thin_layer')->result();
+        $test_id=$data[0]->id;
+        $test_id++;
 		
 		$data =array(			
 			'equipment_number'=>$this->input->post('equipment_number'),
@@ -109,16 +111,14 @@ class Test_Identification_Thin_Layer_Model extends CI_Model{
 			);
 		$this->db->insert('identification_thin_layer', $data);
 
-		$coa_data = array(
-			'coa_method_used'=>$coa_method_used,
-			'coa_results'=>$coa_results,
-			'coa_specification'=>$coa_specification,
-			'test_request_id'=>$test_request,
-			'assignment_id'=>$assignment,
-			'test_type'=>$test_type,
-			'analyst'=>$analyst,
+		$result_data = array(
+			'test_id'=>$test_id,
+			'test_name'=>$test_name,
+			'remarks'=>$this->input->post('choice'),
+			'method'=>$this->input->post('method'),
+			'results'=>$this->input->post('results'),
 			);
-		$this->db->insert('coa', $coa_data);
+		$this->db->update('test_results', $result_data, array('test_request_id'=>$test_request,'test_type'=>$test_type));
 
 		redirect('test/index/'.$assignment.'/'.$test_request);	
 	}
@@ -127,20 +127,29 @@ class Test_Identification_Thin_Layer_Model extends CI_Model{
 		$assignment=$this->input->post('assignment');
 		$test_name='Identification: Thin Layer';
 		$analyst= $this->input->post('analyst');
-		$identification_thin_layer_id= 1;
+		$test_type= '1d';
 
+
+		$data=$this->db->select_max('id')->get('identification_thin_layer')->result();
+        $test_id=$data[0]->id;
+        $test_id++;
 
 		$data = array(
-			'monograph' => $this->input->post('thin_layer_monograph'),
 			'test_request_id' => $this->input->post('test_request'),
-			'assignment_id' => $this->input->post('assignment'),
+			'test_id' => $test_id,
+			'test_type' => $test_type,
 			'test_name' => $test_name,
-			'analyst' => $this->input->post('analyst'),
-			'identification_thin_layer_id' => $identification_thin_layer_id,
-
+			'monograph_specifications' => $this->input->post('specification'),
 
 			);
-		$this->db->insert('identification_thin_layer_monograph', $data);
+		$this->db->insert('monograph_specifications', $data);
+		$data2 = array(
+			'test_request_id' => $this->input->post('test_request'),
+			'test_type' => $test_type,
+			'specifications' => $this->input->post('specification'),
+
+			);
+		$this->db->insert('test_results', $data2);
 		redirect('test/index/'.$assignment.'/'.$test_request);	
 
 	}

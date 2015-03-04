@@ -20,13 +20,9 @@ function GetA(){
        
 
         $this->load->model('test_requestlistmodel');
-
+        // $data['assignment']=$this->db->select('assignment.status')->get_where('assignment', array('assignment.test_request' => $trid))->result_array();
         $data['query'] = 
         $this->test_requestlistmodel->test_request_list_get();
-       
-        //$data['sql'] =
-        //$this->db->get_where('assignment', array('assignment.test_request_id' => $rid))->result_array();
-
         $this->load->view('assigned_test_requests',$data);
     
 }
@@ -37,10 +33,6 @@ function GetC(){
 
         $data['query'] = 
         $this->test_requestlistmodel->test_request_list_getc();
-
-        //$data['sql'] =
-        //$this->db->get_where('assignment', array('assignment.test_request_id' => $rid))->result_array();
-
         $this->load->view('completed_test_requests',$data);
     
 }
@@ -51,11 +43,17 @@ function GetQ(){
 
         $data['query'] = 
         $this->test_requestlistmodel->test_request_list_getq();
-
-        //$data['sql'] =
-        //$this->db->get_where('assignment', array('assignment.test_request_id' => $rid))->result_array();
-
         $this->load->view('quarantined_test_requests',$data);
+    
+}
+function GetW(){
+       
+
+        $this->load->model('test_requestlistmodel');
+
+        $data['query'] = 
+        $this->test_requestlistmodel->test_request_list_getw();
+        $this->load->view('withdrawn_test_requests',$data);
     
 }
 

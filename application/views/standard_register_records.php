@@ -10,7 +10,7 @@
   <link href="<?php echo base_url().'style/jquery-ui.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/demo_table.css';?>" rel="stylesheet" type="text/css"/>
   <link href="datatables/extensions/Tabletools/css/dataTables.tableTools.css" type="text/css" rel="stylesheet"/>
-  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css"> -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
   <link rel="stylesheet" href="<?php echo base_url().'jquery-ui.css';?>">
   
   
@@ -35,16 +35,26 @@
     /* Init DataTables */
     $('#list').dataTable({
      "sScrollY":"270px",
-     "sScrollX":"100%"
-     
-    });
+     "sScrollX":"100%",
+     "oTableTools": {
+                "aButtons": [
+                "copy",
+                "print",
+                {
+                    "sExtends": "collection",
+                    "sButtonText": 'Save',
+                    "aButtons": ["csv", "xls", "pdf"]
+                }
+                ],
+                "sSwfPath": "<?php echo base_url(); ?>datatables/media/swf/copy_csv_xls_pdf.swf"
+            }
+    });     
    });
   </script>
  </head>
  <body>
   <?php
    $user=$this->session->userdata;
-   $test_request_id=$user['logged_in']['test_request_id'];
    $user_type_id=$user['logged_in']['user_type'];
    $user_id=$user['logged_in']['id'];
    $department_id=$user['logged_in']['department_id'];
@@ -87,7 +97,7 @@
               ?> <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="<?php echo base_url().'account_settings/index/'.$test_request_id.'/'.$user_type_id.'/'.$user_id.'/'.$department_id;?>"><i class="icon-wrench"></i> Settings <img src="<?php echo base_url().'images/icons/settings2.png';?>" height="20px" width="20px"></a></li>
+              <li><a href="<?php echo base_url().'account_settings/index/'.$user_type_id.'/'.$user_id.'/'.$department_id;?>"><i class="icon-wrench"></i> Settings <img src="<?php echo base_url().'images/icons/settings2.png';?>" height="20px" width="20px"></a></li>
               <li class="divider"></li>
               <li><a href="<?php echo base_url().'home/logout'?>"><i class="icon-share"></i>Logout</b> <img src="<?php echo base_url().'images/icons/door.png';?>" height="25px" width="25px"></a></li>
             </ul>
@@ -220,7 +230,9 @@
                          echo"style='display:none;'";
                        }
                     ?>
-                ><a data-target="#standard_form" class="btn" role="button" data-toggle="modal"><img src="<?php echo base_url().'images/icons/add_field.png';?>" height="10px" width="10px">Add Standard Register</a></td>
+                ><a data-target="#primarystandard_form" class="btn" role="button" data-toggle="modal"><img src="<?php echo base_url().'images/icons/add_field.png';?>" height="10px" width="10px">Add Primary Standard</a>&nbsp;
+                 <a data-target="#secondarystandard_form" class="btn" role="button" data-toggle="modal"><img src="<?php echo base_url().'images/icons/add_field.png';?>" height="10px" width="10px">Add Secondary Standard</a>
+              </td>
             </tr>
         </table>
         <table width="100%">
@@ -229,21 +241,16 @@
             </tr>
         </table>
         <table id="list" class="list_view_header"  width="100%" cellpadding="4px">
+
             <thead bgcolor="#efefef">
                 <tr>
                     <th style="border-right: dotted 1px #c0c0c0;" align="center">No.</th>
                     <th style="border-right: dotted 1px #c0c0c0;" align="center">Batch/Lot No</th>
                     <th style="border-right: dotted 1px #c0c0c0;" align="center">Reference No</th>                    
                     <th style="border-right: dotted 1px #c0c0c0;" align="center">Item Description</th>
-                    <th style="border-right: dotted 1px #c0c0c0;" align="center">Manufacturer</th>
-                    <th style="border-right: dotted 1px #c0c0c0;" align="center">Physical Appearance</th>
                     <th style="border-right: dotted 1px #c0c0c0;" align="center">Intended Use</th>
-                    <th style="border-right: dotted 1px #c0c0c0;" align="center">Expiry Date</th>
-                    <th style="border-right: dotted 1px #c0c0c0;" align="center">MSDS</th>
-                    <th style="border-right: dotted 1px #c0c0c0;" align="center">Location/Store</th>
-                    <th style="border-right: dotted 1px #c0c0c0;" align="center">Date Received</th>
-                    <th style="border-right: dotted 1px #c0c0c0;" align="center">Initial</th>
-                    <th style="border-right: dotted 1px #c0c0c0;" align="center">Current Quantity</th> 
+                    <th style="border-right: dotted 1px #c0c0c0;" align="center">Initial Qty</th>
+                    <th style="border-right: dotted 1px #c0c0c0;" align="center">Current Qty</th> 
                     <th style="border-right: dotted 1px #c0c0c0;" align="center">Progress Bar</th>                  
                     <th style="border-right: dotted 1px #c0c0c0;center" align="center">log</th>
                     <th style="border-right: dotted 1px #c0c0c0;" align="center">Edit</th>
@@ -253,10 +260,16 @@
             <tbody>
                 <?php
                 $i=1;
+               $progressbar =0;
                 foreach($query as $row):
-                    
+                    $initial_qtty = $row->initial_quantity;
+                  $qtty = $row->quantity;
+                  $progressbar = round((($qtty / $initial_qtty) *100));
+
                 if($i==0){
-                 
+                  
+                  //echo "$progressbar";
+
                 echo"<tr>";
                 }
                 ?> 
@@ -264,24 +277,18 @@
                     <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row->batch_number;?></td>
                     <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row->reference_number;?></td>
                     <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row->item_description;?></td>
-                    <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row->manufacturer_supplier;?></td>
-                    <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row->physical_appearance;?></td>
                     <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row->intended_use;?></td>
-                    <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo substr($row->expiry_date,0,-8);?></td>
-                    <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row->msds;?></td>
-                    <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row->location_store;?></td>
-                    <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo substr($row->date_received,0,-8);?></td>
                     <td style="text-align: left;border-bottom: solid 1px #c0c0c0;" id ="initial_quantity"><?php echo $row->initial_quantity;?></td>
                     <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"id="current_quantity"><?php echo $row->quantity;?></td>
-                    <td style="text-align: left;border-bottom: solid 1px #c0c0c0;" id ="progressbar1"><input type ="hidden" id ="progressbar" onchange="calc()"></td>
+                    <td style="text-align: left;border-bottom: solid 1px #c0c0c0;" id ="progressbar1"><div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo "$progressbar";?>%"><?php echo "$progressbar";?>%</div></td>
                     <td style="text-align: center;border-bottom: solid 1px #c0c0c0;">
-                      <a href="<?php echo base_url().'standard_register_log/Logs/'.$row->id;?>"><img src="<?php echo base_url().'images/icons/view.png';?>" height="20px" width="20px"/>Log</a>
+                      <a href="<?php echo base_url().'standard_register_log/Logs/'.$row->id;?>">Log</a>
                       </td>
                       <td style="text-align: center;border-bottom: solid 1px #c0c0c0;">
-                        <a href="<?php echo base_url().'update_standard_register_record/Update/'.$row->id;?>"><img src='<?php echo base_url()."images/icons/edit.png";?>' height="20px" width="20px"/>Edit</a>
+                        <a href="<?php echo base_url().'update_standard_register_record/Update/'.$row->id;?>">Edit</a>
                       </td>
                       <td style="text-align: center;border-bottom: solid 1px #c0c0c0;">
-                        <a href="<?php echo base_url().'inventory_standard_vial_card_record/Get/'.$row->id;?>"><img src="<?php echo base_url().'images/icons/folder.png';?>" height="20px" width="20px"/> Vial Card</a>
+                        <a href="<?php echo base_url().'inventory_standard_vial_card/get/'.$row->id;?>">Vial Card</a>
                     </td>
                 <?php
              
@@ -291,9 +298,17 @@
                 </tr>
                 <?php endforeach; ?>
             </tbody>
+            <tr><td></td></tr>
+            
         </table>
     </div>
-    <div id="standard_form" class="modal fade" role="dialog" aria-labelledby="equipment" aria-hidden="true"><?php include_once "application/views/standard_register_form.php";?></div>  
+    <div id="primarystandard_form" class="modal fade" role="dialog" aria-labelledby="equipment" aria-hidden="true"><?php include_once "application/views/standard_register_form.php";?></div>
+    <div id="secondarystandard_form" class="modal fade" role="dialog" aria-labelledby="equipment" aria-hidden="true"><?php include_once "application/views/secondary_standard_register_form.php";?></div>  
 </div>
 </body>
+<script>
+progressbar_val = $('#progress_bar_val').val();
+<input type="hidden" id="progress_bar_val" value="<?php echo "$progressbar";?>">
+alert
+</script>
 </html>

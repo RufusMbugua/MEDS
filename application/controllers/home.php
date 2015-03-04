@@ -12,7 +12,6 @@ class Home extends CI_Controller {
    if($this->session->userdata('logged_in')){
      $user=$this->session->userdata;
      $user_id=$user['logged_in']['id'];
-     $test_request_id=$user['logged_in']['test_request_id'];
      $user_type_id=$user['logged_in']['user_type'];
      $department_id=$user['logged_in']['department_id'];
      $username=$user['logged_in']['username'];
@@ -20,15 +19,15 @@ class Home extends CI_Controller {
      
      $this->load->model('test_requestlistmodel');
     if($user_type_id==5){
-      $data['query'] = 
-        $this->test_requestlistmodel->test_request_list_get_assigned($test_request_id,$user_type_id,$department_id,$user_id);
-        $this->load->view('test_request_list',$data);
-    }elseif($user_type_id==6){
-      $data['query'] = 
-        $this->test_requestlistmodel->test_request_list_get_unassigned($test_request_id,$user_type_id,$department_id,$user_id);
+        $data['query'] = 
+        $this->test_requestlistmodel->test_request_list_get_assigned($user_type_id,$department_id,$user_id);
+        $this->load->view('test_request_list',$data);  
+    }elseif($user_type_id==6||$user_type_id==7){
+        $data['query'] = 
+        $this->test_requestlistmodel->test_request_list_get_unassigned($user_type_id,$department_id,$user_id);
         $this->load->view('test_request_list',$data);
     }
-    
+      
    }
    else
    {

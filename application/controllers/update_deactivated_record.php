@@ -28,7 +28,7 @@ function Update()
 function Submit()
 {
     $id = $this->input->post('my_id');
-     /*
+     /* 
     echo $id;
      die();
     */

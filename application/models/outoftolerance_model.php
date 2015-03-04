@@ -32,6 +32,7 @@ class Outoftolerance_Model extends CI_Model{
   $data= array(
  
    'equipment_maintenance_id'=>$equipment_id,
+   'equipment_name'=>$this->input->post('equipment_name'),
    'ref_no'=>$ref_no,
    'instrument_state'=>$instrument_state,
    'reporter'=>$reporter,
@@ -52,10 +53,30 @@ class Outoftolerance_Model extends CI_Model{
    'out_id'=>$ot,
    'status'=>$status
   );
+   
   $this->db->insert('outoftolerance',$data);
-   $this->db->update('equipment_maintenance', $data_two,array('id' => $equipment_id));
-  redirect('outoftolerance_list/records');
+  $this->db->update('equipment_maintenance', $data_two,array('id' => $equipment_id));
+
+  redirect('outoftolerance/records');
  }
+ function details($out_id){
+  $status=1;
+  $instrument_state=$this->input->post('instrument_state');
+  $data = array(
+  'ref_no'=>$this->input->post('ref_no'),
+  'instrument_state'=>$instrument_state,
+  'reporter'=>$this->input->post('reporter'),
+  'comments'=>$this->input->post('comments'),
+  'status'=>$status,
+  'equipment_used'=>$this->input->post('equipment_used'),
+  'who'=>$this->input->post('user')
+  );
+ 
+ $this->db->update('outoftolerance', $data,array('out_id' => $out_id));
+ redirect('outoftolerance/oot_list');
+ 
+ }
+ 
 
 }
 ?>

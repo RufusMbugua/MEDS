@@ -7,14 +7,17 @@ class Test_Identification_Hplc_Model extends CI_Model{
 
 	function save_worksheet(){
 		
-		$coa_method_used=$this->input->post('coa_method_used');
-		$coa_results=$this->input->post('coa_results');
-		$coa_specification=$this->input->post('coa_specification');
 		$status =1;
 		$test_request=$this->input->post('test_request');
 		$assignment=$this->input->post('assignment');
-		$test_type='Identification Test: HPLC Method';
+		$test_name='Identification Test: HPLC Method';
 		$analyst= $this->input->post('analyst');
+		$test_type = '1e';
+
+		$data=$this->db->select_max('id')->get('identification_hplc')->result();
+        $test_id=$data[0]->id;
+        $test_id++;
+
 		
 		$data =array(			
 			'sample_container'=>$this->input->post('sample_container'),
@@ -22,10 +25,10 @@ class Test_Identification_Hplc_Model extends CI_Model{
 			'sample_weight'=>$this->input->post('sample_weight'),
 			'sample_dilution'=>$this->input->post('sample_dilution'),
 			'standard_weight'=>$this->input->post('standard_weight'),
-			'standard_dilution'=>$this->input->post('standard_dilution'),
+			'standard_dilution_2'=>$this->input->post('standard_dilution'),
 			'standard_description'=>$this->input->post('standard_description'),
 			'potency'=>$this->input->post('potency'),
-			'potency_2'=>$this->input->post('potency_2'),
+			// 'potency_2'=>$this->input->post('potency_2'),
 			'lot_no'=>$this->input->post('lot_no'),
 			'id_no'=>$this->input->post('id_no'),
 			'lot_no_2'=>$this->input->post('lot_no_2'),
@@ -129,20 +132,20 @@ class Test_Identification_Hplc_Model extends CI_Model{
 			'asymmetry_comment'=>$this->input->post('asymmetry_comment'),
 			'resolution_comment'=>$this->input->post('resolution_comment'),
 
-			'other_type_1'=>$this->input->post('other_type_1'),
-			'other_1'=>$this->input->post('other_1'),
-			'other_2'=>$this->input->post('other_2'),
-			'other_3'=>$this->input->post('other_3'),
+			// 'other_type_1'=>$this->input->post('other_type_1'),
+			// 'other_1'=>$this->input->post('other_1'),
+			// 'other_2'=>$this->input->post('other_2'),
+			// 'other_3'=>$this->input->post('other_3'),
 
-			'other_4'=>$this->input->post('other_4'),
-			'other_5'=>$this->input->post('other_5'),
-			'other_6'=>$this->input->post('other_6'),
-			'other_avg'=>$this->input->post('other_avg'),
+			// 'other_4'=>$this->input->post('other_4'),
+			// 'other_5'=>$this->input->post('other_5'),
+			// 'other_6'=>$this->input->post('other_6'),
+			// 'other_avg'=>$this->input->post('other_avg'),
 
-			'other_sd'=>$this->input->post('other_sd'),
-			'other_rsd'=>$this->input->post('other_rsd'),
-			'other_ac'=>$this->input->post('other_ac'),
-			'other_comment'=>$this->input->post('other_comment'),
+			// 'other_sd'=>$this->input->post('other_sd'),
+			// 'other_rsd'=>$this->input->post('other_rsd'),
+			// 'other_ac'=>$this->input->post('other_ac'),
+			// 'other_comment'=>$this->input->post('other_comment'),
 
 			'sample_rt_1'=>$this->input->post('sample_rt_1'),
 			'sample_peak_area_1'=>$this->input->post('sample_peak_area_1'),
@@ -225,25 +228,22 @@ class Test_Identification_Hplc_Model extends CI_Model{
 			'chromatograms_attached'=>$this->input->post('chromatograms_attached'),
 			'sample_injection_sequence_comment'=>$this->input->post('Sample_injection_sequence_comment'),
 			'choice'=>$this->input->post('choice'),
-			'analyst'=>$this->input->post('analyst'),
-			'date_done'=>$this->input->post('supervisor'),
-			'supervisor'=>$this->input->post('supervisor'),
-			'date'=>$this->input->post('date'),
+			'analyst'=>$this->input->post('done_by'),
+			'date_done'=>$this->input->post('date_done'),
 			'further_comments'=>$this->input->post('further_comments'),		
 
 			);
 		$this->db->insert('identification_hplc', $data);
 
-		$coa_data = array(
-			'coa_method_used'=>$coa_method_used,
-			'coa_results'=>$coa_results,
-			'coa_specification'=>$coa_specification,
-			'test_request_id'=>$test_request,
-			'assignment_id'=>$assignment,
-			'test_type'=>$test_type,
-			'analyst'=>$analyst,
+		$result_data = array(
+			'test_id'=>$test_id,
+			'test_name'=>$test_name,
+			'remarks'=>$this->input->post('choice'),
+			'method'=>$this->input->post('method'),
+			'results'=>$this->input->post('results'),
 			);
-		$this->db->insert('coa', $coa_data);
+		$this->db->update('test_results', $result_data, array('test_request_id'=>$test_request,'test_type'=>$test_type));
+
 
 		redirect('test/index/'.$assignment.'/'.$test_request);	
 	}
@@ -252,20 +252,29 @@ class Test_Identification_Hplc_Model extends CI_Model{
 		$assignment=$this->input->post('assignment');
 		$test_name='Identification: HPLC';
 		$analyst= $this->input->post('analyst');
-		$identification_hplc_id= 1;
+		$test_type= '1e';
 
+		$data=$this->db->select_max('id')->get('identification_hplc')->result();
+        $test_id=$data[0]->id;
+        $test_id++;
 
 		$data = array(
-			'monograph' => $this->input->post('hplc_monograph'),
 			'test_request_id' => $this->input->post('test_request'),
-			'assignment_id' => $this->input->post('assignment'),
+			'test_id' => $test_id,
+			'test_type' => $test_type,
 			'test_name' => $test_name,
-			'analyst' => $this->input->post('analyst'),
-			'identification_hplc_id' => $identification_hplc_id,
-
+			'monograph_specifications' => $this->input->post('specification'),
 
 			);
-		$this->db->insert('identification_hplc_monograph', $data);
+		$this->db->insert('monograph_specifications', $data);
+		$data2 = array(
+			'test_request_id' => $this->input->post('test_request'),
+			'test_type' => $test_type,
+			'specifications' => $this->input->post('specification'),
+
+			);
+		$this->db->insert('test_results', $data2);
+		
 		redirect('test/index/'.$assignment.'/'.$test_request);	
 
 	}

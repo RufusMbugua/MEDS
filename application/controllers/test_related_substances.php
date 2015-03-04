@@ -9,7 +9,7 @@ class Test_Related_Substances extends CI_Controller{
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
 		$status=0;
-		$user_type=6;
+		$test_type='5';
 
 		$query=$this->db->get_where('test_request', array('id' =>$test_request));
 	    $results=$query->result_array();	    
@@ -23,12 +23,12 @@ class Test_Related_Substances extends CI_Controller{
    		$this->db->select('columns.column_type,columns.serial_number,columns.column_dimensions,columns.manufacturer,columns.column_number')->get_where('columns', array('status' => $status))->result_array();
 
 	    $data['sql_standards']=
-    	$this->db->select('standard_register.reference_number,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
+    	$this->db->select('standard_register.reference_number, standard_register.potency, standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
 
-    	$data['sql_approved']=
-    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
-
-		$this->load->view('test_related_substances_view', $data);
+    	$q = "select * from monograph_specifications where test_request_id = $test_request and test_type = '$test_type' ";
+		$data['specs']=$this->db->query($q)->result_array();
+		
+		$this->load->view('tests/related_substances/test_related_substances_view', $data);
 	}
 	function worksheet(){			
 		$this->load->model('test_related_substances_model');
@@ -37,10 +37,10 @@ class Test_Related_Substances extends CI_Controller{
 		}
 	}
 	function index_manufacture_linear(){			
-		$this->load->view('test_manufacturer_specification');
+		$this->load->view('tests/related_substances/test_manufacturer_specification');
 	}
 	function index_manufacture_precision(){			
-		$this->load->view('test_manufacturer_specification_precision');
+		$this->load->view('tests/related_substances/test_manufacturer_specification_precision');
 	}
 	function monograph(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -53,7 +53,7 @@ class Test_Related_Substances extends CI_Controller{
 
 		$data['results']=$result[0];
 				
-		$this->load->view('test_related_substances_monograph_view',$data);
+		$this->load->view('tests/related_substances/test_related_substances_monograph_view',$data);
 	}	
 	function save_monograph(){	
 
@@ -83,7 +83,7 @@ class Test_Related_Substances extends CI_Controller{
 		//var_dump($results_e);
 		// die;
 
-		$this->load->view('test_related_substances_view_worksheet', $data);	
+		$this->load->view('tests/related_substances/test_related_substances_view_worksheet', $data);	
 	}
 }
 ?>

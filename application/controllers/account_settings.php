@@ -11,15 +11,6 @@ function index(){
     
     $query=$this->db->get_where('user', array('id'=>$user_id));
     $results=$query->result_array();
-    /*
-    var_dump($results);
-    die();
-    
-    echo "<pre>";
-    print_r($results[0]);
-    echo "</pre>";
-    die();
-    */
     $data['query']=$results[0];
 
     $this->load->view('account_settings_form',$data);
@@ -30,8 +21,6 @@ function Update(){
     $usertype_id = $this->uri->segment(4);
     $user_id = $this->uri->segment(5);
         
-    //$data=array();
-    //$this->load->database();
     $query = $this->db->get_where('client', array('id' => $uid));
     $results=$query->result_array();
     
@@ -43,16 +32,11 @@ function Update(){
 function Submit()
 {
     $id = $this->input->post('my_id');
-     /*
-    echo $id;
-     die();
-    */
     $this->load->model('account_settingsmodel');        
 	
 	if($this->input->post('submit')){
 		$this->account_settingsmodel->Update($id);                
 	}
-	//redirect('home');
 }
 }
 

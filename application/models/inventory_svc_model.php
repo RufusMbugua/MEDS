@@ -5,7 +5,9 @@ class Inventory_Svc_Model extends CI_Model{
       parent::__construct();
     }
     
- function process($item_name, $id){
+ function process(){
+
+  $item_name = $this->input->post('item_name');
     
   //Variable Sets
   $requisition=$this->input->post('requisition');
@@ -34,7 +36,7 @@ class Inventory_Svc_Model extends CI_Model{
     'quantity'=>$balance   
   );
 
-  $this->db->update('standard_register',$data_b, array('id' => $id));
+  $this->db->update('standard_register',$data_b, array('id' => $svc_id));
   
  }
 

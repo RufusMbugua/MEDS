@@ -29,7 +29,7 @@ class Test_Vs_Solution extends CI_Controller{
     	$data['sql_approved']=
     	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
 
-		$this->load->view('test_vs_solution_view', $data);		
+		$this->load->view('tests/vs_solution/test_vs_solution_view', $data);		
 	}
 	function worksheet(){	
 
@@ -50,7 +50,7 @@ class Test_Vs_Solution extends CI_Controller{
 
 		$data['results']=$result[0];
 				
-		$this->load->view('test_vs_monograph_view',$data);
+		$this->load->view('tests/vs_solution/test_vs_monograph_view',$data);
 	}
 	function save_monograph(){	
 
@@ -80,7 +80,7 @@ class Test_Vs_Solution extends CI_Controller{
 		//var_dump($results_e);
 		// die;
 
-		$this->load->view('test_vs_solution_view_worksheet', $data);	
+		$this->load->view('tests/vs_solution/test_vs_solution_view_worksheet', $data);	
 	}
 }
 ?>

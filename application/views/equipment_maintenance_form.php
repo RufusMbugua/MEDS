@@ -10,13 +10,6 @@
   <link href="<?php echo base_url().'style/jquery-ui.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/demo_table.css';?>" rel="stylesheet" type="text/css"/>
   
-  <!-- bootstrap reference links  
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.css.map';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.min.css';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap.css.map'; ?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.css';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap.min.css';?>" rel="stylesheet" type="text/css"/>  
-   -->
   <!-- bootstrap reference library -->
   <link href="<?php echo base_url().'bootstrap/css/bootstrap.css'; ?>" rel="stylesheet" type="text/css"/>
 
@@ -171,6 +164,18 @@
               <td style="padding:4px;background-color:#ffffff;"><input type="text" size="30" id="manufacturer" class="field" name="manufacturer"/><span id="manufacturer_g" style="color:Green; display:none;"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="manufacturer_r" style="color:white;background-color:red;padding:4px;display:none;">field required</span></td>
               <td align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;">Model</td>
               <td style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><input type="text" size="30" id="model" class="field" name="model"/><span id="model_g" style="color:Green; display:none;"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="model_r" style="color:white;background-color:red;padding:4px;display:none;">field required</span></td>
+          </tr>
+          <tr>
+              <td align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;">Equipment Type</td>
+              <td style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><select name="equipment_type" id="equipment_type">
+                <option>-----------</option>
+                <option value="balance">Balances</option>
+                <option value="temperature">Temperature Equipment</option>
+                <option value="ph_meter">pH Meter</option>
+                <option value="other">Other</option>
+              </select></td>
+              <td align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;">Calibration Readings</td>
+              <td style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><input type="text" name="std_range_from" id="std_range_from" size="10"> to <input type="text" name="std_range_to" id="std_range_to" size="10"></td>
           </tr>
           <tr>
         	    <td colspan="2" align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;">Description<span id="description_g" style="color:Green; display:none;"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="description_r" style="color:white;background-color:red;padding:4px;display:none;">field required</span></td>

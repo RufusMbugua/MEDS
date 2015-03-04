@@ -1,0 +1,156 @@
+// customize bootstrap variables here:
+
+@import "bootstrap";
+
+@mixin tile(){
+    border:1px solid #e7e7e7;
+    border-radius:3px;
+    height:40%;
+    margin-bottom:2em;
+    padding:2%;
+}
+body{
+    overflow-x:hidden;
+}
+nav{
+    @extend .navbar;
+    @extend .navbar-default;
+}
+footer{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    nav{
+        margin-bottom:0;
+    }
+}
+
+.content{
+    @extend .row;
+    padding:0 5%;
+    padding-bottom:10%;
+}
+
+i{
+        padding-right:5px;
+        
+    }
+.graph{
+.inner{
+    overflow:hidden;
+ @include tile();
+ .graph-plotted{
+    overflow-y:auto;
+    height:80% !important;
+    div{
+width:100%;
+    }
+ }
+ h4{
+    @extend .row;
+    @extend .navbar;
+    form{
+        margin-bottom:0;
+        input,select{
+            display:inline-block;
+            width:32%;
+        }
+    }
+    input{
+        @extend .form-control;
+        display:inline-block;
+        padding:2px;
+        height:auto;
+    }
+    div.filter{
+        @extend .col-sm-6;
+        @extend .navbar-right;
+    }
+    div.more{
+        @extend .col-sm-2;
+        @extend .navbar-left;
+    }
+    div.more,div.filter{
+    ul{
+        padding:0;
+        li{
+            list-style:none;
+        }
+    }
+    text-align:left;
+    a{
+        text-decoration:none;
+        color:#999;
+    }
+    a:hover{
+        color:black;
+    }
+}
+div.title{
+text-align:right;
+@extend .col-sm-4;
+@extend .navbar-right;
+}
+    height:10%;
+    
+    margin:0;
+    padding:5px 5px;
+    font-size:100%;
+    color:#999;
+ }
+    }
+}
+.graph.small{
+    @extend .col-md-3;
+    .inner{
+        h4{
+            div.more{
+                padding:0;
+        @extend .col-xs-3;
+
+    }
+div.title{
+
+text-align:right;
+@extend .col-xs-9;
+
+}
+        }
+    }
+    
+   
+
+}
+.graph.medium{
+    @extend .col-md-6;
+   
+    
+}
+.graph.large{
+    @extend .col-md-9;
+   
+    
+}
+.graph.x-large{
+    @extend .col-md-12;
+}
+.graph.full-page{
+    height:90%;
+    @extend .x-large;
+    .inner{
+        height:90%;
+    }
+    
+}
+#full-page-1{
+    width:100%;
+    position:absolute;
+    left:0;
+    height:100%;
+}
+#full-page-2{
+    width:100%;
+    position:absolute;
+    left:100%;
+    height:100%;
+}

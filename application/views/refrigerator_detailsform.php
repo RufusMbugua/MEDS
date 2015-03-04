@@ -12,7 +12,6 @@
 </script>
 <?php
    $user=$this->session->userdata;
-   $test_request_id=$user['logged_in']['test_request_id'];
    $user_type_id=$user['logged_in']['user_type'];
    $user_id=$user['logged_in']['id'];
    $department_id=$user['logged_in']['department_id'];
@@ -73,11 +72,7 @@
         <span id="ref_min_temp_g" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
         <span id="ref_min_temp_r" style="color:white;background-color:red;padding:4px;display:none">field required</span></td>
 
-      <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Correction Factor</td>
-      <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
-        <input type="text" id="ref_standard_min_temp" onChange="calcref()" name ="ref_standard_min_temp" value="<?php echo $query['standard_min_temp']; ?>"></td>
-
-      <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Minimum Temperature Corrected</td>
+      <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Minimum Temperature</td>
       <td style="padding:8pxbackground-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
         <input type ="text" ;name ="ref_min_temp_corrected" id ="ref_min_temp_corrected" value="<?php echo $query['min_temp_corrected']; ?>"></td>
     </tr>
@@ -86,11 +81,7 @@
       <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
         <input type ="text" name ="ref_max_temp" id ="ref_max_temp" value="<?php echo $query['max_temp']; ?>" ></td>
 
-      <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Correction Factor</td>
-      <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
-        <input type="text" id="ref_standard_max_temp" name ="ref_standard_max_temp" onChange="calc2ref()" value="<?php echo $query['standard_max_temp']; ?>"></td>    
-  
-      <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Maximum Temperature Corrected</td> 
+      <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Maximum Temperature</td> 
       <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
         <input type ="text" name ="ref_max_temp_corrected" id ="ref_max_temp_corrected" value="<?php echo $query['max_temp_corrected']; ?>" ></td>
     </tr>

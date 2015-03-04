@@ -9,56 +9,69 @@
       // var sample_weight_six = (Math.abs(document.getElementById('weight_sample_container_six').value) - Math.abs(document.getElementById('weight_container_six').value));
       
       document.getElementById('weight_sample_one').value = sample_weight_one.toFixed(5);
-      document.getElementById('weight_sample_two').value = sample_weight_two.toFixed(5);
       document.getElementById('weight_sample_three').value = sample_weight_three.toFixed(5);
-      // document.getElementById('weight_sample_four').value = sample_weight_four.toFixed(5);
+      document.getElementById('weight_sample_two').value = sample_weight_two.toFixed(5);
+      document.getElementById('d_one_wt').value = sample_weight_one.toFixed(5);
+      document.getElementById('d_two_wt').value = sample_weight_two.toFixed(5);
+      document.getElementById('d_three_wt').value = sample_weight_three.toFixed(5);
+
+      // document.getElementById('d_four_wt').value = sample_weight_one.toFixed(5);
+      // document.getElementById('d_five_wt').value = sample_weight_two.toFixed(5);
+      // document.getElementById('d_six_wt').value = sample_weight_three.toFixed(5);
+      // // document.getElementById('weight_sample_four').value = sample_weight_four.toFixed(5);
       // document.getElementById('weight_sample_five').value = sample_weight_five.toFixed(5);
       // document.getElementById('weight_sample_six').value = sample_weight_six.toFixed(5);
       
-      var s_weight_one = (Math.abs(document.getElementById('weight_reagent_container_one').value) - Math.abs(document.getElementById('weight_container_one_reagent').value));
-      var s_weight_two = (Math.abs(document.getElementById('weight_reagent_container_two').value) - Math.abs(document.getElementById('weight_container_two_reagent').value));
-      var s_weight_three = (Math.abs(document.getElementById('weight_reagent_container_three').value) - Math.abs(document.getElementById('weight_container_three_reagent').value));
-      var s_weight_four = (Math.abs(document.getElementById('weight_reagent_container_four').value) - Math.abs(document.getElementById('weight_container_four_reagent').value));
-      var s_weight_five = (Math.abs(document.getElementById('weight_reagent_container_five').value) - Math.abs(document.getElementById('weight_container_five_reagent').value));
-      var s_weight_six = (Math.abs(document.getElementById('weight_reagent_container_six').value) - Math.abs(document.getElementById('weight_container_six_reagent').value));
+      // var s_weight_one = (Math.abs(document.getElementById('weight_reagent_container_one').value) - Math.abs(document.getElementById('weight_container_one_reagent').value));
+      // var s_weight_two = (Math.abs(document.getElementById('weight_reagent_container_two').value) - Math.abs(document.getElementById('weight_container_two_reagent').value));
+      // var s_weight_three = (Math.abs(document.getElementById('weight_reagent_container_three').value) - Math.abs(document.getElementById('weight_container_three_reagent').value));
+      // var s_weight_four = (Math.abs(document.getElementById('weight_reagent_container_four').value) - Math.abs(document.getElementById('weight_container_four_reagent').value));
+      // var s_weight_five = (Math.abs(document.getElementById('weight_reagent_container_five').value) - Math.abs(document.getElementById('weight_container_five_reagent').value));
+      // var s_weight_six = (Math.abs(document.getElementById('weight_reagent_container_six').value) - Math.abs(document.getElementById('weight_container_six_reagent').value));
 
-      document.getElementById('weight_reagent_one').value = s_weight_one.toFixed(5);
-      document.getElementById('weight_reagent_two').value = s_weight_two.toFixed(5);
-      document.getElementById('weight_reagent_three').value = s_weight_three.toFixed(5);
-      // document.getElementById('weight_reagent_four').value = s_weight_four.toFixed(5);
+      // document.getElementById('weight_reagent_one').value = s_weight_one.toFixed(5);
+      // document.getElementById('weight_reagent_two').value = s_weight_two.toFixed(5);
+      // document.getElementById('weight_reagent_three').value = s_weight_three.toFixed(5);
+      // // document.getElementById('weight_reagent_four').value = s_weight_four.toFixed(5);
       // document.getElementById('weight_reagent_five').value = s_weight_five.toFixed(5);
       // document.getElementById('weight_reagent_six').value = s_weight_six.toFixed(5);
 
       }
 
-      function calculate_reagent_difference(){
       
-      var reagent_weight_one = (Math.abs(document.getElementById('weight_reagent_container_one').value) - Math.abs(document.getElementById('container_aone').value));
-      var reagent_weight_two = (Math.abs(document.getElementById('weight_reagent_container_two').value) - Math.abs(document.getElementById('container_btwo').value));
-      var reagent_weight_three = (Math.abs(document.getElementById('weight_reagent_container_three').value) - Math.abs(document.getElementById('container_three').value));
-      var reagent_weight_four = (Math.abs(document.getElementById('weight_reagent_container_four').value) - Math.abs(document.getElementById('container_four').value));
-      var reagent_weight_five = (Math.abs(document.getElementById('weight_reagent_container_five').value) - Math.abs(document.getElementById('container_five').value));
-      var reagent_weight_six = (Math.abs(document.getElementById('weight_reagent_container_six').value) - Math.abs(document.getElementById('container_six').value));
-      
-
-      document.getElementById('weight_reagent_one').value = reagent_weight_one.toFixed(5);
-      document.getElementById('weight_reagent_two').value = reagent_weight_two.toFixed(5);
-      document.getElementById('weight_reagent_three').value = reagent_weight_three.toFixed(5);
-      document.getElementById('weight_reagent_four').value = reagent_weight_four.toFixed(5);
-      document.getElementById('weight_reagent_five').value = reagent_weight_five.toFixed(5);
-      document.getElementById('weight_reagent_six').value = reagent_weight_six.toFixed(5); 
-      }
 
       function calculate_sample_difference(){
       
       var weight_one = (Math.abs(document.getElementById('weight_standard_container_one').value) - Math.abs(document.getElementById('container_one').value));
-      // var weight_two = (Math.abs(document.getElementById('weight_standard_container_two').value) - Math.abs(document.getElementById('container_two').value));
+      //var weight_two = (Math.abs(document.getElementById('weight_standard_container_two').value) - Math.abs(document.getElementById('container_two').value));
       
       document.getElementById('weight_standard_one').value = weight_one.toFixed(5); 
-      // document.getElementById('weight_standard_two').value = weight_two.toFixed(5); 
+      //document.getElementById('weight_standard_two').value = weight_two.toFixed(5);
+      var dilution=[Math.abs(document.getElementById('value_d').value)];
+      var wst=(Math.abs(document.getElementById('weight_standard_one').value)/Math.abs(document.getElementById('value_d').value)*1000);
+      
+      document.getElementById('d_one_wstd').value = wst.toFixed(5);
+      document.getElementById('d_two_wstd').value = wst.toFixed(5); 
+      document.getElementById('d_three_wstd').value = wst.toFixed(5);
       }
       
-  
+      function calculate_reagent_difference(){
+      
+      var reagent_weight_one = (Math.abs(document.getElementById('weight_reagent_container_one').value) - Math.abs(document.getElementById('container_aone').value));
+      // var reagent_weight_two = (Math.abs(document.getElementById('weight_reagent_container_two').value) - Math.abs(document.getElementById('container_btwo').value));
+      // var reagent_weight_three = (Math.abs(document.getElementById('weight_reagent_container_three').value) - Math.abs(document.getElementById('container_three').value));
+      // var reagent_weight_four = (Math.abs(document.getElementById('weight_reagent_container_four').value) - Math.abs(document.getElementById('container_four').value));
+      // var reagent_weight_five = (Math.abs(document.getElementById('weight_reagent_container_five').value) - Math.abs(document.getElementById('container_five').value));
+      // var reagent_weight_six = (Math.abs(document.getElementById('weight_reagent_container_six').value) - Math.abs(document.getElementById('container_six').value));
+      
+
+      document.getElementById('weight_reagent_one').value = reagent_weight_one.toFixed(5);
+      // document.getElementById('weight_reagent_two').value = reagent_weight_two.toFixed(5);
+      // document.getElementById('weight_reagent_three').value = reagent_weight_three.toFixed(5);
+      // document.getElementById('weight_reagent_four').value = reagent_weight_four.toFixed(5);
+      // document.getElementById('weight_reagent_five').value = reagent_weight_five.toFixed(5);
+      // document.getElementById('weight_reagent_six').value = reagent_weight_six.toFixed(5); 
+      }
       function calculator_average(){
       
       var average_retention_time = (Math.abs(document.getElementById('retention_time_one').value) + Math.abs(document.getElementById('retention_time_two').value) + Math.abs(document.getElementById('retention_time_three').value) + Math.abs(document.getElementById('retention_time_four').value) + Math.abs(document.getElementById('retention_time_five').value) + Math.abs(document.getElementById('retention_time_six').value))/6;
@@ -152,59 +165,53 @@
       var comment_d= new String();
             
 
-      if(rsd_retention_time==0 || rsd_retention_time==""){
-            comment_a= "Ok";
-            document.getElementById('comment_retention_time').value =comment_a;
+    var result = 0;
 
-      }else if(rsd_retention_time > acc_retention_time){
-            comment_a= "Not Ok";
-            document.getElementById('comment_retention_time').value =comment_a;
+    var rsd_rtt= $("#rsd_retention_time").val();
+    var rsd_pa= $("#rsd_peak_area").val();
+    var a_a= $("#average_asymmetry").val();
+    var a_r= $("#average_resolution").val();
 
-      }else{
-            comment_a="OK";
-            document.getElementById('comment_retention_time').value =comment_a;
+    var ac_rtt= $(".retention_time_acceptance_criteria").val();
+    var ac_pa= $(".peak_area_acceptance_criteria").val();
+    var ac_a= $(".asymmetry_acceptance_criteria").val();
+    var ac_r= $(".resolution_acceptance_criteria").val();
+    
 
-      }
 
-      if(rsd_peak_area==0 || rsd_peak_area==""){
-            comment_b= "OK";
-            document.getElementById('comment_peak_area').value =comment_b;
-
-      }else if(rsd_peak_area > acc_peak_area ){
-            comment_b= "Not Ok";
-            document.getElementById('comment_peak_area').value =comment_b;
-
-      }else{
-            comment_b="Ok";
-            document.getElementById('comment_peak_area').value =comment_b;
-
-      }
-
-      if(average_asymmetry==0 || average_asymmetry==""){
-            comment_c= "Ok";
-            document.getElementById('comment_asymmetry').value =comment_c;
-
-      }else if(average_asymmetry > acc_asymmetry){
-            comment_c= "Not Ok";
-            document.getElementById('comment_asymmetry').value =comment_c;
-
-      }else{
-            comment_c="Ok";
-            document.getElementById('comment_asymmetry').value =comment_c;
-            
-      }
+    if(rsd_rtt<ac_rtt && rsd_rtt==ac_rtt){
+      result="OK";
+      $('.comment_retention_time').val(result);
+        
+    }else{
+      result="Not OK";
+      $('.comment_retention_time').val(result);
       
+    }
+    if(rsd_pa<ac_pa && rsd_pa==ac_pa){
+      result="OK";
+      $('.comment_peak_area').val(result);
+    }else{
+      result="NOT OK";
+      $('.comment_peak_area').val(result);
+    }
 
-      if(average_resolution==0 || average_resolution==""){
-            comment_d= "Not Ok";
-            document.getElementById('comment_resolution').value =comment_d;
-      }else if(average_resolution < acc_resolution){
-            comment_d= "Not Ok";
-            document.getElementById('comment_resolution').value =comment_d;
-      }else{
-            comment_d="OK";
-            document.getElementById('comment_resolution').value =comment_d;
-      }     
+    if(a_a<ac_a && a_a==ac_a){
+      result="OK";
+      $('.comment_asymmetry').val(result);
+    }else{
+      result="NOT OK";
+      $('.comment_asymmetry').val(result);
+    }
+
+    if(a_r<ac_r && a_r==ac_r){
+      result="OK";
+      $('.comment_resolution').val(result);
+    }else{
+      result="NOT OK";
+      $('.comment_resolution').val(result);
+    }
+
       
       }
 
@@ -320,13 +327,7 @@
             
           });
            
-         //  for(var i=0;i<data_carrier.length; i++){
-           
-         //   standard_deviation=Math.sqrt((variance)/boxes); 
-         //   rsd=(standard_deviation/average_rounded)*100;
-         //    //alert(variance)
-         // }
-         
+                 
           
           
           
@@ -363,23 +364,6 @@
       var variance_relative_retention_time=0;
       var variance_determination=0;  
 
-      // var sum = 0;
-      // var sum1 = 0;
-      // var average = 0;
-      // var average_rounded = 0;
-
-      // boxes = $(".retention_time").filter(function() {
-      //           return (this.value.length);
-      //       }).length;
-
-      // $('.retention_time').each(function() {
-      //           num = Number($(this).val());
-      //           sum1 = sum.toFixed(5);
-      //           average = sum1 / boxes;
-      //           average_rounded = average.toFixed(5);
-      //       });
-
-      //       $('.average_retention_time').val(num);
 
          for(var i=0;i<samples_retention_time.length; i++){
 
@@ -449,27 +433,7 @@
       function calc_avg_std(){
 
       var average = (Math.abs(document.getElementById('std_one').value) + Math.abs(document.getElementById('std_two').value) + Math.abs(document.getElementById('std_three').value) + Math.abs(document.getElementById('std_four').value) + Math.abs(document.getElementById('std_five').value))/5;
-      //var c2_average = (Math.abs(document.getElementById('c2_std_one').value) + Math.abs(document.getElementById('c2_std_two').value) + Math.abs(document.getElementById('c2_std_three').value) + Math.abs(document.getElementById('c2_std_four').value) + Math.abs(document.getElementById('c2_std_five').value))/5;
-      
-      // var sample_one_average = (Math.abs(document.getElementById('c2_sample_one_a').value) + Math.abs(document.getElementById('c2_sample_one_b').value) + Math.abs(document.getElementById('c2_sample_one_c').value) + Math.abs(document.getElementById('c2_sample_one_d').value) + Math.abs(document.getElementById('c2_sample_one_e').value))/5;
-      // var sample_two_average = (Math.abs(document.getElementById('c2_sample_two_a').value) + Math.abs(document.getElementById('c2_sample_two_b').value) + Math.abs(document.getElementById('c2_sample_two_c').value) + Math.abs(document.getElementById('c2_sample_two_d').value) + Math.abs(document.getElementById('c2_sample_two_e').value))/5;
-      // var sample_three_average = (Math.abs(document.getElementById('c2_sample_three_a').value) + Math.abs(document.getElementById('c2_sample_three_b').value) + Math.abs(document.getElementById('c2_sample_three_c').value) + Math.abs(document.getElementById('c2_sample_three_d').value) + Math.abs(document.getElementById('c2_sample_three_e').value))/5;
-      // var sample_four_average = (Math.abs(document.getElementById('c2_sample_four_a').value) + Math.abs(document.getElementById('c2_sample_four_b').value) + Math.abs(document.getElementById('c2_sample_four_c').value) + Math.abs(document.getElementById('c2_sample_four_d').value) + Math.abs(document.getElementById('c2_sample_four_e').value))/5;
-      // var sample_five_average = (Math.abs(document.getElementById('c2_sample_five_a').value) + Math.abs(document.getElementById('c2_sample_five_b').value) + Math.abs(document.getElementById('c2_sample_five_c').value) + Math.abs(document.getElementById('c2_sample_five_d').value) + Math.abs(document.getElementById('c2_sample_five_e').value))/5;
-      // var sample_six_average = (Math.abs(document.getElementById('c2_sample_six_a').value) + Math.abs(document.getElementById('c2_sample_six_b').value) + Math.abs(document.getElementById('c2_sample_six_c').value) + Math.abs(document.getElementById('c2_sample_six_d').value) + Math.abs(document.getElementById('c2_sample_six_e').value))/5;
-      // var average_relative_time = (Math.abs(document.getElementById('c2_relative_one').value) + Math.abs(document.getElementById('c2_relative_two').value) + Math.abs(document.getElementById('c2_relative_three').value) + Math.abs(document.getElementById('c2_relative_four').value) + Math.abs(document.getElementById('c2_relative_five').value))/5;
-      
-      
-      // document.getElementById('c2_sample_one_average').value= sample_one_average.toFixed(5);
-      // document.getElementById('c2_sample_two_average').value= sample_two_average.toFixed(5);
-      // document.getElementById('c2_sample_three_average').value= sample_three_average.toFixed(5);
-      // document.getElementById('c2_sample_four_average').value= sample_four_average.toFixed(5);
-      // document.getElementById('c2_sample_five_average').value= sample_five_average.toFixed(5);
-      // document.getElementById('c2_sample_six_average').value= sample_six_average.toFixed(5);
-      // document.getElementById('c2_relative_average').value = average_relative_time.toFixed(5);
-      
       document.getElementById('std_average').value = average.toFixed(5);
-      // document.getElementById('c2_std_average').value = c2_average.toFixed(5);
 
       }
   
@@ -558,44 +522,44 @@
       document.getElementById('ratio_std_g_average').value = average.toFixed(5);
 
       }
-      function calc_avg_sample_one(){
+      // function calc_avg_sample_one(){
 
-      var average = (Math.abs(document.getElementById('sample_a_one').value) + Math.abs(document.getElementById('sample_a_two').value) + Math.abs(document.getElementById('sample_a_three').value) + Math.abs(document.getElementById('sample_a_four').value) + Math.abs(document.getElementById('sample_a_five').value))/5;
-      document.getElementById('sample_a_average').value = average.toFixed(5);
+      // var average = (Math.abs(document.getElementById('sample_a_one').value) + Math.abs(document.getElementById('sample_a_two').value) + Math.abs(document.getElementById('sample_a_three').value) + Math.abs(document.getElementById('sample_a_four').value) + Math.abs(document.getElementById('sample_a_five').value))/5;
+      // document.getElementById('sample_a_average').value = average.toFixed(5);
 
-      }
-      function calc_avg_sample_two(){
+      // }
+      // function calc_avg_sample_two(){
 
-      var average = (Math.abs(document.getElementById('sample_b_one').value) + Math.abs(document.getElementById('sample_b_two').value) + Math.abs(document.getElementById('sample_b_three').value) + Math.abs(document.getElementById('sample_b_four').value) + Math.abs(document.getElementById('sample_b_five').value))/5;
-      document.getElementById('sample_b_average').value = average.toFixed(5);
+      // var average = (Math.abs(document.getElementById('sample_b_one').value) + Math.abs(document.getElementById('sample_b_two').value) + Math.abs(document.getElementById('sample_b_three').value) + Math.abs(document.getElementById('sample_b_four').value) + Math.abs(document.getElementById('sample_b_five').value))/5;
+      // document.getElementById('sample_b_average').value = average.toFixed(5);
 
-      }
-      function calc_avg_sample_three(){
+      // }
+      // function calc_avg_sample_three(){
 
-      var average = (Math.abs(document.getElementById('sample_c_one').value) + Math.abs(document.getElementById('sample_c_two').value) + Math.abs(document.getElementById('sample_c_three').value) + Math.abs(document.getElementById('sample_c_four').value) + Math.abs(document.getElementById('sample_c_five').value))/5;
-      document.getElementById('sample_c_average').value = average.toFixed(5);
+      // var average = (Math.abs(document.getElementById('sample_c_one').value) + Math.abs(document.getElementById('sample_c_two').value) + Math.abs(document.getElementById('sample_c_three').value) + Math.abs(document.getElementById('sample_c_four').value) + Math.abs(document.getElementById('sample_c_five').value))/5;
+      // document.getElementById('sample_c_average').value = average.toFixed(5);
 
       
 
-      }
-      function calc_avg_sample_four(){
+      // }
+      // function calc_avg_sample_four(){
 
-      var average = (Math.abs(document.getElementById('sample_d_one').value) + Math.abs(document.getElementById('sample_d_two').value) + Math.abs(document.getElementById('sample_d_three').value) + Math.abs(document.getElementById('sample_d_four').value) + Math.abs(document.getElementById('sample_d_five').value))/5;
-      document.getElementById('sample_d_average').value = average.toFixed(5);
+      // var average = (Math.abs(document.getElementById('sample_d_one').value) + Math.abs(document.getElementById('sample_d_two').value) + Math.abs(document.getElementById('sample_d_three').value) + Math.abs(document.getElementById('sample_d_four').value) + Math.abs(document.getElementById('sample_d_five').value))/5;
+      // document.getElementById('sample_d_average').value = average.toFixed(5);
 
-      }
-      function calc_avg_sample_five(){
+      // }
+      // function calc_avg_sample_five(){
 
-      var average = (Math.abs(document.getElementById('sample_e_one').value) + Math.abs(document.getElementById('sample_e_two').value) + Math.abs(document.getElementById('sample_e_three').value) + Math.abs(document.getElementById('sample_e_four').value) + Math.abs(document.getElementById('sample_e_five').value))/5;
-      document.getElementById('sample_e_average').value = average.toFixed(5);
+      // var average = (Math.abs(document.getElementById('sample_e_one').value) + Math.abs(document.getElementById('sample_e_two').value) + Math.abs(document.getElementById('sample_e_three').value) + Math.abs(document.getElementById('sample_e_four').value) + Math.abs(document.getElementById('sample_e_five').value))/5;
+      // document.getElementById('sample_e_average').value = average.toFixed(5);
 
-      }
-      function calc_avg_sample_six(){
+      // }
+      // function calc_avg_sample_six(){
 
-      var average = (Math.abs(document.getElementById('sample_f_one').value) + Math.abs(document.getElementById('sample_f_two').value) + Math.abs(document.getElementById('sample_f_three').value) + Math.abs(document.getElementById('sample_f_four').value) + Math.abs(document.getElementById('sample_f_five').value))/5;
-      document.getElementById('sample_f_average').value = average.toFixed(5);
+      // var average = (Math.abs(document.getElementById('sample_f_one').value) + Math.abs(document.getElementById('sample_f_two').value) + Math.abs(document.getElementById('sample_f_three').value) + Math.abs(document.getElementById('sample_f_four').value) + Math.abs(document.getElementById('sample_f_five').value))/5;
+      // document.getElementById('sample_f_average').value = average.toFixed(5);
 
-      }
+      // }
       function calc_avg_relative(){
 
       var average = (Math.abs(document.getElementById('relative_one').value) + Math.abs(document.getElementById('relative_two').value) + Math.abs(document.getElementById('relative_three').value) + Math.abs(document.getElementById('relative_four').value) + Math.abs(document.getElementById('relative_five').value))/5;
@@ -603,56 +567,7 @@
 
       }
   
-      <!---->
-      // function c2_calc_avg_std(){
-
-      // var average = (Math.abs(document.getElementById('c2_std_one').value) + Math.abs(document.getElementById('c2_std_two').value) + Math.abs(document.getElementById('c2_std_three').value) + Math.abs(document.getElementById('c2_std_four').value) + Math.abs(document.getElementById('c2_std_five').value))/5;
-      // document.getElementById('c2_std_average').value = average;
-
-      // }
-      // function c2_calc_avg_sample_one(){
-
-      // var average = (Math.abs(document.getElementById('c2_sample_one_one').value) + Math.abs(document.getElementById('c2_sample_two_one').value) + Math.abs(document.getElementById('c2_sample_three_one').value) + Math.abs(document.getElementById('c2_sample_four_one').value) + Math.abs(document.getElementById('c2_sample_five_one').value))/5;
-      // document.getElementById('c2_sample_one_average').value = average;
-
-      // }
-      // function c2_calc_avg_sample_two(){
-
-      // var average = (Math.abs(document.getElementById('c2_sample_one_two').value) + Math.abs(document.getElementById('c2_sample_two_two').value) + Math.abs(document.getElementById('c2_sample_three_two').value) + Math.abs(document.getElementById('c2_sample_four_two').value) + Math.abs(document.getElementById('c2_sample_five_two').value))/5;
-      // document.getElementById('c2_sample_two_average').value = average;
-
-      // }
-      // function c2_calc_avg_sample_three(){
-
-      // var average = (Math.abs(document.getElementById('c2_sample_one_three').value) + Math.abs(document.getElementById('c2_sample_two_three').value) + Math.abs(document.getElementById('c2_sample_three_three').value) + Math.abs(document.getElementById('c2_sample_four_three').value) + Math.abs(document.getElementById('c2_sample_five_three').value))/5;
-      // document.getElementById('c2_sample_three_average').value = average;
-
-      // }
-      // function c2_calc_avg_sample_four(){
-
-      // var average = (Math.abs(document.getElementById('c2_sample_one_four').value) + Math.abs(document.getElementById('c2_sample_two_four').value) + Math.abs(document.getElementById('c2_sample_three_four').value) + Math.abs(document.getElementById('c2_sample_four_four').value) + Math.abs(document.getElementById('c2_sample_five_four').value))/5;
-      // document.getElementById('c2_sample_four_average').value = average;
-
-      // }
-      // function c2_calc_avg_sample_five(){
-
-      // var average = (Math.abs(document.getElementById('c2_sample_one_five').value) + Math.abs(document.getElementById('c2_sample_two_five').value) + Math.abs(document.getElementById('c2_sample_three_five').value) + Math.abs(document.getElementById('c2_sample_four_five').value) + Math.abs(document.getElementById('c2_sample_five_five').value))/5;
-      // document.getElementById('c2_sample_five_average').value = average;
-
-      // }
-      // function c2_calc_avg_sample_six(){
-
-      // var average = (Math.abs(document.getElementById('c2_sample_one_six').value) + Math.abs(document.getElementById('c2_sample_two_six').value) + Math.abs(document.getElementById('c2_sample_three_six').value) + Math.abs(document.getElementById('c2_sample_four_six').value) + Math.abs(document.getElementById('c2_sample_five_six').value))/5;
-      // document.getElementById('c2_sample_six_average').value = average;
-
-      // }
-      //  function c2_calc_avg_relative(){
-
-      // var average = (Math.abs(document.getElementById('c2_relative_one').value) + Math.abs(document.getElementById('c2_relative_two').value) + Math.abs(document.getElementById('c2_relative_three').value) + Math.abs(document.getElementById('c2_relative_four').value) + Math.abs(document.getElementById('c2_relative_five').value))/5;
-      // document.getElementById('c2_relative_average').value = average;
-
-      // }
-      
+    
       <!---->
       function calc_determination(){
 
@@ -671,40 +586,74 @@
       // document.getElementById('d_six_p_lc').value = determination_six.toFixed(5);
 
       var average_det= (Math.abs(document.getElementById('d_one_p_lc').value)+ Math.abs(document.getElementById('d_two_p_lc').value)+ Math.abs(document.getElementById('d_three_p_lc').value))/3;
-      
+      // var average_det_two= (Math.abs(document.getElementById('d_four_p_lc').value)+ Math.abs(document.getElementById('d_five_p_lc').value)+ Math.abs(document.getElementById('d_six_p_lc').value))/3;
+       
       var determinations= [Math.abs(document.getElementById('d_one_p_lc').value), Math.abs(document.getElementById('d_two_p_lc').value), Math.abs(document.getElementById('d_three_p_lc').value)];
+      // var determinations_two= [Math.abs(document.getElementById('d_four_p_lc').value), Math.abs(document.getElementById('d_five_p_lc').value), Math.abs(document.getElementById('d_six_p_lc').value)];
       
       var highest_value =Math.max.apply(Math,determinations);
       var lowest_value =Math.min.apply(Math,determinations);
 
-      var variance_determinations=0; 
+      // var highest_value_two =Math.max.apply(Math,determinations_two);
+      // var lowest_value_two =Math.min.apply(Math,determinations_two);
+
+      var variance_determinations=0;
+      // var variance_determinations_two=0; 
       
+      // for(var i=0;i<determinations_two.length; i++){
+      //      variance_determinations_two += Math.pow((determinations_two [i]-average_det_two),2);       
+      // }
+
       for(var i=0;i<determinations.length; i++){
            variance_determinations += Math.pow((determinations [i]-average_det),2);       
       }
 
       var a=determinations.length;
+      // var b=determinations_two.length;
 
       var determination_sd= Math.sqrt((variance_determinations)/(a-1));
       var determination_rsd=Math.abs((determination_sd/average_det)*100);
       
+      // var determination_sd_two= Math.sqrt((variance_determinations_two)/(b-1));
+      // var determination_rsd_two=Math.abs((determination_sd_two/average_det_two)*100);
+      
       document.getElementById('det_min').value = lowest_value.toFixed(2);
       document.getElementById('det_max').value = highest_value.toFixed(2);
 
-      document.getElementById('nlt_min_tolerance_det').value = lowest_value.toFixed(2);
-      document.getElementById('nlt_max_tolerance_det').value = highest_value.toFixed(2);
+      // document.getElementById('nlt_min_tolerance_det').value = lowest_value.toFixed(2);
+      // document.getElementById('nlt_max_tolerance_det').value = highest_value.toFixed(2);
 
-      document.getElementById('ngt_min_tolerance_det').value = lowest_value.toFixed(2);
-      document.getElementById('ngt_max_tolerance_det').value = highest_value.toFixed(2);
+      // document.getElementById('ngt_min_tolerance_det').value = lowest_value.toFixed(2);
+      // document.getElementById('ngt_max_tolerance_det').value = highest_value.toFixed(2);
 
-      document.getElementById('range_min_tolerance_det').value = lowest_value.toFixed(2);
-      document.getElementById('range_max_tolerance_det').value = highest_value.toFixed(2);
+      // document.getElementById('range_min_tolerance_det').value = lowest_value.toFixed(2);
+      // document.getElementById('range_max_tolerance_det').value = highest_value.toFixed(2);
 
       document.getElementById('determination_average').value = average_det.toFixed(5);
+      // document.getElementById('range_result').value = average_det.toFixed(5);
       document.getElementById('determination_sd').value = determination_sd.toFixed(5);
       document.getElementById('determination_rsd').value = determination_rsd.toFixed(5);
       document.getElementById('results_determination_sd').value = determination_sd.toFixed(5);
       document.getElementById('results_determination_rsd').value = determination_rsd.toFixed(5);
+      
+
+      // document.getElementById('det_min_two').value = lowest_value_two.toFixed(2);
+      // document.getElementById('det_max_two').value = highest_value_two.toFixed(2);
+
+      // document.getElementById('nlt_min_tolerance_det_two').value = lowest_value_two.toFixed(2);
+      // document.getElementById('nlt_max_tolerance_det_two').value = highest_value_two.toFixed(2);
+
+      // document.getElementById('ngt_min_tolerance_det_two').value = lowest_value_two.toFixed(2);
+      // document.getElementById('ngt_max_tolerance_det_two').value = highest_value_two.toFixed(2);
+
+      // document.getElementById('range_min_tolerance_det_two').value = lowest_value_two.toFixed(2);
+      // document.getElementById('range_max_tolerance_det_two').value = highest_value_two.toFixed(2);
+
+      // document.getElementById('determination_average_two').value = average_det_two.toFixed(5);
+      // document.getElementById('determination_sd_two').value = determination_sd_two.toFixed(5);
+      // document.getElementById('determination_rsd_two').value = determination_rsd_two.toFixed(5);
+      // document.getElementById('results_determination_sd_two').value = determination_sd_two.toFixed(5);
+      // document.getElementById('results_determination_rsd_two').value = determination_rsd_two.toFixed(5);
       
 
 
@@ -712,15 +661,30 @@
       var equivalent_to = (Math.abs(document.getElementById('equivalent_to_lc').value)*average_det)/100; 
       document.getElementById('determination_equivalent_to').value = equivalent_to.toFixed(5);
 
+      // var equivalent_to_two = (Math.abs(document.getElementById('equivalent_to_lc_two').value)*average_det_two)/100; 
+      // document.getElementById('determination_equivalent_to_two').value = equivalent_to_two.toFixed(5);
+
       var min_tolerance=0;
       var max_tolerance=0;
       var new_min_tolerance_det=0;
       var new_max_tolerance_det=0;
 
+      // var min_tolerance_two=0;
+      // var max_tolerance_two=0;
+      // var new_min_tolerance_det_two=0;
+      // var new_max_tolerance_det_two=0;
+
       var comment_conclusion= new String();
       var comment_a= new String();
       var comment_b= new String();
       var comment_c= new String();
+      
+      // var comment_conclusion_two= new String();
+      // var comment_a_two= new String();
+      // var comment_b_two= new String();
+      // var comment_c_two= new String();
+      
+      //var comment_d= new string();
 
       min_tolerance=[document.getElementById('min_tolerance').value];
       max_tolerance=[document.getElementById('max_tolerance').value];
@@ -728,17 +692,26 @@
       new_min_tolerance_det=[document.getElementById('new_min_tolerance_det').value];
       new_max_tolerance_det=[document.getElementById('new_max_tolerance_det').value];
       
+
+      min_tolerance_two=[document.getElementById('min_tolerance_two').value];
+      max_tolerance_two=[document.getElementById('max_tolerance_two').value];
+
+      new_min_tolerance_det_two=[document.getElementById('new_min_tolerance_det_two').value];
+      new_max_tolerance_det_two=[document.getElementById('new_max_tolerance_det_two').value];
+      
       
 
       if(min_tolerance==0 || min_tolerance==""){
             comment_a= "";
       }else if(min_tolerance < lowest_value || min_tolerance > highest_value || min_tolerance==0 || min_tolerance==""){
             comment_a= "Not Ok";
-            comment_conclusion="Test Does Not Comply(Failed)";
+            comment_conclusion="Does Not Comply";
+            // comment_d="The sample supplied Does Not comply to";
              document.getElementById('test_conclusion').value =comment_conclusion;
       }else{
             comment_a="OK";
-            comment_conclusion="Test Complies (Passed)";
+            comment_conclusion="Complies";
+            // comment_d="The sample supplied Complies to";
             document.getElementById('test_conclusion').value =comment_conclusion;
       }
       
@@ -746,11 +719,13 @@
             comment_b= "";
       }else if(max_tolerance < lowest_value || max_tolerance > highest_value){
             comment_b= "Not Ok";
-            comment_conclusion="Test Does Not Comply(Failed)";
+            comment_conclusion="Does Not Comply";
+             // comment_d="The sample supplied Does Not comply to";
             document.getElementById('test_conclusion').value =comment_conclusion;
       }else{
             comment_b="OK";
-            comment_conclusion="Test Complies (Passed)";
+            comment_conclusion="Complies";
+            // comment_d="The sample supplied Complies to";
             document.getElementById('test_conclusion').value =comment_conclusion;
       }
 
@@ -758,11 +733,13 @@
             comment_c= "";
       }else if(new_min_tolerance_det < lowest_value || new_min_tolerance_det > highest_value){
             comment_c= "Not Ok";
-            comment_conclusion="Test Does Not Comply(Failed)";
+            comment_conclusion="Does Not Comply";
+            comment_d="The sample supplied Does Not comply to";
             document.getElementById('test_conclusion').value =comment_conclusion;
       }else{
             comment_c="OK";
-            comment_conclusion="Test Complies (Passed)";
+            comment_conclusion="Complies";
+            comment_d="The sample supplied Complies to";
             document.getElementById('test_conclusion').value =comment_conclusion;
       }
             document.getElementById('min_tolerance_comment').value =comment_c;
@@ -770,22 +747,72 @@
             comment_c= "";
       }else if(new_max_tolerance_det < lowest_value || new_max_tolerance_det > highest_value){
             comment_c= "Not Ok";
-            comment_conclusion="Test Does Not Comply(Failed)";
+            comment_d="The sample supplied Does Not comply to";
+            comment_conclusion="Does Not Comply";
             document.getElementById('test_conclusion').value =comment_conclusion;
       }else{
             comment_c="OK";
-            comment_conclusion="Test Complies (Passed)";
+            comment_conclusion="Complies";
+            comment_d="The sample supplied Complies to";
             document.getElementById('test_conclusion').value =comment_conclusion;
       }     
             document.getElementById('min_tolerance_comment').value =comment_a;
             document.getElementById('max_tolerance_comment').value =comment_b;
             document.getElementById('range_tolerance_comment').value =comment_c;
+            document.getElementById('conclusion').value =comment_d;
+
+      
+      // if(max_tolerance_two==0 || max_tolerance_two==""){
+      //       comment_b_two= "";
+      // }else if(max_tolerance_two < lowest_value_two || max_tolerance_two > highest_value_two){
+      //       comment_b_two= "Not Ok";
+      //       comment_conclusion_two="Does Not Comply";
+      //        // comment_d="The sample supplied Does Not comply to";
+      //       document.getElementById('test_conclusion_two').value =comment_conclusion_two;
+      // }else{
+      //       comment_b_two="OK";
+      //       comment_conclusion_two="Complies";
+      //       // comment_d="The sample supplied Complies to";
+      //       document.getElementById('test_conclusion_two').value =comment_conclusion_two;
+      // }
+
+      // if(new_min_tolerance_det_two==0 || new_min_tolerance_det_two==""){
+      //       comment_c_two= "";
+      // }else if(new_min_tolerance_det_two < lowest_value_two || new_min_tolerance_det_two > highest_value_two){
+      //       comment_c_two= "Not Ok";
+      //       comment_conclusion_two="Does Not Comply";
+      //       comment_d_two="The sample supplied Does Not comply to";
+      //       document.getElementById('test_conclusion_two').value =comment_conclusion_two;
+      // }else{
+      //       comment_c_two="OK";
+      //       comment_conclusion_two="Complies";
+      //       comment_d_two="The sample supplied Complies to";
+      //       document.getElementById('test_conclusion_two').value =comment_conclusion_two;
+      // }
+      //       document.getElementById('min_tolerance_comment_two').value =comment_c_two;
+      // if(new_max_tolerance_det_two==0 || new_max_tolerance_det_two==""){
+      //       comment_c_two= "";
+      // }else if(new_max_tolerance_det_two < lowest_value_two || new_max_tolerance_det_two > highest_value_two){
+      //       comment_c_two= "Not Ok";
+      //       comment_d_two="The sample supplied Does Not comply to";
+      //       comment_conclusion_two="Does Not Comply";
+      //       document.getElementById('test_conclusion_two').value =comment_conclusion_two;
+      // }else{
+      //       comment_c_two="OK";
+      //       comment_conclusion_two="Complies";
+      //       comment_d_two="The sample supplied Complies to";
+      //       document.getElementById('test_conclusion_two').value =comment_conclusion_two;
+      // }     
+            // document.getElementById('min_tolerance_comment_two').value =comment_a_two;
+            // document.getElementById('max_tolerance_comment_two').value =comment_b_two;
+            // document.getElementById('range_tolerance_comment_two').value =comment_c_two;
+            // document.getElementById('conclusion_two').value =comment_d_two;
 
       }
 
       function calc_d_factor(){
-            var dilution_factor= (Math.abs(document.getElementById('a').value) * Math.abs(document.getElementById('b').value))/(Math.abs(document.getElementById('factor').value));
-            document.getElementById('d_factor').value =dilution_factor;
+            var dilution_factor= (Math.abs(document.getElementById('value_a').value) * Math.abs(document.getElementById('value_b').value))/(Math.abs(document.getElementById('value_c').value));
+            document.getElementById('value_d').value =dilution_factor;
       }
 
       function calc_c2_determination(){
@@ -824,7 +851,7 @@
 
       }
 
-
+     
 
 $(document).ready(function(){
       $('.std').keyup(function() {
@@ -933,6 +960,7 @@ $(document).ready(function(){
             $('.internal_std_four_average').val(average_rounded);
 
       });  
+
       $('.ratio_std_one').keyup(function() {
          
       var sum = 0;
@@ -1017,6 +1045,7 @@ $(document).ready(function(){
             $('.ratio_std_four_average').val(average_rounded);
 
       }); 
+
       $('.sample_one').keyup(function() {
          
       var sum = 0;
@@ -1035,9 +1064,11 @@ $(document).ready(function(){
           average_rounded = average.toFixed(5);
       });
 
-            $('.sample_one_average').val(average_rounded);
+            $('.sample_one_average').val(average_rounded); 
+
 
       });
+
       $('.sample_two').keyup(function() {
          
       var sum = 0;
@@ -1060,6 +1091,7 @@ $(document).ready(function(){
              $("#d_two_pkt").val(average_rounded); 
 
       });
+      
       $('.sample_three').keyup(function() {
          
       var sum = 0;
@@ -1081,4 +1113,234 @@ $(document).ready(function(){
             $('.sample_three_average').val(average_rounded);
             $("#d_three_pkt").val(average_rounded); 
       });  
+
+      $('.sample_four').keyup(function() {
+         
+      var sum = 0;
+      var sum1 = 0;
+      var average = 0;
+      var average_rounded = 0;
+
+      boxes = $(".sample_four").filter(function() {
+                return (this.value.length);
+            }).length;
+
+      $('.sample_four').each(function() {
+          sum += Number($(this).val());
+          sum1 = sum.toFixed(5);
+          average = sum1 / boxes;
+          average_rounded = average.toFixed(5);
+      });
+
+            $('.sample_four_average').val(average_rounded);
+            $("#d_four_pkt").val(average_rounded); 
+      });  
+
+      $('.sample_five').keyup(function() {
+         
+      var sum = 0;
+      var sum1 = 0;
+      var average = 0;
+      var average_rounded = 0;
+
+      boxes = $(".sample_five").filter(function() {
+                return (this.value.length);
+            }).length;
+
+      $('.sample_five').each(function() {
+          sum += Number($(this).val());
+          sum1 = sum.toFixed(5);
+          average = sum1 / boxes;
+          average_rounded = average.toFixed(5);
+      });
+
+            $('.sample_five_average').val(average_rounded);
+            $("#d_five_pkt").val(average_rounded); 
+      }); 
+
+      $('.sample_six').keyup(function() {
+         
+      var sum = 0;
+      var sum1 = 0;
+      var average = 0;
+      var average_rounded = 0;
+
+      boxes = $(".sample_six").filter(function() {
+                return (this.value.length);
+            }).length;
+
+      $('.sample_six').each(function() {
+          sum += Number($(this).val());
+          sum1 = sum.toFixed(5);
+          average = sum1 / boxes;
+          average_rounded = average.toFixed(5);
+      });
+
+            $('.sample_six_average').val(average_rounded);
+            $("#d_six_pkt").val(average_rounded); 
+      });   
+      $('.std_two').keyup(function() {
+         
+      var sum = 0;
+      var sum1 = 0;
+      var average = 0;
+      var average_rounded = 0;
+
+      boxes = $(".std_two").filter(function() {
+                return (this.value.length);
+            }).length;
+
+      $('.std_two').each(function() {
+          sum += Number($(this).val());
+          sum1 = sum.toFixed(5);
+          average = sum1 / boxes;
+          average_rounded = average.toFixed(5);
+      });
+
+            $('.std_two_average').val(average_rounded);
+
+      });
+
+      $('.standard_weight').keyup(function() {
+         
+      var difference = 0;
+      var difference_rounded = 0;
+      var a = $("#sc_component").val();
+      var b = $("#c_component").val();
+
+
+      difference= (a-b);
+      difference_rounded = difference.toFixed(5);
+
+      $('').val(difference_rounded);
+
+
+      }); 
+
+      $('.standard_difference').keyup(function() {
+         
+      var difference = 0;
+      var difference_rounded = 0;
+      var a = $("#weight_standard_container_one").val();
+      var b = $("#container_one").val();
+
+
+      difference= (a-b);
+      difference_rounded = difference.toFixed(5);
+
+      $('#weight_standard_one').val(difference_rounded);
+
+      }); 
+      
+      $('.standard_calculation_compo').keyup(function() {
+         
+      var difference = 0;
+      var difference_rounded = 0;
+      var a = $("#weight_standard_container_of_std_one").val();
+      var b = $("#weight_container_of_std_one").val();
+
+
+      difference= (a-b);
+      difference_rounded = difference.toFixed(5);
+
+      $('.weight_of_standard_one').val(difference_rounded);
+      var text_wstd = $(".weight_of_standard_one").val();
+
+        $("#d_one_wstd").val(text_wstd);$("#d_two_wstd").val(text_wstd);$("#d_three_wstd").val(text_wstd);   
+
+      });
+      
+    $('.standard_dilution').keyup(function() {
+    
+    var result = 0;
+
+    var e= $("#value_e").val();
+    var f= $("#value_f").val();
+    var g= $("#value_g").val();
+
+    result=(e*f)/g;
+    result_rounded = result.toFixed(5);
+
+    $('.value_h').val(result_rounded);
+    
+
+    });
+
+    $('.standard_dilution_base').keyup(function() {
+    
+    var result = 0;
+    var wstd = 0;
+    var factor = 0;
+    var result_two = 0;
+    var higher = $("#higher_factor").val();
+    var lower = $("#lower_factor").val();
+
+
+    $('.higher').val(higher);
+    $('.lower').val(lower);
+
+    var e= $("#value_r").val();
+    var f= $("#value_t").val();
+    var g= $("#value_y").val();
+
+    result=(e*f)/g;
+    result_two=(higher/lower);
+    result_two_rounded=result_two.toFixed(5);
+    result_rounded = result.toFixed(5);
+
+    $('.value_u').val(result_rounded);
+    wstd = (result*result_two);
+    wstd_rounded= wstd.toFixed(5);
+    $('.wstd_converted').val(wstd_rounded);
+    $('#d_one_wstd').val(wstd_rounded);$('#d_two_wstd').val(wstd_rounded);$('#d_three_wstd').val(wstd_rounded);
+    
+
+    });
+
+    $('.standard_calculation').keyup(function() {
+    
+    var result = 0;
+
+    var e= $("#value_m").val();
+    var f= $("#value_n").val();
+    var g= $("#value_o").val();
+
+    result=(e*f)/g;
+    result_rounded = result.toFixed(5);
+
+    $('.value_p').val(result_rounded);
+    
+
+    });
+    
+    $('.reagents_dilution').keyup(function() {
+    
+    var result = 0;
+
+    var i= $("#value_i").val();
+    var j= $("#value_j").val();
+    var k= $("#value_k").val();
+
+    result=(i*j)/k;
+    result_rounded = result.toFixed(5);
+
+    $('.value_l').val(result_rounded);
+    
+
+    });
+
+    $('.relative_retention_time').keyup(function() {
+    
+    var result = 0;
+
+    var a= $("#rpk").val();
+    var b= $("#rrp").val();
+
+     result=(a/b)*100;
+     result_rounded = result.toFixed(5);
+
+    $('.relative_retention').val(result_rounded);
+
+    });
+ 
 });

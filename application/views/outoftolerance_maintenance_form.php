@@ -10,13 +10,6 @@
   <link href="<?php echo base_url().'style/jquery-ui.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/demo_table.css';?>" rel="stylesheet" type="text/css"/>
   
-  <!-- bootstrap reference links  
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.css.map';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.min.css';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap.css.map'; ?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.css';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap.min.css';?>" rel="stylesheet" type="text/css"/>  
-   -->
   <!-- bootstrap reference library -->
   <link href="<?php echo base_url().'bootstrap/css/bootstrap.css'; ?>" rel="stylesheet" type="text/css"/>
 
@@ -26,6 +19,7 @@
   
   <!-- bootstrap reference library -->
   <script src="<?php echo base_url().'js/bootstrap.min.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/Jquery-datatables/jquery.dataTables.js';?>"></script>
   <script>
    $(document).ready(function() {
@@ -40,7 +34,6 @@
  <body>
   <?php
    $user=$this->session->userdata;
-   $test_request_id=$user['logged_in']['test_request_id'];
    $user_type_id=$user['logged_in']['user_type'];
    $user_id=$user['logged_in']['id'];
    $department_id=$user['logged_in']['department_id'];
@@ -76,7 +69,7 @@
               ?> <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="<?php echo base_url().'account_settings/index/'.$test_request_id.'/'.$user_type_id.'/'.$user_id.'/'.$department_id;?>"><i class="icon-wrench"></i> Settings <img src="<?php echo base_url().'images/icons/settings2.png';?>" height="20px" width="20px"></a></li>
+              <li><a href="<?php echo base_url().'account_settings/index/'.$user_type_id.'/'.$user_id.'/'.$department_id;?>"><i class="icon-wrench"></i> Settings <img src="<?php echo base_url().'images/icons/settings2.png';?>" height="20px" width="20px"></a></li>
               <li class="divider"></li>
               <li><a href="<?php echo base_url().'home/logout'?>"><i class="icon-share"></i>Logout</b> <img src="<?php echo base_url().'images/icons/door.png';?>" height="25px" width="25px"></a></li>
             </ul>
@@ -191,7 +184,7 @@
     </div>
   <div id="form_wrapper_lists">
     <div id="analysis_request" class="analysis_request" >
-    <table class="table_form"  bgcolor="#c4c4ff" width="950px" height="40px" border="0" cellpadding="4px" align="center">
+    <table class="table_form"  bgcolor="#c4c4ff" width="80%" height="40px" border="0" cellpadding="4px" align="center">
        <input type="hidden" name="id" value="<?php echo $query['id'];?>">
 	<tr>
 	    <td colspan="5" style="text-align:right;background-color:#ffffff;text-color:#00ff00;"><a href="<?php echo base_url().'equipment_maintenance_records/Get';?>"><img src="<?php echo base_url().'images/icons/back.png'?>" height="20px" wieght="20px"><b>Back</b></a></td>
@@ -211,18 +204,18 @@
 	    <td height="15px" style="text-align: center;border-left: dashed 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;background-color:#ffff40;"><?php echo $query['model'];?></td>
   </tr>
 	</table>
-        <table class="table_form"  bgcolor="#c4c4ff" width="950px" height="20px" border="0" cellpadding="4px" align="center">
-        <tr align="right">
-	   
-	    <td colspan="2" height="20px" width="140px" style="text-align: center;background-color:#ffffff;border-left: solid 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><a href="javascript:slide('maintenace_history');"><b>Maintenance History</b></a>&nbsp;<a href="javascript:slide('calibration_history');"><b>|&nbsp;Calibration History</b></a></td>
-	    <td colspan="2" height='20px' width='280px'
-	    <?php
-	    if($user['logged_in']['user_type'] ==6 && $user['logged_in']['department_id'] ==0 ){
-	       echo"style='display:none;'";
-	    }else{
-	       echo"style='display:block;text-align: center;background-color:#ffffff;border-left: solid 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;'";
-	    }
-	    ?>><a href="javascript:slide('performance_form');"><b>Schedule Maintenance&nbsp;</b></a><a href="javascript:slide('calibration_form');"><b>|&nbsp;Schedule Calibration</b></a></td>
+  <table class="table_form"  bgcolor="#c4c4ff" width="80%" height="20px" border="0" cellpadding="4px" align="center">
+    <tr>
+    <td colspan="2" style="text-align: center;background-color:#ffffff;border-left: solid 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><a href="javascript:slide('maintenace_history');">Maintenance History</a>&nbsp;<a href="javascript:slide('calibration_history');">|&nbsp;Calibration History</a></td>
+    <td colspan="2" align="right"
+    <?php
+    if($user['logged_in']['user_type'] ==6 && $user['logged_in']['department_id'] ==0 ){
+       echo"style='display:none;'";
+    }else{
+       echo"style='display:block;text-align: center;background-color:#ffffff;border-left: solid 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;'";
+    }
+    ?>><a href="javascript:slide('performance_form');">Schedule Maintenance&nbsp;</a>
+       <a href="javascript:slide('calibration_form');">|&nbsp;Schedule Calibration</a></td>
 	</tr>
 	</table>
       

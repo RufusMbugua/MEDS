@@ -10,13 +10,6 @@
   <link href="<?php echo base_url().'style/jquery-ui.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/demo_table.css';?>" rel="stylesheet" type="text/css"/>
   
-  <!-- bootstrap reference links  
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.css.map';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.min.css';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap.css.map'; ?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.css';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap.min.css';?>" rel="stylesheet" type="text/css"/>  
-   -->
   <!-- bootstrap reference library -->
   <link href="<?php echo base_url().'bootstrap/css/bootstrap.css'; ?>" rel="stylesheet" type="text/css"/>
 
@@ -40,7 +33,6 @@
  <body>
 <?php
    $user=$this->session->userdata;
-   $test_request_id=$user['logged_in']['test_request_id'];
    $user_type_id=$user['logged_in']['user_type'];
    $user_id=$user['logged_in']['id'];
    $department_id=$user['logged_in']['department_id'];
@@ -89,7 +81,7 @@
               ?> <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="<?php echo base_url().'account_settings/index/'.$test_request_id.'/'.$user_type_id.'/'.$user_id.'/'.$department_id;?>"><i class="icon-wrench"></i> Settings <img src="<?php echo base_url().'images/icons/settings2.png';?>" height="20px" width="20px"></a></li>
+              <li><a href="<?php echo base_url().'account_settings/index/'.$user_type_id.'/'.$user_id.'/'.$department_id;?>"><i class="icon-wrench"></i> Settings <img src="<?php echo base_url().'images/icons/settings2.png';?>" height="20px" width="20px"></a></li>
               <li class="divider"></li>
               <li><a href="<?php echo base_url().'home/logout'?>"><i class="icon-share"></i>Logout</b> <img src="<?php echo base_url().'images/icons/door.png';?>" height="25px" width="25px"></a></li>
             </ul>
@@ -247,38 +239,38 @@
 	</thead>
 	<tbody>
 		<tr>
-                    <?php
-                    $i = 1;
-                    foreach ($query as $row): 
+      <?php
+      $i = 1;
+      foreach ($query as $row): 
 
-                            if ($i ==0) {
-                                     echo "<tr>";
-                            }
-                    ?>
-                            <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $i;?>.</td>
-                            <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->ht_date;?></td>
-                            <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->ht_location;?></td>
-                            <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->min_humidity;?></td>
-                            <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->min_humidity_corrected;?></td>
-                            <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->max_humidity;?></td>
-                            <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->max_humidity_corrected;?></td>
-                            <td          
-                              <?php if($row->min_humidity_corrected<"50"){
-                                  echo "style='text-align: center;background-color:#8395db;border-bottom: solid 1px #c0c0c0;color:#ffffff;'>";
-                                  echo "Humidity too low!";
-                                }elseif($row->max_humidity_corrected>"70"){
-                                  echo "style='text-align: center;background-color:#ffabab;border-bottom: solid 1px #c0c0c0;'>";
-                                  echo "Humidity too high";
-                                }else{
-                                  echo "style='text-align: center;background-color:#b3ffab;border-bottom: solid 1px #c0c0c0;'>";
-                                  echo "Good working condition";
-                                }?>
-                              </td>
-                            <td><a href=" <?php echo base_url().'temperature_humidity_details/Get/'.$row->ht_id;?>">Edit</a>
-                              <a href=" <?php echo base_url().'temperature_humidity_log/Logs_Instrument/'.$row->ht_id;?>">Log</a></td>
-                    <?php $i++; ?>
+              if ($i ==0) {
+                       echo "<tr>";
+              }
+      ?>
+              <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $i;?>.</td>
+              <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->ht_date;?></td>
+              <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->ht_location;?></td>
+              <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->min_humidity;?></td>
+              <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->min_humidity_corrected;?></td>
+              <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->max_humidity;?></td>
+              <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->max_humidity_corrected;?></td>
+              <td          
+                <?php if($row->min_humidity_corrected<"60"){
+                    echo "style='text-align: center;background-color:#8395db;border-bottom: solid 1px #c0c0c0;color:#ffffff;'>";
+                    echo "Humidity too low!";
+                  }elseif($row->max_humidity_corrected>"70"){
+                    echo "style='text-align: center;background-color:#ffabab;border-bottom: solid 1px #c0c0c0;'>";
+                    echo "Humidity too high";
+                  }else{
+                    echo "style='text-align: center;background-color:#b3ffab;border-bottom: solid 1px #c0c0c0;'>";
+                    echo "Good working condition";
+                  }?>
+                </td>
+              <td><a href=" <?php echo base_url().'temperature_humidity_details/Get/'.$row->ht_id;?>">Edit</a>
+                <a href=" <?php echo base_url().'temperature_humidity_log/Logs_Instrument/'.$row->ht_id;?>">Log</a></td>
+      <?php $i++; ?>
 		</tr>
-                    <?php endforeach; ?>
+        <?php endforeach; ?>
 	</tbody>
 	</table>
 	</div>

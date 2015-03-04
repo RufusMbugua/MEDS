@@ -13,19 +13,19 @@ Class New_Usermodel extends CI_Model{
 
     if($user_type==3){
     $role='MEDS Client';
-    }if($user_type==5 && $additional_role==2){
+    }if($user_type==5 ){
     $role='Laboratory Analyst';
     $department_id=2;
-    }if($user_type==5 && $additional_role==3){
+    }if($user_type==5){
     $role='Laboratory Analyst';
     $department_id=3;
-    }if($user_type==5 && $additional_role==4){
+    }if($user_type==5){
     $role='Laboratory Analyst';
     $department_id=4;
     }if($user_type==6){
     $role='Laboratory Supervisor';
     $department_id=0;
-    }if($user_type==7 && $additional_role==1){
+    }if($user_type==7){
     $role='Laboratory Assistant ';
     $department_id=1;
     }if($user_type==8){

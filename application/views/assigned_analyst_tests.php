@@ -40,15 +40,7 @@
             ?>
             >Quantity Remaining</th>
             <th style="text-align:center;border-right: dotted 1px #ddddff;">Date Requested</th>
-            <th
-            <?php 
-              if($user['logged_in']['user_type']==6){
-                echo"style='dsiplay:block;text-align:center;border-right: dotted 1px #ddddff;'";
-              }else{
-                echo"style='display:none;'";
-              }
-            ?>
-            >Qoute</th>
+            
             <th
             <?php 
               if($user['logged_in']['user_type']==6||$user['logged_in']['user_type']==5){
@@ -138,15 +130,7 @@
         ?>
        ><?php echo $row->quantity_remaining;?></td>
        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo substr($row->date_time,0,-8);?></td>
-       <td
-        <?php 
-          if($user['logged_in']['user_type']==6){
-            echo"style='dsiplay:block;text-align:center;border-bottom: solid 1px #c0c0c0;'";
-          }else{
-            echo"style='display:none;'";
-          }
-        ?>
-       ><a href="<?php echo base_url().'finance/index/'.$row->id;?>">Quote</a></td>
+      
        <td
         <?php 
           if($user['logged_in']['user_type']==6||$user['logged_in']['user_type']==5){
@@ -155,7 +139,7 @@
             echo"style='display:none;'";
           }
         ?>
-       ><a href="<?php echo base_url().'print_label/generate_label/'.$row->id.'/'.$test_request_id;?>">Print</a></td>
+       ><a href="<?php echo base_url().'print_label/generate_label/'.$row->id.'/'.$row->test_request_id;?>">Print</a></td>
        <td
        <?php
         if($user['logged_in']['user_type']==6){
@@ -168,7 +152,7 @@
               <?php
               if($row->quantity_remaining=="0"){
                   echo"style='display:block;text-align: center;'>";
-              ?><a href="<?php echo base_url().'worksheet/'.$row->id;?>">Worksheet</a>
+              ?><a href="<?php echo base_url().'worksheets/worksheetlist'.$row->id.'/'.$row->test_request_id;?>">Worksheet</a>
           </div>
               <?php
               }elseif($row->quantity_remaining!="0"){

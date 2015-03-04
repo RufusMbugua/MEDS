@@ -27,7 +27,6 @@ function Update()
 }
 function Submit()
 {
-    $id = $this->input->post('my_id');
     /*
     echo $id;
      die();
@@ -35,7 +34,7 @@ function Submit()
     $this->load->model('update_column_model');        
 	
 	if($this->input->post('submit')){
-		$this->update_column_model->Update($id);                
+		$this->update_column_model->Update();                
 	}
 	//redirect('home');
 }

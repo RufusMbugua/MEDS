@@ -13,8 +13,16 @@ class Test_Dissolution_Delayed_Release_Model extends CI_Model{
 		$status =1;
 		$test_request=$this->input->post('test_request');
 		$assignment=$this->input->post('assignment');
-		$test_type='Dissolution Test: Delayed Release Capsules';
+		$test_name='Dissolution';
 		$analyst= $this->input->post('analyst');
+		$test_type = '34';
+
+		$data=$this->db->select_max('id')->get('diss_delayed_release')->result();
+        $test_id=$data[0]->id;
+        $test_id++;
+
+		$results = 'Range from '.$this->input->post('range_min').' to '.$this->input->post('range_max');
+
 		
 		$data =array(	
 			'dissolution_type'=>$this->input->post('dissolution_type'),		
@@ -34,7 +42,7 @@ class Test_Dissolution_Delayed_Release_Model extends CI_Model{
 			'actual_temperature'=>$this->input->post('actual_temperature'),
 			'temperature_comment'=>$this->input->post('temperature_comment'),
 			
-			'standard_preparation'=>$this->input->post('standard_preparation'),
+			// 'standard_preparation'=>$this->input->post('standard_preparation'),
 			'standard_weight'=>$this->input->post('standard_weight'),
 			'standard_description'=>$this->input->post('standard_description'),
 			'potency'=>$this->input->post('potency'),
@@ -192,29 +200,25 @@ class Test_Dissolution_Delayed_Release_Model extends CI_Model{
 			'chromatograms_attached_comment'=>$this->input->post('chromatograms_attached_comment'),
 			'chromatograms_attached'=>$this->input->post('chromatograms_attached'),
 			'sample_injection_sequence_comment'=>$this->input->post('sample_injection_sequence_comment'),
-			'choice'=>$this->input->post('choice'),
-			'supervisor'=>$this->input->post('supervisor'),
-			'date'=>$this->input->post('date'),
+			'choice'=>$this->input->post('choice'),			
 			'analyst'=>$this->input->post('analyst'),
-			'date_done'=>$this->input->post('date_done'),
-			'further_comments'=>$this->input->post('further_comments'),	
-
 			);
-		$this->db->insert('diss_delayed_release', $data);
+		$this->db->insert('diss_delayed_release', $data);		
 
-		$coa_data = array(
-			'coa_method_used'=>$coa_method_used,
-			'coa_results'=>$coa_results,
-			'coa_specification'=>$coa_specification,
-			'test_request_id'=>$test_request,
-			'assignment_id'=>$assignment,
-			'test_type'=>$test_type,
-			'analyst'=>$analyst,
+		$result_data = array(			
+			'test_id'=>$test_id,
+			'test_name'=>$test_name,
+			'remarks'=>$this->input->post('choice'),
+			'method'=>$this->input->post('method'),
+			'results'=>$results,
 			);
-		$this->db->insert('coa', $coa_data);
+		
+		$this->db->update('test_results', $result_data, array('test_request_id'=>$test_request,'test_type'=>$test_type));
+		
 
 		$determination_data = array(
 			'test_request'=>$this->input->post('test_request'),
+			'delayed_release_id'=>$test_type,
 			
 			'df_1'=>$this->input->post('df_1'),
 			'df_2'=>$this->input->post('df_2'),
@@ -277,21 +281,42 @@ class Test_Dissolution_Delayed_Release_Model extends CI_Model{
 	function save_monograph(){
 		$test_request=$this->input->post('test_request');
 		$assignment=$this->input->post('assignment');
-		$test_name='Dissolution Test: Delayed Release Capsules';
 		$analyst= $this->input->post('analyst');
-		$diss_delayed_release_id= 1;
+		$test_type ='34';
+
+		$monograph_specifications = $this->input->post('specification');
+		$minimum = $this->input->post('min_tolerance');
+		$maximum = $this->input->post('max_tolerance');
+		$range_minimum = $this->input->post('tolerance_range_from');
+		$range_maximum = $this->input->post('tolerance_range_to');
+		if ($minimum!= '') {
+			$monograph_specifications_final = $minimum.' '. $monograph_specifications;
+		}else if ($minimum != '') {
+			$monograph_specifications_final = $maximum.' '. $monograph_specifications;
+		}else{
+			$monograph_specifications_final = $range_minimum.' to '.$range_maximum .' '. $monograph_specifications;
+
+		}
+
+		$data=$this->db->select_max('id')->get('diss_delayed_release')->result();
+        $test_id=$data[0]->id;
+        $test_id++;
 
 		$data = array(
-			'monograph' => $this->input->post('delayed_release_monograph'),
 			'test_request_id' => $this->input->post('test_request'),
-			'assignment_id' => $this->input->post('assignment'),
-			'test_name' => $test_name,
-			'analyst' => $this->input->post('analyst'),
-			'diss_delayed_release_id' => 1,
-
+			'test_id' => $test_id,
+			'test_type' => $test_type,
+			'monograph_specifications' => $monograph_specifications_final,
 
 			);
-		$this->db->insert('diss_delayed_release_monograph', $data);
+		$this->db->insert('monograph_specifications', $data);
+		$data2 = array(
+			'test_request_id' => $this->input->post('test_request'),
+			'test_type' => $test_type,
+			'specifications' => $monograph_specifications_final,
+
+			);
+		$this->db->insert('test_results', $data2);
 		redirect('test/index/'.$assignment.'/'.$test_request);	
 
 	}

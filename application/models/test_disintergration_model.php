@@ -20,15 +20,18 @@ class Test_Disintergration_Model extends CI_Model{
 		$medium_temperature=$this->input->post('medium_temperature');
 		$actual_medium_temperature=$this->input->post('actual_medium_temperature');
 		$medium_temperature_comment=$this->input->post('medium_temperature_comment');
-		$coa_method_used=$this->input->post('coa_method_used');
-		$coa_results=$this->input->post('coa_results');
-		$coa_specification=$this->input->post('coa_specification');
 		$status =1;
 		$test_request=$this->input->post('test_request');
 		$assignment=$this->input->post('assignment');
-		$status =1;
-		$test_type='Disintegration';
+		$test_name='Disintegration';
 		$analyst= $this->input->post('analyst');
+		$test_type = '3';
+
+		$data=$this->db->select_max('id')->get('identification')->result();
+        $test_id=$data[0]->id;
+        $test_id++;
+
+		$results = $actual_medium .' and ' .$actual_medium_temperature ;
 		
 		$data =array(
 			'equipment_make'=>$equipment_make,
@@ -44,64 +47,63 @@ class Test_Disintergration_Model extends CI_Model{
 			'medium_comment'=>$medium_comment,
 			'medium_temperature'=>$medium_temperature,
 			'actual_medium_temperature'=>$actual_medium_temperature,
-			'medium_temperature_comment'=>$medium_temperature_comment, 
-			'coa_method_used'=>$coa_method_used,
-			'coa_results'=>$coa_results,
-			'coa_specification'=>$coa_specification,
+			'medium_temperature_comment'=>$medium_temperature_comment,
 			'test_request'=>$test_request,
 			'assignment'=>$assignment,
 			'status'=>$status,
 			'choice'=>$this->input->post('choice'),
 			'supervisor'=>$this->input->post('supervisor'),
 			'date'=>$this->input->post('date'),
+			'analyst'=>$this->input->post('done_by'),
+			'date_done'=>$this->input->post('date'),
 			'further_comments'=>$this->input->post('further_comments'),			
 
 			);
 		$this->db->insert('disintegration', $data);
-		
-
-
-		$coa_data = array(
-			'coa_method_used'=>$coa_method_used,
-			'coa_results'=>$coa_results,
-			'coa_specification'=>$coa_specification,
-			'test_request_id'=>$test_request,
-			'assignment_id'=>$assignment,
-			'test_type'=>$test_type,
-			'analyst'=>$analyst,
+				
+		$result_data = array(
+			'test_id'=>$test_id,
+			'test_name'=>$test_name,
+			'remarks'=>$this->input->post('choice'),
+			'method'=>$this->input->post('method'),
+			'results'=>$results,
 			);
-		$this->db->insert('coa', $coa_data);
+		$this->db->update('test_results', $result_data, array('test_request_id'=>$test_request,'test_type'=>$test_type));
+
 
 		redirect('test/index/'.$assignment.'/'.$test_request);	
 	}
 	function save_monograph(){
 		$test_request=$this->input->post('test_request');
-		
-		$result_disintegration_id = $this->db->select_max('disintegration.id')->get_where('disintegration', array('disintegration.test_request' => $test_request))->result();
-	    //$disintegration_id = $result_disintegration_id[0];
+		$disintegration_id =1;	
 
-	    foreach ($result_disintegration_id as $disintegration_id) {
-	    	$disintegration_id_count=$disintegration_id+1;
-	    }
-	    //$disintegration_id_count =$disintegration_id ;
-	    print_r($disintegration_id_count) ;
-	    die;
+		$data=$this->db->select_max('id')->get('disintegration')->result();
+        $test_id=$data[0]->id;
+        $test_id++;
 
 		$assignment=$this->input->post('assignment');
 		$test_name='Disintegration';
+		$test_type = '3';
 		$analyst= $this->input->post('analyst');
 		$disintegration_id= 1;
 
 		$data = array(
-			'monograph' => $this->input->post('vs_monograph'),
 			'test_request_id' => $this->input->post('test_request'),
-			'assignment_id' => $this->input->post('assignment'),
+			'test_id' => $test_id,
+			'test_type' => $test_type,
 			'test_name' => $test_name,
-			'analyst' => $this->input->post('analyst'),
-			'disintegration_id' => $disintegration_id,
+			'monograph_specifications' => $this->input->post('specification'),
 
 			);
-		$this->db->insert('disintegration_monograph', $data);
+		$this->db->insert('monograph_specifications', $data);
+
+		$data2 = array(
+			'test_request_id' => $this->input->post('test_request'),
+			'test_type' => $test_type,
+			'specifications' => $this->input->post('specification'),
+
+			);
+		$this->db->insert('test_results', $data2);
 		redirect('test/index/'.$assignment.'/'.$test_request);	
 
 	}

@@ -14,6 +14,7 @@ class Equipment_Maintenancemodel extends CI_Model{
   $ser=$this->input->post('serial_number');
   $mo=$this->input->post('model');
   $user=$this->input->post('user');
+  $equipment_type=$this->input->post('equipment_type');
   
   
   //Equipment Insertion
@@ -24,6 +25,7 @@ class Equipment_Maintenancemodel extends CI_Model{
    'manufacturer'=>$manu,
    'serial_number'=>$ser,
    'model'=>$mo,
+   'equipment_type'=>$equipment_type,
    'who'=>$user
    
   );

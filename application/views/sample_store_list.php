@@ -10,13 +10,6 @@
   <link href="<?php echo base_url().'style/jquery-ui.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/demo_table.css';?>" rel="stylesheet" type="text/css"/>
   
-  <!-- bootstrap reference links  
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.css.map';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.min.css';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap.css.map'; ?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.css';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap.min.css';?>" rel="stylesheet" type="text/css"/>  
-   -->
   <!-- bootstrap reference library -->
   <link href="<?php echo base_url().'bootstrap/css/bootstrap.css'; ?>" rel="stylesheet" type="text/css"/>
 
@@ -40,7 +33,6 @@
  <body>
 <?php
    $user=$this->session->userdata;
-   $test_request_id=$user['logged_in']['test_request_id'];
    $user_type_id=$user['logged_in']['user_type'];
    $user_id=$user['logged_in']['id'];
    $department_id=$user['logged_in']['department_id'];
@@ -89,7 +81,7 @@
               ?> <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="<?php echo base_url().'account_settings/index/'.$test_request_id.'/'.$user_type_id.'/'.$user_id.'/'.$department_id;?>"><i class="icon-wrench"></i> Settings <img src="<?php echo base_url().'images/icons/settings2.png';?>" height="20px" width="20px"></a></li>
+              <li><a href="<?php echo base_url().'account_settings/index/'.$user_type_id.'/'.$user_id.'/'.$department_id;?>"><i class="icon-wrench"></i> Settings <img src="<?php echo base_url().'images/icons/settings2.png';?>" height="20px" width="20px"></a></li>
               <li class="divider"></li>
               <li><a href="<?php echo base_url().'home/logout'?>"><i class="icon-share"></i>Logout</b> <img src="<?php echo base_url().'images/icons/door.png';?>" height="25px" width="25px"></a></li>
             </ul>
@@ -205,12 +197,16 @@
         <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="current sub_menu sub_menu_link first_link">Temperature & Humidity</a>
     </div>
   <div id="form_wrapper_lists">
+    <div id="account_lists" >
       <table  class="subdivider" border="0" bgcolor="#ffffff" width="100%" cellpadding="8px" align="center">
 		<tr>
 		    <td  colspan="4"align="center" style="border-bottom: solid 10px #c4c4ff;color: #0000fb;background-color: #e8e8ff;"><h5>Sample Store Temperature Records</h5></td>
 		</tr>
+    <tr>
+        <td  colspan="4"align="center" style="padding:8px;"></td>
+    </tr>
 		<tr>
-      <td class="subdivider" align="center" colspan="4">
+      <td class="subdivider" align="center" style="padding:8px;" colspan="4">
          <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_location_f;?>"class="sub_menu sub_menu_link first_link">Freezer</a>
          <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_location_s;?>"class="current sub_menu sub_menu_link first_link">Sample Store</a>
          <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_location_l;?>"class="sub_menu sub_menu_link first_link">Laboratory Area</a>
@@ -219,7 +215,7 @@
       </td>
    </tr>
 		<tr>
-			<td colspan="0">
+			<td>
        <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>" ><img src="<?php echo base_url().'images/icons/temperature.png';?>" height="20px" width ="20px">Temperature</a>
        <a href="<?php echo base_url().'temperature_humidity_list/records_humidity/'.$id_humidity;?>" ><img src="<?php echo base_url().'images/icons/humidity.png';?>" height="20px" width ="20px">Humidity</a>
        <a href="<?php echo base_url().'report/sample_store';?>"><b><img src="<?php echo base_url().'images/icons/reports.png';?>" height="25px" width="25px">Reports</b></a>
@@ -282,6 +278,7 @@
 	    <?php endforeach; ?>
 	</tbody>
       </table>
+    </div>
   </div>
 </body>
 </html>

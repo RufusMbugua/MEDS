@@ -3,6 +3,7 @@
 <head>
    <title>MEDS </title>
    <link rel="icon" href="" />
+   <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon">
    <link href="<?php echo base_url().'style/core.css';?>" rel="stylesheet" type="text/css" />
    <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
    <link href="<?php echo base_url().'style/jquery.tooltip.css';?>" rel="stylesheet" type="text/css"/>
@@ -19,113 +20,107 @@
   <!-- bootstrap reference library -->
   <script src="<?php echo base_url().'js/bootstrap.min.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/Jquery-datatables/jquery.dataTables.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/equipmentinfo.js';?>"></script>
    <script>
-       function calcf(){
-	    var total = document.getElementById('min_temp').value - document.getElementById('standard_min_temp').value;
-	    document.getElementById('min_temp_corrected').value = total;
-       }
-       function calc2f(){
-	    var total = document.getElementById('max_temp').value - document.getElementById('standard_max_temp').value;
-	    document.getElementById('max_temp_corrected').value = total;
-       }
-       $( ".datepicker" ).datepicker();
-   });
-   </script>
-   <script>
-    $(document).ready(function(){
+  //  $(document).ready(function(){
   
         
-  $('#min_temp').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#min_temp_g').show();
-            $('#min_temp_r').hide();
-          }else{
-            $('#min_temp_g').hide();
-            $('#min_temp_r').show();
-          }
-        })
+  // $('#min_temp').change('live',function(){
+  //         if ($.trim(this.value)!=""){
+  //           $('#min_temp_g').show();
+  //           $('#min_temp_r').hide();
+  //         }else{
+  //           $('#min_temp_g').hide();
+  //           $('#min_temp_r').show();
+  //         }
+  //       })
         
   
-  $('#max_temp').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#max_temp_g').show();
-            $('#max_temp_r').hide();
-          }else{
-            $('#max_temp_g').hide();
-            $('#max_temp_r').show();
-          }
-        })
-  $('#standard_min_temp').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#standard_min_temp_g').show();
-            $('#standard_min_temp_r').hide();
-          }else{
-            $('#standard_min_temp_g').hide();
-            $('#standard_min_temp_r').show();
-          }
-        })
+  // $('#max_temp').change('live',function(){
+  //         if ($.trim(this.value)!=""){
+  //           $('#max_temp_g').show();
+  //           $('#max_temp_r').hide();
+  //         }else{
+  //           $('#max_temp_g').hide();
+  //           $('#max_temp_r').show();
+  //         }
+  //       })
+  // $('#standard_min_temp').change('live',function(){
+  //         if ($.trim(this.value)!=""){
+  //           $('#standard_min_temp_g').show();
+  //           $('#standard_min_temp_r').hide();
+  //         }else{
+  //           $('#standard_min_temp_g').hide();
+  //           $('#standard_min_temp_r').show();
+  //         }
+  //       })
         
   
-  $('#standard_max_temp').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#standard_max_temp_g').show();
-            $('#standard_max_temp_r').hide();
-          }else{
-            $('#standard_max_temp_g').hide();
-            $('#standard_max_temp_r').show();
-          }
-        })
-  $('#equipment_used').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#equipment_used_g').show();
-            $('#equipment_used_r').hide();
-          }else{
-            $('#equipment_used_g').hide();
-            $('#equipment_used_r').show();
-          }
-        })
-  $('#freezer_ht_date').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#freezer_ht_date_g').show();
-            $('#freezer_ht_date_r').hide();
-          }else{
-            $('#freezer_ht_date_g').hide();
-            $('#freezer_ht_date_r').show();
-          }
-        });
-  $('#save_freezer_humidtemp').click(function(){         
-            count =0;
-            $('.fieldfreezer').each(function(){
-               if ($.trim(this.value)=="")
-               count ++;
-            });
-            if(count >0){
-              alert( count+'  field(s) are not filled. ')
-               return false;
-            }else{
+  // $('#standard_max_temp').change('live',function(){
+  //         if ($.trim(this.value)!=""){
+  //           $('#standard_max_temp_g').show();
+  //           $('#standard_max_temp_r').hide();
+  //         }else{
+  //           $('#standard_max_temp_g').hide();
+  //           $('#standard_max_temp_r').show();
+  //         }
+  //       })
+  // $('#equipment_used').change('live',function(){
+  //         if ($.trim(this.value)!=""){
+  //           $('#equipment_used_g').show();
+  //           $('#equipment_used_r').hide();
+  //         }else{
+  //           $('#equipment_used_g').hide();
+  //           $('#equipment_used_r').show();
+  //         }
+  //       })
+  // $('#freezer_ht_date').change('live',function(){
+  //         if ($.trim(this.value)!=""){
+  //           $('#freezer_ht_date_g').show();
+  //           $('#freezer_ht_date_r').hide();
+  //         }else{
+  //           $('#freezer_ht_date_g').hide();
+  //           $('#freezer_ht_date_r').show();
+  //         }
+  //       });
+  // $('#save_freezer_humidtemp').click(function(){         
+  //           count =0;
+  //           $('.fieldfreezer').each(function(){
+  //              if ($.trim(this.value)=="")
+  //              count ++;
+  //           });
+  //           if(count >0){
+  //             alert( count+'  field(s) are not filled. ')
+  //              return false;
+  //           }else{
               
-            $.ajax({
-                type:"post",
-                url:"<?php echo base_url();?>temperature_humidity/submit",
-                data:$('#humidtemp_form').serialize(),
-                success:function(data){
-        redirect_url = "<?temperature_humidity_list/records/'.$id_temp"
-                    data='Success';
-                    window.location.href = redirect_url;
-                },
-                //error:function(){
-                  // alert('an error occured'); 
-               //}
-            })
-            }
-            })
-    })
+  //           $.ajax({
+  //               type:"post",
+  //               url:"<?php echo base_url();?>temperature_humidity/submit",
+  //               data:$('#humidtemp_form').serialize(),
+  //               success:function(data){
+  //       redirect_url = "temperature_humidity_list/records/'.$id_temp";
+  //                   data='Success';
+  //                   window.location.href = redirect_url;
+  //               },
+  //               //error:function(){
+  //                 // alert('an error occured'); 
+  //              //}
+  //           })
+  //           }
+  //           })
+  //   })
 </script>
+<style>
+ .reg{
+    width:200px;
+  }
+</style>
  </head>
  <body>
 <?php
    $user=$this->session->userdata;
-   $test_request_id=$user['logged_in']['test_request_id'];
    $user_type_id=$user['logged_in']['user_type'];
    $user_id=$user['logged_in']['id'];
    $department_id=$user['logged_in']['department_id'];
@@ -170,7 +165,7 @@
               ?> <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="<?php echo base_url().'account_settings/index/'.$test_request_id.'/'.$user_type_id.'/'.$user_id.'/'.$department_id;?>"><i class="icon-wrench"></i> Settings <img src="<?php echo base_url().'images/icons/settings2.png';?>" height="20px" width="20px"></a></li>
+              <li><a href="<?php echo base_url().'account_settings/index/'.$user_type_id.'/'.$user_id.'/'.$department_id;?>"><i class="icon-wrench"></i> Settings <img src="<?php echo base_url().'images/icons/settings2.png';?>" height="20px" width="20px"></a></li>
               <li class="divider"></li>
               <li><a href="<?php echo base_url().'home/logout'?>"><i class="icon-share"></i>Logout</b> <img src="<?php echo base_url().'images/icons/door.png';?>" height="25px" width="25px"></a></li>
             </ul>
@@ -293,13 +288,13 @@
 		<input type="hidden" name="ht_location" value="1">
     <input type="hidden" name ="user" value ="<?php echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);?>">
 		<tr>
-			<td colspan="6"  style="text-align:right;background-color:#fdfdfd;padding:8px;"><a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"><img src="<?php echo base_url().'images/icons/back.png';?>" height="20px" width="20px"><b>Back</b></a></td>
+			<td colspan="4"  style="text-align:right;background-color:#fdfdfd;padding:8px;"><a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"><img src="<?php echo base_url().'images/icons/back.png';?>" height="20px" width="20px"><b>Back</b></a></td>
 		</tr>
 		<tr>
-			<td colspan = "6" align ="center" style="border-bottom: solid 10px #c4c4ff;color: #0000fb;background-color: #e8e8ff;"><h4>Humidity and Temperature</h4></td>
+			<td colspan ="4" align ="center" style="border-bottom: solid 10px #c4c4ff;color: #0000fb;background-color: #e8e8ff;"><h4>Freezer Temperature</h4></td>
 		</tr>   
 		<tr>
-			<td align="center" colspan="6" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
+			<td align="center" colspan="4" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
 			<a href="javascript:slide('freezer');" class="current sub_menu sub_menu_link first_link"><b>Freezer</b></a>
 			<a href="javascript:slide('sample_store');" class="sub_menu sub_menu_link first_link"><b>Sample Stores</b></a>
 			<a href="javascript:slide('laboratory_area');" class="sub_menu sub_menu_link first_link"><b>Laboratory Working Area</b></a>
@@ -309,23 +304,34 @@
 		</tr>
 		<tr>
 			<td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Date</td>
-			<td colspan ="2"style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
-  			<input type ="date" name ="ht_date" id="freezer_ht_date" class ="fieldfreezer">
+			<td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
+  			<input type ="text"  name ="ht_date" id="freezer_ht_date" class ="datepicker fieldfreezer">
   			<span id="freezer_ht_date_g" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
         <span id="freezer_ht_date_r" style="color:white;background-color:red;padding:4px;display:none">field required</span></td>
 
       <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Equipment Used</td>
-      <td colspan ="2" style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
-        <input type="text" id="equipment_used" name ="equipment_used" class ="fieldfreezer" >
+      <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
+        <input type="text" id="equipmentused" name ="equipmentused" class ="reg fieldfreezer" >
+         <select id="theremometerused" name="theremometerused" >
+          <option selected></option>
+           <?php
+           foreach($sql_equipment as $bl_name):
+          ?>
+           
+           <option value="<?php  echo $bl_name['id_number'];?>" data-equipmentused="<?php echo $bl_name['description']; ?>"><?php  echo $bl_name['id_number'];?></option>
+            <?php
+            endforeach
+            ?>
+          </select>
         <span id="equipment_used_g" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
         <span id="equipment_used_r" style="color:white;background-color:red;padding:4px;display:none">field required</span></td>
 		</tr>
 		<tr>
-			<td colspan ="6" align ="center" style="padding:8px;text-align:center;background-color:#ffffff;padding-right:40px;border-bottom: solid 1px #f0f0ff;color: #0000fb;"><b>Temperature</b></td>
+			<td colspan ="4" align ="center" style="padding:8px;text-align:center;background-color:#ffffff;padding-right:40px;border-bottom: solid 1px #f0f0ff;color: #0000fb;"><b>Temperature</b></td>
 		</tr>
 		<tr>
-        <td colspan="8" style="padding:8px;border-bottom:solid 1px #c4c4ff;">
-          <table border="0" width="80%" class="table_form" cellpadding="8px" align="center">            
+        <td colspan="4" style="padding:8px;border-bottom:solid 1px #c4c4ff;">
+          <table border="0" width="100%" class="table_form" cellpadding="8px" align="center">            
             <tr>
             <td colspan ="6" align ="center" style="padding:8px;text-align:center;padding-right:40px;border-bottom: solid 1px #f0f0ff;color:#0000fb;">
               Standard Temperature Limit: -20 (+/-3)
@@ -337,36 +343,18 @@
 		<tr>
       <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Minimum Temperature</td>
       <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
-        <input type="text" name ="min_temp" id="min_temp" class ="fieldfreezer">
+        <input type="text" name ="min_temp" id="min_temp" value="-20" disabled>
         <span id="min_temp_g" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
         <span id="min_temp_r" style="color:white;background-color:red;padding:4px;display:none">field required</span></td>
-
-			<td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Correction Factor</td>
-			<td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
-				<input type="text" id="standard_min_temp" onChange="calcf()" name ="standard_min_temp" class ="fieldfreezer">
-        <span id="standard_min_temp_g" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
-        <span id="standard_min_temp_r" style="color:white;background-color:red;padding:4px;display:none">field required</span></td>
-
-			
-
-			<td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Minimum Temperature Corrected
-			</td>
-			<td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
-				<input type ="text" id="min_temp_corrected" name ="min_temp_corrected">
-			</td>
-		</tr>
-		<tr>
-      <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Maximum Temperature  </td>     
-      <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" id="max_temp"  name ="max_temp" class ="fieldfreezer"><span id="max_temp_g" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="max_temp_r" style="color:white;background-color:red;padding:4px;display:none">field required</span></td>
-
-			<td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Correction Factor</td>
-			<td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type="text" id="standard_max_temp" name ="standard_max_temp" onChange="calc2f()" class ="fieldfreezer"><span id="standard_max_temp_g" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="standard_max_temp_r" style="color:white;background-color:red;padding:4px;display:none">field required</span></td>
-			
-			<td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Maximum Temperature Corrected</td>	
-			<td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" id="max_temp_corrected" name ="max_temp_corrected"></td>
+		  <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Maximum Temperature  </td>     
+      <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" id="max_temp"  name ="max_temp" value="-17"  disabled><span id="max_temp_g" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="max_temp_r" style="color:white;background-color:red;padding:4px;display:none">field required</span></td>
+    </tr>
+    <tr>
+      <td style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;">Current Temperature  </td>     
+      <td colspan="3" style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><input type ="text" id="collected_temp"  name ="collected_temp" ><span id="collected_temp_g" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="collected_temp_r" style="color:white;background-color:red;padding:4px;display:none">field required</span></td>
     </tr>
 		<tr>
-			<td colspan="6" style="padding:8px;text-align:center;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><input type = "submit" name ="save_humidtemp" class ="btn" id ="save_freezer_humidtemp"value ="Submit"></td>
+			<td colspan="4" style="padding:8px;text-align:center;background-color:#ffffff;border-right: dotted 1px #bfbfbf;"><input type = "submit" name ="save_humidtemp" class ="btn" id ="save_freezer_humidtemp"value ="Submit"></td>
 		</tr>
 	
 	</table>

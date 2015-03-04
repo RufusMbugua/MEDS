@@ -42,7 +42,7 @@
             <th style="text-align:center;border-right: dotted 1px #ddddff;">Date Requested</th>
             <th
             <?php 
-              if($user['logged_in']['user_type']==6){
+              if($user['logged_in']['user_type']==6 ){
                 echo"style='dsiplay:block;text-align:center;border-right: dotted 1px #ddddff;'";
               }else{
                 echo"style='display:none;'";
@@ -102,8 +102,6 @@
       foreach ($query as $row):     
     ?>
     <tr>
-     <?php
-     ?>
        <td style="border-right: dotted 1px #c0c0c0;text-align: center;border-bottom: solid 1px #c0c0c0;" width="20px"><?php echo $i;?>.</td>
        <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row->laboratory_number;?></td>
        <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row->active_ingredients;?></td>
@@ -140,13 +138,18 @@
        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo substr($row->date_time,0,-8);?></td>
        <td
         <?php 
-          if($user['logged_in']['user_type']==6){
+          if($user['logged_in']['user_type']==6 ){
             echo"style='dsiplay:block;text-align:center;border-bottom: solid 1px #c0c0c0;'";
+            ?>>
+            <a href="<?php echo base_url().'finance/index/'.$row->id;?>">Quote</a>
+            <?php
           }else{
-            echo"style='display:none;'";
+            echo"style='dsiplay:block;text-align:center;border-bottom: solid 1px #c0c0c0;'";?>>
+            Quoted
+            <?php
           }
         ?>
-       ><a href="<?php echo base_url().'finance/index/'.$row->id;?>">Quote</a></td>
+       </td>
        <td
         <?php 
           if($user['logged_in']['user_type']==6||$user['logged_in']['user_type']==5){
@@ -155,7 +158,7 @@
             echo"style='display:none;'";
           }
         ?>
-       ><a href="<?php echo base_url().'print_label/generate_label/'.$row->id.'/'.$test_request_id;?>">Print</a></td>
+       ><a href="<?php echo base_url().'print_label/generate_label/'.$row->id;?>">Print</a></td>
        <td
        <?php
         if($user['logged_in']['user_type']==6){
@@ -208,7 +211,7 @@
             echo"style='display:none;'";
           }
         ?>
-       ><a href="<?php echo base_url().'test/index/'.$row->id.'/'.$test_request_id.'/'.$row->test_type_id;?>">Test</a></td>
+       ><a href="<?php echo base_url().'test/index/'.$row->id.'/'.$row->test_type_id;?>">Test</a></td>
        <?php
          $i++;
        ?>
