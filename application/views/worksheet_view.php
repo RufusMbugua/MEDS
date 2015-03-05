@@ -1326,7 +1326,7 @@
                      }else{
                          echo"style='text-align:center;padding:4px;'>";
                    ?>
-                     <a href="<?php echo base_url().'content_uniformity/worksheet/'.$query['a'].'/'.$request[0]['tr'];?>">view worksheet</a>
+                     <a href="<?php echo base_url().'content_uniformity/weight_variation_worksheet_view/'.$query['a'].'/'.$request[0]['tr'];?>">view worksheet</a>
                 <?php
                 }
                 ?>
