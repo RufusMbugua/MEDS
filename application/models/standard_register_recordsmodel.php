@@ -11,19 +11,22 @@ class Standard_Register_Recordsmodel extends CI_Model{
         return $query->result();
     }
     function standard_register_list_get(){
+
         $sql = "SELECT * FROM standard_register WHERE status = '0'";
-        $query = $this->db->query($sql);    return $query->result();
+        $query = $this->db->query($sql);    
+        return $query->result();
     }
     function expired(){
+
         $sql = "SELECT * FROM standard_register WHERE status = '1'";
         $query = $this->db->query($sql);
         return $query ->result();
 
-
     }
     function damaged(){
+
         $sql = "SELECT * FROM standard_register WHERE status = '2'";
-         $query = $this->db->query($sql);
+        $query = $this->db->query($sql);
         return $query ->result();
     }
     function exhausted(){

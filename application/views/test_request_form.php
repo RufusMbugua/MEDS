@@ -173,7 +173,7 @@
             });   
         });
   
-        $('#submit_m').click(function(){         
+        $('#submit').click(function(){         
             count =0;
             $('.field').each(function(){
              if ($.trim(this.value)=="")

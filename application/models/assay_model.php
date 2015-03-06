@@ -6,10 +6,6 @@ class Assay_Model extends CI_Model{
       parent::__construct();
      }
     
-    function process_reagents(){
-        
-    }
-
     function process_specifications(){
     $component;
     $assignment_id=$this->input->post('assignment_id');

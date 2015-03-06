@@ -7,12 +7,13 @@ class Standard_Register_Records extends CI_Controller {
 	}
 	  
     function Get(){
-        $this->load->model('standard_register_recordsmodel');
-        
-        $data['query'] = $this->standard_register_recordsmodel->standard_register_list_get();
+      
+      $this->load->model('standard_register_recordsmodel');  
+      $data['query'] = $this->standard_register_recordsmodel->standard_register_list_get();
     	$this->load->view('standard_register_records',$data);
         
     }
+    
     function getExhausted (){
     	$this->load->model('standard_register_recordsmodel');
     	
