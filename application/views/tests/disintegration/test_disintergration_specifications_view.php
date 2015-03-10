@@ -4,12 +4,12 @@
   <title>MEDS</title>
   <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon">
   <link href="<?php echo base_url().'style/core.css';?>" rel="stylesheet" type="text/css" />
-  <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
+   <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
    
   <link href="<?php echo base_url().'style/jquery.tooltip.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/jquery-ui.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/demo_table.css';?>" rel="stylesheet" type="text/css"/>
-
+  
   <!-- bootstrap reference library -->
   <link href="<?php echo base_url().'bootstrap/css/bootstrap.css'; ?>" rel="stylesheet" type="text/css"/>
 
@@ -37,16 +37,11 @@
  <body>
   <?php
    $user=$this->session->userdata;
-   // $test_request_id=$user['logged_in']['test_request_id'];
    $user_type_id=$user['logged_in']['user_type'];
    $user_id=$user['logged_in']['id'];
    $department_id=$user['logged_in']['department_id'];
-   // $acc_status=$user['logged_in']['acc_status'];
-   // $id_temp=1;
-   $assignment = $this->uri->segment(3);
-      $test_type = $this->uri->segment(5);
-   $test_request = $this->uri->segment(4);
-      
+   $acc_status=$user['logged_in']['acc_status'];
+   $id_temp=1;
    //var_dump($user);
   if(empty($user['logged_in']['id'])) {
        
@@ -56,8 +51,8 @@
 
        }
   ?>
-<div id="header"> 
-  <div id="logo" style="padding:8px;color: #0000ff;" align="center"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="35px" width="40px"/><b>MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</b></div>
+ <div id="header"> 
+   <div id="logo" style="padding:8px;color: #0000ff;" align="center"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="35px" width="40px"/><b>MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</b></div>
   <div id="log_bar">
   <table  border="0" cellpadding="2px" align="center" width="100%">
       <tr>
@@ -90,83 +85,62 @@
       </tr>
   </table> 
   </div>
-</div>
+</div>  
 <div id="form_wrapper">
 <div id="forms">
- <?php echo validation_errors(); 
-       echo form_open('test_identification/save_assay_monograph',array('id'=>'assay_view'));?>
+<?php echo validation_errors(); ?>
+      <?php echo form_open('test_disintergration/save_monograph',array('id'=>'test_disintergration'));?>
+       
        <table class="table_form" width="75%" border="0" cellpadding="4px" align="center">
             <input type="hidden" name ="assignment" value ="<?php echo $assignment;?>"><input type="hidden" name ="test_request" value ="<?php echo $test_request;?>">
-            <input type="hidden" id="test_type" name ="test_type" value ="<?php echo $test_type;?>">
             <input type="hidden" name ="analyst" value ="<?php echo $user['logged_in']['fname']." ".$user['logged_in']['lname'];?>"> 
           <tr>
               <td colspan="6"  style="padding: 8px;text-align:right;background-color:#fdfdfd;padding:8px;border-bottom:solid 1px #bfbfbf;"><a href="<?php echo base_url().'test/index/'.$assignment.'/'.$test_request?>"><img src="<?php echo base_url().'images/icons/assign.png';?>" height="20px" width="20px">Back to Test Lists</a></td>
           </tr>
-             <tr>
+          <tr>
            <td colspan ="6">
-            <table width="100%" bgcolor="#c4c4ff" class ="table_form" cellpadding="8px" border="0" align ="center">
+            <table class="table_form" border="0" align="center" cellpadding="8px" width="100%" >
               <tr>
-              <td rowspan="2" colspan ="2" style="padding:4px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="80px" width="90px"/></td>
-              <td colspan="6" style="padding:4px;color:#0000ff;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;">MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</td>
+                  <td style="border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="80px" width="90px"/></td>
+                  <td colspan="7" style="padding:4px;color:#0000ff;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;">MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</td>
               </tr>
               <tr>    
-                  <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">Document: Analytical Worksheet</td>
-                  <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;">Title: <?php echo $results['active_ingredients'];?> <?php echo $results['test_specification'] ;?></td>
-                  <td height="25px" colspan="" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;color:#000000;">REFERENCE NUMBER</td>
-                  <td colspan="3" style="padding:4px;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><?php echo $results['reference_number'] ;?></td>
+                  <td height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">DOCUMENT: Analytical Worksheet</td>
+                  <td colspan="4" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;">TITLE: <?php echo $results['active_ingredients']." "." ".$results['test_specification'];?><input type="hidden" name="test_specification" value="<?php echo $results['test_specification'];?>"></td>
+                  <td height="25px" colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;color:#000000;">REFERENCE NUMBER</td>
+                  <td style="padding:4px;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><?php echo $results['reference_number'];?></td>
               </tr>
               <tr>
-                    <td colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-left:solid 1px #bfbfbf;">EFFECTIVE DATE: <?php echo date("d/m/Y")?></td>
+                    <td style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-left:solid 1px #bfbfbf;">EFFECTIVE DATE: <?php echo date("d/m/Y")?></td>
                     <td colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-left:solid 1px #bfbfbf;">ISSUE/REV 2/2</td>
                     <td height="25px"colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">SUPERSEDES: 2/1</td>
                     <td height="25px" colspan="3" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">PAGE 1 of 1</td>
-              </tr>
-              <tr>
-                    <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">SERIAL No.</td>
-                    <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><?php echo $component_category[0]['serial_number'] ;?></td>
-                    <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;">Batch/Lot No.</td>
-                    <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><?php echo $results['batch_lot_number'] ;?></td>          
-              </tr>
-             
+                </tr>
+                <tr>
+                    <td height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">SERIAL No.</td>
+                    <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><?php echo $monograph[0]['serial_number']?></td>
+                    <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;">BATCH NUMBER.</td>
+                    <td colspan="3" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><?php echo $results['batch_lot_number']?></td>
+                </tr>
             </table>
           </td>
           </tr>
             <tr>
-              <td colspan="8" align="center" style="padding:4px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><h5>Identification Specifications Details</h5></td>
+              <td colspan="8" align="center" style="padding:4px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><h5><b>Monograph Details</b></h5></td>
             </tr>
-            <?php 
-              if (!empty($monograph_specs)){
-            ?>             
             <tr>
-              <td colspan="8" align="left" style="padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"> Acceptance Criteria
-               <?php 
-               if ($monograph_specs[0]['monograph_specifications']!='') {
-               
-               echo '<textarea>'.$monograph_specs[0]['monograph_specifications'].'</textarea>'; 
-               }else{
-                echo "No specification";
-               }
-               ?>
-              </td>
-            </tr>
-            
-            <?php 
-              }else{
-            ?>
-             <tr>
-              <td colspan="8" align="left" style="padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"> Component(s) 
-                <input type="text" size="40" name="components" id="components" value="<?php echo  $components ?>">
+              <td colspan="8" style="padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">
+                Disintegration Specification Details
               </td>
             </tr>
             <tr>
-              <td colspan="8" align="left" style="padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"> Acceptance Criteria: 
-               <textarea cols ="90" rows="3" name="specification" class="all_input_text_areas" ></textarea> 
+              <td colspan="8" align="center" style="padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">
+                <textarea rows="5" cols="80" name="specification" id="specification"><?php echo $query_monograph[0]['monograph_specifications']?></textarea>
               </td>
             </tr>
-            <tr>
-                <td  height="25px" style="padding:4px;background-color:#ffffff;border-top: solid 1px #bfbfbf;text-align: center;" colspan="8" ><input class="btn" type="submit" name="save_assay_monograph" id="save_assay_monograph" value="Submit"></td>
-            </tr>
-            <?php  } ?>
+            <!-- <tr>
+                <td  height="25px" style="padding:4px;background-color:#ffffff;border-top: solid 1px #bfbfbf;text-align: center;" colspan="8" ><input class="btn" type="submit" name="save_vs_monograph" id="save_vs_monograph" value="Submit"></td>
+            </tr> -->
        </table>
       </form>
     

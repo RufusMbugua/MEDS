@@ -9,7 +9,7 @@ function __construct()
 
 function worksheetlist(){
         
-    $trid= $this->uri->segment(3);
+    $trid= $this->uri->segment(4);
 
     $data['request']=$this->db->select('test_request.id AS tr,test_request.client_id,test_request.active_ingredients,test_request.manufacturer_name,test_request.manufacturer_address,test_request.batch_lot_number,
     test_request.sample_source,test_request.expiry_date,test_request.quantity_type,test_request.reference_number,test_request.applicant_address,test_request.date_time,test_request.date_manufactured,test_request.quantity_type,test_request.sample_source,test_request.laboratory_number,test_request.applicant_name,
@@ -163,7 +163,8 @@ function worksheetlist(){
     
 
    
-
+    $data['disintegration']=$this->db->select('disintegration.status')->get_where('disintegration', array('disintegration.test_request' => $trid))->result_array();
+    
     $data['identification_assay']=$this->db->select('identification.status')->get_where('identification', array('identification.test_request' => $trid))->result_array();
     $data['identification_uv']=$this->db->select('identification_uv.status')->get_where('identification_uv', array('identification_uv.test_request' => $trid))->result_array();
     $data['identification_infrared']=$this->db->select('identification_infrared.status')->get_where('identification_infrared', array('identification_infrared.test_request' => $trid))->result_array();

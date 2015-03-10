@@ -86,7 +86,7 @@
         <input type="hidden" name="tr_id" value="<?php echo $query['tr'];?>"></input>
         <input type="hidden" name="assignment_id" value="<?php echo $request[0]['a'];?>"></input>
           <tr>
-            <td colspan="8" style="text-align:right;padding:4px;backgroun-color:#fffff;border-bottom:solid 1px #bfbfbf;"><a href="<?php echo base_url().'test/index/'.$request[0]['a'].'/'.$query['tr'];?>"><img src="<?php echo base_url().'images/icons/back.png';?>" height="25px" width="20px">Back</a></td>
+            <td colspan="8" style="text-align:right;padding:4px;backgroun-color:#fffff;border-bottom:solid 1px #bfbfbf;"><a href="<?php echo base_url().'test/index/'.$request[0]['a'].'/'.$query['tr'];?>"><img src="<?php echo base_url().'images/icons/view.png';?>" height="25px" width="20px">Back to Test Conduction</a></td>
           </tr>
           <tr>
             <td colspan="8" style="padding:8px;">
@@ -124,14 +124,28 @@
                   <td colspan="8" align="center" style="padding:4px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><h5>Monograph Details</h5></td> 
                 </tr>
                 <tr>
+                  <td colspan="8" align="right" style="padding:4px;background-color: #ffffff;"><a href="<?php echo base_url().'test/monograph_edit/'.$request[0]['a'].'/'.$query['tr'].'/'.$monograph_details[0]['id'];?>" class="edit_btn">Edit Monograph</a></td> 
+                </tr>
+                <tr>
+                  <td colspan="8" align="center" style="padding:4px;border-bottom: solid 1px #c4c4ff;background-color: #ffffff;">
+                  <b>Tests Requested as per Client Test Request Form</b></td> 
+                </tr>
+                <tr>
+                  <td colspan="8" align="center" style="padding:4px;border-bottom: solid 1px #c4c4ff;">
+                    <table width="100%" align="center" cellpaddding="4px">
+                        <?php include_once('application/views/tests_requested.php');?>
+                    </table>
+                  </td> 
+                </tr>
+                <tr>
                   <td colspan="8" align="left" style="padding:4px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><h5><b>Number of Components</b></h5></td> 
                 </tr>
                 <tr>  
-                  <td colspan="8" align="left" style="padding:4px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b><?php if($monograph_details[0]['components']==1){echo"Single Component";}else{echo"Multicomponent";};?></b></td>  
+                  <td colspan="8" align="left" style="padding:4px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><?php if($monograph_details[0]['components']==1){echo"Single Component";}else{echo"Multicomponent";};?></td>  
                 </tr>
                 <tr>  
                   <td colspan="8" style="padding:8px;">
-                    <table width="60%" id="tbl_components" border="0" align="center" cellpadding="4px">
+                    <table width="100%" id="tbl_components" border="0" align="center" cellpadding="4px">
                       <thead>
                         <td style="padding:4px;border-bottom: solid 1px #c4c4ff;">No.</td>
                         <td style="padding:4px;border-bottom: solid 1px #c4c4ff;">Component Name</td>
@@ -156,6 +170,36 @@
                     </tbody>
                     </table>
                   </td>  
+                </tr>
+                <tr>
+                <?php
+                  if($monograph_details[0]['components']==1){
+                  
+                    echo'<td colspan="8" style="padding:8px;">';
+                    echo'<table id="tbl_singlecomp" width="100%" border="0" align="center" cellpadding="4px">';
+                    echo'<thead>';
+                    echo'<td style="padding:8px;border-bottom: solid 1px #c4c4ff;" colspan="2" align="center"><b>SINGLE COMPONENT TESTS AS PER MONOGRAPH</b></td>';
+                    echo'</thead>';
+                    echo'<tbody>';
+                    include_once('application/views/single_complogic.php');
+                    echo'</tbody>';
+                    echo'</table>';
+                    echo'</td>';
+                    
+                  }else{
+
+                    echo'<td colspan="8" style="padding:8px;">';
+                    echo'<table id="tbl_singlecomp" width="100%" border="0" align="center" cellpadding="4px">';
+                    echo'<thead>';
+                    echo'<td style="padding:8px;border-bottom: solid 1px #c4c4ff;" colspan="2" align="center"><b>MULTICOMPONENT TESTS AS PER MONOGRAPH</b></td>';
+                    echo'</thead>';
+                    echo'<tbody>';
+                    include_once('application/views/multi_complogic.php');
+                    echo'</tbody>';
+                    echo'</table>';
+                    echo'</td>';
+                  }
+                ?>
                 </tr>
                 <tr>
                 <?php

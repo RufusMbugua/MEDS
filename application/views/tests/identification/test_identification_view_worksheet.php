@@ -29,9 +29,9 @@
     });
    });
   </script>
-  </head
+  </head>
   <body>
-       <?php
+  <?php
    $user=$this->session->userdata;
    $user_type_id=$user['logged_in']['user_type'];
    $user_id=$user['logged_in']['id'];
@@ -81,7 +81,6 @@
 <div id="form_wrapper">
 <div id="forms">
 
-<?php echo form_open('test_identification/worksheet_assay', array('id'=>'test_identification_view'));?>
 <table width="950px" class="table_form" border="0" cellpadding="4px" align="center">
     <input type="hidden" name ="assignment" value ="<?php echo $assignment;?>">
     <input type="hidden" name ="test_request" value ="<?php echo $test_request;?>">

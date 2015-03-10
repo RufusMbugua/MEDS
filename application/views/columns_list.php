@@ -7,7 +7,6 @@
   <script type="text/javascript" src="<?php echo base_url().'js/Jquery-datatables/jquery.dataTables.js';?>"></script>
 
   <title>MEDS</title>
-  <link rel="icon" href="" />
   <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon">
   <link href="<?php echo base_url().'style/core.css';?>" rel="stylesheet" type="text/css" />
    <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
@@ -35,15 +34,7 @@
   <script type="text/javascript" src="<?php echo base_url().'js/equipmentinfo.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/jquery.autosave.js';?>"></script>
-  <script>
-   $(document).ready(function() {
-    /* Init DataTables */
-    $('#list').dataTable({
-     "sScrollY":"270px",
-     "sScrollX":"100%"
-    });
-   });
-  </script>
+  
  </head>
  <body>
   <?php
@@ -126,9 +117,9 @@
         <a href="<?php echo base_url().'standard_register_records/Get';?>"class="sub_menu sub_menu_link first_link">Standard Register</a>
         <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
         <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a>
-        <a href="<?php echo base_url().'complaints_list/records';?>" class="sub_menu sub_menu_link first_link">Complaints</a>
+        <!-- <a href="<?php echo base_url().'complaints_list/records';?>" class="sub_menu sub_menu_link first_link">Complaints</a>
         <a href="<?php echo base_url().'coa_list/records';?>"class="sub_menu sub_menu_link first_link">Certificate of Analysis</a>
-        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a>
+        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a> -->
     </div>
     <?php
     echo"<div id='sub_menu'";
@@ -157,9 +148,9 @@
         <a href="<?php echo base_url().'standard_register_records/Get';?>"class="sub_menu sub_menu_link first_link">Standard Register</a>
         <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
         <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a>
-        <a href="<?php echo base_url().'complaints_list/records';?>"class="sub_menu sub_menu_link first_link">Complaints</a>
+        <!-- <a href="<?php echo base_url().'complaints_list/records';?>"class="sub_menu sub_menu_link first_link">Complaints</a>
         <a href="<?php echo base_url().'coa_list/records';?>"class="sub_menu sub_menu_link first_link">Certificate of Analysis</a>
-        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a>
+        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a> -->
     </div>
     <?php
     echo"<div id='sub_menu'";
@@ -209,7 +200,7 @@
         <div div="list_view_navbar">
             <table class="subdivider" border="0" bgcolor="#ffffff"  width="100%" cellpadding="8px" align="center">
                 <tr>
-                    <td style="padding:4px;text-align:left;background-color:#ffffff;text-color:#00ff00;"><a href="<?php echo base_url().'equipment_maintenance_records/Get';?>"><img src="<?php echo base_url().'images/icons/back.png';?>" height="20px" wieght="20px">Back</a></td>
+                    <td style="padding:4px;text-align:left;background-color:#ffffff;text-color:#00ff00;"><a href="<?php echo base_url().'equipment_maintenance_records/Get';?>"><img src="<?php echo base_url().'images/icons/view.png';?>" height="20px" wieght="20px">Back To Equipment List</a></td>
                     <td style="padding:4px;text-align:right;background-color:#ffffff;text-color:#00ff00;"><a data-target="#new_column_form" class="btn" role="button" data-toggle="modal"><img src="<?php echo base_url().'images/icons/add_field.png';?>" height="10px" weight="10px">Add Column</a></td>
                 </tr>
                 <tr>
@@ -253,7 +244,7 @@
                 }
                 ?>
                     <td style="border-right: dotted 1px #c0c0c0;text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $i; ?>.</td>
-                    <td style="text-align: center;border-bottom: solid 1px #c0c0c0;background-color:#f2f2f2;" ><?php echo $row->column_type;?></td>
+                    <td style="text-align: left;border-bottom: solid 1px #c0c0c0;background-color:#f2f2f2;" ><?php echo $row->column_type;?></td>
                     <td style="text-align: center;border-bottom: solid 1px #c0c0c0;background-color:#ceffff;"><?php echo $row->serial_number;?></td>
                     <td style="text-align: center;border-bottom: solid 1px #c0c0c0;background-color:#e6ffff;"><?php echo $row->column_dimensions;?></td>
                     <td style="text-align: center;border-bottom: solid 1px #c0c0c0;background-color:#f2f2f2;"><?php echo $row->manufacturer;?></td>

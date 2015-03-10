@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <title>MEDS</title>
-  <link rel="icon" href="" />
+  <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon">
   <link href="<?php echo base_url().'style/core.css';?>" rel="stylesheet" type="text/css" />
    <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
    
@@ -68,7 +68,6 @@
                ?>>
              <a data-target="#equipment_form" class="btn" role="button" data-toggle="modal"><img src="<?php echo base_url().'images/icons/add_field.png'?>" height="10px" width="10px">Add Equipment</a>
              <a href="<?php echo base_url().'columns/Get';?>"><img src="<?php echo base_url().'images/icons/view.png'?>" height="25px" width="25px">Columns</a>
-             <a href="<?php echo base_url().'equipment_report/index';?>"><img src="<?php echo base_url().'images/icons/reports.png';?>" height="25px" width ="25px">Reports</a>
              </td>
           </tr>
       </table>

@@ -28,7 +28,7 @@ class Equipment_Maintenance_Records extends CI_Controller {
   //      redirect('login');
   //    }    
   // }
-  function get(){
+  function Get(){
       
     $data['query'] = $this->db->select('*')->get_where('equipment_maintenance', array('status'=>0))->result();
 	  

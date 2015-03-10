@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <title>MEDS</title>
-  <link rel="icon" href="" />
+  <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon">
   <link href="<?php echo base_url().'style/core.css';?>" rel="stylesheet" type="text/css" />
    <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
    
@@ -196,12 +196,12 @@
           <?php
             $i = 1;
 
-            if(empty($coa)){
+            if(empty($test_results)){
                   echo "There's no data currently for display!";
             }else{
 
             }
-            foreach ($coa as $row): 
+            foreach ($test_results as $row): 
 
               if ($i ==0) {
                  echo "<tr>";
@@ -268,18 +268,18 @@
       </tr>
       <tr>
         <td colspan="6" style ="text-align:center;padding:8px;">
-        <div id="conclusions_view"><?php echo $coa_2[0]['conclusions'];?></div>
+        <div id="conclusions_view"><?php echo $coa[0]['conclusions'];?></div>
         </td>
       </tr>
       <tr>
         <td colspan="6" style ="text-align:center;padding:8px;">
           <div id="conclusions_edit" class="hide_data">
-            <textarea rows="4" cols="20" name="conclusions"> <?php echo $coa_2[0]['conclusions'];?></textarea>
+            <textarea rows="4" cols="20" name="conclusions"> <?php echo $coa[0]['conclusions'];?></textarea>
           </div>
         </td>
       </tr>
       <tr>    
-         <td colspan="3" align="left" style="padding:8px;color:#0000ff;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>Prepared by: <?php echo $coa_2[0]['done_by'];?>
+         <td colspan="3" align="left" style="padding:8px;color:#0000ff;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>Prepared by: <?php echo $coa[0]['done_by'];?>
           
           </td>
 

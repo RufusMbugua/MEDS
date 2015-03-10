@@ -389,6 +389,20 @@ margin-top:-32767px;/* thank you Erik J - negate effect of float*/
     color:#ffffff;
     border-radius:4px;
 }
+.withdrawn_btn{
+    padding: 8px;
+    background-color:#ff6724;
+    color:#ffffff;
+    border-radius:1px;
+
+}
+.edit_btn{
+    padding: 4px;
+    background-color:#cccccc;
+    color:#ffffff;
+    border-radius:2px;
+
+}
 .monograph{
     padding: 6px;
     background-color:#ffffff;

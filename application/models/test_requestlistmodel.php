@@ -102,14 +102,22 @@ class Test_Requestlistmodel extends CI_Model{
     }
     function test_request_list_getc(){
 
-         // $trid = $this->uri->segment(4);
          $utid = $this->uri->segment(3);
          $dp_id = $this->uri->segment(4);
          
          if($utid==6||$utid==7){
-            $sql="SELECT * FROM test_request WHERE request_status ='2' ";
+            
+            $status=2;
+
+            $data=$this->db->select('id')->get_where('test_request',array('request_status' =>$status))->result();
+            $trid=$data[0]->id;
+
+            $sql="SELECT * FROM test_request
+            Join assignment ON assignment.test_request_id=test_request.id WHERE request_status ='2' ";
             $query=$this->db->query($sql);
             return $query->result();
+            
+
         }
         elseif($utid==5 && $dp_id==2){
             $sql="SELECT * FROM test_request

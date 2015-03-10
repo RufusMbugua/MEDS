@@ -10,6 +10,9 @@ class Test_Disintergration extends CI_Controller{
 		$test_request = $this->uri->segment(4);
 		$test_type = 3;
 
+		$data['monograph']=
+    	$this->db->select('*')->get_where('full_monograph', array('test_request_id' => $test_request))->result_array();
+    
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
 		$data['results']= $this->db->get_where('test_request', array('id' =>$test_request))->result_array();
 
@@ -33,6 +36,9 @@ class Test_Disintergration extends CI_Controller{
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
 
+		$data['monograph']=
+    	$this->db->select('*')->get_where('full_monograph', array('test_request_id' => $test_request))->result_array();
+    
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
 		$query = $this->db->query($sql);
 		$result =$query->result_array();
@@ -40,6 +46,24 @@ class Test_Disintergration extends CI_Controller{
 		$data['results']=$result[0];
 				
 		$this->load->view('tests/disintegration/test_disintergration_monograph_view',$data);
+	}
+	function view_specifications(){
+		$data['assignment'] = $this->uri->segment(3);
+		$data['test_request'] = $this->uri->segment(4);
+		$test_request = $this->uri->segment(4);
+
+		$data['monograph']=
+    	$this->db->select('*')->get_where('full_monograph', array('test_request_id' => $test_request))->result_array();
+    	
+    	$data['query_monograph']=$this->db->select('monograph_specifications.monograph_specifications')->get_where('monograph_specifications', array('test_request_id' => $test_request))->result_array();
+
+		$sql = "SELECT * FROM test_request WHERE id =$test_request";
+		$query = $this->db->query($sql);
+		$result =$query->result_array();
+
+		$data['results']=$result[0];
+				
+		$this->load->view('tests/disintegration/test_disintergration_specifications_view',$data);
 	}
 	function save_monograph(){	
 
@@ -54,6 +78,9 @@ class Test_Disintergration extends CI_Controller{
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request =$this->uri->segment(4);
 
+		$data['monograph']=
+    	$this->db->select('*')->get_where('full_monograph', array('test_request_id' => $test_request))->result_array();
+    
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
 		$query = $this->db->query($sql);
 		$result =$query->result_array();
@@ -64,10 +91,7 @@ class Test_Disintergration extends CI_Controller{
 	    $results_e=$query_e->result_array();
 	    $data['query_e']=$results_e[0];
 
-	    $result_monograph = $this->db->get_where('disintegration_monograph', array('test_request_id' => $test_request))->result_array();
-	    $data['query_monograph'] = $result_monograph[0];
-		//var_dump($results_e);
-		// die;
+	    $data['query_monograph']=$this->db->select('monograph_specifications.monograph_specifications')->get_where('monograph_specifications', array('test_request_id' => $test_request))->result_array();
 
 		$this->load->view('tests/disintegration/test_disintergration_view_worksheet', $data);	
 	}	

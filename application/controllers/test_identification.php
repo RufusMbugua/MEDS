@@ -379,13 +379,11 @@ class Test_Identification extends CI_Controller{
 	}
 	
 	function worksheet_assay(){	
-	// var_dump($this->input->post());	
-		if ($this->input->post()) {
-			$this->test_identification_model->save_assay();
-		}		
+		
+		$this->test_identification_model->save_assay();		
 	}
+
 	function worksheet_uv(){
-	var_dump($this->input->post());
 
 		if ($this->input->post()) {
 			$this->test_identification_model->save_uv();
@@ -394,26 +392,26 @@ class Test_Identification extends CI_Controller{
 	}
 	function worksheet_infrared(){
 		
-		if ($this->input->post()) {
+		if ($this->input->post('submit')) {
 			$this->test_identification_model->save_infrared();
 		}
 	}
 	
 	function worksheet_thin_layer(){
 		
-		if ($this->input->post()) {
+		if ($this->input->post('submit')) {
 			$this->test_identification_model->save_thin_layer();
 		}
 	}
 	function worksheet_chemical_method(){
 
-		if ($this->input->post()) {
+		if ($this->input->post('submit')) {
 			$this->test_identification_model->save_chemical();
 		}
 	}
 	function worksheet_hplc(){	
 
-		if ($this->input->post()) {
+		if ($this->input->post('submit')) {
 			$this->test_identification_model->save_hplc();
 		}
 	}

@@ -49,7 +49,7 @@ $(document).ready(function() {
   selector: "textarea"
   });
 
-//function to post data when submit button is pressed
+//function to post data when submit link is pressed
   $('#save_identification').click(function(){ 
      $('#save_identification').hide();    
         post_ajax();
@@ -95,20 +95,20 @@ function post_ajax(){
     
 }
 
-  $('#clear_form').click(function(){
-    $('#save_identification').show();
-   // $('.all_input').val('');
+//   $('#clear_form').click(function(){
+//     $('#save_identification').show();
+//    // $('.all_input').val('');
 
-    var tinymce_editor_id = $('._text_areas'); 
-   // tinymce.get(tinymce_editor_id).setContent('');
+//     //var tinymce_editor_id = $('._text_areas'); 
+//    // tinymce.get(tinymce_editor_id).setContent('');
 
 
-});  
+// });  
 });
   </script>
   </head>
   <body>
-       <?php
+  <?php
    $user=$this->session->userdata;
    $user_type_id=$user['logged_in']['user_type'];
    $user_id=$user['logged_in']['id'];
@@ -189,7 +189,7 @@ function post_ajax(){
               <td colspan="" style="padding:4px;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><?php echo $results['reference_number'] ;?></td>
           </tr>
           <tr>
-                <td colspan="2" width ="80px"style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-left:solid 1px #bfbfbf;">EFFECTIVE DATE: <?php echo date("d/m/Y")?></td>
+                <td colspan="2" width ="80px"style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-left:solid 1px #bfbfbf;">EFFECTIVE DATE: <?php echo date("d/m/Y");?><input type="hidden" name="date_done" value="<?php echo date("d/m/Y");?>"></td>
                 <td colspan="" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-left:solid 1px #bfbfbf;">ISSUE/REV 2/2</td>
                 <td height="25px"colspan="" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">SUPERSEDES: 2/1</td>
                 <td height="25px" colspan="" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">PAGE 1 of 1</td>
@@ -263,19 +263,19 @@ function post_ajax(){
          }else{
             echo $specs['monograph_specifications'];
         }?> </td>
-        <td colspan = "3" align="center" style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> Method <input type="text" name="method" size="40" placeholder="e.g BP 2013"> </td>
+        <td colspan = "3" align="center" style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> Method <input type="text" id="method" name="method" size="40" placeholder="e.g BP 2013"> </td>
       </tr>
       <tr>
         <td colspan ="6" align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-right: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color:#0000fb;"><b>Results</b> </td>
       </tr>       
       <tr>  
-        <td colspan = "6"style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <textarea cols ="90" rows="3" name="results_assay" class="all_input_text_areas"></textarea> </td>  
+        <td colspan = "6"style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <textarea cols ="90" rows="3" id="results" name="results"></textarea></td>  
          </tr>
       <tr>      
         <td colspan ="6" align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-right: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color:#0000fb;"><b>Comments</b></td>
       </tr>       
       <tr>
-        <td colspan = "6"style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <textarea cols ="90" rows="3" name="comment_assay" class="all_input_text_areas"></textarea> </td>
+        <td colspan = "6"style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <textarea cols ="90" rows="3" id="comments" name="comments"></textarea> </td>
       </tr>
        <tr>
         <td colspan="8" align="left"  style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>Conclusion</b></td>
@@ -284,7 +284,13 @@ function post_ajax(){
         <td colspan="8" style="padding:8px;border-bottom:solid 1px #c4c4ff;">
           <table border="0" width="100%" class="table_form" cellpadding="8px" align="center">
             <tr>    
-              <td style="border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:center;"><select name="choice" id="choice" class="all_input"><option>----</option><option>Complies</option><option>Does not Comply</option></td>
+              <td style="border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:center;">
+                <select name="conclusion" id="conclusion" class="all_input">
+                  <option>----</option>
+                  <option value="Complies">Complies</option>
+                  <option value="Does Not Comply">Does Not Comply</option>
+                </select>
+              </td>
             </tr>
           </table>
          </tr>

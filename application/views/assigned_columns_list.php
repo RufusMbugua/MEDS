@@ -43,9 +43,8 @@
   ?>
   <div id="header"> 
    <div id="logo" style="padding:8px;color: #0000ff;" align="center"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="35px" width="40px"/>MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</div>
-  </div>
-  <div id="log_bar" class="subdivider">
-  <table  border="0" cellpadding="2px" align="center" width="100%">
+  <div id="log_bar">
+  <table  cellpadding="2px" align="center" width="100%">
       <tr>
         
         <td style="border-bottom: solid 1px #c4c4ff;padding:4px;text-align: center;background-color: #ffffff;" width="20px">
@@ -78,6 +77,7 @@
       </tr>
   </table> 
   </div>
+</div>
    <?php 
     echo "<div id='system_nav'";
       if($user['logged_in']['user_type'] !=6 && $user['logged_in']['user_type'] !=8){
@@ -104,10 +104,10 @@
         <a href="<?php echo base_url().'reagents_inventory_record/Get';?>"class="sub_menu sub_menu_link first_link">Reagents & Inventory</a>
         <a href="<?php echo base_url().'standard_register_records/Get';?>"class="sub_menu sub_menu_link first_link">Standard Register</a>
         <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
-        <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a>
+        <!-- <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a>
         <a href="<?php echo base_url().'complaints_list/records';?>" class="sub_menu sub_menu_link first_link">Complaints</a>
         <a href="<?php echo base_url().'coa_list/records';?>"class="sub_menu sub_menu_link first_link">Certificate of Analysis</a>
-        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a>
+        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a> -->
     </div>
     <?php
     echo"<div id='sub_menu'";
@@ -135,10 +135,10 @@
         <a href="<?php echo base_url().'reagents_inventory_record/Get';?>"class="sub_menu sub_menu_link first_link">Reagents & Inventory</a>
         <a href="<?php echo base_url().'standard_register_records/Get';?>"class="sub_menu sub_menu_link first_link">Standard Register</a>
         <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
-        <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a>
+        <!-- <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a>
         <a href="<?php echo base_url().'complaints_list/records';?>"class="sub_menu sub_menu_link first_link">Complaints</a>
         <a href="<?php echo base_url().'coa_list/records';?>"class="sub_menu sub_menu_link first_link">Certificate of Analysis</a>
-        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a>
+        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a> -->
     </div>
     <?php
     echo"<div id='sub_menu'";
@@ -188,7 +188,7 @@
         <div div="list_view_navbar">
             <table class="subdivider" border="0" bgcolor="#ffffff"  width="100%" cellpadding="8px" align="center">
                 <tr>
-                    <td style="padding:4px;text-align:left;background-color:#ffffff;text-color:#00ff00;"><a href="<?php echo base_url().'equipment_maintenance_records/Get';?>"><img src="<?php echo base_url().'images/icons/back.png';?>" height="20px" wieght="20px">Back</a></td>
+                    <td style="padding:4px;text-align:left;background-color:#ffffff;text-color:#00ff00;"><a href="<?php echo base_url().'equipment_maintenance_records/Get';?>"><img src="<?php echo base_url().'images/icons/view.png';?>" height="20px" wieght="20px">Back To Equipment List</a></td>
                     <td style="padding:4px;text-align:right;background-color:#ffffff;text-color:#00ff00;"><a data-target="#new_column_form" class="btn" role="button" data-toggle="modal"><img src="<?php echo base_url().'images/icons/add_field.png';?>" height="10px" weight="10px">Add Column</a></td>
                 </tr>
                  <tr>

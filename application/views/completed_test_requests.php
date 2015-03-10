@@ -368,7 +368,7 @@
               <?php
               if($row->analyst_name!="0"){
                   echo"style='display:block;text-align: center;'>";
-              ?><a href="<?php echo base_url().'worksheet/'.$row->id;?>"><img src="<?php echo base_url().'images/icons/worksheet.png';?>" height="30px" width="30px"/>Worksheet</a>
+              ?><a href="<?php echo base_url().'worksheets/worksheetlist/'.$row->id.'/'.$row->test_request_id;?>"><img src="<?php echo base_url().'images/icons/worksheet.png';?>" height="30px" width="30px"/>Worksheet</a>
           </div>
               <?php
               }elseif($row->analyst_name==0){

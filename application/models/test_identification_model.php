@@ -37,9 +37,10 @@ class Test_Identification_Model extends CI_Model{
 	}
 
 	function save_assay(){
-		$results=$this->input->post('results_assay');
+
+		$results=$this->input->post('results');
 		$component_name=$this->input->post('component_name');
-		$comment_assay=$this->input->post('comment_assay');
+		$comment_assay=$this->input->post('comments');
 		$test_request=$this->input->post('test_request');
 		$test_type=$this->input->post('test_type');
 		$remarks = $this->input->post('choice');
@@ -47,6 +48,8 @@ class Test_Identification_Model extends CI_Model{
 		$status =1;
 		$test_name='Identification';
 		$analyst= $this->input->post('analyst');
+
+      
 
 		$data=$this->db->select_max('id')->get('identification')->result();
         $test_id=$data[0]->id;
@@ -60,23 +63,22 @@ class Test_Identification_Model extends CI_Model{
         $result_next = $result_prev." ".$component_name;
 
         if ($remark_prev == "Does not Comply" || $remarks =="Does not Comply" ) {
-        	$remark_next = "Does not Comply";
+        	$remark_next = "Does Not Comply";
         }else{
         	$remark_next = "Complies";
         }
 		
-		$data =array(
-			'results_assay'=>$results,
-			'comment_assay'=>$comment_assay,
-			'choice'=>$this->input->post('choice'),
+		$data_i =array(
+			'results_assay'=>$this->input->post('results'),
+			'comment_assay'=>$this->input->post('comments'),
+			'choice'=>$this->input->post('conclusion'),
 			'date'=>$this->input->post('date_done'),
-			'further_comments'=>$this->input->post('further_comments'),
 			'status' =>$status,
 			'test_request'=>$test_request,
 			'assignment'=>$assignment,
 			'analyst'=>$analyst,
 			);
-
+		//var_dump($data_i);die;
 		$result_data = array(
 			'test_id'=>$test_id,
 			'test_name'=>$test_name,
@@ -89,8 +91,7 @@ class Test_Identification_Model extends CI_Model{
 			'status'=>1,
 			);
 // var_dump($test_type);
-// var_dump($result_data);die;
-		$this->db->insert('identification', $data);		
+		$this->db->insert('identification', $data_i);		
 		$this->db->update('test_results', $result_data, array('test_request_id'=>$test_request,'test_type'=>$test_type));
 		$this->db->update('components', $c_data, array('component'=>$component_name));
 

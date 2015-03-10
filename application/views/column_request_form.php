@@ -116,19 +116,19 @@
 <div class="modal-header">
   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h4 class="modal-title" id="meds">Columns Record Form</h4>
-</div>
+
     <?php echo validation_errors(); ?>
     <?php echo form_open('columns_request/save',array('id'=>'column_request_form'));?>
-<table class="table_form" width="90%" bgcolor="#c4c4ff" border="0" cellpadding="4" align="center">
+<table class="" width="100%" bgcolor="#c4c4ff" border="0" cellpadding="4" align="center">
   <tr>
     <td colspan="8" style="padding:8px;">
       <table width="100%" align="center">
         <tr> 
           <td rowspan="2" style="padding:4px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="80px" width="90px"/></td>
-          <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><b>Document:Official Form</b></td>
+          <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><b>DOCUMENT: OFFICIAL FORM</b></td>
           <td width="150px" height="25px" colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;color:#000000;"><b>REFERENCE NUMBER</b></td>
           <td colspan="3" style="padding:4px;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">
-            <input type="text" id="reference_number" name="reference_number" class="field"/>
+            <input type="text" id="reference_number" name="reference_number" value="MEDS/QC/RE/01-01" class="field"/>
             <span id="reference_number_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
             <span id="reference_number_r" style="color:red; display:none">Fill this field</span>
           </td>
@@ -147,6 +147,7 @@
       </table>
     </td>
   </tr>
+  </div>
   <tr>
       <td colspan="8" height="25px" align="center" style="border-right:solid 1px #bfbfbf;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #c4c4ff;">
       </td>

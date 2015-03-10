@@ -871,7 +871,7 @@
                 <td style="text-align:center;padding:4px; background-color:#ffffff;"><b></b></td>
                 <td style="text-align:center;padding:4px; background-color:#ffffff;"><b></b></td>
                 <td style="text-align:center;padding:4px; background-color:#ffffff;"><b></b></td>
-                <td></td>
+                <td style="text-align:center;padding:4px; background-color:#ffffff;"></td>
             </tr>
             <?php 
               if($monograph[0]['components']==1){
@@ -1035,7 +1035,7 @@
                 <td style="text-align:center;padding:4px; background-color:#ffffff;"><b></b></td>
                 <td style="text-align:center;padding:4px; background-color:#ffffff;"><b></b></td>
                 <td style="text-align:center;padding:4px; background-color:#ffffff;"><b></b></td>
-                <td></td>
+                <td style="text-align:center;padding:4px; background-color:#ffffff;"></td>
             </tr>
             <?php 
               if($monograph[0]['components']==1){
@@ -1183,9 +1183,7 @@
               }else{}
             ?>
             <?php 
-              if($monograph[0]['components']==1){
-
-                if(in_array('54',$tests_done)){
+              if(in_array('6',$tests)){
             ?> 
             <tr>
                 <td style="text-align:center;padding:4px; background-color:#ffffff;"><b>Weight Variation</b></td>
@@ -1194,6 +1192,10 @@
                 <td style="text-align:center;padding:4px; background-color:#ffffff;"><b></b></td>
                 <td style="text-align:center;padding:4px; background-color:#ffffff;"></td>
             </tr>
+            <?php
+              if($monograph[0]['components']==1){
+                if(in_array('54',$tests_done)){
+            ?>
             <tr>
                 <td style="text-align:center;padding:4px;"></td>
                 <!-- && in_array('Weight Variation', $uniformity_of_dosage) -->
@@ -1252,7 +1254,7 @@
                      }else{
                          echo"style='text-align:center;padding:4px;'>";
                    ?>
-                     <a href="<?php echo base_url().'content_uniformity/weight_variation_worksheet_view/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a>
+                     <a href="<?php echo base_url().'content_uniformity/worksheet/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a>
                 <?php
                 }
                 ?>
@@ -1272,6 +1274,7 @@
             <?php
               }else{}
                     }else{}
+                          }else{}
             ?>
             <?php 
               if($monograph[0]['components']==2){
@@ -1326,7 +1329,7 @@
                      }else{
                          echo"style='text-align:center;padding:4px;'>";
                    ?>
-                     <a href="<?php echo base_url().'content_uniformity/weight_variation_worksheet_view/'.$query['a'].'/'.$request[0]['tr'];?>">view worksheet</a>
+                     <a href="<?php echo base_url().'content_uniformity/worksheet/'.$query['a'].'/'.$request[0]['tr'];?>">view worksheet</a>
                 <?php
                 }
                 ?>
@@ -3357,35 +3360,53 @@
            </tr>
            <tr>
                 <td style="text-align:center;padding:4px;"><b></b></a></td>
-                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_disintergration/monograph/'.$query['a'].'/'.$request[0]['tr'];?>">Please Fill Test specification</a></td>
+                <td style="text-align:left;padding:4px;">
+                  <?php              
+                  if(in_array('3', $monograph_specifications)){
+                  ?>
+                    <a href="<?php echo base_url().'test_disintergration/view_specifications/'.$query['a'].'/'.$request[0]['tr'];?>">View Disintegration Test specifications</a>
+                  <?php
+                    }else{
+                  ?>
+                    <a href="<?php echo base_url().'test_disintergration/monograph/'.$query['a'].'/'.$request[0]['tr'];?>">Please Fill Test specification</a>
+                  <?php
+                    }
+                  ?>
+                </td>
                 <td 
                  <?php              
-                  if(in_array('3', $monograph_specifications)){
+                  if(in_array('3', $monograph_specifications) && empty($disintegration)){
                     ?>
-                     <td style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_disintergration/index/'.$query['a'].'/'.$request[0]['tr'];?>">Specify Components</a></td>
+                     style="text-align:left;padding:4px;">
+                     <a href="<?php echo base_url().'test_disintergration/index/'.$query['a'].'/'.$request[0]['tr'];?>">Disintegration Test</a>
                     
                  <?php     
-                 }else{                         
+                 }else{ 
+                    echo'style="text-align:left;padding:4px;">';                        
                   ?>
-                    <td style='text-align:left;padding:4px;'>Please fill in Disintegration Specification  
+                   Disintegration Test  
                 <?php
                 }             
-                ?></td>
+                ?>
+                </td>
                 <td 
                 <?php 
-                      if(empty($query_six)){
+                      if(empty($disintegration)){
                     
                           echo"style='text-align:center;padding:4px;'>";
                           echo "View Worksheet";
                      }else{
                       ?>
-                        style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_disintergration/view_worksheet/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
+                        style="text-align:center;padding:4px;">
+                        <a href="<?php echo base_url().'test_disintergration/view_worksheet/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a>
+                
                      <?php   
                      }
                      ?> 
+              </td>
               <td 
                 <?php 
-                      if(empty($query_six)){
+                      if(empty($disintegration)){
                     
                           echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
                           echo "Not Done";

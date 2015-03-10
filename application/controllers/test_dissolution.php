@@ -830,6 +830,9 @@ $data['monograph_specs']=	$this->db->select('*')->get_where('monograph_specifica
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
 
+		$monograph['monograph']=
+		$this->db->select('*')->get_where('full_monograph', array('test_request_id' => $test_request))->result_array();
+		
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
 		$query = $this->db->query($sql);
 		$result =$query->result_array();

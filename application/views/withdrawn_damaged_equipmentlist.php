@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <title>MEDS</title>
-  <link rel="icon" href="" />
+  <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon">
   <link href="<?php echo base_url().'style/core.css';?>" rel="stylesheet" type="text/css" />
    <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
    

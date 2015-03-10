@@ -165,10 +165,8 @@ function index(){
 
     }
 
+    $data['disintegration']=$this->db->select('disintegration.status')->get_where('disintegration', array('disintegration.test_request' => $trid))->result_array();
     
-
-   
-
     $data['identification_assay']=$this->db->select('identification.status')->get_where('identification', array('identification.test_request' => $trid))->result_array();
     $data['identification_uv']=$this->db->select('identification_uv.status')->get_where('identification_uv', array('identification_uv.test_request' => $trid))->result_array();
     $data['identification_infrared']=$this->db->select('identification_infrared.status')->get_where('identification_infrared', array('identification_infrared.test_request' => $trid))->result_array();
@@ -197,7 +195,6 @@ function monograph(){
     $test_request_id=$this->uri->segment(4);
     $component=1;
     $component2=2;
-    $component3=1;
        
     $data['request']=
     $this->db->select('assignment.id AS a,assignment.test_request_id,assignment.assigner_user_id,assignment.client_id,assignment.reference_number,assignment.assigner_name,assignment.analyst_name,assignment.sample_issued')->get_where('assignment', array('id' => $assignment_id))->result_array();
@@ -267,9 +264,13 @@ function save_monograph(){
       
   }  
   function view_monograph(){
+
     $assignment_id= $this->uri->segment(3);
     $test_request_id=$this->uri->segment(4);
     $monograph_id=$this->uri->segment(5);
+
+    $component=1;
+    $component2=2;
 
     $data['request']=
     $this->db->select('assignment.id AS a,assignment.test_request_id,assignment.assigner_user_id,assignment.client_id,assignment.reference_number,assignment.assigner_name,assignment.analyst_name,assignment.sample_issued')->get_where('assignment', array('id' => $assignment_id))->result_array();
@@ -284,10 +285,107 @@ function save_monograph(){
 
     $data['monograph_details'] = $this->db->select('*')->get_where('full_monograph', array('test_request_id'=>$test_request_id, 'id'=>$monograph_id))->result_array();
     $data['components'] = $this->db->select('*')->get_where('components', array('test_request_id'=>$test_request_id))->result_array();
-   
+    
+    $sql= $this->db->select('full_monograph.tests_done')->get_where('full_monograph', array('test_request_id'=>$test_request_id, 'id'=>$monograph_id))->result_array();
+    $return= explode( ",", $sql[0]['tests_done'] );
+    $data['tests_done']=$return;
+
+    $sql_test_request= $this->db->select('test_request.tests')->get_where('test_request', array('id'=>$test_request_id))->result_array();
+    $return= explode( ",", $sql_test_request[0]['tests'] );
+    $data['tests']=$return;
+ 
+    $data['subtests_multicomponent']=
+    $this->db->select('*')->get_where('subtests', array('component' => $component2))->result_array();
+    
+    $data['subtests_single']=
+    $this->db->select('*')->get_where('subtests', array('component' => $component))->result_array();
+
     $this->load->view('monograph_view',$data);
 
   }
 
+  function monograph_edit(){
+   
+    $assignment_id= $this->uri->segment(3);
+    $test_request_id=$this->uri->segment(4);
+    $monograph_id=$this->uri->segment(5);
+    $component=1;
+    $component2=2;
+       
+    $data['request']=
+    $this->db->select('assignment.id AS a,assignment.test_request_id,assignment.assigner_user_id,assignment.client_id,assignment.reference_number,assignment.assigner_name,assignment.analyst_name,assignment.sample_issued')->get_where('assignment', array('id' => $assignment_id))->result_array();
+    
+    $query=$this->db->select('test_request.id AS tr,test_request.client_id,test_request.active_ingredients,test_request.manufacturer_name,test_request.manufacturer_address,test_request.batch_lot_number,
+    test_request.sample_source,test_request.expiry_date,test_request.quantity_type,test_request.reference_number,test_request.applicant_address,test_request.date_time,test_request.date_manufactured,test_request.quantity_type,test_request.sample_source,test_request.laboratory_number,test_request.applicant_name,
+    test_request.quantity_remaining,test_request.quantity_submitted,test_request.applicant_ref_number,test_request.test_specification,test_request.request_status')->get_where('test_request', array('id' => $test_request_id));
+    
+    $data['monograph_details'] = $this->db->select('*')->get_where('full_monograph', array('test_request_id'=>$test_request_id, 'id'=>$monograph_id))->result_array();
+    $data['components'] = $this->db->select('*')->get_where('components', array('test_request_id'=>$test_request_id))->result_array();
+    
+    $result=$this->db->select('test_request.tests')->get_where('test_request', array('id' => $test_request_id))->result_array();
+    $return= explode( ",", $result[0]['tests'] );
+    $data['tests']=$return;
+
+    $sql= $this->db->select('full_monograph.tests_done')->get_where('full_monograph', array('test_request_id'=>$test_request_id, 'id'=>$monograph_id))->result_array();
+    $return= explode( ",", $sql[0]['tests_done'] );
+    $data['tests_done']=$return;
+ 
+    $results=$query->result_array();
+    $data['query']=$results[0];
+
+    $data['subtests_multicomponent']=
+    $this->db->select('*')->get_where('subtests', array('component' => $component2))->result_array();
+    
+    $data['subtests_single']=
+    $this->db->select('*')->get_where('subtests', array('component' => $component))->result_array();
+    
+
+    $this->load->view('monograph_edit',$data);
+    $this->load->helper(array('form'));
+}
+
+function edit_monograph(){
+
+    $copy = $this->input->post('copy_paste');
+    $upload_doc = $this->input->post('upload_document');
+
+
+    if($this->input->post('upload')) {
+            
+         
+    $config['upload_path'] = './uploads/';
+    $config['allowed_types'] = 'gif|jpg|png|pdf|doc';
+    $config['max_size'] = '100000';
+    $config['max_width']  = '1024';
+    $config['max_height']  = '768';
+
+    $this->load->library('upload', $config);
+
+        if ( ! $this->upload->do_upload() && $upload_doc = 0){
+          echo $upload_doc,$copy;
+          $error = array('error' => $this->upload->display_errors());
+          print_r($config['upload_path']);
+
+          $this->load->view('upload_form', $error);
+        }
+        else
+        {
+           $data = $this->upload->data();
+           // echo "<pre>";
+           // print_r($data);die;
+           $file_name = $data['file_name'];
+           $full_path = $data['full_path'];
+
+          $this->load->model('test_model');
+          $path = $config['upload_path'];
+
+          if($this->input->post('upload')) {
+            $this->test_model->process_edit_monograph($full_path, $file_name);
+          } 
+
+        }
+    }
+      
+  }  
 }
 ?>

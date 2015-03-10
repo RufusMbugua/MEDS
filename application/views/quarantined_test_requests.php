@@ -423,7 +423,7 @@
             echo"style='display:none;'";
           }
         ?>
-       ><a class="btn" href="<?php echo base_url().'withdraw/withdraw_record/'.$row->id.'/'.$user_type_id.'/'.$department_id;?>">withdraw</a></td>
+       ><a class="withdrawn_btn" href="<?php echo base_url().'withdraw/withdraw_record/'.$row->id.'/'.$user_type_id.'/'.$department_id;?>">withdraw</a></td>
        <td
         <?php 
           if($user['logged_in']['user_type']==6){

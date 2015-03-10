@@ -81,7 +81,7 @@
     <div id="form_wrapper_lists">
        <div id="account_lists">
       <?php echo validation_errors(); ?>
-      <?php echo form_open_multipart('test/save_monograph',array('id'=>'monograph_form'));?>
+      <?php echo form_open_multipart('test/edit_monograph',array('id'=>'monograph_form'));?>
        <table class="table_form" width="70%" border="0" cellpadding="4px" align="center">
         <input type="hidden" name="tr_id" value="<?php echo $query['tr'];?>"></input>
         <input type="hidden" name="assignment_id" value="<?php echo $request[0]['a'];?>"></input>
@@ -110,7 +110,7 @@
                 </tr>
                 <tr>
                     <td height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">SERIAL NO.</td>
-                    <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><input type="text" name="serial_number"></input></td>
+                    <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><input type="text" name="serial_number" value="<?php echo $monograph_details[0]['serial_number']?>"></input></td>
                     <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;">BATCH/LOT NO.</td>
                     <td colspan="3" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><?php echo $query['batch_lot_number']?></input></td>    
                 </tr>
@@ -128,9 +128,20 @@
                   <b>Tests Requested as per Client Test Request Form</b></td> 
                 </tr>
                 <tr>
-                  <td colspan="8" align="center" style="padding:4px;border-bottom: solid 1px #c4c4ff;">
-                    <table width="100%" align="center" cellpaddding="4px">
+                  <td colspan="8" align="center" style="padding:4px;">
+                    <table width="80%" align="center" cellpaddding="4px">
                         <?php include_once('application/views/tests_requested.php');?>
+                    </table>
+                  </td> 
+                </tr>
+                <tr>
+                  <td colspan="8" align="center" style="padding:4px;border-bottom: solid 1px #c4c4ff;background-color: #ffffff;">
+                  <b>Tests Originally Selected To Be Done</b></td> 
+                </tr>
+                <tr>
+                  <td colspan="8" align="center" style="padding:4px;border-bottom: solid 1px #c4c4ff;">
+                    <table width="80%" align="center" cellpaddding="4px">
+                        <?php include_once('application/views/single_complogic_edit.php');?>
                     </table>
                   </td> 
                 </tr>
@@ -138,35 +149,51 @@
                   <td colspan="8" align="left" style="padding:4px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><h5>Number of Components</h5></td> 
                 </tr>
                 <tr>
-                  <td colspan="8" align="left" style="padding:4px;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><input type="checkbox" name="singlecomponent" id="singlecomponent" value="1"> Single Component</td>
+                  <td colspan="8" align="left" style="padding:4px;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">
+                    <?php
+                      if($monograph_details[0]['components']==1){
+                    ?>
+                    <input type="checkbox" name="singlecomponent" id="singlecomponent" value="1" checked> Single Component</td>
+                    <?php
+                    }else{
+                    ?>
+                     <input type="checkbox" name="singlecomponent" id="singlecomponent" value="1"> Single Component</td>
+                    <?php
+                    } 
+                    ?>
                 </tr>
                 <tr>  
                   <td colspan="8" style="padding:8px;">
-                    <table width="100%" id="tbl_singlecomp"  align="center" cellpadding="4px">
+                    <table width="80%" id="tbl_singlecomp"  align="center" cellpadding="4px">
                       <tr>
-                        <td>Component <input type="text" name="single_component" id="single_component"></td>
-                        <td>Label Claim (mg) <input type="text" name="single_lc_component" id="single_lc_component" class="id"></td>
+                        <td>Component <input type="text" name="single_component" id="single_component" value="<?php echo $components[0]['component'];?>"></td>
+                        <td>Label Claim (mg) <input type="text" name="single_lc_component" id="single_lc_component" value="<?php echo $components[0]['label_claim'];?>" class="id"></td>
                       </tr>
                     </table>
                     <table class="" id="tbl_singlecomp" width="80%" border="0" align="center" cellpadding="4px">
                       <thead>
-                        <td style="padding:8px;" colspan="2" align="center"><b>SELECT SINGLE COMPONENT TESTS AS PER MONOGRAPH</b></td>
+                        <td style="padding:8px;border-bottom:solid 1px #c4c4ff;" colspan="2" align="center"><b>SELECT SINGLE COMPONENT TESTS AS PER MONOGRAPH</b></td>
                       </thead>
                       <tbody>
                         <tr>
                           <tr >
                           <?php
                             $i=1;
-                            foreach ($subtests_single as $row):     
+                            //$x=1;
+                            //$x<=70;
+
+                            foreach ($subtests_single as $row):    
                           ?>
                            <td style="padding:8px;border-right: dotted 1px #c0c0c0;text-align: center;border-bottom: solid 1px #c0c0c0;" width="20px"><?php echo $i;?>.</td>
-                           <td style="padding:8px;text-align: left;border-bottom: solid 1px #c0c0c0;"><input type="checkbox" id="subtests[]" name="subtests[]" value="<?php echo $row['id'];?>"> <?php echo $row['name'];?></td>
+                           <td style="padding:8px;text-align: left;border-bottom: solid 1px #c0c0c0;">
+                              <input type="checkbox" id="subtests[]" name="subtests[]" value="<?php echo $row['id'];?>"> <?php echo $row['name'];?>
+                           </td>
                            <?php
                              $i++;
+                             //$x++;
                            ?>
                         </tr>
                         <?php endforeach; ?>
-                        </tr>
                     </tbody>
                     </table>
                   </td>  
@@ -182,7 +209,7 @@
                       </thead>
                       <tbody>
                         <tr class="prototype">
-                          <td>Component 1 <input type="text" name="component[]" id="component_one" class="id"></td>
+                          <td>Component 1 <input type="text" name="component[]" id="component_one" class="id" ></td>
                           <td>Label Claim (mg) <input type="text" name="lc_component[]" id="lc_component" class="id"></td>
                         </tr>
                     </tbody>
