@@ -14,6 +14,8 @@ class Test_Dissolution_Model extends CI_Model{
 		
 		$component_names = $this->db->select('*')->get_where('components', array('test_request_id' => $test_request))->result_array();
 
+		$query['columns']=$this->db->select('*')->get_where('columns', array('status' => 0))->result_array();
+		
 		$query['standards']=$this->db->select('*')->get_where('standard_register', array('status' => 0))->result_array();
 		
 		$query['reagents']=	$this->db->select('*')->get_where('reagents_inventory_record', array('status' => 0))->result_array();

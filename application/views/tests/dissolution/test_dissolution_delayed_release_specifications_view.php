@@ -132,26 +132,60 @@
               <table border="0" width="80%" cellpadding="8px" align="center">
               
                 <tr>
-                  <td><input type="checkbox" id="min" />Minimum Value</td>
-                  <td><input type="checkbox" id="max" />Maximum Value</td>
-                  <td><input type="checkbox" id="range" />Range of Values</td>
+                  <td>
+                    <?php 
+                      if(!empty($monograph_specs[0]['minimum'])){
+                    ?>
+                    <input type="checkbox" id="min" checked/>Minimum Value
+                    <?php
+                      }else{
+                    ?>
+                    <input type="checkbox" id="min"/>Minimum Value
+                    <?php
+                      }
+                    ?>
+                  </td>
+                  <td>
+                    <?php 
+                      if(!empty($monograph_specs[0]['maximum'])){
+                    ?>
+                    <input type="checkbox" id="max" checked/>Maximum Value
+                    <?php
+                      }else{
+                    ?>
+                    <input type="checkbox" id="max"/>Maximum Value
+                    <?php
+                      }
+                    ?>
+                  </td>
+                  <td>
+                    <?php 
+                      if(!empty($monograph_specs[0]['range_minimum'] && $monograph_specs[0]['range_maximum'])){
+                    ?>
+                    <input type="checkbox" id="range" checked/>Range of Values
+                    <?php
+                      }else{
+                    ?>
+                    <input type="checkbox" id="range"/>Range of Values
+                    <?php
+                      }
+                    ?>
+                  </td>
                   </tr>
                 <tr>
-                  <td style="color:#0000ff;padding:8px;"><input type="text" min="min_tolerance" id="min_tolerance" name="min_tolerance" placeholder="min%" size="5"/></td>
-                  <td style="color:#0000ff;padding:8px;"><input type="text" max='max_tolerance' id="max_tolerance" name="max_tolerance" placeholder="max%" size="5"/></td>
-                  <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" id = "tolerance_range_from" name="tolerance_range_from" placeholder="min%" size="5"> - <input type="text" range="tolerance_range" name="tolerance_range_to" id = "tolerance_range_to" placeholder="max%" size="5" onChange="calculation_determinations()"></td>
+                  <td style="color:#0000ff;padding:8px;"><input type="text" min="min_tolerance" id="min_tolerance" name="min_tolerance" placeholder="min%" value="<?php echo $monograph_specs[0]['minimum'];?>" size="5"/></td>
+                  <td style="color:#0000ff;padding:8px;"><input type="text" max='max_tolerance' id="max_tolerance" name="max_tolerance" placeholder="max%" value="<?php echo $monograph_specs[0]['maximum'];?>"size="5"/></td>
+                  <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" id = "tolerance_range_from" name="tolerance_range_from" placeholder="min%" value="<?php echo $monograph_specs[0]['minimum'];?>" size="5"> - <input type="text" range="tolerance_range" name="tolerance_range_to" id = "tolerance_range_to" placeholder="max%" size="5" value="<?php echo $monograph_specs[0]['range_maximum'];?>" onChange="calculation_determinations()"></td>
                   </tr>
                 <tr>
                 <tr>
               </table>
             <tr>
               <td colspan="8" align="center" style="padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">
-                <textarea cols="90" rows="4" name="specification" id="specification"></textarea>
+                <textarea cols="90" rows="4" name="specification" id="specification"><?php echo $monograph_specs[0]['monograph_specifications'];?></textarea>
               </td>
             </tr>
-            <tr>
-                <td  height="25px" style="padding:4px;background-color:#ffffff;border-top: solid 1px #bfbfbf;text-align: center;" colspan="8" ><input class="btn" type="submit" name="save_delayed_release" id="save_delayed_release" value="Submit"></td>
-            </tr>
+           
        </table>
       </form>
     

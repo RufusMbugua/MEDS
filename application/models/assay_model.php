@@ -10,7 +10,7 @@ class Assay_Model extends CI_Model{
     $component;
     $assignment_id=$this->input->post('assignment_id');
     $test_request_id=$this->input->post('tr_id');
-    $test_name="ASSAY";
+    $test_name="Assay";
     $test_type=6;
     $test_id=8;
 
@@ -38,7 +38,62 @@ class Assay_Model extends CI_Model{
      'test_id'=>$main_test_id,
      'test_type'=>$test_type,
      'test_name'=>$test_name,
-     'specifications'=>"SHOULD RANGE BETWEEN ".$min."% AND ".$max."%" 
+     'specifications'=>$min."% to ".$max."%"." of the stated amount " 
+    );
+
+    $this->db->insert('monograph_specifications',$data_two);
+    $this->db->insert('test_results',$data_three);
+    redirect('test/index/'.$assignment_id.'/'.$test_request_id);
+    
+   }
+
+   function process_specifications_multi(){
+    $component;
+    $assignment_id=$this->input->post('assignment_id');
+    $test_request_id=$this->input->post('tr_id');
+    $test_name="Assay";
+    $test_type=7;
+    $test_id=8;
+
+    //Query the Test table to get id to identify test type
+    $sql=$this->db->select('*')->get_where('test', array('id' => $test_id))->result();
+    $main_test_id=$sql[0]->id;
+
+    $comp_first=$this->db->select_min('id')->get_where('components', array('test_request_id'=>$test_request_id))->result();
+    $comp_one=$comp_first[0]->id;
+
+    $sql_comp_one=$this->db->select('component')->get_where('components', array('id' => $comp_one))->result_array();
+
+    $comp_last=$this->db->select_max('id')->get_where('components', array('test_request_id'=>$test_request_id))->result();
+    $comp_two=$comp_last[0]->id;
+
+    $sql_comp_two=$this->db->select('component')->get_where('components', array('id' => $comp_two))->result_array();
+
+
+    $sql=$this->db->select_max('id')->get('full_monograph')->result();
+    $monograph_id=$sql[0]->id;
+    
+    $min=$this->input->post('range_minimum');
+    $max=$this->input->post('range_maximum');
+
+    $data_two = array( 
+     'monograph_id'=>$monograph_id,
+     'test_request_id'=>$test_request_id,
+     'test_type'=>$test_type,
+     'monograph_specifications'=>$this->input->post('monograph_specifications'),
+     'component'=>$this->input->post('component_name'),
+     'comp_one'=>$sql_comp_one,
+     'comp_two'=>$sql_comp_two,
+     'range_minimum'=>$this->input->post('range_minimum'),
+     'range_maximum'=>$this->input->post('range_maximum')
+    );
+
+    $data_three = array( 
+    'test_request_id'=>$test_request_id,
+     'test_id'=>$main_test_id,
+     'test_type'=>$test_type,
+     'test_name'=>$test_name,
+     'specifications'=>$min."% to ".$max."%"." of the stated amount "
     );
 
     $this->db->insert('monograph_specifications',$data_two);

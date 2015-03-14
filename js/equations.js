@@ -37,16 +37,54 @@
       // document.getElementById('weight_reagent_six').value = s_weight_six.toFixed(5);
 
       }
+      function calculate_difference_two(){
+
+      var sample_weight_one = (Math.abs(document.getElementById('weight_sample_container_one').value) - Math.abs(document.getElementById('weight_container_one').value));
+      var sample_weight_two = (Math.abs(document.getElementById('weight_sample_container_two').value) - Math.abs(document.getElementById('weight_container_two').value));
+      var sample_weight_three = (Math.abs(document.getElementById('weight_sample_container_three').value) - Math.abs(document.getElementById('weight_container_three').value));
+      // var sample_weight_four = (Math.abs(document.getElementById('weight_sample_container_four').value) - Math.abs(document.getElementById('weight_container_four').value));
+      // var sample_weight_five = (Math.abs(document.getElementById('weight_sample_container_five').value) - Math.abs(document.getElementById('weight_container_five').value));
+      // var sample_weight_six = (Math.abs(document.getElementById('weight_sample_container_six').value) - Math.abs(document.getElementById('weight_container_six').value));
+      
+      document.getElementById('weight_sample_one').value = sample_weight_one.toFixed(5);
+      document.getElementById('weight_sample_three').value = sample_weight_three.toFixed(5);
+      document.getElementById('weight_sample_two').value = sample_weight_two.toFixed(5);
+      document.getElementById('d_one_wt').value = sample_weight_one.toFixed(5);
+      document.getElementById('d_two_wt').value = sample_weight_two.toFixed(5);
+      document.getElementById('d_three_wt').value = sample_weight_three.toFixed(5);
+
+      // document.getElementById('d_four_wt').value = sample_weight_one.toFixed(5);
+      // document.getElementById('d_five_wt').value = sample_weight_two.toFixed(5);
+      // document.getElementById('d_six_wt').value = sample_weight_three.toFixed(5);
+      // // document.getElementById('weight_sample_four').value = sample_weight_four.toFixed(5);
+      // document.getElementById('weight_sample_five').value = sample_weight_five.toFixed(5);
+      // document.getElementById('weight_sample_six').value = sample_weight_six.toFixed(5);
+      
+      // var s_weight_one = (Math.abs(document.getElementById('weight_reagent_container_one').value) - Math.abs(document.getElementById('weight_container_one_reagent').value));
+      // var s_weight_two = (Math.abs(document.getElementById('weight_reagent_container_two').value) - Math.abs(document.getElementById('weight_container_two_reagent').value));
+      // var s_weight_three = (Math.abs(document.getElementById('weight_reagent_container_three').value) - Math.abs(document.getElementById('weight_container_three_reagent').value));
+      // var s_weight_four = (Math.abs(document.getElementById('weight_reagent_container_four').value) - Math.abs(document.getElementById('weight_container_four_reagent').value));
+      // var s_weight_five = (Math.abs(document.getElementById('weight_reagent_container_five').value) - Math.abs(document.getElementById('weight_container_five_reagent').value));
+      // var s_weight_six = (Math.abs(document.getElementById('weight_reagent_container_six').value) - Math.abs(document.getElementById('weight_container_six_reagent').value));
+
+      // document.getElementById('weight_reagent_one').value = s_weight_one.toFixed(5);
+      // document.getElementById('weight_reagent_two').value = s_weight_two.toFixed(5);
+      // document.getElementById('weight_reagent_three').value = s_weight_three.toFixed(5);
+      // // document.getElementById('weight_reagent_four').value = s_weight_four.toFixed(5);
+      // document.getElementById('weight_reagent_five').value = s_weight_five.toFixed(5);
+      // document.getElementById('weight_reagent_six').value = s_weight_six.toFixed(5);
+
+      }
 
       
 
       function calculate_sample_difference(){
       
       var weight_one = (Math.abs(document.getElementById('weight_standard_container_one').value) - Math.abs(document.getElementById('container_one').value));
-      //var weight_two = (Math.abs(document.getElementById('weight_standard_container_two').value) - Math.abs(document.getElementById('container_two').value));
+      var weight_two = (Math.abs(document.getElementById('weight_standard_container_two').value) - Math.abs(document.getElementById('container_two').value));
       
       document.getElementById('weight_standard_one').value = weight_one.toFixed(5); 
-      //document.getElementById('weight_standard_two').value = weight_two.toFixed(5);
+      document.getElementById('weight_standard_two').value = weight_two.toFixed(5);
       var dilution=[Math.abs(document.getElementById('value_d').value)];
       var wst=(Math.abs(document.getElementById('weight_standard_one').value)/Math.abs(document.getElementById('value_d').value)*1000);
       

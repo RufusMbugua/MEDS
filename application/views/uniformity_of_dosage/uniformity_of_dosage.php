@@ -27,6 +27,19 @@
   <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/equipmentinfo.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/averagecalculation.js';?>"></script>
+  <script>
+    //function to prevent submitting the form when enter button is pressed.
+    $('form input').keydown(function (e) {
+        if (e.keyCode == 26) {
+            var inputs = $(this).parents("form").eq(0).find(":input");
+            if (inputs[inputs.index(this) + 1] != null) {                    
+                inputs[inputs.index(this) + 1].focus();
+            }
+            e.preventDefault();
+            return false;
+        }
+    });
+  </script>
  </head>
  <body>
   <?php

@@ -14,6 +14,11 @@ $(document).ready(function() {
       $("#idnumber").val(idnumber);
       
     });
+     $("#equipment_balance_two").on('change',function(){
+      var idnumbertwo=$(this).find(":selected").data("idnumbertwo");
+      $("#idnumbertwo").val(idnumbertwo);
+      
+    });
       $("#theremometerused").on('change',function(){
       var equipmentused=$(this).find(":selected").data("equipmentused");
       $("#equipmentused").val(equipmentused);

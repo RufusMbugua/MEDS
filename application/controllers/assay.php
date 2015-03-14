@@ -33,6 +33,39 @@ class Assay extends CI_Controller {
     $this->load->view('assay/assay_specifications',$data);
     $this->load->helper(array('form'));
     }
+    function assay_specifications_multi() {
+        
+    $assignment_id= $this->uri->segment(3);
+    $test_request_id=$this->uri->segment(4);
+    $test_type=$this->uri->segment(5);
+
+    $data['request']=
+    $this->db->select('assignment.id AS a,assignment.test_request_id,assignment.assigner_user_id,assignment.client_id,assignment.reference_number,assignment.assigner_name,assignment.analyst_name,assignment.sample_issued')->get_where('assignment', array('id' => $assignment_id))->result_array();
+    
+    $data['component_names'] = 
+    $this->db->select('*')->get_where('components', array('test_request_id' => $test_request_id))->result_array();
+
+    
+    $data['monograph']=
+    $this->db->select('*')->get_where('full_monograph', array('test_request_id' => $test_request_id))->result_array();
+    
+    $data['assay_hplc_internal_method']=
+    $this->db->select('*')->get_where('assay_hplc_internal_method', array('test_request_id' => $test_request_id))->result_array();
+    
+    $data['sql']=
+    $this->db->select('*')->get_where('full_monograph', array('test_request_id' => $test_request_id))->result_array(); 
+
+    $query=$this->db->select('test_request.id AS tr,test_request.client_id,test_request.active_ingredients,test_request.manufacturer_name,test_request.manufacturer_address,test_request.batch_lot_number,
+    test_request.sample_source,test_request.expiry_date,test_request.quantity_type,test_request.reference_number,test_request.applicant_address,test_request.date_time,test_request.date_manufactured,test_request.quantity_type,test_request.sample_source,test_request.laboratory_number,test_request.applicant_name,
+    test_request.quantity_remaining,test_request.quantity_submitted,test_request.applicant_ref_number,test_request.test_specification,test_request.brand_name,test_request.request_status')->get_where('test_request', array('id' => $test_request_id));
+   
+
+    $results=$query->result_array();
+    $data['query']=$results[0];
+    
+    $this->load->view('assay/assay_specifications_multi',$data);
+    $this->load->helper(array('form'));
+    }
     function specifications_view_worksheet() {
         
     $assignment_id= $this->uri->segment(3);
@@ -59,6 +92,32 @@ class Assay extends CI_Controller {
     $this->load->helper(array('form'));
     }
 
+    function specifications_multi_view_worksheet() {
+        
+    $assignment_id= $this->uri->segment(3);
+    $test_request_id=$this->uri->segment(4);
+    $test_type=$this->uri->segment(5);
+    
+
+    $data['request']=
+    $this->db->select('assignment.id AS a,assignment.test_request_id,assignment.assigner_user_id,assignment.client_id,assignment.reference_number,assignment.assigner_name,assignment.analyst_name,assignment.sample_issued')->get_where('assignment', array('id' => $assignment_id))->result_array();
+
+    $data['monograph']=
+    $this->db->select('*')->get_where('full_monograph', array('test_request_id' => $test_request_id))->result_array();
+    
+    $data['monograph_specifications']=
+    $this->db->select('*')->get_where('monograph_specifications', array('test_type' => $test_type, 'test_request_id' => $test_request_id))->result_array();
+    
+    $query=$this->db->select('test_request.id AS tr,test_request.client_id,test_request.active_ingredients,test_request.manufacturer_name,test_request.manufacturer_address,test_request.batch_lot_number,
+    test_request.sample_source,test_request.expiry_date,test_request.quantity_type,test_request.reference_number,test_request.applicant_address,test_request.date_time,test_request.date_manufactured,test_request.quantity_type,test_request.sample_source,test_request.laboratory_number,test_request.applicant_name,
+    test_request.quantity_remaining,test_request.quantity_submitted,test_request.applicant_ref_number,test_request.test_specification,test_request.brand_name,test_request.request_status')->get_where('test_request', array('id' => $test_request_id));
+     
+    $results=$query->result_array();
+    $data['query']=$results[0];
+       
+    $this->load->view('assay/assay_specifications_multi_view',$data);
+    $this->load->helper(array('form'));
+    }
     function assay_tests(){
     $assignment_id= $this->uri->segment(3);
     $test_request_id=$this->uri->segment(4);
@@ -1693,8 +1752,14 @@ function worksheet_ointment() {
     $test_type_id=$this->uri->segment(5);
     $status=0; 
 
-    $data['hplc_internal_method_monograph']=
-    $this->db->select('*')->get_where('assay_monograph_hplc_internal_method', array('test_request_id' => $test_request_id))->result_array();
+    $data['monograph']=
+    $this->db->select('*')->get_where('full_monograph', array('test_request_id' => $test_request_id))->result_array();
+    
+    $data['reagents']=
+    $this->db->select('*')->get_where('reagents_inventory_record', array('status' => $status))->result_array();
+
+    $data['component_names']=
+    $this->db->select('*')->get_where('components', array('test_request_id' => $test_request_id))->result_array();
 
     $data['hplc_internal_method']=
     $this->db->select('assay_hplc_internal_method.test_status')->get_where('assay_hplc_internal_method', array('id' => $test_type_id))->result_array();
@@ -2085,5 +2150,13 @@ function worksheet_ointment() {
         if ($this->input->post('submit')) {
             $this->assay_model->process_specifications();
         }                
+    }
+    function save_assay_specifications_multi(){
+       $this->load->model('assay_model');
+
+       if ($this->input->post()) {
+        $this->assay_model->process_specifications_multi();
+    }
+        
     }
 }

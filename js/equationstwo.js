@@ -1,5 +1,9 @@
 
+  function calculate_difference(){
 
+      var sample_weight_one = (Math.abs(document.getElementById('weight_sample_container_one').value) - Math.abs(document.getElementById('weight_container_one').value));
+      document.getElementById('weight_sample_one').value = sample_weight_one.toFixed(5);
+  }
 	// Calculating the weights of standards
 	$(function() {
           $('#container').keyup(function() {
@@ -1919,5 +1923,22 @@ $('#sample_resolution_ac').keyup(function() {
         // alert(max_tolerance)
         $('#max_tolerance_comment').val(comment_b);
         $('#choice').val(comment_conclusion);
+          });
+
+        $('.simple').keyup(function() {
+    
+          var result = 0;
+
+          var a= $("#value_a").val();
+          var b= $("#value_b").val();
+          var c= $("#value_c").val();
+
+          result=(a*b)/c;
+          result_rounded = result.toFixed(5);
+
+          $('.value_d').val(result_rounded);
+          $('.df').val(result_rounded);
+          
+
           });
       }); 

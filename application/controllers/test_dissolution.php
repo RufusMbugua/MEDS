@@ -13,6 +13,7 @@ class Test_Dissolution extends CI_Controller{
 		$data['results'] = $results['test_request'][0];
 		$data['sql_standards'] = $results['standards'];
 		$data['sql_reagents'] = $results['reagents'];
+		$data['sql_columns'] = $results['columns'];
 		$data['component_names'] = $results['component_names'];
 		$data['component_category'] = $results['component_category'];
 		$data['query_e'] = $results['equipment'];
@@ -159,6 +160,7 @@ class Test_Dissolution extends CI_Controller{
 		$data['results'] = $results['test_request'][0];
 		$data['sql_standards'] = $results['standards'];
 		$data['sql_reagents'] = $results['reagents'];
+		$data['sql_columns'] = $results['columns'];
 		$data['component_names'] = $results['component_names'];
 		$data['component_category'] = $results['component_category'];
 		$data['query_e'] = $results['equipment'];
@@ -166,7 +168,7 @@ class Test_Dissolution extends CI_Controller{
 
 		foreach ($results['monograph_specs'] as $key => $value) {
 		
-		if ($value['test_type']==34) {
+		if ($value['test_type']==38) {
 			$results_ = $value;
 		}
 
@@ -241,14 +243,22 @@ class Test_Dissolution extends CI_Controller{
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
-		$status=0; $user_type = 6;
+		$status=0; 
+		$user_type = 6;
 		$status_first_stage =1;
+		$test_type=38;
 
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
 		$query = $this->db->query($sql);
 		$result =$query->result_array();
 
 		$data['results']=$result[0];		
+
+		$data['monograph']=
+		$this->db->select('*')->get_where('full_monograph', array('test_request_id' => $test_request))->result_array();
+
+		$data['monograph_specs']=
+		$this->db->select('*')->get_where('monograph_specifications', array('test_request_id' => $test_request,'test_type'=>$test_type))->result_array();
 
 		$data['query_e']=$this->db->get_where('equipment_maintenance', array('status' =>0))->result_array();
 
@@ -718,13 +728,10 @@ class Test_Dissolution extends CI_Controller{
 		}
 	}
 	function worksheet_delayed_release_hplc(){	
-		var_dump($this->input->post());
-
+		
 		$this->load->model('test_dissolution_delayed_release_model');
-
-		if ($this->input->post()) {
-			$this->test_dissolution_delayed_release_model->save_worksheet();
-		}
+		$this->test_dissolution_delayed_release_model->save_worksheet();
+		
 	}
 	function worksheet_delayed_release_second_stage_hplc(){	
 
@@ -830,7 +837,7 @@ $data['monograph_specs']=	$this->db->select('*')->get_where('monograph_specifica
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
 
-		$monograph['monograph']=
+		$data['monograph']=
 		$this->db->select('*')->get_where('full_monograph', array('test_request_id' => $test_request))->result_array();
 		
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
@@ -840,6 +847,26 @@ $data['monograph_specs']=	$this->db->select('*')->get_where('monograph_specifica
 		$data['results']=$result[0];
 				
 		$this->load->view('tests/dissolution/test_dissolution_monograph_delayed_release_view',$data);
+	}
+	function specifications_delayed_release_view(){
+		$data['assignment'] = $this->uri->segment(3);
+		$data['test_request'] = $this->uri->segment(4);
+		$test_request = $this->uri->segment(4);
+		$test_type='38';
+
+		$data['monograph_specs']=
+		$this->db->select('*')->get_where('monograph_specifications', array('test_request_id' => $test_request,'test_type'=>$test_type))->result_array();
+
+		$data['monograph']=
+		$this->db->select('*')->get_where('full_monograph', array('test_request_id' => $test_request))->result_array();
+		
+		$sql = "SELECT * FROM test_request WHERE id =$test_request";
+		$query = $this->db->query($sql);
+		$result =$query->result_array();
+
+		$data['results']=$result[0];
+				
+		$this->load->view('tests/dissolution/test_dissolution_delayed_release_specifications_view',$data);
 	}
 	function monograph_hplc(){
 		$data['assignment'] = $this->uri->segment(3);

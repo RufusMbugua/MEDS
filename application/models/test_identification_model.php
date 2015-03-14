@@ -62,10 +62,10 @@ class Test_Identification_Model extends CI_Model{
 
         $result_next = $result_prev." ".$component_name;
 
-        if ($remark_prev == "Does not Comply" || $remarks =="Does not Comply" ) {
-        	$remark_next = "Does Not Comply";
+        if ($remark_prev == "DOES NOT COMPLY" || $remarks =="DOES NOT COMPLY" ) {
+        	$remark_next = "DOES NOT COMPLY";
         }else{
-        	$remark_next = "Complies";
+        	$remark_next = "COMPLIES";
         }
 		
 		$data_i =array(
@@ -120,10 +120,10 @@ class Test_Identification_Model extends CI_Model{
 
         $result_next = $result_prev." ".$component_name;
 
-        if ($remark_prev == "Does not Comply" || $remarks =="Does not Comply" ) {
-        	$remark_next = "Does not Comply";
+        if ($remark_prev == "DOES NOT COMPLY" || $remarks =="DOES NOT COMPLY" ) {
+        	$remark_next = "DOES NOT COMPLY";
         }else{
-        	$remark_next = "Complies";
+        	$remark_next = "COMPLIES";
         }
 
 		$data=$this->db->select_max('id')->get('identification_uv')->result();
@@ -278,10 +278,10 @@ class Test_Identification_Model extends CI_Model{
 
         $result_next = $result_prev." ".$component_name;
 
-        if ($remark_prev == "Does not Comply" || $remarks =="Does not Comply" ) {
-        	$remark_next = "Does not Comply";
+        if ($remark_prev == "DOES NOT COMPLY" || $remarks =="DOES NOT COMPLY" ) {
+        	$remark_next = "DOES NOT COMPLY";
         }else{
-        	$remark_next = "Complies";
+        	$remark_next = "COMPLIES";
         }     
 		
 		$data =array(			

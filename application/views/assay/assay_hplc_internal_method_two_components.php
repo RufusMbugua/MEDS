@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <title>MEDS</title>
-  <link rel="icon" href="" />
+  <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon">
   <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon">
   <link href="<?php echo base_url().'style/core.css';?>" rel="stylesheet" type="text/css" />
    <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
@@ -24,11 +24,89 @@
   <script src="<?php echo base_url().'js/bootstrap.min.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/Jquery-datatables/jquery.dataTables.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/equations.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/calculations.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'tinymce/tinymce.min.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'tinymce/textarea_script.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/equipmentinfo.js';?>"></script>
-  
+  <script>
+
+$(document).ready(function() {
+/* Init DataTables */
+  $('#clear_form').hide();
+  //function to prevent submitting the form when enter button is pressed.
+  $('form input').keydown(function (e) {
+    if (e.keyCode == 40) {
+        var inputs = $(this).parents("form").eq(0).find(":input");
+        if (inputs[inputs.index(this) + 1] != null) {                    
+            inputs[inputs.index(this) + 1].focus();
+        }
+        e.preventDefault();
+        return false;
+    }
+});
+
+   tinymce.init({
+  selector: "textarea"
+  });
+
+//function to post data when submit link is pressed
+  $('#save_assay_multi').click(function(){ 
+     $('#save_assay_multi').hide();    
+        post_ajax();
+
+  });
+function post_ajax(){
+  //post via ajax
+  form_data = $('#assay_multi_form').serialize();
+  console.log(form_data);
+
+
+  if ( $('#choice').val()=="" ||  $('#component_name').val()=="") {
+  alert('Please fill all the neccesary fields')
+  }else{
+
+    $.ajax({
+    url:"<?php echo base_url();?>assay/save_internal_method",
+    type:"POST",
+     async:false,
+    data:form_data,
+    success: function(){
+
+      $("#component_name option:selected").attr('disabled','disabled')
+      var a = $('#assignment').val();
+      var t = $('#test_request').val();
+
+      var length_ = $("#component_name").find('option').length;
+      var  length_2 = $("#component_name").find('option[disabled = "disabled"]').length;
+      if ((length_-length_2)==1) {
+        //redirect location when all components are selected
+        window.location.href = "<?php echo base_url();?>test/index/"+a+"/"+t
+
+      } 
+      
+      alert("Successful!"); 
+      $('#clear_form').show();
+    },fail:function(){
+
+      alert('An error occured')
+    }
+    });
+  }
+    
+}
+
+  $('#clear_form').click(function(){
+    $('#save_identification').show();
+   // $('.all_input').val('');
+
+    var tinymce_editor_id = $('._text_areas'); 
+   // tinymce.get(tinymce_editor_id).setContent('');
+
+
+});  
+});
+  </script>
  </head>
  <body>
   <?php
@@ -85,11 +163,10 @@
 </div>
     <div id="form_wrapper">
      <div id="forms">
-      <?php echo validation_errors(); ?>
-      <?php echo form_open('assay/save_internal_method',array('id'=>'assay_view'));?>
+      <form method="post" id="assay_multi_form">
        <table width="75%" class="table_form" border="0" cellpadding="4px" align="center">
-        <input type="hidden" name="tr_id" value="<?php echo $query['tr'];?>"></input>
-        <input type="hidden" name="assignment_id" value="<?php echo $request[0]['a'];?>"></input>    
+        <input type="hidden" id="test_request" name="tr_id" value="<?php echo $query['tr'];?>"></input>
+        <input type="hidden" id="assignment" name="assignment_id" value="<?php echo $request[0]['a'];?>"></input>    
         <tr>
             <td colspan="8" style="text-align:right;padding:8px;backgroun-color:#fffff;border-bottom:solid 1px #bfbfbf;"><a href="<?php echo base_url().'test/index/'.$request[0]['a'].'/'.$query['tr'].'/';?>"><img src="<?php echo base_url().'images/icons/view.png';?>" height="25px" width="25px">Back To Test Lists</a></td>
         </tr>
@@ -114,7 +191,7 @@
                 </tr>
                 <tr>
                     <td height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">SERIAL No.</td>
-                    <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><?php echo $hplc_internal_method_monograph[0]['serial_number']?></td>
+                    <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><?php echo $monograph[0]['serial_number']?></td>
                     <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;">Batch/Lot No.</td>
                     <td colspan="3" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><?php echo $query['batch_lot_number']?></td>
                 </tr>
@@ -153,10 +230,26 @@
             </tr>
             <tr><td colspan="8" style="padding:8px;"></td></tr>
             <tr>
-              <td colspan="8" align="center" style="padding:4px;border-bottom: solid 10px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><h5>HPLC Internal Method Two Components</h5></td>
+              <td colspan="8" align="center" style="padding:4px;border-bottom: solid 10px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><h5>HPLC Internal Method Multicomponents</h5></td>
             </tr>
             <tr>
               <td colspan="8" height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>Balance Details</b></td>
+          </tr>
+          <tr>
+              <td align="left"colspan ="2" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>Components:</b></td>
+              <td align="left"colspan = "6" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">          
+                <select id="component_name" name="component_name" >
+                <option selected> </option>
+                     <?php
+                     foreach($component_names as $c):
+                    ?>
+                     
+                     <option value="<?php echo $c['component'];?>" class = "all_input" data-status="<?php  //echo $c['status'];?>"><?php  echo $c['component'];?></option>
+                      <?php
+                      endforeach
+                      ?>
+                  </select>
+              </td>
           </tr>
           <tr>
               <td colspan="8" style="padding:8px;">
@@ -185,9 +278,7 @@
             <tr>
               <td colspan="8"  align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>Weight of Sample taken (g)</b></td>
             </tr>
-            <tr>
-              <td colspan="8"  align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>Component One</b> <input type="text" name="component_one"/></td>
-            </tr>
+            
             <tr>
               <td colspan="8">
                 <table border="0" class="inner_table" width="80%" cellpadding="8px" align="center">
@@ -196,9 +287,7 @@
                       <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Weight 1</td>
                       <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Weight 2</td>
                       <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">weight 3</td>    
-                      <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Weight 4</td>
-                      <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Weight 5</td>
-                      <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Weight 6</td>
+                      
                   </tr>
                   <tr>
                       <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
@@ -208,13 +297,8 @@
                       <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                       <input type="text" id="weight_sample_container_two" name="weight_sample_container_two" size="10"></td>
                       <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_sample_container_three" name="weight_sample_container_three" size="10"></td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_sample_container_four" name="weight_sample_container_four" size="10"></td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_sample_container_five" name="weight_sample_container_five" size="10"></td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_sample_container_six" name="weight_sample_container_six" size="10"></td>
+                      <input type="text" id="weight_sample_container_three" name="weight_sample_container_three" size="10"></td> 
+                     
                   </tr>
                   <tr>
                       <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
@@ -225,12 +309,6 @@
                       <input type="text" id="weight_container_two" name="weight_container_two" onChange="calculate_difference()" size="10"></td>
                       <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                       <input type="text" id="weight_container_three" name="weight_container_three" onChange="calculate_difference()" size="10"></td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_container_four" name="weight_container_four" onChange="calculate_difference()" size="10"></td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_container_five" name="weight_container_five" onChange="calculate_difference()" size="10"></td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_container_six" name="weight_container_six" onChange="calculate_difference()" size="10"></td>
                   </tr>
                   <tr>
                       <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
@@ -240,91 +318,30 @@
                       <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                       <input type="text" id="weight_sample_two" name="weight_sample_two" onChange="calculate_difference()" size="10"></td>
                       <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_sample_three" name="weight_sample_three" onChange="calculate_difference()" size="10"></td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_sample_four" name="weight_sample_four" onChange="calculate_difference()" size="10"></td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_sample_five" name="weight_sample_five" onChange="calculate_difference()" size="10"></td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_sample_six" name="weight_sample_six" onChange="calculate_difference()" size="10"></td>
+                      <input type="text" id="weight_sample_three" name="weight_sample_three" onChange="calculate_difference()" size="10"></td
                   </tr>
                   <tr>
-                    <td colspan="7"  align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Dilution: </td>
+                    <td colspan="7"  align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Sample Dilution Preparation: </td>
                   </tr>
                   <tr>
-                    <td colspan="7"  align="center" style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><textarea rows="5" cols="160" name="dilution_one"></textarea></td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="8"  align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>Component Two</b> <input type="text" name="component_two"/></td>
-            </tr>
-            <tr>
-              <td colspan="8">
-                <table border="0" class="inner_table" width="80%" cellpadding="8px" align="center">
-                  <tr>
-                      <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"></td>
-                      <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Weight 1</td>
-                      <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Weight 2</td>
-                      <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">weight 3</td>    
-                      <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Weight 4</td>
-                      <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Weight 5</td>
-                      <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Weight 6</td>
+                    <td colspan="7"  align="center" style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><textarea rows="5" cols="160" name="sample_dilution_preparation"></textarea></td>
                   </tr>
                   <tr>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      Weight of Sample + container(g)</td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_sample_container_one" name="weight_sample_container_one" size="10"></td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_sample_container_two" name="weight_sample_container_two" size="10"></td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_sample_container_three" name="weight_sample_container_three" size="10"></td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_sample_container_four" name="weight_sample_container_four" size="10"></td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_sample_container_five" name="weight_sample_container_five" size="10"></td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_sample_container_six" name="weight_sample_container_six" size="10"></td>
+                    <td colspan="7"  align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">Sample Dilution Calculation </td>
                   </tr>
                   <tr>
-                      <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      Weight of Container(g)</td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_container_one" name="weight_container_one" onChange="calculate_difference()" size="10"></td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_container_two" name="weight_container_two" onChange="calculate_difference()" size="10"></td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_container_three" name="weight_container_three" onChange="calculate_difference()" size="10"></td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_container_four" name="weight_container_four" onChange="calculate_difference()" size="10"></td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_container_five" name="weight_container_five" onChange="calculate_difference()" size="10"></td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_container_six" name="weight_container_six" onChange="calculate_difference()" size="10"></td>
-                  </tr>
-                  <tr>
-                      <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      Weight of Sample(g)</td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_sample_one" name="weight_sample_one" onChange="calculate_difference()" size="10"></td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_sample_two" name="weight_sample_two" onChange="calculate_difference()" size="10"></td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_sample_three" name="weight_sample_three" onChange="calculate_difference()" size="10"></td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_sample_four" name="weight_sample_four" onChange="calculate_difference()" size="10"></td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_sample_five" name="weight_sample_five" onChange="calculate_difference()" size="10"></td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_sample_six" name="weight_sample_six" onChange="calculate_difference()" size="10"></td>
-                  </tr>
-                  <tr>
-                    <td colspan="7"  align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Dilution: </td>
-                  </tr>
-                  <tr>
-                    <td colspan="7"  align="center" style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><textarea rows="5" cols="160" name="dilution_one"></textarea></td>
+                    <td colspan="7"  align="center" style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">
+                      <table align="center" border="0"align="center" width="50%" cellpadding="44px">
+                        <tr>
+                          <td style="text-align:right;padding:8px;border-bottom: solid 1px #c4c4ff;"><input type="text" id="value_a" name="value_a" size="10" class="simple"> X </td>
+                          <td style="text-align:left;padding:8px;border-bottom: solid 1px #c4c4ff;"><input type="text" id="value_b" name="value_b" size="10" class="simple"> =</td>
+                          <td style="text-align:left;padding:8px;"><input type="text" id="value_d" name="sample_dilution_calculation" size="10" class="value_d"></td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align:center;padding:8px;"><input type="text" id="value_c" name="value_c" size="10" class="simple"> </td>
+                        </tr>
+                      </table>
+                    </td>
                   </tr>
                 </table>
               </td>
@@ -351,7 +368,7 @@
             </tr>
           <tr>
             <td colspan="8" style="padding:8px;border-bottom:dotted 1px #c4c4ff;">
-              <table class="inner_table" width="80%" border="0" align="center" cellpadding="8px">
+              <table class="inner_table" width="100%" border="0" align="center" cellpadding="8px">
               <tr>
                 <td style="padding:8px;border-bottom: solid 1px #dfdfff;text-align:center;"></td>
                 <td style="padding:8px;border-bottom: solid 1px #dfdfff;text-align:center;color:#0000ff;"><b>Component One</b></td>
@@ -422,15 +439,15 @@
                     
                 </tr>
                 <tr>
-                  <td colspan="4" height="25px" align="left" style="color:#000;padding:8px;background-color: #ffffff;">Dilution:</td>
+                  <td colspan="3" height="25px" align="left" style="color:#000;padding:8px;background-color: #ffffff;">Dilution:</td>
                 </tr>
-                <tr>
-                  
-                  <td colspan="2" height="25px" align="left" style="color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;background-color: #ffffff;"><textarea type="text" name="dilution_one" row="8" cols="40"></textarea></td>
-                  <td colspan="2" height="25px" align="left" style="color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;background-color: #ffffff;"><textarea type="text" name="dilution_two" row="8" cols="40"></textarea></td>
-                </tr>
+                
               </table>
             </td>
+          </tr>
+          <tr>
+            <td colspa="4"height="25px" align="center" style="color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;background-color: #ffffff;"><textarea type="text" name="dilution_one" row="8" cols="20"></textarea></td>
+            <td colspa="4"height="25px" align="center" style="color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;background-color: #ffffff;"><textarea type="text" name="dilution_two" row="8" cols="20"></textarea></td>
           </tr>
           <tr>
               <td colspan="8" height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>Chromatographic System</b></td>
@@ -463,71 +480,169 @@
               <td colspan="8" height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>Reagents</b></td>
             </tr>
             <tr>
-              <td colspan="8" align="center">
-                <table class="inner_table" width="90%" align="center" cellpadding="8px">
-                    <tr>
-                      <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"></td>
-                      <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Weight 1</td>
-                      <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Weight 2</td>
-                      <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">weight 3</td>
-                      <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Weight 4</td>
-                      <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">weight 5</td>
-                      <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">weight 6</td>
-                    </tr>
-                    <tr>
-                        <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        Weight of Sample + container(g)</td>
-                        <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <input type="text" name="weight_reagent_container_one" id="weight_reagent_container_one" size="10"></td>
-                        <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <input type="text" name="weight_reagent_container_two" id="weight_reagent_container_two" size="10"></td>
-                        <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <input type="text" name="weight_reagent_container_three" id="weight_reagent_container_three" size="10"></td>
-                        <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <input type="text" name="weight_reagent_container_four" id="weight_reagent_container_foue" size="10"></td>
-                        <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <input type="text" name="weight_reagent_container_five" id="weight_reagent_container_five" size="10"></td>
-                        <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <input type="text" name="weight_reagent_container_six" id="weight_reagent_container_six" size="10"></td>
-                      
-                    </tr>
-                    <tr>
-                        <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        Weight of container(g)</td>
-                        <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <input type="text" name="weight_container_one_reagent" id="weight_container_one_reagent" onChange="calculate_difference()" size="10"></td>
-                        <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <input type="text" name="weight_container_two_reagent" id="weight_container_two_reagent" onChange="calculate_difference()" size="10"></td>
-                        <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <input type="text" name="weight_container_three_reagent" id="weight_container_three_reagent" onChange="calculate_difference()" size="10"></td>
-                        <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <input type="text" name="weight_container_four_reagent" id="weight_container_four_reagent" onChange="calculate_difference()" size="10"></td>
-                        <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <input type="text" name="weight_container_five_reagent" id="weight_container_five_reagent" onChange="calculate_difference()" size="10"></td>
-                        <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <input type="text" name="weight_container_six_reagent" id="weight_container_six_reagent" onChange="calculate_difference()" size="10"></td>
-                        
-                    </tr>
-                    <tr>
-                        <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        Weight of Sample(g)</td>
-                        <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <input type="text" name="weight_reagent_one" id="weight_reagent_one" onChange="calculate_difference()" size="10"></td>
-                        <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <input type="text" name="weight_reagent_two" id="weight_reagent_two" onChange="calculate_difference()" size="10"></td>
-                        <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <input type="text" name="weight_reagent_three" id="weight_reagent_three" onChange="calculate_difference()" size="10"></td>
-                        <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <input type="text" name="weight_reagent_four" id="weight_reagent_four" onChange="calculate_difference()" size="10"></td>
-                        <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <input type="text" name="weight_reagent_five" id="weight_reagent_five" onChange="calculate_difference()" size="10"></td>
-                        <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <input type="text" name="weight_reagent_six" id="weight_reagent_six" onChange="calculate_difference()" size="10"></td>
-                        
-                    </tr>
-                </table>
-              </td>
-            </tr>
+            <td colspan="8" style="padding:8px;border-bottom:dotted 1px #c4c4ff;">
+              <table class="inner_table" width="80%" border="0" align="center" cellpadding="8px"> 
+                <tr>
+                    <td align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Reagent Description:</td>
+                    <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    Reagent + Container (mlg)</td>
+                    <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    Container(mlg)</td>
+                    <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    Reagent (mlg)</td>
+                </tr>
+                <tr>
+                    <td align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                      <select id="reagent_description" name="reagent_description" >
+                      <option selected></option>
+                       <?php
+                       foreach($reagents as $r_name):
+                      ?>
+                       
+                       <option value="<?php  echo $r_name['item_description'];?>" data-reagentslotnumber="<?php  echo $r_name['batch_number'];?>" data-reagentsrefnumber="<?php  echo $r_name['card_number'];?>" data-potencynumber="<?php  echo $r_name['potency_number'];?>"><?php  echo $r_name['item_description'];?></option>
+                        <?php
+                        endforeach
+                        ?>
+                      </select>
+                    </td>
+                    <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    <input type="text" name="weight_reagent_container_one" id="weight_reagent_container_one" size="10">
+                    </td>
+                    <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    <input type="text" name="weight_container_one_reagent" id="weight_container_one_reagent" size="10">
+                    </td>
+                    <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    <input type="text" name="weight_reagent_one" id="weight_reagent_one" size="10">
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                      <select id="reagent_description_two" name="reagent_description_two" >
+                      <option selected></option>
+                       <?php
+                       foreach($reagents as $r_name):
+                      ?>
+                       
+                       <option value="<?php  echo $r_name['item_description'];?>" data-reagentslotnumber="<?php  echo $r_name['batch_number'];?>" data-reagentsrefnumber="<?php  echo $r_name['card_number'];?>" data-potencynumber="<?php  echo $r_name['potency_number'];?>"><?php  echo $r_name['item_description'];?></option>
+                        <?php
+                        endforeach
+                        ?>
+                      </select>
+                    </td>
+                    <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    <input type="text" name="weight_reagent_container_two" id="weight_reagent_container_two" size="10">
+                    </td>
+                    <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    <input type="text" name="weight_container_two_reagent" id="weight_container_two_reagent" size="10">
+                    </td>
+                    <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    <input type="text" name="weight_reagent_two" id="weight_reagent_two" size="10">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                      <select id="reagent_description_three" name="reagent_description_three" >
+                      <option selected></option>
+                       <?php
+                       foreach($reagents as $r_name):
+                      ?>
+                       
+                       <option value="<?php  echo $r_name['item_description'];?>" data-reagentslotnumber="<?php  echo $r_name['batch_number'];?>" data-reagentsrefnumber="<?php  echo $r_name['card_number'];?>" data-potencynumber="<?php  echo $r_name['potency_number'];?>"><?php  echo $r_name['item_description'];?></option>
+                        <?php
+                        endforeach
+                        ?>
+                      </select>
+                    </td>
+                    <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    <input type="text" name="weight_reagent_container_three" id="weight_reagent_container_three" size="10">
+                    </td>
+                    <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    <input type="text" name="weight_container_three_reagent" id="weight_container_one_reagent" size="10">
+                    </td>
+                    <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    <input type="text" name="weight_reagent_three" id="weight_reagent_three" size="10">
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                      <select id="reagent_description_four" name="reagent_description_four" >
+                      <option selected></option>
+                       <?php
+                       foreach($reagents as $r_name):
+                      ?>
+                       
+                       <option value="<?php  echo $r_name['item_description'];?>" data-reagentslotnumber="<?php  echo $r_name['batch_number'];?>" data-reagentsrefnumber="<?php  echo $r_name['card_number'];?>" data-potencynumber="<?php  echo $r_name['potency_number'];?>"><?php  echo $r_name['item_description'];?></option>
+                        <?php
+                        endforeach
+                        ?>
+                      </select>
+                    </td>
+                    <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    <input type="text" name="weight_reagent_container_four" id="weight_reagent_container_four" size="10">
+                    </td>
+                    <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    <input type="text" name="weight_container_four_reagent" id="weight_container_four_reagent" size="10">
+                    </td>
+                    <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    <input type="text" name="weight_reagent_four" id="weight_reagent_four" size="10">
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                      <select id="reagent_description_five" name="reagent_description_five" >
+                      <option selected></option>
+                       <?php
+                       foreach($reagents as $r_name):
+                      ?>
+                       
+                       <option value="<?php  echo $r_name['item_description'];?>" data-reagentslotnumber="<?php  echo $r_name['batch_number'];?>" data-reagentsrefnumber="<?php  echo $r_name['card_number'];?>" data-potencynumber="<?php  echo $r_name['potency_number'];?>"><?php  echo $r_name['item_description'];?></option>
+                        <?php
+                        endforeach
+                        ?>
+                      </select>
+                    </td>
+                    <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    <input type="text" name="weight_reagent_container_five" id="weight_reagent_container_five" size="10">
+                    </td>
+                    <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    <input type="text" name="weight_container_five_reagent" id="weight_container_five_reagent" size="10">
+                    </td>
+                    <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    <input type="text" name="weight_reagent_five" id="weight_reagent_five" size="10">
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                      <select id="reagent_description_six" name="reagent_description_six" >
+                      <option selected></option>
+                       <?php
+                       foreach($reagents as $r_name):
+                      ?>
+                       
+                       <option value="<?php  echo $r_name['item_description'];?>" data-reagentslotnumber="<?php  echo $r_name['batch_number'];?>" data-reagentsrefnumber="<?php  echo $r_name['card_number'];?>" data-potencynumber="<?php  echo $r_name['potency_number'];?>"><?php  echo $r_name['item_description'];?></option>
+                        <?php
+                        endforeach
+                        ?>
+                      </select>
+                    </td>
+                    <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    <input type="text" name="weight_reagent_container_six" id="weight_reagent_container_six" size="10">
+                    </td>
+                    <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    <input type="text" name="weight_container_six_reagent" id="weight_container_six_reagent" size="10">
+                    </td>
+                    <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    <input type="text" name="weight_reagent_six" id="weight_reagent_six" size="10">
+                    </td>
+                    
+                </tr>
+              </table>
+            </td>
+          </tr>
             <tr>
               <td colspan="8" height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>Mobile Phase Preparation:</b></td>
             </tr>
@@ -1162,8 +1277,12 @@
               </td>
             </tr>
             <tr>
-                <td  height="25px" style="padding:4px;background-color:#ffffff;border-top: solid 1px #bfbfbf;text-align: center;" colspan="8" ><input class="btn" type="submit" name="submit" id="submit" value="Submit"></td>
+              <td colspan = "8" align ="center"> <a class="btn" name ="save_assay_multi" id="save_assay_multi">Submit</a>
+              <input type ="button" class="btn" id="clear_form" name ="" value ="Clear Form"></td>        
             </tr>
+            <!-- <tr>
+                <td  height="25px" style="padding:4px;background-color:#ffffff;border-top: solid 1px #bfbfbf;text-align: center;" colspan="8" ><input class="btn" type="submit" name="submit" id="submit" value="Submit"></td>
+            </tr> -->
        </table>
       </form>
 </div>

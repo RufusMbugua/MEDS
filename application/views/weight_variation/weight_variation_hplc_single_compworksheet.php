@@ -366,10 +366,15 @@
                       <td colspan="8" class="singlecomponent" style="padding:8px;border-bottom:solid 1px #c4c4ff;">
                         <table border="0"  class="table_form" width="100%" cellpadding="8px" align="center">
                           <tr>    
-                            <td style="color:#00CC00;border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:center;">Method <input type="text" id="method" name="method" size="30" /></td>
+                            <td style="color:#00CC00;border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:center;">Method<input type="text" id="method" name="method" size="30" placeholder="eg. BP 2012"/></td>
                           </tr>
                           <tr>    
-                            <td style="color:#00CC00;border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:center;"><input type="text" id="test_conclusion" name="test_conclusion" size="30" /></td>
+                            <td style="color:#00CC00;border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:center;">
+                              <select name="test_conclusion" id="test_conclusion">
+                                <option></option>
+                                <option value="COMPLIES">COMPLIES</option>
+                                <option value="DOES NOT COMPLY">DOES NOT COMPLY</option>
+                              </select>
                           </tr>
                         </table>
                     </tr>

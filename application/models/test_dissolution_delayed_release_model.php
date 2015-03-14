@@ -15,11 +15,13 @@ class Test_Dissolution_Delayed_Release_Model extends CI_Model{
 		$assignment=$this->input->post('assignment');
 		$test_name='Dissolution';
 		$analyst= $this->input->post('analyst');
-		$test_type = '34';
+		$test_type = '38';
 
 		$data=$this->db->select_max('id')->get('diss_delayed_release')->result();
         $test_id=$data[0]->id;
         $test_id++;
+
+   
 
 		$results = 'Range from '.$this->input->post('range_min').' to '.$this->input->post('range_max');
 
@@ -282,7 +284,7 @@ class Test_Dissolution_Delayed_Release_Model extends CI_Model{
 		$test_request=$this->input->post('test_request');
 		$assignment=$this->input->post('assignment');
 		$analyst= $this->input->post('analyst');
-		$test_type ='34';
+		$test_type ='38';
 
 		$monograph_specifications = $this->input->post('specification');
 		$minimum = $this->input->post('min_tolerance');
@@ -302,10 +304,19 @@ class Test_Dissolution_Delayed_Release_Model extends CI_Model{
         $test_id=$data[0]->id;
         $test_id++;
 
+        $data_mon=$this->db->select_max('id')->get('full_monograph')->result();
+        $monograph_id=$data_mon[0]->id;
+        $monograph_id++; 
+
 		$data = array(
 			'test_request_id' => $this->input->post('test_request'),
 			'test_id' => $test_id,
 			'test_type' => $test_type,
+			'minimum'=>$this->input->post('min_tolerance'),
+			'maximum'=>$this->input->post('max_tolerance'),
+			'range_minimum'=>$this->input->post('tolerance_range_from'),
+			'range_maximum'=>$this->input->post('tolerance_range_to'),
+			'monograph_id'=>$monograph_id,
 			'monograph_specifications' => $monograph_specifications_final,
 
 			);
@@ -313,6 +324,7 @@ class Test_Dissolution_Delayed_Release_Model extends CI_Model{
 		$data2 = array(
 			'test_request_id' => $this->input->post('test_request'),
 			'test_type' => $test_type,
+			'test_id'=>$test_id,
 			'specifications' => $monograph_specifications_final,
 
 			);

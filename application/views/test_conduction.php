@@ -178,7 +178,8 @@
           <tbody>
           <?php
           if($monograph==0){}else{
-            if(in_array('1', $tests)){
+            if($monograph[0]['components']==1){
+                if(in_array('1', $tests)){
               ?>
                <tr>
                 <td style="text-align:center;padding:4px;background-color:#ffffff;"><b>Identification</b></td>
@@ -493,10 +494,331 @@
               }else{}
               ?>
              <?php
-           }else{
-              
-              
-             }
+           }else{}
+                  }else{}
+          
+          if($monograph[0]['components']==2){
+                if(in_array('1', $tests)){
+              ?>
+               <tr>
+                <td style="text-align:center;padding:4px;background-color:#ffffff;"><b>Identification</b></td>
+                <td style='text-align:left;padding:4px;background-color:#ffffff;'></td>
+                <td style='text-align:center;padding:4px;background-color:#ffffff;'></td>
+                <td style='text-align:center;padding:4px;background-color:#ffffff;'></td>
+                <td style='text-align:center;padding:4px;background-color:#ffffff;'></td>
+               </tr>  
+              <?php              
+                
+              if(in_array('25', $tests_done)){
+                $t = 25;
+              ?>
+               <tr >
+                    <td style="text-align:center;padding:4px;"><b></b></td>
+                    <td
+                    <?php
+                      if(in_array('25', $monograph_specifications)){
+                        echo'style="text-align:left;padding:4px;">';
+                    ?>
+                      <a href="<?php echo base_url().'test_identification/monograph_assay/'.$query['a'].'/'.$request[0]['tr'].'/'.$t;?>">View Identification By Assay Specification</a>
+                    <?php
+                      }else{
+                    ?>
+                      <td style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_assay/'.$query['a'].'/'.$request[0]['tr'].'/'.$t;?>">Identification By Assay Specifications</a></td>
+                    <?php
+                      }
+                    ?>
+                                       
+                 <?php              
+
+                  if(empty($identification_assay)){
+                    ?>
+                    <td style='text-align:left;padding:4px;'><a href="<?php echo base_url().'test_identification/index/'.$query['a'].'/'.$request[0]['tr'].'/'.$t;?>">Identification Assay Test</a>
+                 <?php     
+                 }else{                         
+                  ?>
+                    <td style='text-align:left;padding:4px;'>Identification Assay 
+                <?php
+                }             
+                ?>
+                </td>
+                    <td <?php 
+                      if(empty($identification_assay)){
+                    
+                          echo"style='text-align:center;padding:4px;'>";
+                          echo "View Worksheet";
+                     }else{
+                      ?>
+                         style='text-align:center;padding:4px;'><a href='<?php echo base_url().'test_identification/view_worksheet/'.$query['a'].'/'.$request[0]['tr'];?>'>View Worksheet</a>
+                     <?php   
+                     }
+                     ?>
+                    </td>
+                    <td 
+                      <?php 
+                      if(empty($identification_assay)){
+                    
+                          echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Not Done";
+                     }else{
+                         echo"style='text-align:center;padding:4px;background-color:#98ff98;border-bottom:solid 1px #bfbfbf;'>";
+                         echo "Complete";
+                     }?>                     
+                    </td>
+              </tr>
+              <?php
+                }else{}
+              ?>
+              <?php
+                if(in_array('27',$tests_done)){
+                  $t=27;
+              ?>
+              <tr>
+                  <td style="text-align:center;padding:4px;"></td>
+                  <td
+                    <?php
+                      if(in_array('27', $monograph_specifications)){
+                      echo'style="text-align:left;padding:4px;">';
+                    ?>
+                    <a href="<?php echo base_url().'test_identification/monograph_uv/'.$query['a'].'/'.$request[0]['tr'];?>">View Identification By UV Specifications</a>
+                    <?php
+                      }else{
+                       echo'style="text-align:center;padding:4px;">';  
+                    ?>
+                      <a href="<?php echo base_url().'test_identification/monograph_uv/'.$query['a'].'/'.$request[0]['tr'];?>">Please Fill in Test Specifications</a>
+                    <?php
+                      }
+                    ?>
+                  </td>
+                    
+                  <?php              
+                  if(empty($identification_uv)){
+                  ?>
+                    <td style='text-align:left;padding:4px;'><a href="<?php echo base_url().'test_identification/index_uv/'.$query['a'].'/'.$request[0]['tr'];?>">Identification By UV Test</a>
+                 <?php     
+                 }else{                         
+                  ?>
+                    <td style='text-align:left;padding:4px;'>Identification By UV Test 
+                <?php
+                }             
+                ?>
+                    <td 
+                    <?php 
+                      if(empty($identification_uv)){
+                    
+                          echo"style='text-align:center;padding:4px;'>";
+                          echo "View Worksheet";
+                     }else{
+                      ?>
+                         style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/view_worksheet_uv/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
+                     <?php   
+                     }
+                     ?>                    
+                    <td 
+                      <?php 
+                      if(empty($identification_uv)){
+                    
+                          echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Not Done";
+                     }else{
+                         echo"style='text-align:center;padding:4px;background-color:#98ff98;border-bottom:solid 1px #bfbfbf;'>";
+                         echo "Complete";
+                     }?>
+                     
+                    </td>
+              </tr>
+              <?php }else{}?>
+              <?php
+                if(in_array('35',$tests_done)){
+                  $t=35;
+              ?>
+              <tr>
+                    <td style="text-align:center;padding:4px;"></td>
+                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_infrared/'.$query['a'].'/'.$request[0]['tr'];?>">Specification</a></td>
+                    <?php              
+
+                      if(in_array('35', $monograph_specifications)){
+                        ?>
+                        <td style='text-align:left;padding:4px;'><a href="<?php echo base_url().'test_identification/index_infrared/'.$query['a'].'/'.$request[0]['tr'];?>">Infrared</a>
+                     <?php     
+                     }else{                         
+                      ?>
+                        <td style='text-align:left;padding:4px;'>Please fill in Infrared Specification  
+                    <?php
+                    }             
+                    ?>
+                    <td 
+                    <?php 
+                      if(empty($identification_infrared)){
+                    
+                          echo"style='text-align:center;padding:4px;'>";
+                          echo "View Worksheet";
+                     }else{
+                      ?>
+                         style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/view_worksheet_infrared/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
+                     <?php   
+                     }
+                     ?>                    
+                    <td 
+                      <?php 
+                      if(empty($identification_infrared)){
+                    
+                          echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf';>";
+                          echo "Not Done";
+                     }else{
+                         echo"style='text-align:center;padding:4px;background-color:#98ff98;border-bottom:solid 1px #bfbfbf';>";
+                         echo "Complete";
+                     }?>
+                     
+                    </td>
+              </tr>
+              <?php
+              }else{}
+              ?>
+              <?php
+                if(in_array('29',$tests_done)){
+                  $t=29;
+              ?>
+              <tr>
+                    <td style="text-align:center;padding:4px;"></td>
+                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_thin_layer/'.$query['a'].'/'.$request[0]['tr'];?>">Specifications</a></td>
+                    <?php              
+
+                      if(in_array('29', $monograph_specifications)){
+                        ?>
+                        <td style='text-align:left;padding:4px;'><a href="<?php echo base_url().'test_identification/index_thin_layer/'.$query['a'].'/'.$request[0]['tr'];?>">Thin Layer</a>
+                     <?php     
+                     }else{                         
+                      ?>
+                        <td style='text-align:left;padding:4px;'>Please fill in Thin Layer Specification  
+                    <?php
+                    }             
+                    ?>
+                    <td 
+                    <?php 
+                      if(empty($identification_thin_layer)){
+                    
+                          echo"style='text-align:center;padding:4px;'>";
+                          echo "View Worksheet";
+                     }else{
+                      ?>
+                        style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/view_worksheet_thin_layer/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
+                     <?php   
+                     }
+                     ?>
+                    
+                    <td 
+                      <?php 
+                      if(empty($identification_thin_layer)){
+                    
+                          echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf';>";
+                          echo "Not Done";
+                     }else{
+                         echo"style='text-align:center;padding:4px;background-color:#98ff98;border-bottom:solid 1px #bfbfbf';>";
+                         echo "Complete";
+                     }?>
+                     
+                    </td>
+              </tr>
+              <?php
+              }else{}
+              ?>
+              <?php
+                if(in_array('31',$tests_done)){
+                  $t = 31;
+              ?>
+              <tr>
+                    <td style="text-align:center;padding:4px;"></td>
+                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_hplc/'.$query['a'].'/'.$request[0]['tr'].'/'.$t;?>">Specifications</a></td>
+                    <?php              
+
+                      if(in_array('31', $monograph_specifications)){
+                        ?>
+                        <td style='text-align:left;padding:4px;'><a href="<?php echo base_url().'test_identification/index_hplc/'.$query['a'].'/'.$request[0]['tr'].'/'.$t;?>">Identification By HPLC</a>
+                     <?php     
+                     }else{                         
+                      ?>
+                        <td style='text-align:left;padding:4px;'>Please fill in HPLC Specification  
+                    <?php
+                    }             
+                    ?>
+                    <td 
+                    <?php 
+                      if(empty($identification_hplc)){
+                    
+                          echo"style='text-align:center;padding:4px;'>";
+                          echo "View Worksheet";
+                     }else{
+                      ?>
+                        style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/view_worksheet_hplc/'.$query['a'].'/'.$request[0]['tr'].'/'.$t;?>">View Worksheet</a></td>
+                     <?php   
+                     }
+                     ?>
+                    <td 
+                      <?php 
+                      if(empty($identification_hplc)){
+                    
+                          echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Not Done";
+                     }else{
+                         echo"style='text-align:center;padding:4px;background-color:#98ff98;border-bottom:solid 1px #bfbfbf;'>";
+                         echo "Complete";
+                     }?>
+                     
+                    </td>
+              </tr>
+              <?php
+              }else{}
+              ?>
+              <?php
+                if(in_array('33',$tests_done)){
+                  $t=33;
+              ?>
+              <tr>
+                    <td style="text-align:center;padding:4px;"></td>
+                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_chemical/'.$query['a'].'/'.$request[0]['tr'].'/'.$t;?>">Specifications</a></td>
+                    <?php              
+
+                      if(in_array('33', $monograph_specifications)){
+                        ?>
+                        <td style='text-align:left;padding:4px;'><a id="chemical_test_link"  href="#">Chemical Method</a>
+                     <?php     
+                     }else{                         
+                      ?>
+                        <td style='text-align:left;padding:4px;'>Please fill in Chemical Method Specification  
+                    <?php
+                    }             
+                    ?>
+                    <td 
+                    <?php 
+                      if(empty($identification_chemical_method)){
+                    
+                          echo"style='text-align:center;padding:4px;'>";
+                          echo "View Worksheet";
+                     }else{
+                      ?>
+                       style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/view_worksheet_chemical/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
+                     <?php   
+                     }
+                     ?>
+                    <td 
+                      <?php 
+                      if(empty($identification_chemical_method)){
+                    
+                          echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Not Done";
+                     }else{
+                         echo"style='text-align:center;padding:4px;background-color:#98ff98;border-bottom:solid 1px #bfbfbf;'>";
+                         echo "Complete";
+                     }?>
+                     
+                    </td>
+              </tr>
+              <?php
+              }else{}
+              ?>
+             <?php
+           }else{}
+                  }else{}
              ?>
           <?php
             if(in_array('6', $tests)){
@@ -602,18 +924,18 @@
                 <td style="text-align:center;padding:4px;"></a></td>
                 <td 
                   <?php
-                  if(empty($dissolution_delayed) && in_array('38', $monograph_specifications) ){
+                  if(in_array('38', $monograph_specifications)){
                     echo'style="text-align:left;padding:4px;">';
                     ?>
-                    <a href="<?php echo base_url().'test_dissolution/monograph_delayed_release/'.$query['a'].'/'.$request[0]['tr'];?>">Dissolution Delayed Release Tablets HPLS Specifications</a>
+                    <a href="<?php echo base_url().'test_dissolution/specifications_delayed_release_view/'.$query['a'].'/'.$request[0]['tr'];?>">View Dissolution Delayed Release Tablets HPLS Specifications</a>
                     <?php
                   }else{
                     echo'style="text-align:left;padding:4px;">';
                     ?>
-                    <a href="<?php echo base_url().'test_dissolution/monograph_delayed_release/'.$query['a'].'/'.$request[0]['tr'];?>">View Dissolution Delayed Release Tablets HPLS Specifications</a>
-                <?php
-                  }
-                ?>
+                    <a href="<?php echo base_url().'test_dissolution/monograph_delayed_release/'.$query['a'].'/'.$request[0]['tr'];?>">Dissolution Delayed Release Tablets HPLS Specifications</a>
+                    <?php
+                      }
+                    ?>
                 </td>  
                 <td 
                 <?php              
@@ -953,32 +1275,35 @@
 
             <?php 
               if($monograph[0]['components']==2){
+                $t=53;
             ?>
             <tr>
                 <td style="text-align:center;padding:4px;"></a></td>
                 <td 
                   <?php 
-                      if(!in_array('j', $monograph_specifications)){
-                    
+                      if(in_array('53', $monograph_specifications)){
+                          
                           echo"style='text-align:left;padding:4px;'>";
                           ?>
-                          <a href="<?php echo base_url().'content_uniformity/uniformity_of_dosage_specifications/'.$query['a'].'/'.$request[0]['tr'];?>">Please Fill Test specification</a>
+                          <a href="<?php echo base_url().'content_uniformity/uniformity_of_dosage_specifications_view/'.$query['a'].'/'.$request[0]['tr'].'/'.$t;?>">View Specification</a>
+                          
                   <?php       
                      }else{
                          echo"style='text-align:left;padding:4px;'>";
                     ?>
-                      <a href="<?php echo base_url().'content_uniformity/uniformity_of_dosage_specifications_view/'.$query['a'].'/'.$request[0]['tr'].'/';?>">view specification</a>&nbsp;&nbsp;
+                      
+                      <a href="<?php echo base_url().'content_uniformity/uniformity_of_dosage_specifications/'.$query['a'].'/'.$request[0]['tr'].'/'.$t;?>">Please Fill Test specification</a>
                     <?php
                     }
                     ?>
                 </td>
                 <td
                  <?php 
-                      if(in_array('j', $monograph_specifications) && empty($uniformity_of_dosage_multicomponent)){
+                      if(in_array('53', $monograph_specifications) && empty($uniformity_of_dosage_multicomponent)){
                     
                           echo"style='text-align:left;padding:4px;'>";
                           ?>
-                          <a href="<?php echo base_url().'content_uniformity/uniformity_of_dosage_multicomponent/'.$query['a'].'/'.$request[0]['tr'];?>"> Uniformity of Dosage Test Multicomponent</a> 
+                          <a href="<?php echo base_url().'content_uniformity/uniformity_of_dosage_multicomponent/'.$query['a'].'/'.$request[0]['tr'].'/'.$t;?>"> Uniformity of Dosage Test Multicomponent</a> 
 
                      <?php     
                      }else{
@@ -991,24 +1316,17 @@
                 </td>
                 <td
                  <?php 
-                      if(in_array('Weight Variation', $uniformity_of_dosage_multicomponent_m1)){
+                      if($uniformity_of_dosage_multicomponent_m1){
                     
                           echo"style='text-align:center;padding:4px;'>";
                           ?>
-                        <a href="<?php echo base_url().'content_uniformity/worksheet_uniformity_of_dosage_view/'.$query['a'].'/'.$request[0]['tr'];?>">view worksheet</a>  
+                        <a href="<?php echo base_url().'content_uniformity/worksheet_uniformity_of_dosage_view_multi/'.$query['a'].'/'.$request[0]['tr'].'/'.$t;?>">View Worksheet</a>  
                      <?php     
-                     }elseif(in_array('Content Uniformity', $uniformity_of_dosage_multicomponent_m1)){
+                     }else{
                          echo"style='text-align:center;padding:4px;'>";
+                         echo"View Worksheet";
+                    }
                    ?>
-                     <a href="<?php echo base_url().'content_uniformity/worksheet_uniformity_of_dosage_view/'.$query['a'].'/'.$request[0]['tr'];?>">view worksheet</a>
-                <?php
-                }else{
-                 echo"style='text-align:center;padding:4px;'>";
-                 ?>
-                 view worksheet
-                <?php
-                }
-                ?>
               </td>
               <td 
                 <?php 
@@ -1111,77 +1429,7 @@
                       }else{}
                             }else{}
             ?>
-            <?php 
-              if($monograph[0]['components']==2){
-              ?>
-            <tr>
-                <td style="text-align:center;padding:4px;"></a></td>
-                <td style='text-align:left;padding:4px;'>
-                  <?php 
-                  if(empty($uniformity_of_dosage_multicomponent_m1)){  
-                  ?>
-                    First Conduct Uniformity of Dosage Test
-                  <?php       
-                  }elseif(!empty($uniformity_of_dosage_multicomponent_m1) && !in_array('g', $monograph_specifications) && in_array('Content Uniformity', $uniformity_of_dosage_multicomponent_m1)){
-                  ?>
-                    <a href="<?php echo base_url().'content_uniformity/content_uniformity_specifications/'.$query['a'].'/'.$request[0]['tr'].'/';?>">Please Fill Content Uniformity Test specifications</a>
-                  <?php
-                  }elseif(!empty($uniformity_of_dosage_multicomponent_m1) && !in_array('k', $monograph_specifications) && !in_array('f', $monograph_specifications) && in_array('Weight Variation', $uniformity_of_dosage_multicomponent_m1)){
-                  ?>
-                    <a href="<?php echo base_url().'assay/assay_specifications/'.$query['a'].'/'.$request[0]['tr'].'/';?>">Please Fill Assay Test Specification</a>
-                  <?php
-                  }else{
-                    ?>
-                    <a href="<?php echo base_url().'assay/specifications_view_worksheet/'.$query['a'].'/'.$request[0]['tr'].'/';?>">view Assay specifications</a>
-                    <?php
-                  }
-                  ?>
-                </td>
-                <td style="text-align:left;padding:4px;">
-                   <?php 
-                    if(!in_array('1',$hplc_internal_method))
-                      {
-                        ?>
-                        <a href="<?php echo base_url().'assay/assay_hplc_areamethod_multicomponent/'.$query['a'].'/'.$request[0]['tr'];?>">Assay HPLC Area Method Test Multicomponent</a>&nbsp;
-                    <?php 
-                  }elseif(!in_array('0',$assay_hplc_area_method_multicomponent) || empty($assay_hplc_area_method_multicomponent ) && in_array('1',$hplc_internal_method)){
-                   ?>
-                     Assay Test Multicomponent
-                   <?php
-                    }
-                   ?>
-                </td>
-                <td
-                 <?php 
-                      if(!in_array('1',$hplc_internal_method)){
-                    
-                          echo"style='text-align:center;padding:4px;'>";
-                          ?>
-                          view worksheet
-                     <?php     
-                     }else{
-                         echo"style='text-align:center;padding:4px;'>";
-                   ?>
-                     <a href="<?php echo base_url().'assay/full_worksheet_hplc_internal_method_single_component/'.$query['a'].'/'.$request[0]['tr'];?>">view worksheet</a>
-                <?php
-                }
-                ?>
-              </td>
-              <td 
-                <?php 
-                      if(empty($assay_hplc_area_method_multicomponent)){
-                        echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
-                        echo "Not Done";
-                          
-                     }else{
-                         echo"style='text-align:center;padding:4px;background-color:#98ff98;border-bottom:solid 1px #bfbfbf;'>";
-                         echo "Complete"; 
-                     }?>
-                </td>
-            </tr>
-            <?php
-              }else{}
-            ?>
+
             <?php 
               if(in_array('6',$tests)){
             ?> 
@@ -1278,44 +1526,41 @@
             ?>
             <?php 
               if($monograph[0]['components']==2){
+                $t=55;
             ?> 
             <tr>
                 <td style="text-align:center;padding:4px;"></td>
                 <td 
                   <?php 
-                      if(in_array('1',$hplc_internal_method) && !in_array('6', $monograph_specifications) && !in_array('Weight Variation', $uniformity_of_dosage)){
+                      if(in_array('55', $monograph_specifications)){
                     
                           echo"style='text-align:left;padding:4px;'>";
                           ?>
-                          <a href="<?php echo base_url().'content_uniformity/weight_variation_specifications/'.$query['a'].'/'.$request[0]['tr'].'/';?>">Please Fill Weight Variation Test specifications</a>
+                          <a href="<?php echo base_url().'content_uniformity/weight_variation_specifications_multi_view/'.$query['a'].'/'.$request[0]['tr'].'/'.$t;?>">View Weight Variation Test Specification</a>
                   <?php       
-                     }elseif(!empty($hplc_internal_method)){
+                     }else{
                          echo"style='text-align:left;padding:4px;'>";
                     ?>
-                      <a href="<?php echo base_url().'content_uniformity/weight_variation_specifications_view/'.$query['a'].'/'.$request[0]['tr'].'/';?>">view Weight Variation specification</a>  
-                    <?php
-                    }else{
-                    ?>
-                    First Complete Assay Test
+                        <a href="<?php echo base_url().'content_uniformity/weight_variation_specifications_multi/'.$query['a'].'/'.$request[0]['tr'].'/'.$t;?>">Please Fill Weight Variation Test Specifications</a>
                     <?php
                     }
                   ?>
                 </td>
                  <td
                  <?php 
-                      if(in_array('21', $monograph_specifications) && in_array('Weight Variation', $uniformity_of_dosage)){
-                    
-                          echo"style='text-align:left;padding:4px;'>";
-                          ?>
-                          <a href="<?php echo base_url().'content_uniformity/weight_variation_worksheet/'.$query['a'].'/'.$request[0]['tr'];?>">Weight Variation Test</a>
-                     <?php     
-                     }else{
-                         echo"style='text-align:left;padding:4px;'>";
-                   ?>
-                   Weight Variation Test
-                     
+                  if(in_array('55', $monograph_specifications) && empty($hplc_internal_method)){
+                
+                    echo"style='text-align:left;padding:4px;'>";
+                    echo"Please Conduct Assay Test First";
+                  }else if(in_array('55', $monograph_specifications) && empty($weight_variation_hplc_two_components)){
+                    echo"style='text-align:left;padding:4px;'>";
+                ?>
+                   <a href="<?php echo base_url().'content_uniformity/weight_variation_worksheet/'.$query['a'].'/'.$request[0]['tr'];?>">Weight Variation Test</a>  
                 <?php
-                }
+                  }else{
+                    echo"style='text-align:left;padding:4px;'>";
+                    echo"Weight Variation Test Multicomponent";
+                  }
                 ?>
                 </td>
                 <td
@@ -1324,12 +1569,12 @@
                     
                           echo"style='text-align:center;padding:4px;'>";
                           ?>
-                          view worksheet
+                          View Worksheet
                      <?php     
                      }else{
                          echo"style='text-align:center;padding:4px;'>";
                    ?>
-                     <a href="<?php echo base_url().'content_uniformity/worksheet/'.$query['a'].'/'.$request[0]['tr'];?>">view worksheet</a>
+                     <a href="<?php echo base_url().'content_uniformity/worksheet/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a>
                 <?php
                 }
                 ?>
@@ -1421,7 +1666,15 @@
             ?>
             <?php 
               if($monograph[0]['components']==2){
+                if(in_array('9',$tests)){
             ?>
+            <tr>
+                <td style="text-align:center;padding:4px; background-color:#ffffff;"><b>Content Uniformity</b></td>
+                <td style="text-align:center;padding:4px; background-color:#ffffff;"><b></b></td>
+                <td style="text-align:center;padding:4px; background-color:#ffffff;"><b></b></td>
+                <td style="text-align:center;padding:4px; background-color:#ffffff;"><b></b></td>
+                <td style="text-align:center;padding:4px; background-color:#ffffff;"></td>
+            </tr>
             <tr>
                 <td style="text-align:center;padding:4px;"></a></td>
                 <td 
@@ -1487,7 +1740,8 @@
                 </td>
             </tr>
             <?php
-              }else{}
+              }else{}   
+                    }else{}
             ?>
             <?php 
               if($monograph[0]['components']==1){
@@ -1560,6 +1814,7 @@
             ?>
             <?php 
               if($monograph[0]['components']==2){
+                if(in_array('9',$tests)){
               ?>
             <tr>
                 <td style="text-align:center;padding:4px;"></a></td>
@@ -1625,6 +1880,7 @@
             </tr>
             <?php
               }else{}
+                    }else{}
             ?>
             <?php 
               if($monograph[0]['components']==1){
@@ -1698,6 +1954,7 @@
             ?>
             <?php 
               if($monograph[0]['components']==2){
+                if(in_array('9', $tests)){
             ?>
             <tr>
                 <td style="text-align:center;padding:4px;"></td>
@@ -1764,7 +2021,8 @@
             </tr>
             <?php
             }else{}
-           }else{}
+                  }else{}
+                        }else{}
             ?>
 
           <?php
@@ -1797,7 +2055,7 @@
                      }else{
                          echo"style='text-align:left;padding:4px;'>";
                     ?>
-                      <a href="<?php echo base_url().'assay/assay_specifications/'.$query['a'].'/'.$request[0]['tr'].'/';?>">Please Fill Test specification</a>
+                      <a href="<?php echo base_url().'assay/assay_specifications/'.$query['a'].'/'.$request[0]['tr'].'/';?>">Please Fill Assay Test specification</a>
                       
                      <?php
                      }
@@ -1873,79 +2131,78 @@
             ?>
             <?php 
               if($monograph[0]['components']==2){
+                $t=7;
+                if(in_array('7', $tests_done)){
               ?>
             <tr>
                 <td style="text-align:center;padding:4px;"></a></td>
                 <td 
                   <?php 
-                      if(empty($assay_monograph_hplc_internal_method_two_components)){
+                      if(in_array('7', $monograph_specifications)){
                     
                           echo"style='text-align:left;padding:4px;'>";
                           ?>
-                          <a href="<?php echo base_url().'assay/monograph_hplc_internal_method_two_components/'.$query['a'].'/'.$request[0]['tr'].'/';?>">Please Fill Test specification</a>
+                         
+                      <a href="<?php echo base_url().'assay/specifications_multi_view_worksheet/'.$query['a'].'/'.$request[0]['tr'].'/'.$t;?>">View Assay Specification</a> 
                   <?php       
                      }else{
                          echo"style='text-align:left;padding:4px;'>";
-                    ?>
-                      <a href="<?php echo base_url().'assay/view_monograph_hplc_internal_method_two_components/'.$query['a'].'/'.$request[0]['tr'].'/';?>">View specification</a>
+                    ?><a href="<?php echo base_url().'assay/assay_specifications_multi/'.$query['a'].'/'.$request[0]['tr'].'/'.$t;?>">Please Fill Assay Test specification</a>
                      <?php
                      }
                      ?>
                 </td>
                 <td
                  <?php 
-                      if(empty($assay_monograph_hplc_internal_method_two_components)){
+                      if(in_array('7', $monograph_specifications)){
                     
                           echo"style='text-align:left;padding:4px;'>";
                           ?>
-                          Hplc Internal Method Two Components
-                     <?php     
-                     }else if(!empty($assay_monograph_hplc_internal_method_two_components)){
-                    
-                          echo"style='text-align:left;padding:4px;'>";
-                          ?>
-                          <a href="<?php echo base_url().'assay/worksheet_internal_method_two_components/'.$query['a'].'/'.$request[0]['tr'].'/';?>">Hplc Internal Method Two Components</a> 
+                          <a href="<?php echo base_url().'assay/worksheet_internal_method_two_components/'.$query['a'].'/'.$request[0]['tr'].'/'.$t;?>">Hplc Internal Method Two Components</a>
                           
                      <?php     
+                     }else{
+                          echo"style='text-align:left;padding:4px;'>";
+                          echo" Assay Hplc Internal Method Two Components";   
                      }
-                     else{
-                         echo"style='text-align:left;padding:4px;'>";
-                   ?>
-                        Hplc Internal Method Two Components has been Conducted 
-                     <?php
-                }
                 ?>
                 </td>
-                 <td
+                <td
                  <?php 
                       if(empty($hplc_internal_method_two_components)){
                     
                           echo"style='text-align:center;padding:4px;'>";
+                          echo"View Worksheet";
                           ?>
-                          view worksheet
+                          
                      <?php     
                      }else{
                          echo"style='text-align:center;padding:4px;'>";
-                   ?>
-                     <a href="<?php echo base_url().'assay/full_worksheet_hplc_internal_method_two_components/'.$query['a'].'/'.$request[0]['tr'].'/';?>">view worksheet</a>
-                <?php
-                }
+                         
+                     ?>
+                     <a href="<?php echo base_url().'assay/full_worksheet_hplc_internal_method_two_components/'.$query['a'].'/'.$request[0]['tr'].'/';?>">View Worksheet</a>
+                          
+                     <?php
+                     }
+
                 ?>
                 </td>
-              <td
+                <td
                 <?php 
-                      if(empty($hplc_internal_method_two_components)){
-                        echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;'>";
-                        echo "Not Done";
-                          
-                     }else if (!empty($hplc_internal_method_two_components)){
-                         echo"style='text-align:center;padding:4px;border-bottom:solid 1px #bfbfbf;background-color:#98ff98;'>";
-                         echo "Complete"; 
-                     }?> 
+                  if(empty($hplc_internal_method_two_components)){
+                    echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;'>";
+                    echo "Not Done";
+                      
+                 }else{
+                     echo"style='text-align:center;padding:4px;border-bottom:solid 1px #bfbfbf;background-color:#98ff98;'>";
+                     echo "Complete"; 
+                 }
+                ?> 
                 </td>
             </tr>
             <?php
             }else{}
+                  }else{}
             ?>
 
             <?php 
@@ -2019,6 +2276,7 @@
             ?>
             <?php 
               if($monograph[0]['components']==2){
+                if(in_array('2', $tests_done)){
               ?>
             <tr>
                 <td style="text-align:center;padding:4px;"></td>
@@ -2085,9 +2343,11 @@
             </tr>
             <?php
             }else{}
+                  }else{}
             ?>
             <?php 
               if($monograph[0]['components']==2){
+                if(in_array('72', $tests_done)){
               ?> 
             <tr>
                 <td style="text-align:center;padding:4px;"></a></td>
@@ -2154,6 +2414,7 @@
             </tr>
             <?php
               }else{}
+                    }else{}
             ?>
             <?php 
               if($monograph[0]['components']==1){
@@ -2229,6 +2490,7 @@
             ?>
             <?php 
               if($monograph[0]['components']==2){
+                if(in_array('73', $tests_done)){
             ?> 
             <tr>
                 <td style="text-align:center;padding:4px;"></a></td>
@@ -2295,6 +2557,7 @@
             </tr>
             <?php
             }else{}
+                  }else{}
             ?>
             <?php 
               if($monograph[0]['components']==1){
@@ -2438,6 +2701,7 @@
             ?>
             <?php 
               if($monograph[0]['components']==2){
+                if(in_array('9', $tests_done)){
             ?> 
             <tr>
                 <td style="text-align:center;padding:4px;"></a></td>
@@ -2504,6 +2768,7 @@
             </tr>
             <?php
             }else{}
+                  }else{}
             ?>
             <?php 
               if($monograph[0]['components']==1){
@@ -2718,6 +2983,7 @@
             ?>
             <?php 
               if($monograph[0]['components']==2){
+                if(in_array('11', $tests_done)){
               ?>
             <tr>
                 <td style="text-align:center;padding:4px;"></a></td>
@@ -2783,6 +3049,7 @@
             </tr>
             <?php
             }else{}
+                  }else{}
             ?>
 
             <?php 

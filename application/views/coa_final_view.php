@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <title>MEDS</title>
-  <link rel="icon" href="" />
+  <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon">
   <link href="<?php echo base_url().'style/core.css';?>" rel="stylesheet" type="text/css" />
    <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
    
@@ -95,7 +95,7 @@
  <div id="form">  
  <?php echo validation_errors(); ?>
   <?php echo form_open('coa/coa_pdf/'.$test_request_id,array('id'=>'coa_view'));?>
-  <table bgcolor="#c4c4ff" class="table_form"  width="75%" border="0" cellpadding="8px" align="center">
+  <table bgcolor="#c4c4ff" class="table_form"  width="50%" border="0" cellpadding="8px" align="center">
    <input type="hidden" name ="test_request" value ="<?php echo $test_request_id;?>">
     <tr>
         <td colspan="8" style="padding:8px;text-align:center;">
@@ -106,21 +106,22 @@
                 <td colspan="4" style="padding:8px;border-right:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;color:#000000;"><b><h3>QUALITY CONTROL LABORATORY</h3><b></td>
             </tr>
              <tr>
-                <td height="25px" colspan="4" style="padding:8px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><b><h4>MISSION FOR ESSENTIAL DRUGS & SUPPLIES</h4></b></td>
-                <td height="25px" colspan="4" style="padding:8px;border-bottom:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;color:#ff0000;"><b><h6>ASSURING QUALITY OF MEDICINES</h6></b></td>
+                <td height="25px" colspan="4" style="padding:8px;border-left:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><b><h4>MISSION FOR ESSENTIAL DRUGS & SUPPLIES</h4></b></td>
+                <td height="25px" colspan="4" style="padding:8px;border-right:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;color:#ff0000;"><b><h6>ASSURING QUALITY OF MEDICINES</h6></b></td>
+            </tr>
+             <tr>
+                <td colspan="8" align="center" style="padding:8px;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><h1><b><u>CERTIFICATE OF ANALYSIS</u></b></h1></td>
             </tr>
           </table>
         </td>
     </tr>
-    <tr>
-        <td colspan="8" align="center" style="padding:8px;border-bottom: solid 10px #c4c4ff;color: #0000fb;background-color: #ffffff;"><h1><b><u>CERTIFICATE OF ANALYSIS</u></b></h1></td>
-    </tr>
+   
     <tr>
       <td colspan="8" align="center" style="padding:8px;">
         <table align="center" width="100%">
           <tr>
               <td align="left" style="padding:8px;background-color:#ffffff;"><b><u>REGISTRATION NUMBER:</u></b></td>
-              <td align="left" style="padding:8px;background-color:#ffffff;"><?php echo $query['reference_number'] ?></td>
+              <td align="left" style="padding:8px;background-color:#ffffff;"><?php echo $query['laboratory_number'] ?></td>
               <td align="left" style="padding:8px;background-color:#ffffff;"><b><u>Request Date:</u></b></td>
               <td align="left" style="padding:8px;background-color:#ffffff;"><?php echo $query['date_time']?></td>
               <td align="left" style="padding:8px;background-color:#ffffff;"><b><u>Test Date:</u></b></td>
@@ -148,7 +149,7 @@
       <td colspan="6"align="left" style="padding:8px;background-color:#ffffff;border-top: dotted 1px #bfbfbf;border-bottom: solid 1px #bfbfbf;"><b>Appearance:</b>&nbsp;<?php echo $query['active_ingredients']?></td>
     </tr>
      <tr>
-      <td colspan="6">
+      <td colspan="6" style="padding:8px">
       <table width="950px" bgcolor="#c4c4ff" border="0" cellpadding="4px" align="center">
 
         <thead>
@@ -175,12 +176,12 @@
                  echo "<tr>";
               }
             ?>
-          <td style="padding:8px;background-color:#ffffff;border-left: dotted 1px #bfbfbf;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $i?>.</td>      
-          <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $row['test_name'];?> </td>      
-          <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $row['method'];?></td>       
-          <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $row['specifications'];?></td>
-          <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $row['results'];?></td>      
-          <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $row['remarks'];?></td>
+          <td style="padding:8px;background-color:#ffffff;border-left: solid 1px #bfbfbf;border-right: solid 1px #bfbfbf;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"><?php echo $i?>.</td>      
+          <td style="padding:8px;background-color:#ffffff;border-right: solid 1px #bfbfbf;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"><?php echo $row['test_name'];?> </td>      
+          <td style="padding:8px;background-color:#ffffff;border-right: solid 1px #bfbfbf;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"><?php echo $row['method'];?></td>       
+          <td style="padding:8px;background-color:#ffffff;border-right: solid 1px #bfbfbf;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"><?php echo $row['specifications'];?></td>
+          <td style="padding:8px;background-color:#ffffff;border-right: solid 1px #bfbfbf;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"><?php echo $row['results'];?></td>      
+          <td style="padding:8px;background-color:#ffffff;border-right: solid 1px #bfbfbf;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"><?php echo $row['remarks'];?></td>
           <?php $i++; ?>
 
       </tr>
@@ -192,9 +193,11 @@
       </td>     
       </tr>
       <tr>
-          <td colspan="6"align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>CONCLUSION:*<b></td> 
+          <td colspan="6"align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>CONCLUSION:*<b></td> 
       </tr>
-      <tr><td colspan="6" style ="text-align:center;padding:8px;"><?php echo $coa[0]['conclusions'];?></td></tr>
+      <tr>
+        <td colspan="6" style ="text-align:center;padding:8px;"><?php echo $coa[0]['conclusions'];?></td>
+      </tr>
       <tr>    
          <td colspan="2" align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>Prepared by: <?php echo $coa[0]['done_by'];?></td>
          <td colspan="2" align="center" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>Reviewed by: <?php echo $coa[0]['supervisor'];?>

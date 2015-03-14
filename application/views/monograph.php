@@ -198,7 +198,7 @@
                             foreach ($subtests_multicomponent as $row):     
                           ?>
                            <td style="padding:8px;border-right: dotted 1px #c0c0c0;text-align: center;border-bottom: solid 1px #c0c0c0;" width="20px"><?php echo $i;?>.</td>
-                           <td style="padding:8px;text-align: left;border-bottom: solid 1px #c0c0c0;"><input type="checkbox" id="subtests[]" name="subtests[]"> <?php echo $row['name'];?></td>
+                           <td style="padding:8px;text-align: left;border-bottom: solid 1px #c0c0c0;"><input type="checkbox" id="subtests[]" name="subtests[]" value="<?php echo $row['id'];?>"> <?php echo $row['name']." ".$row['id'];?></td>
                            <?php
                              $i++;
                            ?>

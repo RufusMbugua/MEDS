@@ -3,7 +3,6 @@
  <head>
   <title>MEDS</title>
   <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon">
-  <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon">
   <link href="<?php echo base_url().'style/core.css';?>" rel="stylesheet" type="text/css" />
    <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
    
@@ -28,19 +27,6 @@
   <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/equipmentinfo.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/averagecalculation.js';?>"></script>
-  <script>
-    //function to prevent submitting the form when enter button is pressed.
-    $('form input').keydown(function (e) {
-        if (e.keyCode == 30) {
-            var inputs = $(this).parents("form").eq(0).find(":input");
-            if (inputs[inputs.index(this) + 1] != null) {                    
-                inputs[inputs.index(this) + 1].focus();
-            }
-            e.preventDefault();
-            return false;
-        }
-    });
-  </script>
  </head>
  <body>
   <?php
@@ -97,7 +83,7 @@
     <div id="form_wrapper">
      <div id="forms">
       <?php echo validation_errors(); ?>
-      <?php echo form_open('content_uniformity/save_uniformity_of_dosage_multicomponent',array('id'=>'uniformity_of_dosage_multi'));?>
+      <?php echo form_open('content_uniformity/save_uniformity_of_dosage',array('id'=>'uniformity_of_dosage'));?>
        <table width="75%" class="table_form" border="0" cellpadding="4px" align="center">
         <input type="hidden" name="tr_id" value="<?php echo $query['tr'];?>"></input>
         <input type="hidden" name="assignment_id" value="<?php echo $request[0]['a'];?>"></input>
@@ -125,7 +111,7 @@
                 </tr>
                 <tr>
                     <td height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">SERIAL No.</td>
-                    <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><?php echo $monograph[0]['serial_number'];?></input></td>
+                    <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><?php echo $monograph[0]['serial_number'];?></td>
                     <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;">Batch/Lot No.</td>
                     <td colspan="3" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><?php echo $query['batch_lot_number'];?></td>
                 </tr>
@@ -161,14 +147,14 @@
                     </tr>
                     <tr>
                       <td height="25px" style="padding:8px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">Analysis Start Date: <?php echo date("d/m/Y")?></td>
-                      <td height="25px" style="padding:8px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">Analysis End Date: <input type="text" value="<?php echo date("d/m/Y");?>"></td>
+                      <td height="25px" style="padding:8px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">Analysis End Date: <?php echo date("d/m/Y");?></td>
                     </tr>
                 </table>
               </td>
             </tr>
             <tr><td colspan="8" style="padding:8px;"></td></tr>
             <tr>
-              <td colspan="8" align="center" style="padding:4px;border-bottom: solid 10px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><h5>Uniformity of Dosage Unit</h5></td>
+              <td colspan="8" align="center" style="padding:4px;border-bottom: solid 10px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><h5><b>Uniformity of Dosage Unit</b></h5></td>
             </tr>
             <tr>
               <td colspan="8" height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>Balance Details</b></td>
@@ -178,20 +164,10 @@
                 <table class="inner_table" width="90%" align="center" cellpadding="8px">
                   <tr>
                     <td style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Balance Make</td>
-                    <td style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"><input type="text" size="80" id="equipmentbalance" name="equipmentbalance"></input></td>
+                    <td style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"> <?php echo $uniformity_of_dosage[0]['equipmentbalance'];?></td>
                     <td style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Balance ID Number</td>
                     <td style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <select id="balance_id" name="balance_id" >
-                      <option selected></option>
-                       <?php
-                       foreach($sql_equipment as $bl_name):
-                      ?>
-                       
-                       <option value="<?php  echo $bl_name['id_number'];?>" data-equipmentbalance="<?php echo $bl_name['description']; ?>"><?php  echo $bl_name['id_number'];?></option>
-                        <?php
-                        endforeach
-                        ?>
-                      </select>
+                    <?php echo $uniformity_of_dosage[0]['balance_id'];?>
                     </td>
                   </tr>
                 </table>
@@ -206,97 +182,96 @@
                   <tr>
                       <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">1.</td>
                       <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="" name="weight_tablet_one"class="total"></td>
+                       <?php echo $uniformity_of_dosage[0]['weight_tablet_one'];?></td>
                       <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                       11.</td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="" name="weight_tablet_eleven"class="total"></td>
+                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"> <?php echo $uniformity_of_dosage[0]['weight_tablet_eleven'];?>
+                      </td>
                   </tr>
                   <tr>
                       <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">2.</td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="" name="weight_tablet_two" class="total" ></td>
+                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"> <?php echo $uniformity_of_dosage[0]['weight_tablet_two'];?>
+                      </td>
                       <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                       12.</td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="" name="weight_tablet_twelve" class="total" ></td>
+                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"> <?php echo $uniformity_of_dosage[0]['weight_tablet_twelve'];?>
+                      </td>
                   </tr>
                   <tr>
                       <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">3.</td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="" name="weight_tablet_three" class="total" ></td>
+                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"> <?php echo $uniformity_of_dosage[0]['weight_tablet_three'];?>
+                      </td>
                       <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                       13.</td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="" name="weight_tablet_thirteen" class="total" ></td>
+                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"> <?php echo $uniformity_of_dosage[0]['weight_tablet_thirteen'];?>
+                      </td>
                   </tr>
                   <tr>
                       <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">4.</td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="" name="weight_tablet_four"class="total"></td>
+                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"> <?php echo $uniformity_of_dosage[0]['weight_tablet_four'];?>
+                     </td>
                       <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                       14.</td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="" name="weight_tablet_fourteen"class="total"></td>
+                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"> <?php echo $uniformity_of_dosage[0]['weight_tablet_fourteen'];?>
+                      </td>
                   </tr>
                   <tr>
                       <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">5.</td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="" name="weight_tablet_five" class="total" ></td>
+                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"> <?php echo $uniformity_of_dosage[0]['weight_tablet_five'];?>
+                      </td>
                       <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                       15.</td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="" name="weight_tablet_fifteen" class="total" ></td>
+                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"> <?php echo $uniformity_of_dosage[0]['weight_tablet_fifteen'];?>
+                      </td>
                   </tr>
                   <tr>
                       <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">6.</td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="" name="weight_tablet_six" class="total" ></td>
+                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"> <?php echo $uniformity_of_dosage[0]['weight_tablet_six'];?>
+                      </td>
                       <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                       16.</td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="" name="weight_tablet_sixteen" class="total" ></td>
+                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"> <?php echo $uniformity_of_dosage[0]['weight_tablet_sixteen'];?>
+                      </td>
                   </tr>
                   <tr>
                       <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">7.</td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="" name="weight_tablet_seven"class="total"></td>
+                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"> <?php echo $uniformity_of_dosage[0]['weight_tablet_seven'];?>
+                      </td>
                       <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                       17.</td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="" name="weight_tablet_seventeen"class="total"></td>
+                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"> <?php echo $uniformity_of_dosage[0]['weight_tablet_seventeen'];?>
+                     </td>
                   </tr>
                   <tr>
                       <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">8.</td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="" name="weight_tablet_eight" class="total" ></td>
+                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"> <?php echo $uniformity_of_dosage[0]['weight_tablet_eight'];?>
+                      </td>
                       <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                       18.</td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="" name="weight_tablet_eighteen" class="total" ></td>
+                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"> <?php echo $uniformity_of_dosage[0]['weight_tablet_eighteen'];?>
+                      </td>
                   </tr>
                   <tr>
                       <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">9.</td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="" name="weight_tablet_nine" class="total" ></td>
+                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"> <?php echo $uniformity_of_dosage[0]['weight_tablet_nine'];?>
+                      </td>
                       <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                       19.</td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="" name="weight_tablet_nineteen" class="total" ></td>
+                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"> <?php echo $uniformity_of_dosage[0]['weight_tablet_nineteen'];?>
+                      </td>
                   </tr>
                   <tr>
                       <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">10.</td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="" name="weight_tablet_ten"class="total"></td>
+                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"> <?php echo $uniformity_of_dosage[0]['weight_tablet_ten'];?>
                       <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                       20.</td>
-                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="" name="weight_tablet_twenty"class="total"></td>
+                      <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"> <?php echo $uniformity_of_dosage[0]['weight_tablet_twenty'];?>
+                      </td>
                   </tr>
                   <tr>
                       <td colspan="2" height="25px" align="right" style="color:#0000ff;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Average</td>
-                      <td colspan="2" height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="" name="average"class="average"></td>
+                      <td colspan="2" height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"> <?php echo $uniformity_of_dosage[0]['average'];?>
+                      </td>
                   </tr>
                 </table>
               </td>
@@ -306,32 +281,29 @@
             </tr>
             <tr>
               <td colspan="8" style="padding:8px;">
-                <table width="100%">
+                <table class="table_form" width="100%">
                   <tr>
-                    <td rowspan="2" style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;">DosageForm</td>
-                    <td rowspan="2" style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;">Type</td>
-                    <td rowspan="2" style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;">Subtype</td>
-                    <td colspan="2" style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;border-right: solid 1px #c4c4ff;background-color: #ffffff;">Dosage & Ratio of Drug</td>
+                    <td rowspan="2" style="text-align:center;color:#0000ff;padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;">DosageForm</td>
+                    <td rowspan="2" style="text-align:center;color:#0000ff;padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;">Type</td>
+                    <td rowspan="2" style="text-align:center;color:#0000ff;padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;">Subtype</td>
+                    <td colspan="2" style="text-align:center;color:#0000ff;padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;border-right: solid 1px #c4c4ff;background-color: #ffffff;">Dosage & Ratio of Drug</td>
                   </tr>
                    <tr>
-                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;border-right: solid 1px #c4c4ff;background-color: #ffffff;">NMT 25mg & NMT 25%</td>
-                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;border-right: solid 1px #c4c4ff;background-color: #ffffff;">NLT 25mg or NLT 25%</td>
+                    <td style="text-align:center;color:#0000ff;padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;border-right: solid 1px #c4c4ff;background-color: #ffffff;"> >= 25mg & >= 25%</td>
+                    <td style="text-align:center;color:#0000ff;padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;border-right: solid 1px #c4c4ff;background-color: #ffffff;"> < 25mg or < 25%</td>
                   </tr>
                   <tr>
-                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;"><input type="hidden" name="dosage_form" value="<?php echo $monograph_specifications[0]['dosage_form'];?>"><?php echo $monograph_specifications[0]['dosage_form'];?></td>
-                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;"><input type="hidden" id="type" name="type" value="<?php echo $monograph_specifications[0]['type'];?>"><?php echo $monograph_specifications[0]['type'];?></td>
-                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;"><input type="hidden" name="subtype" value="<?php echo $monograph_specifications[0]['subtype'];?>"><?php echo $monograph_specifications[0]['subtype'];?></td>
-                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;">Weight variation</td>
-                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;border-right: solid 1px #c4c4ff;background-color: #ffffff;">Content Uniformity</td>
+                    <td style="text-align:center;color:#0000ff;padding:8px;border-bottom: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;"><input type="hidden" name="dosage_form" value="<?php echo $monograph_specifications[0]['dosage_form'];?>"><?php echo $monograph_specifications[0]['dosage_form'];?></td>
+                    <td style="text-align:center;color:#0000ff;padding:8px;border-bottom: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;"><input type="hidden" id="type" name="type" value="<?php echo $monograph_specifications[0]['type'];?>"><?php echo $monograph_specifications[0]['type'];?></td>
+                    <td style="text-align:center;color:#0000ff;padding:8px;border-bottom: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;"><input type="hidden" name="subtype" value="<?php echo $monograph_specifications[0]['subtype'];?>"><?php echo $monograph_specifications[0]['subtype'];?></td>
+                    <td style="text-align:center;color:#0000ff;padding:8px;border-bottom: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;">Weight Variation</td>
+                    <td style="text-align:center;color:#0000ff;padding:8px;border-bottom: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;border-right: solid 1px #c4c4ff;background-color: #ffffff;">Content Uniformity</td>
                   </tr>
                 </table>
               </td>
             </tr>
-             <?php 
-              if($monograph[0]['components']==1){
-            ?>
             <tr>
-              <td colspan="8"  align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"><b>Component <?php echo $components[0]['component'];?></b><input type="hidden" name="component_one" value="<?php echo $components[0]['component'];?>"></td>
+              <td colspan="8"  align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b><?php echo $uniformity_of_dosage[0]['component_one'];?></b></td>
             </tr>
             <tr>
               <td colspan="8" style="padding:8px;">
@@ -343,22 +315,16 @@
                     <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;border-right: solid 1px #c4c4ff;background-color: #ffffff;">Method To be Used</td>
                   </tr>
                   <tr>
-                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;"><input type="text" name="average" class="average"></td>
-                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;"><input type="hidden" id="dosage" name="dosage" value="<?php echo $components[0]['label_claim'];?>" ><input type="text" class="lcg" name="lcg" id="lcg" disabled></td>
-                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;"><input type="text" name="ratio" class="ratio"></td>
-                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-right: solid 1px #c4c4ff;background-color: #ffffff;"><input type="text" name="method" class="method"></td>
+                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;"> <?php echo $uniformity_of_dosage[0]['average'];?></td>
+                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;"><input type="hidden" id="dosage" name="dosage" value="<?php echo $query['strength_concentration'];?>" > <?php echo $uniformity_of_dosage[0]['dosage_one'];?></td>
+                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;"> <?php echo $uniformity_of_dosage[0]['ratio_one'];?></td>
+                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-right: solid 1px #c4c4ff;background-color: #ffffff;"> <?php echo $uniformity_of_dosage[0]['method_one'];?></td>
                   </tr>
                 </table>
               </td>
             </tr>
-            <?php
-              }else{}
-            ?>
-             <?php 
-              if($monograph[0]['components']==2){
-            ?>
             <tr>
-              <td colspan="8"  align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"><b><?php echo $components[0]['component'];?></b><input type="hidden" name="component_one" value="<?php echo $components[0]['component'];?>"></td>
+              <td colspan="8"  align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b><?php echo $uniformity_of_dosage[0]['component_two'];?></b></td>
             </tr>
             <tr>
               <td colspan="8" style="padding:8px;">
@@ -370,41 +336,16 @@
                     <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;border-right: solid 1px #c4c4ff;background-color: #ffffff;">Method To be Used</td>
                   </tr>
                   <tr>
-                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;"><input type="text" name="average" class="average"></td>
-                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;"><input type="hidden" id="dosage_one" name="dosage_one" value="<?php echo $components[0]['label_claim'];?>" ><input type="text" class="lcg_one" name="lcg_one" id="lcg_one" disabled></td>
-                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;"><input type="text" name="ratio_one" class="ratio_one"></td>
-                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-right: solid 1px #c4c4ff;background-color: #ffffff;"><input type="text" name="method_one" class="method_one"></td>
+                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;"> <?php echo $uniformity_of_dosage[0]['average'];?></td>
+                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;"><input type="hidden" id="dosage" name="dosage" value="<?php echo $query['strength_concentration'];?>" > <?php echo $uniformity_of_dosage[0]['dosage_two'];?></td>
+                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;"> <?php echo $uniformity_of_dosage[0]['ratio_two'];?></td>
+                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-right: solid 1px #c4c4ff;background-color: #ffffff;"> <?php echo $uniformity_of_dosage[0]['method_two'];?></td>
                   </tr>
                 </table>
               </td>
             </tr>
-             <tr>
-              <td colspan="8"  align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"><b><?php echo $components[1]['component'];?> </b> <input type="hidden" name="component_two" value="<?php echo $components[1]['component'];?>"></td>
-            </tr>
             <tr>
-              <td colspan="8" style="padding:8px;">
-                <table width="100%">
-                  <tr>
-                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;">Average wt of tablets(a)</td>
-                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;">Dosage(b) [Label Claim](g)</td>
-                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;">Ratio(b)*100(a)</td>
-                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;border-right: solid 1px #c4c4ff;background-color: #ffffff;">Method To be Used</td>
-                  </tr>
-                  <tr>
-                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;"><input type="text" name="average" class="average"></td>
-                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;"><input type="hidden" id="dosage_two" name="dosage_two" value="<?php echo $components[1]['label_claim'];?>" ><input type="text" class="lcg_two" name="lcg_two" id="lcg_two" disabled></td>
-                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;"><input type="text" name="ratio_two" class="ratio_two"></td>
-                    <td style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-right: solid 1px #c4c4ff;background-color: #ffffff;"><input type="text" name="method_two" class="method_two"></td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-            <?php
-              }else{}
-            ?>
-            
-            <tr>
-                <td  height="25px" style="padding:4px;background-color:#ffffff;border-top: solid 1px #bfbfbf;text-align: center;" colspan="8" ><input class="btn" type="submit" name="submit" id="submit" value="Submit"></td>
+                <td  height="25px" style="padding:4px;background-color:#ffffff;border-top: solid 1px #bfbfbf;text-align: center;" colspan="8" ><input class="btn" type="submit" name="submit" id="submit" value="Print"></td>
             </tr>
        </table>
       </form>

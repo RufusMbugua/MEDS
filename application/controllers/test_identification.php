@@ -158,7 +158,8 @@ class Test_Identification extends CI_Controller{
 		$data['results'] = $results['test_request'][0];	
 		$data['component_category'] = $results['component_category'];
 		$data['components'] = $results['components'];	
-		$data['monograph_specs']=	$this->db->select('*')->get_where('monograph_specifications', array('test_request_id' => $test_request,'test_type'=>$test_type))->result_array();
+		$data['monograph_specs']=
+		$this->db->select('*')->get_where('monograph_specifications', array('test_request_id' => $test_request,'test_type'=>$test_type))->result_array();
 
 		$this->load->view('tests/identification/test_identification_monograph_assay_view',$data);
 	}
@@ -380,7 +381,9 @@ class Test_Identification extends CI_Controller{
 	
 	function worksheet_assay(){	
 		
-		$this->test_identification_model->save_assay();		
+		if ($this->input->post()) {
+			$this->test_identification_model->save_assay();		
+		}
 	}
 
 	function worksheet_uv(){

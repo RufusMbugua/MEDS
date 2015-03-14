@@ -68,7 +68,7 @@ function post_ajax(){
     $.ajax({
     url:"<?php echo base_url();?>test_identification/worksheet_assay",
     type:"POST",
-    // async:false,
+     async:false,
     data:form_data,
     success: function(){
 
@@ -95,15 +95,15 @@ function post_ajax(){
     
 }
 
-//   $('#clear_form').click(function(){
-//     $('#save_identification').show();
-//    // $('.all_input').val('');
+  $('#clear_form').click(function(){
+    $('#save_identification').show();
+   // $('.all_input').val('');
 
-//     //var tinymce_editor_id = $('._text_areas'); 
-//    // tinymce.get(tinymce_editor_id).setContent('');
+    var tinymce_editor_id = $('._text_areas'); 
+   // tinymce.get(tinymce_editor_id).setContent('');
 
 
-// });  
+});  
 });
   </script>
   </head>
@@ -287,8 +287,8 @@ function post_ajax(){
               <td style="border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:center;">
                 <select name="conclusion" id="conclusion" class="all_input">
                   <option>----</option>
-                  <option value="Complies">Complies</option>
-                  <option value="Does Not Comply">Does Not Comply</option>
+                  <option value="COMPLIES">Complies</option>
+                  <option value="DOES NOT COMPLY">Does Not Comply</option>
                 </select>
               </td>
             </tr>
