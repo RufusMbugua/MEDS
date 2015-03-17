@@ -72,6 +72,21 @@ class Assay_Model extends CI_Model{
 
     $sql=$this->db->select_max('id')->get('full_monograph')->result();
     $monograph_id=$sql[0]->id;
+
+    $array_comp=$this->input->post('component');
+    $array_range=$this->input->post('range');
+
+    $array_range_one=array_slice($array_range, 0,2);
+    $array_comp_one=array_slice($array_comp,0,1);
+
+    $array_range_two=array_slice($array_range, 2,3);
+    $array_comp_two=array_slice($array_comp,1,2);
+    
+    $monoa=array_merge($array_comp_one,$array_range_one);
+    $monob=array_merge($array_comp_two,$array_range_two);
+    
+    $mono= implode(",", $monoa );
+    $monoc=implode(",", $monob);
     
     $min=$this->input->post('range_minimum');
     $max=$this->input->post('range_maximum');
@@ -80,12 +95,7 @@ class Assay_Model extends CI_Model{
      'monograph_id'=>$monograph_id,
      'test_request_id'=>$test_request_id,
      'test_type'=>$test_type,
-     'monograph_specifications'=>$this->input->post('monograph_specifications'),
-     'component'=>$this->input->post('component_name'),
-     'comp_one'=>$sql_comp_one,
-     'comp_two'=>$sql_comp_two,
-     'range_minimum'=>$this->input->post('range_minimum'),
-     'range_maximum'=>$this->input->post('range_maximum')
+     'monograph_specifications'=> $mono." of the stated amount. ".$monoc." of the stated amount"
     );
 
     $data_three = array( 
@@ -93,7 +103,7 @@ class Assay_Model extends CI_Model{
      'test_id'=>$main_test_id,
      'test_type'=>$test_type,
      'test_name'=>$test_name,
-     'specifications'=>$min."% to ".$max."%"." of the stated amount "
+     'specifications'=>$mono." of the stated amount. ".$monoc." of the stated amount"
     );
 
     $this->db->insert('monograph_specifications',$data_two);

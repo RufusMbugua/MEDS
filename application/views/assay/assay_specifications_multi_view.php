@@ -124,11 +124,10 @@
                 <td colspan="8" style="padding:8px;">
                   <table border="0" width="80%" cellpadding="8px" align="center">
                     <tr>
-                      <td colspan="2" style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;"><b>Acceptance Criteria</b></td>
+                      <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;"><b>Acceptance Criteria</b></td>
                     </tr>
                     <tr>
-                      <td>Range Between</td>
-                      <td style="color:#0000ff;padding:8px;"><?php echo $monograph_specifications[0]['range_minimum'];?>% - <?php echo $monograph_specifications[0]['range_maximum'];?>%</td>
+                      <td style="color:#0000ff;padding:8px;"><textarea rows="4" cols="90"><?php echo $monograph_specifications[0]['monograph_specifications'];?></textarea></td>
                     </tr>
                   </table>
                 </td>

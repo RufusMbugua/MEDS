@@ -23,80 +23,36 @@
   <script src="<?php echo base_url().'js/bootstrap.min.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/Jquery-datatables/jquery.dataTables.js';?>"></script>
   <script>
-
-  $(document).ready(function(){
-    //function to prevent submitting the form when enter button is pressed.
-    $('form input').keydown(function (e) {
-      if (e.keyCode == 3) {
-          var inputs = $(this).parents("form").eq(0).find(":input");
-          if (inputs[inputs.index(this) + 1] != null) {                    
-              inputs[inputs.index(this) + 1].focus();
+    $(document).ready(function(){
+        //function to prevent submitting the form when enter button is pressed.
+        $('form input').keydown(function (e) {
+          if (e.keyCode == 3) {
+              var inputs = $(this).parents("form").eq(0).find(":input");
+              if (inputs[inputs.index(this) + 1] != null) {                    
+                  inputs[inputs.index(this) + 1].focus();
+              }
+              e.preventDefault();
+              return false;
           }
-          e.preventDefault();
-          return false;
-      }
+        });
+
+        tinymce.init({
+        selector: "textarea"
+        });
+        
+        var id=2;
+
+        // Add button functionality
+        $(document).on('click','#add_row',function () {
+            
+            var html='<tr><td>Component '+id+' <input type="text" name="component[]" id="component_'+id+' size="7" class="id"></td><td>Range <input type="text" name="range[]" id="range_minimum" size="7" class="id" placeholder="min%"> - <input type="text" name="range[]" id="range_maximum" size="7" class="id" placeholder="max%"></td></tr>';
+            var master = $(this).closest("table.dynatable");
+         
+             master.find("tbody").append(html);
+            //alert('egfdeg')
+            id++;
+        });
     });
-
-  tinymce.init({
-  selector: "textarea"
-  });
-
-//function to post data when submit link is pressed
-  $('#save_assay_multi_spec').click(function(){ 
-     //$('#save_assay_multi_spec').hide();    
-        post_ajax();
-
-  });
-function post_ajax(){
-  //post via ajax
-  form_data = $('#save_assay_multi_specifications').serialize();
-  console.log(form_data);
-
-
-  if( $('#choice').val()=="" || $('#component_name').val()=="") {
-  alert('Please fill all the neccesary fields')
-  }else{
-
-    $.ajax({
-    url:"<?php echo base_url();?>assay/save_assay_specifications_multi",
-    type:"POST",
-    async:true,
-    data:form_data,
-    success: function(){
-
-      $("#component_name option:selected").attr('disabled','disabled')
-      var a = $('#assignment').val();
-      var t = $('#test_request').val();
-
-      var length_ = $("#component_name").find('option').length;
-      var  length_2 = $("#component_name").find('option[disabled = "disabled"]').length;
-      if ((length_-length_2)==1) {
-        //redirect location when all components are selected
-        window.location.href = "<?php echo base_url();?>test/index/"+a+"/"+t
-
-      } 
-      
-      alert("Successful!"); 
-      $('#clear_form').show();
-    },fail:function(){
-
-      alert('An error occured')
-    }
-    });
-  }
-    
-}
-
-  $('#clear_form').click(function(){
-    $('#save_assay_multi_spec').show();
-    //$('.all_input').val('');
-
-    var tinymce_editor_id = $('._text_areas'); 
-   // tinymce.get(tinymce_editor_id).setContent('');
-
-
-});  
-});
   </script> 
  </head>
  <body>
@@ -154,8 +110,8 @@ function post_ajax(){
 </div>
     <div id="form_wrapper_lists">
        <div id="account_lists">
-
-      <form id="save_assay_multi_specifications" method="POST">
+      <?php echo validation_errors(); ?>
+      <?php echo form_open_multipart('assay/save_assay_specifications_multi',array('id'=>'assay_specifications_multi'));?>
        <table class="table_form" width="75%" border="0" cellpadding="4px" align="center">
         <input type="hidden" id="test_request" name="tr_id" value="<?php echo $query['tr'];?>"></input>
         <input type="hidden" id="assignment" name="assignment_id" value="<?php echo $request[0]['a'];?>"></input>
@@ -198,9 +154,20 @@ function post_ajax(){
             </tr>
              <tr>
                 <td colspan="8" style="padding:8px;">
-                  <table border="0" width="80%" cellpadding="8px" align="center">
+                  <table width="80%" id="tbl_components" class="dynatable" border="0" align="center" cellpadding="4px">
+                      <thead>
+                        <td colspan="2" align="right"><input type="button" id="add_row" class=" btn" value="Add"></td>
+                      </thead>
+                      <tbody>
+                        <tr class="prototype">
+                          <td>Component 1 <input type="text" name="component[]" id="component_one" class="id"></td>
+                          <td>Range <input type="text" name="range[]" id="range_minimum" placeholder="min%" size="7" class="id"> - <input type="text" name="range[]" id="range_maximum" placeholder="max%" size="7" class="id"></td>
+                        </tr>
+                    </tbody>
+                  </table>
+                  <!-- <table border="0" width="80%" cellpadding="8px" align="center">
                     <tr>
-                      <td colspan="2" style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;"><b>Acceptance Criteria</b></td>
+                      <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;"><b>Acceptance Criteria</b></td>
                     </tr>
                     <tr>
                       <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>Components</b></td>
@@ -222,13 +189,13 @@ function post_ajax(){
                       <td>Range Between</td>
                       <td style="color:#0000ff;padding:8px;"><input type="text" id="new_min_tolerance_det" name="range_minimum" placeholder="min%" size="5">% - <input type="text" id="new_max_tolerance_det" name="range_maximum" placeholder="max%" size="5">>%</td>
                     </tr>
-                  </table>
+                  </table> -->
                 </td>
             </tr>
             <tr>
             <td colspan="8" style="padding:4px;background-color:#ffffff;border-top: solid 1px #bfbfbf;text-align: center;"> 
-              <a class="btn" name ="save_assay_multi_spec" id="save_assay_multi_spec">Submit</a>
-            <input type ="button" class="btn" id="clear_form" name ="" value ="Clear Form"></td>        
+             <input type="submit" class="btn" id="submit" name="submit" value="Submit">
+           </td>        
           </tr>
             
        </table>

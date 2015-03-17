@@ -67,6 +67,13 @@ class Assay extends CI_Controller {
         $this->load->view('assay/assay_specifications_multi',$data);
         $this->load->helper(array('form'));
     }
+    
+    function save_assay_specifications_multi(){
+       if ($this->input->post('submit')) {
+        $this->assay_model->process_specifications_multi();
+        }
+        
+    }
 
     function specifications_view_worksheet() {
         
@@ -2157,23 +2164,15 @@ class Assay extends CI_Controller {
     }
     function save_monograph_ultraviolet(){
        
-
         if ($this->input->post('submit')) {
             $this->assay_model->process_monograph_ultraviolet();
         }                
     }
     function save_assay_specifications(){
-       
 
         if ($this->input->post('submit')) {
             $this->assay_model->process_specifications();
         }                
-    }
-    function save_assay_specifications_multi(){
-       if ($this->input->post()) {
-        $this->assay_model->process_specifications_multi();
-        }
-        
     }
     
 }
