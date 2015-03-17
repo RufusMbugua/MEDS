@@ -3,50 +3,47 @@
  <title>MEDS</title>
   <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon">
   <link href="<?php echo base_url().'style/core.css';?>" rel="stylesheet" type="text/css" />
-   <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
+  <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
    
   <link href="<?php echo base_url().'style/jquery.tooltip.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/jquery-ui.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/demo_table.css';?>" rel="stylesheet" type="text/css"/>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+  
   <!-- bootstrap reference library -->
   <link href="<?php echo base_url().'bootstrap/css/bootstrap.css'; ?>" rel="stylesheet" type="text/css"/>
 
   <script src="<?php echo base_url().'js/jquery.js';?>"></script>
-  <script src="<?php echo base_url().'js/jquery-1.11.0.js';?>"></script>
   <script src="<?php echo base_url().'js/jquery-ui.js';?>"></script>
-  <script type="text/javascript" src="<?php echo base_url().'js/tabs.js';?>"></script>  
-  <script type="text/javascript" src="<?php echo base_url().'js/jquery.validate.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/tabs.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'tinymce/tinymce.min.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/equationstwo.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
   
   <!-- bootstrap reference library -->
   <script src="<?php echo base_url().'js/bootstrap.min.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/Jquery-datatables/jquery.dataTables.js';?>"></script>
-  <script type="text/javascript" src="<?php echo base_url().'tinymce/tinymce.min.js';?>"></script>
-  <script type="text/javascript" src="<?php echo base_url().'tinymce/textarea_script.js';?>"></script>
-  <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
-  <script type="text/javascript" src="<?php echo base_url().'js/equipmentinfo.js';?>"></script>
   <script>
 
   $(document).ready(function(){
-  //function to prevent submitting the form when enter button is pressed.
-  $('form input').keydown(function (e) {
-    if (e.keyCode == 3) {
-        var inputs = $(this).parents("form").eq(0).find(":input");
-        if (inputs[inputs.index(this) + 1] != null) {                    
-            inputs[inputs.index(this) + 1].focus();
-        }
-        e.preventDefault();
-        return false;
-    }
-});
+    //function to prevent submitting the form when enter button is pressed.
+    $('form input').keydown(function (e) {
+      if (e.keyCode == 3) {
+          var inputs = $(this).parents("form").eq(0).find(":input");
+          if (inputs[inputs.index(this) + 1] != null) {                    
+              inputs[inputs.index(this) + 1].focus();
+          }
+          e.preventDefault();
+          return false;
+      }
+    });
 
-   tinymce.init({
+  tinymce.init({
   selector: "textarea"
   });
 
 //function to post data when submit link is pressed
   $('#save_assay_multi_spec').click(function(){ 
-     $('#save_assay_multi_spec').hide();    
+     //$('#save_assay_multi_spec').hide();    
         post_ajax();
 
   });
@@ -56,14 +53,14 @@ function post_ajax(){
   console.log(form_data);
 
 
-  if( $('#new_min_tolerance_det').val()=="" || $('#new_max_tolerance_det').val()=="" || $('#component_name').val()=="") {
-  alert('Please fill all the neccesary fields');
+  if( $('#choice').val()=="" || $('#component_name').val()=="") {
+  alert('Please fill all the neccesary fields')
   }else{
 
     $.ajax({
     url:"<?php echo base_url();?>assay/save_assay_specifications_multi",
     type:"POST",
-    async:false,
+    async:true,
     data:form_data,
     success: function(){
 

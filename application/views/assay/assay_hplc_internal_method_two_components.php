@@ -36,7 +36,7 @@ $(document).ready(function() {
   $('#clear_form').hide();
   //function to prevent submitting the form when enter button is pressed.
   $('form input').keydown(function (e) {
-    if (e.keyCode == 40) {
+    if (e.keyCode == 13) {
         var inputs = $(this).parents("form").eq(0).find(":input");
         if (inputs[inputs.index(this) + 1] != null) {                    
             inputs[inputs.index(this) + 1].focus();
