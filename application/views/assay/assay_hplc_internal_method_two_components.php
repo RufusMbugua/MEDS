@@ -3,17 +3,16 @@
  <head>
   <title>MEDS</title>
   <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon">
-  <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon">
   <link href="<?php echo base_url().'style/core.css';?>" rel="stylesheet" type="text/css" />
    <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
    
   <link href="<?php echo base_url().'style/jquery.tooltip.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/jquery-ui.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/demo_table.css';?>" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+  
   <!-- bootstrap reference library -->
   <link href="<?php echo base_url().'bootstrap/css/bootstrap.css'; ?>" rel="stylesheet" type="text/css"/>
-
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
   <script src="<?php echo base_url().'js/jquery.js';?>"></script>
   <script src="<?php echo base_url().'js/jquery-1.11.0.js';?>"></script>
   <script src="<?php echo base_url().'js/jquery-ui.js';?>"></script>
@@ -27,85 +26,86 @@
   <script type="text/javascript" src="<?php echo base_url().'js/calculations.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'tinymce/tinymce.min.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'tinymce/textarea_script.js';?>"></script>
-  <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/equipmentinfo.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/jquery.autosave.js';?>"></script>
   <script>
 
-$(document).ready(function() {
-/* Init DataTables */
-  $('#clear_form').hide();
-  //function to prevent submitting the form when enter button is pressed.
-  $('form input').keydown(function (e) {
-    if (e.keyCode == 13) {
-        var inputs = $(this).parents("form").eq(0).find(":input");
-        if (inputs[inputs.index(this) + 1] != null) {                    
-            inputs[inputs.index(this) + 1].focus();
-        }
-        e.preventDefault();
-        return false;
-    }
-});
+  // $(document).ready(function() {
+  // /* Init DataTables */
+  //   $('#clear_form').hide();
+  //   //function to prevent submitting the form when enter button is pressed.
+  //   $('form input').keydown(function (e) {
+  //     if (e.keyCode == 13) {
+  //         var inputs = $(this).parents("form").eq(0).find(":input");
+  //         if (inputs[inputs.index(this) + 1] != null) {                    
+  //             inputs[inputs.index(this) + 1].focus();
+  //         }
+  //         e.preventDefault();
+  //         return false;
+  //     }
+  // });
 
-   tinymce.init({
-  selector: "textarea"
-  });
+  //    tinymce.init({
+  //   selector: "textarea"
+  //   });
 
-//function to post data when submit link is pressed
-  $('#save_assay_multi').click(function(){ 
-     $('#save_assay_multi').hide();    
-        post_ajax();
+  // //function to post data when submit link is pressed
+  //   $('#save_assay_multi').click(function(){ 
+  //      $('#save_assay_multi').hide();    
+  //         post_ajax();
 
-  });
-function post_ajax(){
-  //post via ajax
-  form_data = $('#assay_multi_form').serialize();
-  console.log(form_data);
+  //   });
+  // function post_ajax(){
+  //   //post via ajax
+  //   form_data = $('#assay_multi_form').serialize();
+  //   console.log(form_data);
 
 
-  if ( $('#choice').val()=="" ||  $('#component_name').val()=="") {
-  alert('Please fill all the neccesary fields')
-  }else{
+  //   if ( $('#choice').val()=="" ||  $('#component_name').val()=="") {
+  //   alert('Please fill all the neccesary fields')
+  //   }else{
 
-    $.ajax({
-    url:"<?php echo base_url();?>assay/save_internal_method",
-    type:"POST",
-     async:false,
-    data:form_data,
-    success: function(){
+  //     $.ajax({
+  //     url:"<?php echo base_url();?>assay/save_internal_method",
+  //     type:"POST",
+  //      async:false,
+  //     data:form_data,
+  //     success: function(){
 
-      $("#component_name option:selected").attr('disabled','disabled')
-      var a = $('#assignment').val();
-      var t = $('#test_request').val();
+  //       $("#component_name option:selected").attr('disabled','disabled')
+  //       var a = $('#assignment').val();
+  //       var t = $('#test_request').val();
 
-      var length_ = $("#component_name").find('option').length;
-      var  length_2 = $("#component_name").find('option[disabled = "disabled"]').length;
-      if ((length_-length_2)==1) {
-        //redirect location when all components are selected
-        window.location.href = "<?php echo base_url();?>test/index/"+a+"/"+t
+  //       var length_ = $("#component_name").find('option').length;
+  //       var  length_2 = $("#component_name").find('option[disabled = "disabled"]').length;
+  //       if ((length_-length_2)==1) {
+  //         //redirect location when all components are selected
+  //         window.location.href = "<?php echo base_url();?>test/index/"+a+"/"+t
 
-      } 
+  //       } 
+        
+  //       alert("Successful!"); 
+  //       $('#clear_form').show();
+  //     },fail:function(){
+
+  //       alert('An error occured')
+  //     }
+  //     });
+  //   }
       
-      alert("Successful!"); 
-      $('#clear_form').show();
-    },fail:function(){
+  // }
 
-      alert('An error occured')
-    }
-    });
-  }
-    
-}
+  //   $('#clear_form').click(function(){
+  //     $('#save_identification').show();
+  //    // $('.all_input').val('');
 
-  $('#clear_form').click(function(){
-    $('#save_identification').show();
-   // $('.all_input').val('');
-
-    var tinymce_editor_id = $('._text_areas'); 
-   // tinymce.get(tinymce_editor_id).setContent('');
+  //     var tinymce_editor_id = $('._text_areas'); 
+  //    // tinymce.get(tinymce_editor_id).setContent('');
 
 
-});  
-});
+  // });  
+  // });
   </script>
  </head>
  <body>
@@ -164,7 +164,7 @@ function post_ajax(){
     <div id="form_wrapper">
      <div id="forms">
       <form method="post" id="assay_multi_form">
-       <table width="75%" class="table_form" border="0" cellpadding="4px" align="center">
+       <table width="70%" class="table_form" border="0" cellpadding="4px" align="center">
         <input type="hidden" id="test_request" name="tr_id" value="<?php echo $query['tr'];?>"></input>
         <input type="hidden" id="assignment" name="assignment_id" value="<?php echo $request[0]['a'];?>"></input>    
         <tr>
@@ -368,86 +368,46 @@ function post_ajax(){
             </tr>
           <tr>
             <td colspan="8" style="padding:8px;border-bottom:dotted 1px #c4c4ff;">
-              <table class="inner_table" width="100%" border="0" align="center" cellpadding="8px">
-              <tr>
-                <td style="padding:8px;border-bottom: solid 1px #dfdfff;text-align:center;"></td>
-                <td style="padding:8px;border-bottom: solid 1px #dfdfff;text-align:center;color:#0000ff;"><b>Component One</b></td>
-                <td style="padding:8px;border-bottom: solid 1px #dfdfff;text-align:left;color:#0000ff;"><b>Component Two</b></td>
-              </tr>    
+              <table class="inner_table" width="80%" border="0" align="center" cellpadding="8px">
                 <tr>
-                    <td align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Standard Description:</td>
-                    <td align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <select id="standard_description_one" name="standard_description_one" >
-                      <option selected></option>
-                       <?php
-                       foreach($sql_standards as $s_name):
-                      ?>
-                       
-                       <option value="<?php  echo $s_name['item_description'];?>"><?php  echo $s_name['item_description'];?></option>
-                        <?php
-                        endforeach
-                        ?>
-                      </select>
-                    </td>
-                    <td align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <select id="standard_description_two" name="standard_description_two" >
-                      <option selected></option>
-                       <?php
-                       foreach($sql_standards as $s_name):
-                      ?>
-                       
-                       <option value="<?php  echo $s_name['item_description'];?>"><?php  echo $s_name['item_description'];?></option>
-                        <?php
-                        endforeach
-                        ?>
-                      </select>
-                    </td>
-                </tr>
-                 <tr>
-                    <td align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                    Potency</td>
-                    <td height="20px" align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                    <input type="text" name="potency_one"></input></td>
-                    <td height="20px" align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                    <input type="text" name="potency_two"></input></td>
-                </tr>
+                    <td colspan="8" style="padding:8px;background-color:#ffffff;" align="center">Please select the appropriate number of <b>Standards</b> as needed</td>
+                </tr> 
                 <tr>
-                    <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                    Weight of standard + container(g)</td>
-                    <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                    <input type="text" name="weight_standard_container_one" id="weight_standard_container_one"></td>
-                    <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                    <input type="text" name="weight_standard_container_two" id="weight_standard_container_two"></td>
-                  
+                    <td  align="center" style="padding:8px;"><input type="checkbox" name="std_one" id="std_one">One</td>
+                    <td  align="center" style="padding:8px;"><input type="checkbox" name="std_two" id="std_two">Two</td>
+                    <td  align="center" style="padding:8px;"><input type="checkbox" name="std_three" id="std_three">Three</td>
+                    <td  align="center" style="padding:8px;"><input type="checkbox" name="std_four" id="std_four">Four</td>
+                    <td  align="center" style="padding:8px;"><input type="checkbox" name="std_five" id="std_five">Five</td>
+                    <td  align="center" style="padding:8px;"><input type="checkbox" name="std_six" id="std_six">Six</td>
+                    <td  align="center" style="padding:8px;"><input type="checkbox" name="std_seven" id="std_seven">Seven</td>
+                    <td  align="center" style="padding:8px;"><input type="checkbox" name="std_eight" id="std_eight">Eight</td>
                 </tr>
-                <tr>
-                    <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                    Weight of container(g)</td>
-                    <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                    <input type="text" name="weight_container_of_std_one" id="container_one" onChange="calculate_sample_difference()"></td>
-                    <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                    <input type="text" name="weight_container_of_std_two" id="container_two" onChange="calculate_sample_difference()"></td>
-                    
-                </tr>
-                <tr>
-                    <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                    Weight of standard(g)</td>
-                    <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                    <input type="text" name="weight_standard_one" id="weight_standard_one" onChange="calculate_sample_difference()"></td>
-                    <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                    <input type="text" name="weight_standard_two" id="weight_standard_two" ></td>
-                    
-                </tr>
-                <tr>
-                  <td colspan="3" height="25px" align="left" style="color:#000;padding:8px;background-color: #ffffff;">Dilution:</td>
-                </tr>
-                
+              </table>
+              <table class="inner_table" id="std_form_one" width="80%" border="0" align="center" cellpadding="8px">   
+                <?php include_once 'application/views/standard_form_one.php';?>
+              </table>
+              <table class="inner_table" id="std_form_two" width="80%" border="0" align="center" cellpadding="8px">   
+                <?php include_once 'application/views/standard_form_two.php';?>
+              </table>
+              <table class="inner_table" id="std_form_three" width="80%" border="0" align="center" cellpadding="8px">   
+                <?php include_once 'application/views/standard_form_three.php';?>
+              </table>
+              <table class="inner_table" id="std_form_four" width="80%" border="0" align="center" cellpadding="8px">   
+                <?php include_once 'application/views/standard_form_four.php';?>
+              </table>
+              <table class="inner_table" id="std_form_five" width="80%" border="0" align="center" cellpadding="8px">   
+                <?php include_once 'application/views/standard_form_five.php';?>
+              </table>
+              <table class="inner_table" id="std_form_six" width="80%" border="0" align="center" cellpadding="8px">   
+                <?php include_once 'application/views/standard_form_six.php';?>
+              </table>
+              <table class="inner_table" id="std_form_seven" width="80%" border="0" align="center" cellpadding="8px">   
+                <?php include_once 'application/views/standard_form_seven.php';?>
+              </table>
+              <table class="inner_table" id="std_form_eight" width="80%" border="0" align="center" cellpadding="8px">   
+                <?php include_once 'application/views/standard_form_eight.php';?>
               </table>
             </td>
-          </tr>
-          <tr>
-            <td colspa="4"height="25px" align="center" style="color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;background-color: #ffffff;"><textarea type="text" name="dilution_one" row="8" cols="20"></textarea></td>
-            <td colspa="4"height="25px" align="center" style="color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;background-color: #ffffff;"><textarea type="text" name="dilution_two" row="8" cols="20"></textarea></td>
           </tr>
           <tr>
               <td colspan="8" height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>Chromatographic System</b></td>
@@ -1309,6 +1269,211 @@ $(document).ready(function() {
     });
 </script>
 <script>
+  $('#std_one').change(function() {
+    if($('#std_one').is(':checked')){
+       $("table[id='std_form_one']").show();
+       $("#std_two").prop('disabled', true);
+       $("#std_three").prop('disabled', true);
+       $("#std_four").prop('disabled', true);
+       $("#std_five").prop('disabled', true);
+       $("#std_six").prop('disabled', true);
+       $("#std_seven").prop('disabled', true);
+       $("#std_eight").prop('disabled', true);
+
+    } else {
+        $("table[id='std_form_one']").hide();
+        $("#std_two").prop('disabled', false);
+        $("#std_three").prop('disabled', false);
+        $("#std_four").prop('disabled', false);
+        $("#std_five").prop('disabled', false);
+        $("#std_six").prop('disabled', false);
+        $("#std_seven").prop('disabled', false);
+        $("#std_eight").prop('disabled', false);
+    }
+  }).change();
+
+  $('#std_two').change(function() {
+    if($('#std_two').is(':checked')){
+       $("table[id='std_form_two']").show();
+       $("#std_one").prop('disabled', true);
+       $("#std_three").prop('disabled', true);
+       $("#std_four").prop('disabled', true);
+       $("#std_five").prop('disabled', true);
+       $("#std_six").prop('disabled', true);
+       $("#std_seven").prop('disabled', true);
+       $("#std_eight").prop('disabled', true);
+
+    } else {
+        $("table[id='std_form_two']").hide();
+        $("#std_one").prop('disabled', false);
+        $("#std_three").prop('disabled', false);
+        $("#std_four").prop('disabled', false);
+        $("#std_five").prop('disabled', false);
+        $("#std_six").prop('disabled', false);
+        $("#std_seven").prop('disabled', false);
+        $("#std_eight").prop('disabled', false);
+    }
+  }).change();
+
+  $('#std_three').change(function() {
+    if($('#std_three').is(':checked')){
+       $("table[id='std_form_three']").show();
+       $("#std_two").prop('disabled', true);
+       $("#std_one").prop('disabled', true);
+       $("#std_four").prop('disabled', true);
+       $("#std_five").prop('disabled', true);
+       $("#std_six").prop('disabled', true);
+       $("#std_seven").prop('disabled', true);
+       $("#std_eight").prop('disabled', true);
+
+    } else {
+        $("table[id='std_form_three']").hide();
+        $("#std_two").prop('disabled', false);
+        $("#std_one").prop('disabled', false);
+        $("#std_four").prop('disabled', false);
+        $("#std_five").prop('disabled', false);
+        $("#std_six").prop('disabled', false);
+        $("#std_seven").prop('disabled', false);
+        $("#std_eight").prop('disabled', false);
+    }
+  }).change();
+
+  $('#std_four').change(function() {
+    if($('#std_four').is(':checked')){
+       $("table[id='std_form_four']").show();
+       $("#std_two").prop('disabled', true);
+       $("#std_three").prop('disabled', true);
+       $("#std_one").prop('disabled', true);
+       $("#std_five").prop('disabled', true);
+       $("#std_six").prop('disabled', true);
+       $("#std_seven").prop('disabled', true);
+       $("#std_eight").prop('disabled', true);
+
+    } else {
+        $("table[id='std_form_four']").hide();
+        $("#std_two").prop('disabled', false);
+        $("#std_three").prop('disabled', false);
+        $("#std_one").prop('disabled', false);
+        $("#std_five").prop('disabled', false);
+        $("#std_six").prop('disabled', false);
+        $("#std_seven").prop('disabled', false);
+        $("#std_eight").prop('disabled', false);
+    }
+  }).change();
+
+  $('#std_five').change(function() {
+    if($('#std_five').is(':checked')){
+       $("table[id='std_form_five']").show();
+       $("#std_two").prop('disabled', true);
+       $("#std_three").prop('disabled', true);
+       $("#std_four").prop('disabled', true);
+       $("#std_one").prop('disabled', true);
+       $("#std_six").prop('disabled', true);
+       $("#std_seven").prop('disabled', true);
+       $("#std_eight").prop('disabled', true);
+
+    } else {
+        $("table[id='std_form_five']").hide();
+        $("#std_two").prop('disabled', false);
+        $("#std_three").prop('disabled', false);
+        $("#std_four").prop('disabled', false);
+        $("#std_one").prop('disabled', false);
+        $("#std_six").prop('disabled', false);
+        $("#std_seven").prop('disabled', false);
+        $("#std_eight").prop('disabled', false);
+    }
+  }).change();
+
+  $('#std_six').change(function() {
+    if($('#std_six').is(':checked')){
+       $("table[id='std_form_six']").show();
+       $("#std_two").prop('disabled', true);
+       $("#std_three").prop('disabled', true);
+       $("#std_four").prop('disabled', true);
+       $("#std_five").prop('disabled', true);
+       $("#std_one").prop('disabled', true);
+       $("#std_seven").prop('disabled', true);
+       $("#std_eight").prop('disabled', true);
+
+    } else {
+        $("table[id='std_form_six']").hide();
+        $("#std_two").prop('disabled', false);
+        $("#std_three").prop('disabled', false);
+        $("#std_four").prop('disabled', false);
+        $("#std_five").prop('disabled', false);
+        $("#std_one").prop('disabled', false);
+        $("#std_seven").prop('disabled', false);
+        $("#std_eight").prop('disabled', false);
+    }
+  }).change();
+
+  $('#std_seven').change(function() {
+    if($('#std_seven').is(':checked')){
+       $("table[id='std_form_seven']").show();
+       $("#std_two").prop('disabled', true);
+       $("#std_three").prop('disabled', true);
+       $("#std_four").prop('disabled', true);
+       $("#std_five").prop('disabled', true);
+       $("#std_six").prop('disabled', true);
+       $("#std_one").prop('disabled', true);
+       $("#std_eight").prop('disabled', true);
+
+    } else {
+        $("table[id='std_form_seven']").hide();
+        $("#std_two").prop('disabled', false);
+        $("#std_three").prop('disabled', false);
+        $("#std_four").prop('disabled', false);
+        $("#std_five").prop('disabled', false);
+        $("#std_six").prop('disabled', false);
+        $("#std_one").prop('disabled', false);
+        $("#std_eight").prop('disabled', false);
+    }
+  }).change();
+
+  $('#std_eight').change(function() {
+    if($('#std_eight').is(':checked')){
+       $("table[id='std_form_eight']").show();
+       $("#std_two").prop('disabled', true);
+       $("#std_three").prop('disabled', true);
+       $("#std_four").prop('disabled', true);
+       $("#std_five").prop('disabled', true);
+       $("#std_six").prop('disabled', true);
+       $("#std_seven").prop('disabled', true);
+       $("#std_one").prop('disabled', true);
+
+    } else {
+        $("table[id='std_form_eight']").hide();
+        $("#std_two").prop('disabled', false);
+        $("#std_three").prop('disabled', false);
+        $("#std_four").prop('disabled', false);
+        $("#std_five").prop('disabled', false);
+        $("#std_six").prop('disabled', false);
+        $("#std_seven").prop('disabled', false);
+        $("#std_one").prop('disabled', false);
+    }
+  }).change();
+
+  $('#base').change(function() {
+    if($('#base').is(':checked')){
+       $("table[id='base_calc']").show();
+       $("#salt").prop('disabled', true);
+
+    } else {
+        $("table[id='base_calc']").hide();
+        $("#salt").prop('disabled', false);
+    }
+  }).change();
+
+  $('#salt').change(function() {
+    if($('#salt').is(':checked')){
+       $("table[id='salt_calc']").show();
+       $("#base").prop('disabled', true);
+
+    } else {
+        $("table[id='salt_calc']").hide();
+        $("#base").prop('disabled', false);
+    }
+  }).change();
   $('#min').change(function() {
     if($('#min').is(':checked')){
        $("input[min='min_tolerance']").show();

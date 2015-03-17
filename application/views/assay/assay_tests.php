@@ -333,7 +333,6 @@
                    
                 </tr>
                 <tr>
-                <tr>
                   <td align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                   Potency</td>
                   <td colspan="3" height="20px" align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
