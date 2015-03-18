@@ -789,13 +789,13 @@ $data['monograph_specs']=	$this->db->select('*')->get_where('monograph_specifica
 		$data['monograph_specs']=	$this->db->select('*')->get_where('monograph_specifications', array('test_request_id' => $test_request,'test_type'=>$test_type))->result_array();
 
 		// print_r($data['monograph_specs']);die;
-	    $component_names= $this->db->select('*')->get_where('components', array('test_request_id' => $test_request))->result_array();
-		foreach ($component_names as $key => $value) {
-			$c_names[] = $value['component'];
-		}
+	    $data['components']= $this->db->select('*')->get_where('components', array('test_request_id' => $test_request))->result_array();
+		//foreach ($component_names as $key => $value) {
+		//	$c_names[] = $value['component'];
+		//}
 
 		// $c_name = implode(', ', $c_names);
-		$data['components']= $c_names;
+		//$data['components']= $c_names;
 				
 		$this->load->view('tests/dissolution/test_dissolution_monograph_normal_hplc_view',$data);
 	}

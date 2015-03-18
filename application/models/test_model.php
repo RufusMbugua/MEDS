@@ -84,7 +84,6 @@ class Test_Model extends CI_Model{
 
   function process_edit_monograph($full_path, $file_name){
 
-
   $assignment_id=$this->input->post('assignment_id');
   $test_request_id=$this->input->post('tr_id');
   $status=1; 
@@ -123,9 +122,11 @@ class Test_Model extends CI_Model{
           'label_claim'=>$data_three[$j]
 
       );
-    $this->db->insert('components',$array);
+    //$this->db->insert('components',$array);
+    $this->db->update('components', $array, array('test_request_id' => $test_request_id ));
   }
-   $this->db->insert('full_monograph',$data);
+   //$this->db->insert('full_monograph',$data);
+   $this->db->update('full_monograph', $data, array('test_request_id' => $test_request_id ));
    redirect('test/index/'.$assignment_id.'/'.$test_request_id);
   }
   else

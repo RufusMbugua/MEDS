@@ -141,26 +141,26 @@
                 <tr>
                   <td colspan="8" align="center" style="padding:4px;border-bottom: solid 1px #c4c4ff;">
                     <table width="80%" align="center" cellpaddding="4px">
-                        <?php include_once('application/views/single_complogic_edit.php');?>
+                      <?php
+                      if($monograph_details[0]['components']==1){
+                        include_once('application/views/single_complogic_edit.php');
+                      }else{
+                        include_once('application/views/multi_complogic_edit.php');
+                      }
+                      ?>
                     </table>
                   </td> 
                 </tr>
                 <tr>
                   <td colspan="8" align="left" style="padding:4px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><h5>Number of Components</h5></td> 
                 </tr>
-                <tr>
-                  <td colspan="8" align="left" style="padding:4px;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">
-                    <?php
+                <?php
                       if($monograph_details[0]['components']==1){
                     ?>
+                <tr>
+                  <td colspan="8" align="left" style="padding:4px;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">
+                    
                     <input type="checkbox" name="singlecomponent" id="singlecomponent" value="1" checked> Single Component</td>
-                    <?php
-                    }else{
-                    ?>
-                     <input type="checkbox" name="singlecomponent" id="singlecomponent" value="1"> Single Component</td>
-                    <?php
-                    } 
-                    ?>
                 </tr>
                 <tr>  
                   <td colspan="8" style="padding:8px;">
@@ -198,20 +198,34 @@
                     </table>
                   </td>  
                 </tr>
-                <tr>  
-                  <td colspan="8" align="left" style="padding:4px;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><input type="checkbox" name="multicomponent" id="multicomponent" Value="2"> Multicomponent</td>  
+                <?php
+                  }else{}
+
+                if($monograph_details[0]['components']==2){
+                ?>
+                <tr> 
+                  <td colspan="8" align="left" style="padding:4px;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">
+                    <input type="checkbox" name="multicomponent" id="multicomponent" value="2" checked> Multicomponent</td>
                 </tr>
                 <tr>  
                   <td colspan="8" style="padding:8px;">
                     <table width="80%" id="tbl_components" class="dynatable" border="0" align="center" cellpadding="4px">
                       <thead>
-                        <td colspan="2" align="right"><input type="button" id="add_row" class=" btn" value="Add"></td>
+                        <td colspan="2" align="right"></td>
                       </thead>
                       <tbody>
                         <tr class="prototype">
-                          <td>Component 1 <input type="text" name="component[]" id="component_one" class="id" ></td>
-                          <td>Label Claim (mg) <input type="text" name="lc_component[]" id="lc_component" class="id"></td>
+                          <?php
+                            $i=1;
+                            foreach ($components as $key):     
+                          ?>
+                          <td style="padding:8px;">Component  <input type="text" name="component[]" id="component_one" value="<?php echo $key['component'];?>"></td>
+                          <td style="padding:8px;">Label Claim (mg) <input type="text" name="lc_component[]" id="lc_component" value="<?php echo $key['label_claim'];?>"></td>
+                          <?php
+                             $i++;
+                           ?>
                         </tr>
+                        <?php endforeach; ?>
                     </tbody>
                   </table>
                   <table class="" id="tbl_components" width="80%" border="0" align="center" cellpadding="4px">
@@ -225,7 +239,7 @@
                             foreach ($subtests_multicomponent as $row):     
                           ?>
                            <td style="padding:8px;border-right: dotted 1px #c0c0c0;text-align: center;border-bottom: solid 1px #c0c0c0;" width="20px"><?php echo $i;?>.</td>
-                           <td style="padding:8px;text-align: left;border-bottom: solid 1px #c0c0c0;"><input type="checkbox" id="subtests[]" name="subtests[]"> <?php echo $row['name'];?></td>
+                           <td style="padding:8px;text-align: left;border-bottom: solid 1px #c0c0c0;"><input type="checkbox" id="subtests[]" name="subtests[]" value="<?php echo $row['id'];?>"> <?php echo $row['name'];?></td>
                            <?php
                              $i++;
                            ?>
@@ -235,6 +249,9 @@
                     </table>
                   </td>  
                 </tr>
+                <?php
+                }else{} 
+                ?>
                 <tr>
                   <td colspan="8" align="left" style="padding:4px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><h5>Please chose where appropriate, Thank you.</h5></td> 
                 </tr>

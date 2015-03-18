@@ -1181,6 +1181,86 @@
               <td></td>
             </tr>
             <?php }else{}?>
+            <?php
+                if(in_array('57',$tests_done)){
+
+              ?>
+            <tr>
+                <td style="text-align:center;padding:4px;"></a></td>
+                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_normal_hplc/'.$query['a'].'/'.$request[0]['tr'];?>">Specification</a></td>
+                <td  
+                 <?php              
+
+                  if(in_array('57', $monograph_specifications)){
+                    ?>
+                    <td style='text-align:left;padding:4px;'><a href="<?php echo base_url().'test_dissolution/index_normal/'.$query['a'].'/'.$request[0]['tr'];?>">Dissolution Normal Tablet: HPLC</a>
+                 <?php     
+                 }else{                         
+                  ?>
+                    <td style='text-align:left;padding:4px;'>Please fill in Dissolution Normal Tablets Specification  
+                <?php
+                }             
+                ?>
+                <td 
+                <?php 
+                      if(empty($dissolution_normal_hplc)){
+                    
+                          echo"style='text-align:center;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "View Worksheet";
+                     }else{
+                      ?>
+                       style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/view_worksheet_normal/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
+                     <?php   
+                     }
+                     ?>
+              <td 
+                <?php 
+                      if(empty($dissolution_normal_hplc)){
+                    
+                          echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Not Done";
+                     }else{
+                         echo"style='text-align:center;padding:4px;background-color:#98ff98;border-bottom:solid 1px #bfbfbf;'>";
+                         echo "Complete";
+                     }?>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center;padding:4px;"></td>
+                <td style="text-align:center;padding:4px;"></td>
+                <td 
+                <?php 
+                      if(@$dissolution_normal_hplc[0]['choice']==1 && @$dissolution_normal_hplc[0]['status']==1|| @$dissolution_normal_hplc[0]['choice']==0 && @$dissolution_normal_hplc[0]['status']==0){                  
+                      
+                          echo"style='text-align:left;padding:4px;color:#000;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Normal Tablets (HPLC): ";
+                          
+                     }
+                     else{
+                      ?>
+                        style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_second_normal/'.$query['a'].'/'.$request[0]['tr'];?>">Normal Tablets (HPLC): Second Stage</a></td>
+                     <?php   
+                     }
+                     ?>
+                <td></td>
+              <td></td>
+            </tr>
+            <tr>
+                <td style="text-align:center;padding:4px;"></td>
+                <td style="text-align:center;padding:4px;"></td>
+                <td 
+                <?php 
+                      if(@$dissolution_normal_hplc[0]['choice']==0 && @$dissolution_normal_hplc[0]['status']==2 || @$dissolution_normal_hplc[0]['choice']==0 && @$dissolution_normal_hplc[0]['status']==3 || @$dissolution_normal_hplc[0]['choice']==1 && @$dissolution_normal_hplc[0]['status']==3 ){                  
+                      
+                      ?>style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_third_normal/'.$query['a'].'/'.$request[0]['tr'];?>">Normal Tablets ( HPLC): Third Stage</a></td><?php
+                     }else{
+                        
+                         echo"style='text-align:left;padding:4px;color:#000;border-bottom:solid 1px #bfbfbf;'>";echo "Normal Tablets (HPLC): Third Stage";
+                     } ?>
+                <td></td>
+              <td></td>
+            </tr>
+            <?php }else{}?>
             <?php }else{}?>
            
 
