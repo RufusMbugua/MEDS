@@ -2,28 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <title>MEDS</title>
-  <link rel="icon" href="" />
+  <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon">
   <link href="<?php echo base_url().'style/core.css';?>" rel="stylesheet" type="text/css" />
-   <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
+  <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
    
   <link href="<?php echo base_url().'style/jquery.tooltip.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/jquery-ui.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/demo_table.css';?>" rel="stylesheet" type="text/css"/>
   
-  <!-- bootstrap reference links  
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.css.map';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.min.css';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap.css.map'; ?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.css';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap.min.css';?>" rel="stylesheet" type="text/css"/>  
-   -->
   <!-- bootstrap reference library -->
   <link href="<?php echo base_url().'bootstrap/css/bootstrap.css'; ?>" rel="stylesheet" type="text/css"/>
 
   <script src="<?php echo base_url().'js/jquery.js';?>"></script>
   <script src="<?php echo base_url().'js/jquery-ui.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/tabs.js';?>"></script>
-  <script type="text/javascript" src="<?php echo base_url().'js/jquery.validate.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'tinymce/tinymce.min.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/equipmentinfo.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/equationstwo.js';?>"></script>
@@ -32,80 +24,68 @@
   <!-- bootstrap reference library -->
   <script src="<?php echo base_url().'js/bootstrap.min.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/Jquery-datatables/jquery.dataTables.js';?>"></script>
-  <style type="text/css">
-  .std_table{
-      padding: 8px;
-      background-color:#ffffff;
-      text-align: center;
-  }
-  .hide_data {
-      display: none; 
-    }
-  </style>
   <script>
-   $(document).ready(function() {
+  $(document).ready(function(){
 
     $('#clear_form').hide();
-    
-    /* Init DataTables */
-    $('#list').dataTable({
-     "sScrollY":"270px",
-     "sScrollX":"100%"
-    });
-     tinymce.init({
-    selector: "textarea"
-   });
-    
-    $('#save_normal_hplc').click(function(){ 
-     $('#save_normal_hplc').hide();  
-        post_ajax();
 
-  });
-function post_ajax(){
+    //function to prevent submitting the form when enter button is pressed.
+    $('form input').keydown(function (e){
+      if (e.keyCode == 13) {
+          var inputs = $(this).parents("form").eq(0).find(":input");
+          if (inputs[inputs.index(this) + 1] != null) {                    
+              inputs[inputs.index(this) + 1].focus();
+          }
+          e.preventDefault();
+          return false;
+      }
+    });
+
+    tinymce.init({
+      selector: "textarea"
+    });
+
+    //function to post data when submit link is pressed
+    $('#save_normal_hplc').click(function(){ 
+     $('#save_normal_hplc').hide();
+        post_ajax();
+    });
+  function post_ajax(){
   //post via ajax
   form_data = $('#test_dissolution_normal_view').serialize();
   console.log(form_data);
 
+   if ( $('#choice').val()=="" ||  $('#component_name').val()=="") {
+      alert('Please fill all the neccesary fields')
+    }else{ 
 
-  // if ( $('#choice').val()=="" ||  $('#component_name').val()=="") {
-  // // alert('Please fill all the neccesary fields')
-  // }else{
+      $.ajax({
+        url:"<?php echo base_url();?>test_dissolution/worksheet_normal_hplc",
+        type:"POST",
+        dataType:'json',
+        async:true,
+        data:form_data,
+        success: function(){
 
-    $.ajax({
-    url:"<?php echo base_url();?>test_dissolution/worksheet_normal_hplc",
-    type:"POST",
-    async:false,
-    data:form_data,
-    success: function(){
+          $("#component_name option:selected").attr('disabled','disabled')
+          var a = $('#assignment').val();
+          var t = $('#test_request').val();
 
-      $("#component_name option:selected").attr('disabled','disabled')
-      var a = $('#assignment').val();
-      var t = $('#test_request').val();
-
-      var length_ = $("#component_name").find('option').length;
-      var  length_2 = $("#component_name").find('option[disabled = "disabled"]').length;
-
-      console.log(length_-length_2)
-      if ((length_-length_2)==1) {
-        //redirect location when all components are selected
-        window.location.href = "<?php echo base_url();?>test/index/"+a+"/"+t
-
-      } 
-      
-      alert('Successful! ensure all components are selected.'); 
-      $('#clear_form').show();
-    },fail:function(){
-
-      alert('An error occured')
+          var length_ = $("#component_name").find('option').length;
+          var  length_2 = $("#component_name").find('option[disabled = "disabled"]').length;
+          if ((length_-length_2)==1) {
+            //redirect location when all components are selected
+            window.location.href = "<?php echo base_url();?>test/index/"+a+"/"+t
+          }   
+          alert('Successful! Please ensure that all components are selected.');
+          $('#clear_form').show(); 
+        },fail:function(){
+          alert('An error occured')
+        }
+      });
     }
-    });
-
-  } 
-   
-// }
-
+  }
   $('#clear_form').click(function(){
-   
     $('#save_normal_hplc').show();
     $('.all_input').val('');
     $('#peak_areas :input').val('');
@@ -114,14 +94,12 @@ function post_ajax(){
 
     //var tinymce_editor_id = $('._text_areas'); 
     //tinymce.get(tinymce_editor_id).setContent('');
-
-
-});  
-   });
+  });  
+  });
   </script>
   </head>
   <body>
-      <?php
+  <?php
    $user=$this->session->userdata;
    $user_type_id=$user['logged_in']['user_type'];
    $user_id=$user['logged_in']['id'];
@@ -130,12 +108,8 @@ function post_ajax(){
    $id_temp=1;
    //var_dump($user);
     if(empty($user['logged_in']['id'])) {
-       
-      redirect('login','location');  //loads the login page in current page div
-
-      echo '<meta http-equiv=refresh content="0;url=base_url();login">'; 
-
-       }
+      redirect('login','location');  //loads the login page in current page
+    }
   ?>
   <div id="header"> 
   <div id="logo" style="padding:8px;color: #0000ff;" align="center"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="35px" width="40px"/><b>MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</b></div>
@@ -176,11 +150,12 @@ function post_ajax(){
 <div id="forms">
 
 <form method="POST" id="test_dissolution_normal_view">
-<table width="950" class="table_form" border="0" cellpadding="4px" align="center">
-     <input type="hidden" name ="assignment" id="assignment" value ="<?php echo $assignment;?>"><input type="hidden" id="test_request" name ="test_request" value ="<?php echo $test_request;?>">
+  <table width="950" class="table_form" border="0" cellpadding="4px" align="center">
+      <input type="hidden" name ="assignment" id="assignment" value ="<?php echo $assignment;?>">
+      <input type="hidden" id="test_request" name ="test_request" value ="<?php echo $test_request;?>">
       <input type="hidden" name ="analyst" value ="<?php echo $user['logged_in']['fname']." ".$user['logged_in']['lname'];?>"> 
       <input type ="hidden" id = "label_claim" value=" <?php echo $results['label_claim'];?>">
-      <tr>
+    <tr>
         <td colspan="6"  style="padding: 8px;text-align:right;background-color:#fdfdfd;padding:8px;border-bottom:solid 1px #bfbfbf;"><a href="<?php echo base_url().'test/index/'.$assignment.'/'.$test_request?>"><img src="<?php echo base_url().'images/icons/assign.png';?>" height="20px" width="20px">Back to Test Lists</a></td>
     </tr>
     <tr>
@@ -194,7 +169,7 @@ function post_ajax(){
             <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">Document: Analytical Worksheet</td>
             <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;">Title: <?php echo $results['active_ingredients'];?> <?php echo $results['test_specification'] ;?></td>
             <td height="25px" colspan="" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;color:#000000;">REFERENCE NUMBER</td>
-            <td colspan="3" style="padding:4px;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><input type="text" id="reference_number" name="reference_number" class="field"/><span id="reference_number_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="reference_number_r" style="color:red; display:none">Fill this field</span></td>
+            <td colspan="3" style="padding:4px;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><?php echo $results['reference_number']?></td>
         </tr>
         <tr>
               <td colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-left:solid 1px #bfbfbf;">EFFECTIVE DATE: <?php echo date("d/m/Y")?></td>
@@ -204,7 +179,7 @@ function post_ajax(){
         </tr>
         <tr>
               <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">SERIAL No.</td>
-              <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><input type="text" name="serial_number"></input></td>
+              <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><?php echo $full_monograph[0]['serial_number']?></input></td>
               <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;">Batch/Lot No.</td>
               <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><?php echo $results['batch_lot_number'] ;?></td>          
         </tr>
@@ -265,7 +240,9 @@ function post_ajax(){
             </select>
         </td>
     </tr>
-         <tr>
+    <tr>
+        <td align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Equipment Make:</td>
+        <td colspan = "2" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="equipment_number" size="70" id="equipmentid"></td>
         <td colspan=""align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Equipment ID:</td>
         <td colspan = "2" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> 
             <select id ="equipment_make" name="equipment_number">
@@ -281,10 +258,7 @@ function post_ajax(){
               
             </select>
          </td>    
-      
-        <td colspan=""align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Equipment Make:</td>
-        <td colspan = "2" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="equipment_number" id="equipmentid"></td>
-      </tr>
+       </tr>
       <tr>
         <td  colspan ="6" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color: #0000fb;" ><b>Preparation of Dissolution Medium</b></td>
       </tr>
@@ -328,6 +302,8 @@ function post_ajax(){
         <td colspan = "6"align ="center"style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><textarea cols="50" rows="4" name ="standard_weight"></textarea></td>
       </tr> 
       <tr>
+        <td align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">ID Number:</td>
+        <td colspan = "2" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="balance_number" id="idnumber" size="70"></td>
         <td colspan=""align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Balance Make:</td>
         <td colspan = "2" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> 
             <select id ="equipment_balance" name="balance_make">
@@ -344,8 +320,6 @@ function post_ajax(){
             </select>
          </td>    
       
-        <td colspan=""align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">ID Number:</td>
-        <td colspan = "2" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="balance_number" id="idnumber"></td>
       </tr>
       <tr>
       <!-- start of adding standards-->
@@ -708,12 +682,12 @@ function post_ajax(){
       </tr>
       <tr>
         <td colspan ="4" align ="center" style="padding: 12px;">
-          <input type ="text" name="det_1_pkt" id ="det_1_pkt" size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="det_1_pkt" id ="det_1_pkt" size ="10" placeholder="PKT" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_1_wstd" id ="det_1_wstd" size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_1_df" id ="det_1_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_1_potency" id ="det_1_potency" size ="10" placeholder="Potency">*100 <br/><br/>
-          <input type ="text" name="det_1_pkstd" id ="det_1_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_1_lc" id ="det_1_lc" class="det_1_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>
+          <input type ="text" name="det_1_pkstd" id ="det_1_pkstd" size ="10" placeholder="PKSTD" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="det_1_lc" id ="det_1_lc" class="det_1_lc" size ="10" placeholder="LC" ></td>
         <td> =&nbsp &nbsp<input type ="text" name="determination_1" id ="determination_1" class="determination_1" size ="10"> % LC</td>
       </tr>
       <tr>
@@ -722,12 +696,12 @@ function post_ajax(){
       </tr>
       <tr>
         <td colspan ="4" align ="center" style="padding: 12px;">
-          <input type ="text" name="det_2_pkt" id="det_2_pkt" size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="det_2_pkt" id="det_2_pkt" size ="10" placeholder="PKT" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_2_wstd" id ="det_2_wstd" size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_2_df"id="det_2_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_2_potency" id ="det_2_potency" size ="10" placeholder="Potency">*100 <br/><br/>
-          <input type ="text" name="det_2_pkstd" id ="det_2_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_2_lc" id ="det_2_lc" class="det_2_lc" size ="10" placeholder="LC"onchange="calculation_determinations()"></td>        
+          <input type ="text" name="det_2_pkstd" id ="det_2_pkstd" size ="10" placeholder="PKSTD" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="det_2_lc" id ="det_2_lc" class="det_2_lc" size ="10" placeholder="LC"></td>        
         <td>=&nbsp &nbsp <input type ="text" name="determination_2"id ="determination_2" class="determination_2" size ="10">% LC </td>
       </tr>
       <tr>  
@@ -736,12 +710,12 @@ function post_ajax(){
       </tr> 
       <tr>  
         <td colspan ="4" align ="center" style="padding: 12px;">
-          <input type ="text" name="det_3_pkt" id ="det_3_pkt"size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="det_3_pkt" id ="det_3_pkt"size ="10" placeholder="PKT" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_3_wstd" id ="det_3_wstd"size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_3_df" id ="det_3_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_3_potency" id ="det_3_potency" size ="10" placeholder="Potency">*100 <br/><br/>
-          <input type ="text" name="det_3_pkstd" id ="det_3_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_3_lc" id ="det_3_lc" class="det_3_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
+          <input type ="text" name="det_3_pkstd" id ="det_3_pkstd" size ="10" placeholder="PKSTD" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="det_3_lc" id ="det_3_lc" class="det_3_lc" size ="10" placeholder="LC" ></td>        
         <td>=&nbsp &nbsp <input type ="text" name="determination_3" id ="determination_3" class="determination_3" size ="10">% LC </td>
       </tr>
       <tr>
@@ -750,12 +724,12 @@ function post_ajax(){
       </tr> 
       <tr>  
         <td colspan ="4" align ="center" style="padding: 12px;">
-          <input type ="text" name="det_4_pkt" id ="det_4_pkt" size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="det_4_pkt" id ="det_4_pkt" size ="10" placeholder="PKT" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_4_wstd" id ="det_4_wstd" size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_4_df" id ="det_4_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_4_potency" id ="det_4_potency" size ="10" placeholder="Potency">*100 <br/><br/>
-          <input type ="text" name="det_4_pkstd" id ="det_4_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_4_lc" id ="det_4_lc"  class="det_4_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
+          <input type ="text" name="det_4_pkstd" id ="det_4_pkstd" size ="10" placeholder="PKSTD" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="det_4_lc" id ="det_4_lc"  class="det_4_lc" size ="10" placeholder="LC" ></td>        
         <td>=&nbsp &nbsp <input type ="text" name="determination_4" id ="determination_4" class="determination_4" size ="10">% LC </td>
       </tr> 
       <tr>  
@@ -764,12 +738,12 @@ function post_ajax(){
       </tr> 
       <tr>  
         <td colspan ="4" align ="center" style="padding: 12px;">
-          <input type ="text" name="det_5_pkt" id ="det_5_pkt" size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="det_5_pkt" id ="det_5_pkt" size ="10" placeholder="PKT" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_5_wstd" id ="det_5_wstd" size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_5_df" id ="det_5_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_5_potency" id ="det_5_potency" size ="10" placeholder="Potency">*100 <br/><br/>
-          <input type ="text" name="det_5_pkstd" id ="det_5_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_5_lc" id ="det_5_lc"  class="det_5_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
+          <input type ="text" name="det_5_pkstd" id ="det_5_pkstd" size ="10" placeholder="PKSTD" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="det_5_lc" id ="det_5_lc"  class="det_5_lc" size ="10" placeholder="LC" ></td>        
         <td>=&nbsp &nbsp <input type ="text" name="determination_5" class="determination_5" id ="determination_5" size ="10">% LC </td>
       </tr> 
       <tr> 
@@ -778,12 +752,12 @@ function post_ajax(){
       </tr> 
       <tr>  
         <td colspan ="4" align ="center" style="padding: 12px;">
-          <input type ="text" name="det_6_pkt" id ="det_6_pkt" size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="det_6_pkt" id ="det_6_pkt" size ="10" placeholder="PKT" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_6_wstd" id ="det_6_wstd" size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_6_df" id ="det_6_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_6_potency" id ="det_6_potency" size ="10" placeholder="Potency">*100 <br/><br/>
-          <input type ="text" name="det_6_pkstd" id ="det_6_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_6_lc" id ="det_6_lc"  class="det_6_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
+          <input type ="text" name="det_6_pkstd" id ="det_6_pkstd" size ="10" placeholder="PKSTD" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="det_6_lc" id ="det_6_lc"  class="det_6_lc" size ="10" placeholder="LC" ></td>        
         <td>=&nbsp &nbsp <input type ="text" name="determination_6" class="determination_6" id ="determination_6" size ="10">% LC </td>
       </tr> 
       <tr> 
@@ -821,19 +795,19 @@ function post_ajax(){
             </tr>
             <tr>
               <td><input type="checkbox" id="min" />Not Less than Tolerance</td>
-              <td style="color:#0000ff;padding:8px;"><input type="text" min="min_tolerance" id="min_tolerance" name="min_tolerance" placeholder="min%" size="5"  /></td>
+              <td style="color:#0000ff;padding:8px;"></td>
               <td style="color:#0000ff;padding:8px;"><input type="text" min="min_tolerance" id="nlt_min_tolerance_det" name="det_min" size="4" placeholder="min%" disabled/> - <input type="text" min="min_tolerance" id="nlt_max_tolerance_det" name="det_max" size="4" placeholder="max%" disabled/></td>
               <td style="color:#0000ff;padding:8px;"><input type="text" min="min_tolerance" id="min_tolerance_comment" name="min_tolerance_comment" disable/></td>
             </tr>
             <tr>
               <td><input type="checkbox" id="max" />Not Greater than Tolerance</td>
-              <td style="color:#0000ff;padding:8px;"><input type="text" max='max_tolerance' id="max_tolerance" name="max_tolerance" placeholder="max%" size="5" /></td>
+              <td style="color:#0000ff;padding:8px;"></td>
               <td style="color:#0000ff;padding:8px;"><input type="text" max='max_tolerance' id="ngt_min_tolerance_det" name="det_min" size="4" placeholder="min%" disabled/> - <input type="text" max="max_tolerance" id="ngt_max_tolerance_det" name="det_max" size="4" placeholder="max%" disabled/></td>
               <td style="color:#0000ff;padding:8px;"><input type="text" max='max_tolerance' name="content_comment" disable/></td>
             </tr>
             <tr>
               <td><input type="checkbox" id="range" />Tolerance Range</td>
-              <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" name="content_from" placeholder="min%" size="5"> - <input type="text" range="tolerance_range" name="content_to" placeholder="max%" size="5"></td>
+              <td style="color:#0000ff;padding:8px;"></td>
               <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" id="range_min_tolerance_det" name="det_min" size="4" placeholder="min%" disabled/> - <input type="text" id="range_max_tolerance_det" range="tolerance_range" name="det_max" size="4" placeholder="max%" disabled/></td>
               <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" name="content_comment" disable/></td>
             </tr>

@@ -1884,48 +1884,47 @@ $('#sample_resolution_ac').keyup(function() {
           $('#ngt_max_tolerance_det').val(highest_value.toFixed(3));
           $('#range_min_tolerance_det').val(lowest_value.toFixed(3));
           $('#range_max_tolerance_det').val(highest_value.toFixed(3));
-      });
-      $('#min_tolerance').change(function() {   
-          var min_tolerance =$('#min_tolerance').val();
+
           var lowest_value =$('#range_min').val();
-         
           var comment_a = new String();
           var comment_conclusion =new String();
-          if(min_tolerance==0 || min_tolerance==""){
-              comment_a= "";
-        }
-        else if(min_tolerance > lowest_value){
-              comment_a= "Not Ok";
-              comment_conclusion = "Does not Comply";
-        }else{
-              comment_a="OK";
-              comment_conclusion = "Complies";
-        }
 
-        $('#min_tolerance_comment').val(comment_a);
-        $('#choice').val(comment_conclusion);
-          });
-      $('#max_tolerance').change(function() {   
-          var max_tolerance =$('#max_tolerance').val();
           var highest_value =$('#range_max').val();
           var comment_b = new String();
           var comment_conclusion =new String();
-          if(max_tolerance==0 || max_tolerance==""){
-              comment_b= "";
-        }
-        else if(max_tolerance > highest_value){
-              comment_b= " Ok";
-              comment_conclusion = "Does not Comply";
-        }else{
-              comment_b="Not OK";
-              comment_conclusion = "Complies";
-        }
-        // alert(max_tolerance)
-        $('#max_tolerance_comment').val(comment_b);
-        $('#choice').val(comment_conclusion);
-          });
 
-        $('.simple').keyup(function() {
+          if(average_determination==0 || average_determination==""){
+              comment_a= "";
+          }
+          else{}
+          if(average_determination > lowest_value){
+              comment_a= "Ok";
+              comment_conclusion = "COMPLIES";
+          }else{
+              comment_a="Not OK";
+              comment_conclusion = "DOES NOT COMPLY";
+          }
+          $('#min_tolerance_comment').val(comment_a);
+          $('#choice').val(comment_conclusion);
+
+          
+          if(average_determination==0 || average_determination==""){
+              comment_b= "";
+          }
+          else if(average_determination > highest_value){
+              comment_b= " Not Ok";
+              comment_conclusion = "DOES NOT COMPLY";
+          }else{
+              comment_b="OK";
+              comment_conclusion = "COMPLIES";
+          }
+          // alert(max_tolerance)
+          $('#max_tolerance_comment').val(comment_b);
+          $('#choice').val(comment_conclusion);
+
+      });
+
+      $('.simple').keyup(function() {
     
           var result = 0;
 

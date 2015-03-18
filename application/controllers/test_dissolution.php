@@ -430,7 +430,8 @@ class Test_Dissolution extends CI_Controller{
 		$data['results']=$results[0];
 	    	    
 	    $data['components']= $this->db->select('*')->get_where('components', array('test_request_id' => $test_request))->result_array();
-
+	    $data['full_monograph']= $this->db->select('*')->get_where('full_monograph', array('test_request_id' => $test_request))->result_array();
+	    
 	    $data['query_e']=$this->db->get_where('equipment_maintenance', array('status' =>0))->result_array();
 
 	    $data['sql_columns']= $this->db->select('*')->get_where('columns', array('status' => $status))->result_array();
@@ -656,12 +657,13 @@ class Test_Dissolution extends CI_Controller{
 	}
 	
 	function worksheet_normal_hplc(){
+
 	 // var_dump($this->input->post());
 		$this->load->model('test_dissolution_normal_model');
-
 		if ($this->input->post()) {
 			$this->test_dissolution_normal_model->save_worksheet();
-		}
+	    }
+		
 	}
 	function worksheet_normal_second_hplc(){			
 
@@ -783,21 +785,32 @@ $data['monograph_specs']=	$this->db->select('*')->get_where('monograph_specifica
 
 		$data['results']=$result[0];
 
-	    //$full_monograph= $this->db->select('*')->get_where('full_monograph', array('test_request_id' => $test_request))->result_array();
-
-	    //$data['full_monograph'] = $full_monograph[0]['components'];
+	    $data['full_monograph']= $this->db->select('*')->get_where('full_monograph', array('test_request_id' => $test_request))->result_array();
 		$data['monograph_specs']=	$this->db->select('*')->get_where('monograph_specifications', array('test_request_id' => $test_request,'test_type'=>$test_type))->result_array();
 
-		// print_r($data['monograph_specs']);die;
-	    $data['components']= $this->db->select('*')->get_where('components', array('test_request_id' => $test_request))->result_array();
-		//foreach ($component_names as $key => $value) {
-		//	$c_names[] = $value['component'];
-		//}
-
-		// $c_name = implode(', ', $c_names);
-		//$data['components']= $c_names;
+		$data['components']= $this->db->select('*')->get_where('components', array('test_request_id' => $test_request))->result_array();
 				
 		$this->load->view('tests/dissolution/test_dissolution_monograph_normal_hplc_view',$data);
+	}
+	function monograph_normal_hplc_view(){
+		$data['assignment'] = $this->uri->segment(3);
+		$data['test_request'] = $this->uri->segment(4);
+		$data['test_type'] = $this->uri->segment(5);
+		$test_request = $this->uri->segment(4);
+		$test_type = $this->uri->segment(5);
+
+		$sql = "SELECT * FROM test_request WHERE id =$test_request";
+		$query = $this->db->query($sql);
+		$result =$query->result_array();
+
+		$data['results']=$result[0];
+
+	    $data['full_monograph']= $this->db->select('*')->get_where('full_monograph', array('test_request_id' => $test_request))->result_array();
+		$data['monograph_specs']=	$this->db->select('*')->get_where('monograph_specifications', array('test_request_id' => $test_request,'test_type'=>$test_type))->result_array();
+
+	    $data['components']= $this->db->select('*')->get_where('components', array('test_request_id' => $test_request))->result_array();
+				
+		$this->load->view('tests/dissolution/test_dissolution_specifications_normal_hplc_view',$data);
 	}
 	function monograph_enteric_coated(){
 		$data['assignment'] = $this->uri->segment(3);

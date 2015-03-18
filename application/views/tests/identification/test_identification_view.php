@@ -26,13 +26,9 @@
   <script>
 
 $(document).ready(function() {
-/* Init DataTables */
+
   $('#clear_form').hide();
 
-  $('#list').dataTable({
-   "sScrollY":"270px",
-   "sScrollX":"100%"
-  });
   //function to prevent submitting the form when enter button is pressed.
   $('form input').keydown(function (e) {
     if (e.keyCode == 13) {
@@ -43,66 +39,57 @@ $(document).ready(function() {
         e.preventDefault();
         return false;
     }
-});
+  });
 
-   tinymce.init({
-  selector: "textarea"
+  tinymce.init({
+    selector: "textarea"
   });
 
 //function to post data when submit link is pressed
   $('#save_identification').click(function(){ 
-     $('#save_identification').hide();    
-        post_ajax();
-
+    $('#save_identification').hide();    
+      post_ajax();
   });
-function post_ajax(){
+  function post_ajax(){
   //post via ajax
   form_data = $('#test_identification_view').serialize();
   console.log(form_data);
-
 
   if ( $('#choice').val()=="" ||  $('#component_name').val()=="") {
   alert('Please fill all the neccesary fields')
   }else{
 
     $.ajax({
-    url:"<?php echo base_url();?>test_identification/worksheet_assay",
-    type:"POST",
-     async:false,
-    data:form_data,
-    success: function(){
+      url:"<?php echo base_url();?>test_identification/worksheet_assay",
+      type:"POST",
+      dataType:'json',
+      async:true,
+      data:form_data,
+      success: function(){
 
-      $("#component_name option:selected").attr('disabled','disabled')
-      var a = $('#assignment').val();
-      var t = $('#test_request').val();
+        $("#component_name option:selected").attr('disabled','disabled')
+        var a = $('#assignment').val();
+        var t = $('#test_request').val();
 
-      var length_ = $("#component_name").find('option').length;
-      var  length_2 = $("#component_name").find('option[disabled = "disabled"]').length;
-      if ((length_-length_2)==1) {
-        //redirect location when all components are selected
-        window.location.href = "<?php echo base_url();?>test/index/"+a+"/"+t
-
-      } 
-      
-      alert("Successful!"); 
-      $('#clear_form').show();
-    },fail:function(){
-
-      alert('An error occured')
-    }
+        var length_ = $("#component_name").find('option').length;
+        var  length_2 = $("#component_name").find('option[disabled = "disabled"]').length;
+        if ((length_-length_2)==1) {
+          //redirect location when all components are selected
+          window.location.href = "<?php echo base_url();?>test/index/"+a+"/"+t
+        } 
+        alert("Successful!"); 
+        $('#clear_form').show();
+      },fail:function(){
+        alert('An error occured')
+      }
     });
-  }
-    
+  }  
 }
-
   $('#clear_form').click(function(){
     $('#save_identification').show();
    // $('.all_input').val('');
-
     var tinymce_editor_id = $('._text_areas'); 
    // tinymce.get(tinymce_editor_id).setContent('');
-
-
 });  
 });
   </script>

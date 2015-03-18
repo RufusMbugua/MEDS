@@ -505,3 +505,11 @@ margin-top:-32767px;/* thank you Erik J - negate effect of float*/
     font-size:14px; font-family: Arial, Helvetica, sans-serif;
     
 }
+.std_table{
+      padding: 8px;
+      background-color:#ffffff;
+      text-align: center;
+}
+  .hide_data {
+      display: none; 
+}

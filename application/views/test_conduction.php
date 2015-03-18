@@ -1183,17 +1183,27 @@
             <?php }else{}?>
             <?php
                 if(in_array('57',$tests_done)){
-
+                  $t=57;
               ?>
             <tr>
                 <td style="text-align:center;padding:4px;"></a></td>
-                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_normal_hplc/'.$query['a'].'/'.$request[0]['tr'];?>">Specification</a></td>
+                <?php
+                  if(in_array('57', $monograph_specifications)){ 
+                ?>
+                    <td style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_normal_hplc/'.$query['a'].'/'.$request[0]['tr'].'/'.$t;?>">Please fill in Dissolution Normal Tablets Specification</a></td>
+                <?php
+                  }else{ 
+                ?>
+                    <td style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_normal_hplc_view/'.$query['a'].'/'.$request[0]['tr'].'/'.$t;?>">View Dissolution HPLC Normal Tablets Test Specifications</a></td>
+                <?php
+                  }
+                ?>
                 <td  
                  <?php              
 
                   if(in_array('57', $monograph_specifications)){
                     ?>
-                    <td style='text-align:left;padding:4px;'><a href="<?php echo base_url().'test_dissolution/index_normal/'.$query['a'].'/'.$request[0]['tr'];?>">Dissolution Normal Tablet: HPLC</a>
+                    <td style='text-align:left;padding:4px;'><a href="<?php echo base_url().'test_dissolution/index_normal/'.$query['a'].'/'.$request[0]['tr'].'/'.$t;?>">Dissolution Normal Tablet: HPLC</a>
                  <?php     
                  }else{                         
                   ?>
@@ -1209,7 +1219,7 @@
                           echo "View Worksheet";
                      }else{
                       ?>
-                       style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/view_worksheet_normal/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
+                       style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/view_worksheet_normal/'.$query['a'].'/'.$request[0]['tr'].'/'.$t;?>">View Worksheet</a></td>
                      <?php   
                      }
                      ?>
