@@ -17,6 +17,7 @@
   <script src="<?php echo base_url().'js/jquery-ui.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/tabs.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'tinymce/tinymce.min.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'tinymce/textarea_script.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/equipmentinfo.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/equationstwo.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
@@ -41,13 +42,10 @@
       }
     });
 
-    tinymce.init({
-      selector: "textarea"
-    });
-
     //function to post data when submit link is pressed
     $('#save_normal_hplc').click(function(){ 
      $('#save_normal_hplc').hide();
+
         post_ajax();
     });
   function post_ajax(){
@@ -60,29 +58,39 @@
     }else{ 
 
       $.ajax({
-        url:"<?php echo base_url();?>test_dissolution/worksheet_normal_hplc",
-        type:"POST",
-        dataType:'json',
-        async:true,
-        data:form_data,
-        success: function(){
+            url:"<?php echo base_url();?>test_dissolution/worksheet_normal_hplc",
+            type:"POST",
+            dataType:'json',
+            async:true,
+            data:form_data,
 
-          $("#component_name option:selected").attr('disabled','disabled')
-          var a = $('#assignment').val();
-          var t = $('#test_request').val();
+            success: function(j){
 
-          var length_ = $("#component_name").find('option').length;
-          var  length_2 = $("#component_name").find('option[disabled = "disabled"]').length;
-          if ((length_-length_2)==1) {
-            //redirect location when all components are selected
-            window.location.href = "<?php echo base_url();?>test/index/"+a+"/"+t
-          }   
-          alert('Successful! Please ensure that all components are selected.');
-          $('#clear_form').show(); 
-        },fail:function(){
-          alert('An error occured')
-        }
-      });
+                $("#component_name option:selected").attr('disabled','disabled')
+                var a = $('#assignment').val();
+                var t = $('#test_request').val();
+                
+                //Gets length of Component Selection to determine how many components are being tested
+                var total_components = $("#component_name").find('option').length;
+                //Gets length of Tested Components in dropdown Selection to determine how many components have been already tested
+                var components_tested = $("#component_name").find('option[disabled = "disabled"]').length;
+                
+                //Gives remaining components not done
+                var remaining_components= (total_components-components_tested);
+
+                if (remaining_components==1) {
+                //redirect location when all components are selected
+                  window.location.href = "<?php echo base_url();?>test/index/"+a+"/"+t;
+
+                }
+
+                alert('Successful! Please ensure that all components are selected.');
+                $('#clear_form').show(); 
+            },
+            error:function(){
+              alert('An error occured')
+            }
+          });
     }
   }
   $('#clear_form').click(function(){
@@ -159,15 +167,15 @@
         <td colspan="6"  style="padding: 8px;text-align:right;background-color:#fdfdfd;padding:8px;border-bottom:solid 1px #bfbfbf;"><a href="<?php echo base_url().'test/index/'.$assignment.'/'.$test_request?>"><img src="<?php echo base_url().'images/icons/assign.png';?>" height="20px" width="20px">Back to Test Lists</a></td>
     </tr>
     <tr>
-     <td colspan ="6">
+     <td colspan ="6" style="padding:8px;">
       <table width="100%" bgcolor="#c4c4ff" class ="table_form" cellpadding="8px" border="0" align ="center">
         <tr>
         <td rowspan="2" colspan ="2" style="padding:4px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="80px" width="90px"/></td>
         <td colspan="6" style="padding:4px;color:#0000ff;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;">MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</td>
         </tr>
         <tr>    
-            <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">Document: Analytical Worksheet</td>
-            <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;">Title: <?php echo $results['active_ingredients'];?> <?php echo $results['test_specification'] ;?></td>
+            <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">ANALYTICAL WORKSHEET</td>
+            <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><?php echo $results['active_ingredients'];?> <?php echo $results['test_specification'] ;?></td>
             <td height="25px" colspan="" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;color:#000000;">REFERENCE NUMBER</td>
             <td colspan="3" style="padding:4px;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><?php echo $results['reference_number']?></td>
         </tr>
@@ -178,15 +186,15 @@
               <td height="25px" colspan="3" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">PAGE 1 of 1</td>
         </tr>
         <tr>
-              <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">SERIAL No.</td>
+              <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">SERIAL NUMBER</td>
               <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><?php echo $full_monograph[0]['serial_number']?></input></td>
               <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;">Batch/Lot No.</td>
               <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><?php echo $results['batch_lot_number'] ;?></td>          
         </tr>
         <tr>
-              <td height="25px" colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;">Form Authorized By:</td>
+              <td height="25px" colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">TEST CONDUCTED BY</td>
               <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><?php echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);?></td>
-              <td colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">USER TYPE</td>
+              <td colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;">USER TYPE</td>
               <td colspan="3" style="padding:4px;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><?php echo $user['logged_in']['role'];?></td>
         </tr> 
       </table>
@@ -225,9 +233,9 @@
           <td colspan ="6" align="center" style="text-align:center;background-color:#ffffff;padding-right:40px;border-bottom: solid 10px #f0f0ff;color: #0000fb;background-color: #e8e8ff;"> MEDS Dissolution Test Form: By Normal HPLC Method</td>
     </tr> 
     <tr>
-        <td colspan="6" style="padding:8px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">Component: 
-            <select id ="component_name" name="component_name">
-              <option selected></option>
+        <td colspan="6" style="padding:8px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>Select Component:</b> 
+            <select id ="component_name" name="component_z_name">
+              <option></option>
                <?php
                foreach($components as $component):
               ?>
@@ -242,7 +250,7 @@
     </tr>
     <tr>
         <td align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Equipment Make:</td>
-        <td colspan = "2" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="equipment_number" size="70" id="equipmentid"></td>
+        <td colspan = "2" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="equipment_make" size="70" id="equipmentid"></td>
         <td colspan=""align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Equipment ID:</td>
         <td colspan = "2" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> 
             <select id ="equipment_make" name="equipment_number">
@@ -296,17 +304,17 @@
         <td colspan = "3"style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="temperature_comment"> </td>
       </tr>
        <tr>
-        <td colspan = "6" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color: #0000fb;"><b>Weight of Standard</b></td>
+        <td colspan = "6" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color: #0000fb;"><b>Standard Preparation</b></td>
       </tr>
        <tr>
         <td colspan = "6"align ="center"style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><textarea cols="50" rows="4" name ="standard_weight"></textarea></td>
       </tr> 
       <tr>
-        <td align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">ID Number:</td>
-        <td colspan = "2" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="balance_number" id="idnumber" size="70"></td>
-        <td colspan=""align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Balance Make:</td>
+        <td align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Equipment Make:</td>
+        <td colspan = "2" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="balance_make" id="idnumber" size="70"></td>
+        <td colspan=""align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Equipment ID:</td>
         <td colspan = "2" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> 
-            <select id ="equipment_balance" name="balance_make">
+            <select id ="equipment_balance" name="balance_number">
               <option selected></option>
                <?php
                foreach($query_e as $equipment):
@@ -319,76 +327,91 @@
               
             </select>
          </td>    
-      
       </tr>
       <tr>
       <!-- start of adding standards-->
       <tr>
-        <td align="left" colspan = "2" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>Standard Description:</b></td>
-        <td colspan = "4" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
-            <select id="standard_description_one" name="standard_description" >
-              <option selected></option>
-               <?php
-               foreach($sql_standards as $s_name):
-              ?>
-               
-               <option value="<?php  echo $s_name['item_description'];?>" data-stdrefnumber="<?php  echo $s_name['reference_number'];?>" data-potency="<?php  echo $s_name['potency'];?>" data-stdlotnumber="<?php  echo $s_name['batch_number'];?>"><?php  echo $s_name['item_description'];?></option>
-                <?php
-                endforeach
-                ?>
-            </select>
-          </td>
+        <td colspan="6" style="padding:8px;color:#0000ff;border-bottom:dotted 1px #c0c0c0;"> <b>Weight of Standard<b></td>
       </tr>
       <tr>
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Potency:</td>
-        <td colspan = "" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" class="all_input" name="potency" id = "potency"> </td>
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Lot No.:</td>
-        <td colspan = "" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text"class="all_input" name="lot_no" id ="stdlotnumber"> </td>
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">ID No.:</td>
-        <td colspan = ""style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text"class="all_input" name="id_no" id ="stdrefnumber"> </td>
-      </tr>
-      <tr>
-        <td colspan="2"align="center" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of standard + container (g)</td>
-        <td colspan="4"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text"class="all_input" name="standard_container" id ="standard_container"> </td>
-      </tr>
-      <tr>  
-        <td colspan="2"align="center" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of container (g) </td>
-        <td colspan="4"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text"class="all_input" name="container" id ="container" > </td>
-      </tr>
-      <tr>  
-        <td colspan="2"align="center" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of standard (g)</td>
-        <td colspan="4"style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text"class="all_input" name="standard_weight_1" id ="standard_weight_1" > </td>
-      </tr>     
-      <tr>  
-        <td colspan ="6" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Dilution</td>
-      </tr>  
-      <tr> 
-        <td colspan ="6" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">  <textarea rows ="4" cols ="80" name ="standard_dilution"></textarea> </td>
-      </tr> 
-      <tr>        
-        <td colspan = "2" align = "center"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;color:#0000fb;">Diluted Weight of Standard:</td>
-        <td colspan = "4" style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"> Salt: <input type="checkbox" id="saltchkbox"> Base: <input type="checkbox" id="basechkbox"></td>
-      </tr>
-      <tr>        
-        <td colspan = "6" align = "center"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"> 
-        <div saltchkbox ="saltchkbox_input">
-        [<input type ="text"class ="all_input" name = "df_1" id = "df_1" size = "10" placeholder="WT of Std"> X 
-        <input type ="text" class ="all_input" name = "df_2" id = "df_2" size = "10" placeholder="e.g 1000">] / 
-        <input type ="text" class ="all_input" name = "df_3" id = "df_3" class="dilution_factor_class" size = "20" placeholder="diluting volume">=
-        <input type ="text" class ="all_input" name = "dilution_factor" id = "dilution_factor" size = "10"></div> </td>
-      </tr>
-      <tr>        
-        <td colspan = "6" align = "center"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"> 
-        <div basechkbox= "basechkbox_input">
-        <input type ="text" class ="all_input" name = "df_1_base" id = "df_1_base" size = "10" placeholder="WT of Std"> X [
-        <input type ="text" class ="all_input" name = "df_2_base" id = "df_2_base" size = "10" placeholder="e.g 1000">] / 
-        <input type ="text" class ="all_input" name = "df_3_base" id = "df_3_base" size = "20" placeholder="diluting volume" class="dilution_factor_class"> = &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <td colspan="6" style="padding:8px;">
+          <table class="inner_table" align="center" width="80%" cellpadding="4px">
+            <tr>
+              <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;">Standard Description</td>
+              <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;">
+                  <select id="standard_description_one" name="standard_description" >
+                    <option selected></option>
+                     <?php
+                     foreach($sql_standards as $s_name):
+                    ?>
+                     
+                     <option value="<?php  echo $s_name['item_description'];?>" data-stdrefnumber="<?php  echo $s_name['reference_number'];?>" data-potency="<?php  echo $s_name['potency'];?>" data-stdlotnumber="<?php  echo $s_name['batch_number'];?>"><?php  echo $s_name['item_description'];?></option>
+                      <?php
+                      endforeach
+                      ?>
+                  </select>
+                </td>
+            </tr>
+            <tr>
+              <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Lot Number</td>
+              <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text"class="all_input" name="lot_no" id ="stdlotnumber"> </td>
+            </tr>
+            <tr>  
+              <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">ID Number</td>
+              <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text"class="all_input" name="id_no" id ="stdrefnumber"> </td>
+            </tr>
+            <tr>
+              <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Potency</td>
+              <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" class="all_input" name="potency" id = "potency"> </td>
+            </tr>
+            <tr>
+              <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of standard + container (g)</td>
+              <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text"class="all_input" name="standard_container" id ="standard_container"> </td>
+            </tr>
+            <tr>  
+              <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of container (g) </td>
+              <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text"class="all_input" name="container" id ="container" > </td>
+            </tr>
+            <tr>  
+              <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of standard (g)</td>
+              <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text"class="all_input" name="standard_weight_1" id ="standard_weight_1" > </td>
+            </tr>     
+            <tr>  
+              <td colspan ="2" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Standard Dilution Preparation</td>
+            </tr>  
+            <tr> 
+              <td colspan ="2" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">  <textarea rows ="4" cols ="80" name ="standard_dilution"></textarea> </td>
+            </tr> 
+             <tr>  
+              <td colspan ="2" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;">Standard Dilution Calculation</td>
+            </tr>
+            <tr>        
+              <td align = "center"style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><input type="checkbox" id="saltchkbox">If the <b>Sample</b> is already a <b>Salt</b> (Please check the box)</td>
+              <td style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><input type="checkbox" id="basechkbox">If the <b>Sample</b> is a base and needs conversion to a <b>Base</b> (please check the box)</td>
+            </tr>
+            <tr>        
+              <td colspan = "2" align = "center"style="padding:8px;"> 
+              <div saltchkbox ="saltchkbox_input">
+              [<input type ="text"class ="all_input" name = "df_1" id = "df_1" size = "10" placeholder="WT of Std"> X 
+              <input type ="text" class ="all_input" name = "df_2" id = "df_2" size = "10" placeholder="e.g 1000">] / 
+              <input type ="text" class ="all_input" name = "df_3" id = "df_3" class="dilution_factor_class" size = "20" placeholder="diluting volume">=
+              <input type ="text" class ="all_input" name = "dilution_factor" id = "dilution_factor" size = "10"></div> </td>
+            </tr>
+            <tr>        
+              <td colspan = "2" align = "center"style="padding:8px;"> 
+              <div basechkbox= "basechkbox_input">
+              <input type ="text" class ="all_input" name = "df_1_base" id = "df_1_base" size = "10" placeholder="WT of Std"> X [
+              <input type ="text" class ="all_input" name = "df_2_base" id = "df_2_base" size = "10" placeholder="e.g 1000">] / 
+              <input type ="text" class ="all_input" name = "df_3_base" id = "df_3_base" size = "20" placeholder="diluting volume" class="dilution_factor_class"> = &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-        <input type ="text" class ="all_input" name = "dilution_factor_initial" id = "dilution_factor_initial" size = "10" placeholder="WT of Std" disabled> X
-        <input type ="text" class ="all_input" name = "lower_factor" id = "lower_factor" size = "10" placeholder="408.1">] / 
-        <input type ="text" class ="all_input" name = "higher_factor" id = "higher_factor" class="dilution_factor_class"size = "10" placeholder="e.g 567.8">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <input type ="text" class ="all_input" name = "dilution_factor_initial" id = "dilution_factor_initial" size = "10" placeholder="WT of Std" disabled> X
+              <input type ="text" class ="all_input" name = "lower_factor" id = "lower_factor" size = "10" placeholder="408.1">] / 
+              <input type ="text" class ="all_input" name = "higher_factor" id = "higher_factor" class="dilution_factor_class"size = "10" placeholder="e.g 567.8">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-        <input type ="text" name = "dilution_factor_final" id = "dilution_factor_final" size = "10"></div> </td>
+              <input type ="text" name = "dilution_factor_final" id = "dilution_factor_final" size = "10"></div> </td>
+            </tr>
+          </table>
+        </td>
       </tr>
       <tr>
         <td colspan = "6" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: solid 1px #bfbfbf;color: #0000fb;"><b>Sample Preparation</b></td>
@@ -477,92 +500,92 @@
             </tr>
             <tr>
               <td align="center"style="padding: 8px;">1.</td>
-              <td style="padding: 8px;"><input type = "text" class="rt" name ="rt_1" id ="rt_1"></td>
-              <td style="padding: 8px;"><input type = "text" class="peak_area" name ="peak_area_1" id ="peak_area_1"></td >
-              <td style="padding: 8px;"><input type = "text" class="asymmetry" name ="asymmetry_1" id="asymmetry_1"></td>
-              <td style="padding: 8px;"><input type = "text" class="resolution" name ="resolution_1" id ="resolution_1"></td>
-              <td style="padding: 8px;"><input type = "text" class="other" name ="other_1" id ="other_1"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="rt" name ="rt_1" id ="rt_1"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="peak_area" name ="peak_area_1" id ="peak_area_1"></td >
+              <td style="padding: 8px;"><input type = "text" size="12" class="asymmetry" name ="asymmetry_1" id="asymmetry_1"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="resolution" name ="resolution_1" id ="resolution_1"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="other" name ="other_1" id ="other_1"></td>
             </tr>
             <tr>
               <td align="center"style="padding: 8px;">2.</td>
-              <td style="padding: 8px;"><input type = "text" class="rt" name ="rt_2" id ="rt_2"></td>
-              <td style="padding: 8px;"><input type = "text" class="peak_area" name ="peak_area_2" id ="peak_area_2"></td>
-              <td style="padding: 8px;"><input type = "text" class="asymmetry" name ="asymmetry_2" id="asymmetry_2"></td>
-              <td style="padding: 8px;"><input type = "text" class="resolution" name ="resolution_2" id ="resolution_2"></td>
-              <td style="padding: 8px;"><input type = "text" class="other" name ="other_2" id ="other_2"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="rt" name ="rt_2" id ="rt_2"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="peak_area" name ="peak_area_2" id ="peak_area_2"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="asymmetry" name ="asymmetry_2" id="asymmetry_2"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="resolution" name ="resolution_2" id ="resolution_2"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="other" name ="other_2" id ="other_2"></td>
             </tr>
             <tr>
               <td align="center"style="padding: 8px;">3.</td>
-              <td style="padding: 8px;"><input type = "text" class="rt" name ="rt_3" id ="rt_3"></td>
-              <td style="padding: 8px;"><input type = "text" class="peak_area" name ="peak_area_3" id ="peak_area_3"></td>
-              <td style="padding: 8px;"><input type = "text" class="asymmetry" name ="asymmetry_3" id="asymmetry_3"></td>
-              <td style="padding: 8px;"><input type = "text" class="resolution" name ="resolution_3" id ="resolution_3"></td>
-              <td style="padding: 8px;"><input type = "text" class="other" name ="other_3" id ="other_3"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="rt" name ="rt_3" id ="rt_3"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="peak_area" name ="peak_area_3" id ="peak_area_3"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="asymmetry" name ="asymmetry_3" id="asymmetry_3"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="resolution" name ="resolution_3" id ="resolution_3"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="other" name ="other_3" id ="other_3"></td>
             </tr>
             <tr>
               <td align="center"style="padding: 8px;">4.</td>
-              <td style="padding: 8px;"><input type = "text" class="rt" name ="rt_4" id ="rt_4"></td>
-              <td style="padding: 8px;"><input type = "text" class="peak_area" name ="peak_area_4" id ="peak_area_4"></td>
-              <td style="padding: 8px;"><input type = "text" class="asymmetry" name ="asymmetry_4" id="asymmetry_4"></td>
-              <td style="padding: 8px;"><input type = "text" class="resolution" name ="resolution_4" id ="resolution_4"></td>
-              <td style="padding: 8px;"><input type = "text" class="other" name ="other_4" id ="other_4"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="rt" name ="rt_4" id ="rt_4"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="peak_area" name ="peak_area_4" id ="peak_area_4"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="asymmetry" name ="asymmetry_4" id="asymmetry_4"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="resolution" name ="resolution_4" id ="resolution_4"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="other" name ="other_4" id ="other_4"></td>
             </tr>
             <tr>
               <td align="center"style="padding: 8px;">5.</td>
-              <td style="padding: 8px;"><input type = "text" class="rt" name ="rt_5" id="rt_5"></td>
-              <td style="padding: 8px;"><input type = "text" class="peak_area" name ="peak_area_5" id ="peak_area_5"></td>
-              <td style="padding: 8px;"><input type = "text" class="asymmetry" name ="asymmetry_5" id="asymmetry_5"></td>
-              <td style="padding: 8px;"><input type = "text" class="resolution" name ="resolution_5" id ="resolution_5"></td>
-              <td style="padding: 8px;"><input type = "text" class="other" name ="other_5" id ="other_5"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="rt" name ="rt_5" id="rt_5"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="peak_area" name ="peak_area_5" id ="peak_area_5"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="asymmetry" name ="asymmetry_5" id="asymmetry_5"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="resolution" name ="resolution_5" id ="resolution_5"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="other" name ="other_5" id ="other_5"></td>
             </tr>
             <tr>
               <td align="center"style="padding: 8px;">6.</td>
-              <td style="padding: 8px;"><input type = "text" class="rt" name ="rt_6" id="rt_6"></td>
-              <td style="padding: 8px;"><input type = "text" class="peak_area" name ="peak_area_6" id ="peak_area_6"></td>
-              <td style="padding: 8px;"><input type = "text" class="asymmetry" name ="asymmetry_6" id ="asymmetry_6"></td>
-              <td style="padding: 8px;"><input type = "text" class="resolution" name ="resolution_6"id ="resolution_6"></td>
-              <td style="padding: 8px;"><input type = "text" class="other" name ="other_6"id ="other_6"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="rt" name ="rt_6" id="rt_6"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="peak_area" name ="peak_area_6" id ="peak_area_6"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="asymmetry" name ="asymmetry_6" id ="asymmetry_6"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="resolution" name ="resolution_6"id ="resolution_6"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="other" name ="other_6"id ="other_6"></td>
             </tr>
             <tr>
               <td align="center"style="padding: 8px;">Average</td>
-              <td style="padding: 8px;"><input type = "text" class="rt_avg" name ="rt_avg" id ="rt_avg"></td>
-              <td style="padding: 8px;"><input type = "text" class="peak_area_avg" name ="peak_area_avg" id ="peak_area_avg" ></td>
-              <td style="padding: 8px;"><input type = "text" class="asymmetry_avg" name ="asymmetry_avg" id="asymmetry_avg"></td>
-              <td style="padding: 8px;"><input type = "text" class="resolution_avg" name ="resolution_avg" id ="resolution_avg"></td>
-              <td style="padding: 8px;"><input type = "text" class="other_avg" name ="other_avg" id ="other_avg"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="rt_avg" name ="rt_avg" id ="rt_avg"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="peak_area_avg" name ="peak_area_avg" id ="peak_area_avg" ></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="asymmetry_avg" name ="asymmetry_avg" id="asymmetry_avg"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="resolution_avg" name ="resolution_avg" id ="resolution_avg"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="other_avg" name ="other_avg" id ="other_avg"></td>
             </tr>
             <tr>
               <td align="center"style="padding: 8px;">SD</td>
-              <td style="padding: 8px;"><input type = "text" class="rt_sd" name ="rt_sd" id ="rt_sd"></td>
-              <td style="padding: 8px;"><input type = "text" class="peak_area_sd" name ="peak_area_sd" id ="peak_area_sd"></td>
-              <td style="padding: 8px;"><input type = "text" class="asymmetry_sd" name ="asymmetry_sd" id ="asymmetry_sd"></td>
-              <td style="padding: 8px;"><input type = "text" class="resolution_sd" name ="resolution_sd" id ="resolution_sd"></td>
-              <td style="padding: 8px;"><input type = "text" class="other_sd" name ="other_sd" id ="other_sd"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="rt_sd" name ="rt_sd" id ="rt_sd"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="peak_area_sd" name ="peak_area_sd" id ="peak_area_sd"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="asymmetry_sd" name ="asymmetry_sd" id ="asymmetry_sd"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="resolution_sd" name ="resolution_sd" id ="resolution_sd"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="other_sd" name ="other_sd" id ="other_sd"></td>
             </tr>
             <tr>
               <td align="center"style="padding: 8px;">RSD</td>
-              <td style="padding: 8px;"><input class="rt_rsd" id = "rt_rsd" type = "text" name ="rt_rsd"></td>
-              <td style="padding: 8px;"><input class="peak_area_rsd" id = "peak_area_rsd" type = "text" name ="peak_area_rsd"></td>
-              <td style="padding: 8px;"><input class="asymmetry_rsd" id = "asymmetry_rsd" type = "text" name ="asymmetry_rsd"></td>
-              <td style="padding: 8px;"><input class="resolution_rsd" id = "resolution_rsd" type = "text" name ="resolution_rsd"></td>
-              <td style="padding: 8px;"><input class="other_rsd" id = "other_rsd" type = "text" name ="other_rsd" id ="other_rsd"></td>
+              <td style="padding: 8px;"><input class="rt_rsd" id = "rt_rsd" type = "text" size="12" name ="rt_rsd"></td>
+              <td style="padding: 8px;"><input class="peak_area_rsd" id = "peak_area_rsd" type = "text" size="12" name ="peak_area_rsd"></td>
+              <td style="padding: 8px;"><input class="asymmetry_rsd" id = "asymmetry_rsd" type = "text" size="12" name ="asymmetry_rsd"></td>
+              <td style="padding: 8px;"><input class="resolution_rsd" id = "resolution_rsd" type = "text" size="12" name ="resolution_rsd"></td>
+              <td style="padding: 8px;"><input class="other_rsd" id = "other_rsd" type = "text" size="12" name ="other_rsd" id ="other_rsd"></td>
             </tr>
             <tr>
               <td align="center"style="padding: 8px;">Acceptance Criteria</td>
-              <td style="padding: 8px;"><input type="text" class="rt_ac" id="rt_ac" name="rt_ac" placeholder ="NMT 2.0% RSD"></td>
-              <td style="padding: 8px;"><input type="text" class="peak_area_ac" id="peak_area_ac" name="peak_area_ac" placeholder ="NMT 2.0% RSD"></td>
-              <td style="padding: 8px;"><input type="text" class="asymmetry_ac" id="asymmetry_ac" name="asymmetry_ac" placeholder ="NMT 2.0% Avg"></td>
-              <td style="padding: 8px;"><input type="text" class="resolution_ac" id="resolution_ac" name="resolution_ac" placeholder ="NLT 5.0% Avg"></td>
-              <td style="padding: 8px;"><input type="text" class="other_ac" id="other_ac" name="other_ac" placeholder ="NLT"></td>
+              <td style="padding: 8px;"><input type="text" size="12" class="rt_ac" id="rt_ac" name="rt_ac" placeholder ="NMT 2.0% RSD"></td>
+              <td style="padding: 8px;"><input type="text" size="12" class="peak_area_ac" id="peak_area_ac" name="peak_area_ac" placeholder ="NMT 2.0% RSD"></td>
+              <td style="padding: 8px;"><input type="text" size="12" class="asymmetry_ac" id="asymmetry_ac" name="asymmetry_ac" placeholder ="NMT 2.0% Avg"></td>
+              <td style="padding: 8px;"><input type="text" size="12" class="resolution_ac" id="resolution_ac" name="resolution_ac" placeholder ="NLT 5.0% Avg"></td>
+              <td style="padding: 8px;"><input type="text" size="12" class="other_ac" id="other_ac" name="other_ac" placeholder ="NLT"></td>
               
             </tr>
             <tr>
               <td align="center"style="padding: 8px;">Comment</td>
-              <td style="padding: 8px;"><input type = "text" class="rt_comment alerts" name ="rt_comment" id ="rt_comment"></td>
-              <td style="padding: 8px;"><input type = "text" class="peak_area_comment alerts" name ="peak_area_comment" id ="peak_area_comment"></td>
-              <td style="padding: 8px;"><input type = "text" class="asymmetry_comment alerts" name ="asymmetry_comment" id ="asymmetry_comment"></td>
-              <td style="padding: 8px;"><input type = "text" class="resolution_comment alerts" name ="resolution_comment" id ="resolution_comment"></td>
-              <td style="padding: 8px;"><input type = "text" class="other_comment alerts" name ="other_comment" id ="other_comment"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="rt_comment alerts" name ="rt_comment" id ="rt_comment"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="peak_area_comment alerts" name ="peak_area_comment" id ="peak_area_comment"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="asymmetry_comment alerts" name ="asymmetry_comment" id ="asymmetry_comment"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="resolution_comment alerts" name ="resolution_comment" id ="resolution_comment"></td>
+              <td style="padding: 8px;"><input type = "text" size="12" class="other_comment alerts" name ="other_comment" id ="other_comment"></td>
             </tr>
           </table>
         </td>
@@ -597,63 +620,63 @@
               </tr>
               <tr>
                   <td align="center"style="padding: 8px;">1.</td>
-                  <td style="padding: 8px;"><input type = "text" class = "standard all_input" name ="sample_1" id ="sample_1"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_1 all_input" name ="sample_1_s1" id ="sample_1_s1"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_2 all_input" name ="sample_1_s2" id ="sample_1_s2"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_3 all_input" name ="sample_1_s3" id ="sample_1_s3"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_4 all_input" name ="sample_1_s4" id ="sample_1_s4"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_5 all_input" name ="sample_1_s5" id ="sample_1_s5"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_6 all_input" name ="sample_1_s6" id ="sample_1_s6"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class = "standard all_input" name ="sample_1" id ="sample_1"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_1 all_input" name ="sample_1_s1" id ="sample_1_s1"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_2 all_input" name ="sample_1_s2" id ="sample_1_s2"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_3 all_input" name ="sample_1_s3" id ="sample_1_s3"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_4 all_input" name ="sample_1_s4" id ="sample_1_s4"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_5 all_input" name ="sample_1_s5" id ="sample_1_s5"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_6 all_input" name ="sample_1_s6" id ="sample_1_s6"></td>
                 </tr>
                 <tr>
                   <td align="center"style="padding: 8px;">2.</td>
-                  <td style="padding: 8px;"><input type = "text" class = "standard all_input" name ="sample_2" id ="sample_2"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_1 all_input" name ="sample_2_s1" id ="sample_2_s1"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_2 all_input" name ="sample_2_s2" id ="sample_2_s2"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_3 all_input" name ="sample_2_s3" id ="sample_2_s3"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_4 all_input" name ="sample_2_s4" id ="sample_2_s4"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_5 all_input" name ="sample_2_s5" id ="sample_2_s5"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_6 all_input" name ="sample_2_s6" id ="sample_2_s6"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class = "standard all_input" name ="sample_2" id ="sample_2"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_1 all_input" name ="sample_2_s1" id ="sample_2_s1"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_2 all_input" name ="sample_2_s2" id ="sample_2_s2"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_3 all_input" name ="sample_2_s3" id ="sample_2_s3"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_4 all_input" name ="sample_2_s4" id ="sample_2_s4"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_5 all_input" name ="sample_2_s5" id ="sample_2_s5"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_6 all_input" name ="sample_2_s6" id ="sample_2_s6"></td>
                 </tr>
                 <tr>
                   <td align="center"style="padding: 8px;">3.</td>
-                  <td style="padding: 8px;"><input type = "text" class = "standard all_input" name ="sample_3" id ="sample_3"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_1 all_input" name ="sample_3_s1" id ="sample_3_s1"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_2 all_input" name ="sample_3_s2" id ="sample_3_s2"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_3 all_input" name ="sample_3_s3" id ="sample_3_s3"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_4 all_input" name ="sample_3_s4" id ="sample_3_s4"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_5 all_input" name ="sample_3_s5" id ="sample_3_s5"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_6 all_input" name ="sample_3_s6" id ="sample_3_s6"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class = "standard all_input" name ="sample_3" id ="sample_3"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_1 all_input" name ="sample_3_s1" id ="sample_3_s1"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_2 all_input" name ="sample_3_s2" id ="sample_3_s2"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_3 all_input" name ="sample_3_s3" id ="sample_3_s3"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_4 all_input" name ="sample_3_s4" id ="sample_3_s4"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_5 all_input" name ="sample_3_s5" id ="sample_3_s5"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_6 all_input" name ="sample_3_s6" id ="sample_3_s6"></td>
                 </tr>
                 <tr>
                   <td align="center"style="padding: 8px;">4.</td>
-                  <td style="padding: 8px;"><input type = "text" class = "standard all_input" name ="sample_4" id ="sample_4"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_1 all_input" name ="sample_4_s1" id ="sample_4_s1"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_2 all_input" name ="sample_4_s2" id ="sample_4_s2"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_3 all_input" name ="sample_4_s3" id ="sample_4_s3"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_4 all_input" name ="sample_4_s4" id ="sample_4_s4"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_5 all_input" name ="sample_4_s5" id ="sample_4_s5"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_6 all_input" name ="sample_4_s6" id ="sample_4_s6"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class = "standard all_input" name ="sample_4" id ="sample_4"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_1 all_input" name ="sample_4_s1" id ="sample_4_s1"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_2 all_input" name ="sample_4_s2" id ="sample_4_s2"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_3 all_input" name ="sample_4_s3" id ="sample_4_s3"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_4 all_input" name ="sample_4_s4" id ="sample_4_s4"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_5 all_input" name ="sample_4_s5" id ="sample_4_s5"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_6 all_input" name ="sample_4_s6" id ="sample_4_s6"></td>
                 </tr>
                  <tr>
                   <td align="center"style="padding: 8px;">5.</td>
-                  <td style="padding: 8px;"><input type = "text" class = "standard all_input" name ="sample_5" id ="sample_5"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_1 all_input" name ="sample_5_s1" id ="sample_5_s1" onchange ="avg_sample1()"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_2 all_input" name ="sample_5_s2" id ="sample_5_s2" onchange ="avg_sample2()"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_3 all_input" name ="sample_5_s3" id ="sample_5_s3" onchange ="avg_sample3()"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_4 all_input" name ="sample_5_s4" id ="sample_5_s4" onchange ="avg_sample4()"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_5 all_input" name ="sample_5_s5" id ="sample_5_s5" onchange ="avg_sample5()"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_6 all_input" name ="sample_5_s6" id ="sample_5_s6" onchange ="avg_sample6()"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class = "standard all_input" name ="sample_5" id ="sample_5"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_1 all_input" name ="sample_5_s1" id ="sample_5_s1" onchange ="avg_sample1()"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_2 all_input" name ="sample_5_s2" id ="sample_5_s2" onchange ="avg_sample2()"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_3 all_input" name ="sample_5_s3" id ="sample_5_s3" onchange ="avg_sample3()"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_4 all_input" name ="sample_5_s4" id ="sample_5_s4" onchange ="avg_sample4()"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_5 all_input" name ="sample_5_s5" id ="sample_5_s5" onchange ="avg_sample5()"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_6 all_input" name ="sample_5_s6" id ="sample_5_s6" onchange ="avg_sample6()"></td>
                 </tr>
                 <tr>
                   <td align="center"style="padding: 8px;">Average</td>
-                  <td style="padding: 8px;"><input type = "text" class = "standard_avg all_input" name ="avg" id ="avg"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_1_avg all_input" name ="avg_s1" id ="avg_s1"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_2_avg all_input" name ="avg_s2" id ="avg_s2"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_3_avg all_input" name ="avg_s3" id ="avg_s3"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_4_avg all_input" name ="avg_s4" id ="avg_s4"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_5_avg all_input" name ="avg_s5" id ="avg_s5"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_6_avg all_input" name ="avg_s6" id ="avg_s6"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class = "standard_avg all_input" name ="avg" id ="avg"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_1_avg all_input" name ="avg_s1" id ="avg_s1"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_2_avg all_input" name ="avg_s2" id ="avg_s2"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_3_avg all_input" name ="avg_s3" id ="avg_s3"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_4_avg all_input" name ="avg_s4" id ="avg_s4"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_5_avg all_input" name ="avg_s5" id ="avg_s5"></td>
+                  <td style="padding: 8px;"><input type = "text" size="12" class ="sample_6_avg all_input" name ="avg_s6" id ="avg_s6"></td>
                 </tr> 
               </table>
             </div>

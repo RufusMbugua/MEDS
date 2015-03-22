@@ -86,7 +86,7 @@
         <input type="hidden" name="tr_id" value="<?php echo $query['tr'];?>"></input>
         <input type="hidden" name="assignment_id" value="<?php echo $request[0]['a'];?>"></input>
           <tr>
-            <td colspan="8" style="text-align:right;padding:4px;backgroun-color:#fffff;border-bottom:solid 1px #bfbfbf;"><a href="<?php echo base_url().'test/index/'.$request[0]['a'].'/'.$query['tr'];?>"><img src="<?php echo base_url().'images/icons/back.png';?>" height="25px" width="20px">Back</a></td>
+            <td colspan="8" style="text-align:right;padding:4px;backgroun-color:#fffff;border-bottom:solid 1px #bfbfbf;"><a href="<?php echo base_url().'test/view_monograph/'.$request[0]['a'].'/'.$query['tr'].'/'.$monograph_details[0]['id'];?>"><img src="<?php echo base_url().'images/icons/view.png';?>" height="25px" width="20px">Back to View Monograph</a></td>
           </tr>
           <tr>
             <td colspan="8" style="padding:8px;">
@@ -96,7 +96,7 @@
                     <td colspan="7" style="padding:4px;color:#0000ff;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;">MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</td>
                 </tr>
                 <tr>    
-                    <td height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">DOCUMENT: ANALYTICAL MONOGRAPH WORKSHEET</td>
+                    <td height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">ANALYTICAL MONOGRAPH WORKSHEET</td>
                     <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;">TITLE:</td>
                     <td colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;"><?php echo $query['active_ingredients']." "." ".$query['test_specification'];?></td>
                     <td height="25px" colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;color:#000000;">REFERENCE NUMBER</td>
@@ -109,8 +109,8 @@
                     <td height="25px" colspan="3" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">PAGE 1 of 1</td>
                 </tr>
                 <tr>
-                    <td height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">SERIAL NO.</td>
-                    <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><input type="text" name="serial_number" value="<?php echo $monograph_details[0]['serial_number']?>"></input></td>
+                    <td height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">SERIAL NUMBER</td>
+                    <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><input type="text" name="serial_number" size="10" value="<?php echo $monograph_details[0]['serial_number']?>"></input></td>
                     <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;">BATCH/LOT NO.</td>
                     <td colspan="3" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><?php echo $query['batch_lot_number']?></input></td>    
                 </tr>
@@ -121,7 +121,7 @@
             <td colspan="8" style="padding:8px;">
               <table width="100%">
                 <tr>
-                  <td colspan="8" align="center" style="padding:4px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b><h5>Monograph Details</h5></b></td> 
+                  <td colspan="8" align="center" style="padding:4px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b><h5>MONOGRAPH DATA AND INFORMATION</h5></b></td> 
                 </tr>
                 <tr>
                   <td colspan="8" align="center" style="padding:4px;border-bottom: solid 1px #c4c4ff;background-color: #ffffff;">
@@ -129,7 +129,7 @@
                 </tr>
                 <tr>
                   <td colspan="8" align="center" style="padding:4px;">
-                    <table width="80%" align="center" cellpaddding="4px">
+                    <table width="100%" align="center" cellpaddding="4px">
                         <?php include_once('application/views/tests_requested.php');?>
                     </table>
                   </td> 
@@ -140,7 +140,7 @@
                 </tr>
                 <tr>
                   <td colspan="8" align="center" style="padding:4px;border-bottom: solid 1px #c4c4ff;">
-                    <table width="80%" align="center" cellpaddding="4px">
+                    <table width="100%" align="center" cellpaddding="4px">
                       <?php
                       if($monograph_details[0]['components']==1){
                         include_once('application/views/single_complogic_edit.php');

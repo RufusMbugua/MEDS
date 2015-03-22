@@ -12,18 +12,20 @@ class Test_Dissolution_Normal_Model extends CI_Model{
 		$test_name='Dissolution';
 		$test_type='57';
 		$analyst= $this->input->post('analyst');
-		$results = 'Range from '.$this->input->post('range_min').' to '.$this->input->post('range_max').'. <br/>Average: '.$this->input->post('average');
+		$component=$this->input->post('component_z_name');
+		
+		$results =$component.':'.' Range'.$this->input->post('range_min').'% to '.$this->input->post('range_max').'%'.'. <br/>Average= '.$this->input->post('average').'of the stated amoount';
 
 		$data=$this->db->select_max('id')->get('diss_normal')->result();
         $test_id=$data[0]->id;
         $test_id++;
+		
+		//Query that checks if there is any prexisting results data in the test_results table which then concatinates it with new data provided to update the table
+		$results_data=$this->db->select('*')->get_where('test_results', array('test_request_id' => $test_request))->result_array();
+		$prev_test_results=$results_data[0]['results'];
+		//$prev_test_remarks=$results_data[0]['remarks'];
 
-        $q = "select results, remarks from test_results where test_request_id = '$test_request'";
-        $r = $this->db->query($q)->result_array();
-        $result_prev = $r[0]['results'];
-        $remark_prev = $r[0]['remarks'];
-
-        $result_next =$result_prev." <br/>". $results;
+        $new_results =$prev_test_results." <br/>". $results;
 		
 		$data =array(			
 		'equipment_make'=>$this->input->post('equipment_make'),
@@ -41,20 +43,24 @@ class Test_Dissolution_Normal_Model extends CI_Model{
 		'temperature'=>$this->input->post('temperature'),
 		'actual_temperature'=>$this->input->post('actual_temperature'),
 		'temperature_comment'=>$this->input->post('temperature_comment'),
-		'sample_preparation'=>$this->input->post('sample_preparation'),
-		'standard_weight'=>$this->input->post('standard_weight'),
+		'standard_preparation'=>$this->input->post('standard_preparation'),
+		'balance_make'=>$this->input->post('balance_make'),
+		'balance_number'=>$this->input->post('balance_number'),
 		'standard_description'=>$this->input->post('standard_description'),
 		'potency'=>$this->input->post('potency'),
 		'lot_no'=>$this->input->post('lot_no'),
 		'id_no'=>$this->input->post('id_no'),
 		'standard_container'=>$this->input->post('standard_container'),
 		'container'=>$this->input->post('container'),
-		'standard_weight_1'=>$this->input->post('standard_weight_1'),			
+		'standard_weight_1'=>$this->input->post('standard_weight_1'),
+
+		'standard_weight'=>$this->input->post('standard_weight'),
+					
 		'equivalent'=>$this->input->post('equivalent'),
 		'standard_dilution'=>$this->input->post('standard_dilution'),
 
-		'balance_make'=>$this->input->post('balance_make'),
-		'balance_number'=>$this->input->post('balance_number'),
+		
+
 		'standard_description_1'=>$this->input->post('standard_description_1'),
 		'potency_1'=>$this->input->post('potency_1'),
 		'lot_no_1'=>$this->input->post('lot_no_1'),
@@ -208,7 +214,7 @@ class Test_Dissolution_Normal_Model extends CI_Model{
 			'test_name'=>$test_name,
 			'remarks'=>$this->input->post('conclusion'),
 			'method'=>$this->input->post('method'),
-			'results'=>$result_next,
+			'results'=>$new_results
 		);
 		$this->db->update('test_results', $result_data, array('test_request_id'=>$test_request,'test_type'=>$test_type));
 
@@ -264,9 +270,11 @@ class Test_Dissolution_Normal_Model extends CI_Model{
 			'determination_6'=>$this->input->post('determination_6'),
 			);
 
-			$this->db->insert('diss_normal_hplc_determinations', $determination_data);
+		$this->db->insert('diss_normal_hplc_determinations', $determination_data);
+          header('Content-Type: application/json');
+		  echo json_encode("Success");
 
-		redirect('test/index/'.$assignment.'/'.$test_request);	
+		//redirect('test/index/'.$assignment.'/'.$test_request);	
 	}
 	function save_second_worksheet(){
 		
@@ -814,6 +822,7 @@ class Test_Dissolution_Normal_Model extends CI_Model{
 	}
 	
 	function save_monograph(){
+
 		$test_request=$this->input->post('test_request');
 		$assignment=$this->input->post('assignment');
 		$analyst= $this->input->post('analyst');
@@ -841,14 +850,15 @@ class Test_Dissolution_Normal_Model extends CI_Model{
 			'test_id' => $test_id,
 			'test_type' => $test_type,
 			'monograph_id'=>$monograph_id,
-			'monograph_specifications' => implode(',', $value),
+			'monograph_specifications' => implode('; </br>', $value),
 			
 			);
 		$data2 = array(
 			'test_request_id' => $this->input->post('test_request'),
+			'test_id' => $test_id,
 			'test_type' => $test_type,
-			''=>$test_name,
-			'specifications' => implode(',', $value)
+			'test_name'=>$test_name,
+			'specifications' => implode(';', $value)
 
 			);
 

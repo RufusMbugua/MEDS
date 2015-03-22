@@ -147,13 +147,18 @@
                         <td>Component <input type="text" name="single_component" id="single_component"></td>
                         <td>Label Claim (mg) <input type="text" name="single_lc_component" id="single_lc_component" class="id"></td>
                       </tr>
+                      <tr>
+                          <td style="padding:8px;align-text:left;border-bottom:solid 1px #c0c0c0;">Sample Appearance</td>
+                      </tr>
+                      <tr>
+                        <td style="padding:8px;align-text:center;"><textarea name="sample_apperance" id="sample_appearance" rows="4" cols="90"></textarea></td>
+                      </tr>
                     </table>
                     <table class="" id="tbl_singlecomp" width="80%" border="0" align="center" cellpadding="4px">
                       <thead>
                         <td style="padding:8px;" colspan="2" align="center"><b>SELECT SINGLE COMPONENT TESTS AS PER MONOGRAPH</b></td>
                       </thead>
                       <tbody>
-                        <tr>
                           <tr >
                           <?php
                             $i=1;
@@ -166,7 +171,6 @@
                            ?>
                         </tr>
                         <?php endforeach; ?>
-                        </tr>
                     </tbody>
                     </table>
                   </td>  
@@ -176,6 +180,14 @@
                 </tr>
                 <tr>  
                   <td colspan="8" style="padding:8px;">
+                    <table id='tbl_components' align="center" cellpadding="4px">
+                      <tr>
+                          <td style="padding:8px;align-text:left;border-bottom:solid 1px #c0c0c0;">Sample Appearance</td>
+                      </tr>
+                      <tr>
+                        <td style="padding:8px;align-text:center;"><textarea name="sample_apperance" id="sample_appearance" rows="4" cols="90"></textarea></td>
+                      </tr>
+                    </table>
                     <table width="80%" id="tbl_components" class="dynatable" border="0" align="center" cellpadding="4px">
                       <thead>
                         <td colspan="2" align="right"><input type="button" id="add_row" class=" btn" value="Add"></td>
@@ -204,6 +216,12 @@
                            ?>
                         </tr>
                         <?php endforeach; ?>
+                          <tr>
+                            <td style="padding:8px;align-text:left;border-bottom:solid 1px #c0c0c0;">Sample Appearance</td>
+                          </tr>
+                          <tr>
+                            <td style="padding:8px;align-text:center;"><textarea name="sample_apperance" id="sample_appearance" rows="4" cols="90"></textarea></td>
+                          </tr>
                       </tbody>
                     </table>
                   </td>  

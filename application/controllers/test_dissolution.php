@@ -447,7 +447,8 @@ class Test_Dissolution extends CI_Controller{
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
-		$status=0; $user_type=6;
+		$status=0;
+		$user_type=6;
 		$status_first_stage =1;
 
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
@@ -456,13 +457,15 @@ class Test_Dissolution extends CI_Controller{
 
 		$data['results']=$result[0];		
 
-		$query_e=$this->db->get_where('equipment_maintenance', array('status' =>0));
-	    $results_e=$query_e->result_array();	    
-	    $data['query_e']=$results_e;
+		$data['query_e']=$this->db->get_where('equipment_maintenance', array('status' =>0))->result_array();
 
 	    $data['sql_columns']=
 	    $this->db->select('columns.column_type,columns.serial_number,columns.column_dimensions,columns.manufacturer,columns.column_number')->get_where('columns', array('status' => $status))->result_array();
 
+	    $data['components']= $this->db->select('*')->get_where('components', array('test_request_id' => $test_request))->result_array();
+	    
+	    $data['full_monograph']=
+	    $this->db->select('*')->get_where('full_monograph', array('test_request_id' => $test_request))->result_array();
 
 	    $data['sql_standards']=
     	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
@@ -470,9 +473,8 @@ class Test_Dissolution extends CI_Controller{
     	$query_dissolution = $this->db->get_where('diss_normal', array('status' => $status_first_stage))->result_array();
 		$data['sql_dissolution']= $query_dissolution[0];
 		
-		$query_dissolution_det = $this->db->get_where('diss_normal_hplc_determinations', array('status' => $status_first_stage))->result_array();
-		$data['sql_dissolution_det']= $query_dissolution_det[0];
-		
+		$data['sql_dissolution_det'] = $this->db->get_where('diss_normal_hplc_determinations', array('status' => $status_first_stage))->result_array();
+				
 		$data['sql_approved']=
     	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
 
@@ -1043,12 +1045,40 @@ $data['monograph_specs']=	$this->db->select('*')->get_where('monograph_specifica
 	    $results_determination=$query_determination->result_array();
 	    $data['query_determination']=$results_determination[0];
 
-	    $result_monograph = $this->db->get_where('diss_normal_hplc_monograph', array('test_request_id' => $test_request))->result_array();
-	    $data['query_monograph'] = $result_monograph[0];
-		//var_dump($results_e);
-		// die;
+
+	    $data['full_monograph'] = $this->db->get_where('full_monograph', array('test_request_id' => $test_request))->result_array();
 
 		$this->load->view('tests/dissolution/test_dissolution_view_worksheet_normal', $data);	
+	}
+	function view_dissolution_hplc_normal_multi_worksheet(){
+
+		$data['assignment'] = $this->uri->segment(3);
+		$data['test_request'] = $this->uri->segment(4);
+		$data['test_id']=$this->uri->segment(5);
+		$test_request =$this->uri->segment(4);
+		$test_id =$this->uri->segment(5);
+
+		$sql = "SELECT * FROM test_request WHERE id =$test_request";
+		$query = $this->db->query($sql);
+		$result =$query->result_array();
+
+		$data['results']=$result[0];
+
+		$data['query_e']=$this->db->get_where('diss_normal', array('test_request' =>$test_request));
+	    $results_e=$data['query_e']->result_array();
+	    $data['query_e']=$results_e[0];
+
+	    $data['components']=
+        $this->db->select('*')->get_where('components', array('test_request_id' => $test_request))->result_array();
+
+	    $query_determination=$this->db->get_where('diss_normal_hplc_determinations', array('test_request' =>$test_request));
+	    $results_determination=$query_determination->result_array();
+	    $data['query_determination']=$results_determination[0];
+
+	    
+	    $data['full_monograph'] = $this->db->get_where('full_monograph', array('test_request_id' => $test_request))->result_array();
+
+		$this->load->view('tests/dissolution/view_dissolution_hplc_normal_multi_worksheet', $data);	
 	}
 	function view_worksheet_two_component(){
 		$data['assignment'] = $this->uri->segment(3);

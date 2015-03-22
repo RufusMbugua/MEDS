@@ -403,6 +403,13 @@ margin-top:-32767px;/* thank you Erik J - negate effect of float*/
     border-radius:2px;
 
 }
+.component_btn{
+    padding: 4px;
+    background-color:#cccccc;
+    color:#ffffff;
+    border-radius:2px;
+
+}
 .monograph{
     padding: 6px;
     background-color:#ffffff;
