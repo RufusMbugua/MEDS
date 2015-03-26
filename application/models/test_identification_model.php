@@ -94,8 +94,73 @@ class Test_Identification_Model extends CI_Model{
 		$this->db->insert('identification', $data_i);		
 		$this->db->update('test_results', $result_data, array('test_request_id'=>$test_request,'test_type'=>$test_type));
 		$this->db->update('components', $c_data, array('component'=>$component_name));
+		header('Content-Type: application/json');
+          echo json_encode("Success");
+		//redirect('test/index/'.$assignment.'/'.$test_request);
 
-		redirect('test/index/'.$assignment.'/'.$test_request);
+
+	}
+	function save_meltingpoint(){
+
+		$results=$this->input->post('results');
+		$component_name=$this->input->post('component_name');
+		$comment_assay=$this->input->post('comments');
+		$test_request=$this->input->post('test_request');
+		$test_type=$this->input->post('test_type');
+		$remarks = $this->input->post('choice');
+		$assignment=$this->input->post('assignment');
+		$status =1;
+		$test_name='Identification';
+		$analyst= $this->input->post('analyst');
+
+      
+
+		$data=$this->db->select_max('id')->get('identification_meltingpoint')->result();
+        $test_id=$data[0]->id;
+        $test_id++;
+
+        $q = "select results, remarks from test_results where test_request_id = '$test_request' and test_type = '$test_type'";
+        $r = $this->db->query($q)->result_array();
+        $result_prev = $r[0]['results'];
+        $remark_prev = $r[0]['remarks'];
+
+        $result_next = $result_prev." ".$component_name;
+
+        if ($remark_prev == "DOES NOT COMPLY" || $remarks =="DOES NOT COMPLY" ) {
+        	$remark_next = "DOES NOT COMPLY";
+        }else{
+        	$remark_next = "COMPLIES";
+        }
+		
+		$data_i =array(
+			'results_assay'=>$this->input->post('results'),
+			'comment_assay'=>$this->input->post('comments'),
+			'choice'=>$this->input->post('conclusion'),
+			'date'=>$this->input->post('date_done'),
+			'status' =>$status,
+			'test_request'=>$test_request,
+			'assignment'=>$assignment,
+			'analyst'=>$analyst,
+			);
+		//var_dump($data_i);die;
+		$result_data = array(
+			'test_id'=>$test_id,
+			'test_name'=>$test_name,
+			'remarks'=>$remark_next,
+			'method'=>$this->input->post('method'),
+			'results'=>$result_next,
+			);		
+		
+		$c_data = array(			
+			'status'=>1,
+			);
+// var_dump($test_type);
+		$this->db->insert('identification_meltingpoint', $data_i);		
+		$this->db->update('test_results', $result_data, array('test_request_id'=>$test_request,'test_type'=>$test_type));
+		$this->db->update('components', $c_data, array('component'=>$component_name));
+		header('Content-Type: application/json');
+          echo json_encode("Success");
+		//redirect('test/index/'.$assignment.'/'.$test_request);
 
 
 	}
@@ -546,6 +611,76 @@ class Test_Identification_Model extends CI_Model{
 		$analyst= $this->input->post('analyst');
 		$test_type=$this->input->post('test_type');
 
+
+		$data=$this->db->select_max('id')->get('identification_meltingpoint')->result();
+        $test_id=$data[0]->id;
+        $test_id++;
+
+
+		$mono_data=$this->db->select_max('id')->get('full_monograph')->result();
+        $monograph_id=$mono_data[0]->id;
+        $monograph_id++;
+
+		$data = array(
+			'test_request_id' => $this->input->post('test_request'),
+			'test_id' => $test_id,
+			'test_type' => $test_type,
+			'monograph_id'=>$monograph_id,
+			'monograph_specifications' => $this->input->post('specification'),
+
+			);
+		$this->db->insert('monograph_specifications', $data);
+		$data2 = array(
+			'test_request_id' => $this->input->post('test_request'),
+			'test_type' => $test_type,
+			'specifications' => $this->input->post('components'),
+
+			);
+		$this->db->insert('test_results', $data2);
+		redirect('test/index/'.$assignment.'/'.$test_request);	
+
+	}
+	function save_meltingpoint_monograph(){
+		$test_request=$this->input->post('test_request');
+		$assignment=$this->input->post('assignment');		
+		$analyst= $this->input->post('analyst');
+		$test_type=$this->input->post('test_type');
+
+
+		$data=$this->db->select_max('id')->get('identification')->result();
+        $test_id=$data[0]->id;
+        $test_id++;
+
+
+		$mono_data=$this->db->select_max('id')->get('full_monograph')->result();
+        $monograph_id=$mono_data[0]->id;
+        $monograph_id++;
+
+		$data = array(
+			'test_request_id' => $this->input->post('test_request'),
+			'test_id' => $test_id,
+			'test_type' => $test_type,
+			'monograph_id'=>$monograph_id,
+			'monograph_specifications' => $this->input->post('specification'),
+
+			);
+		$this->db->insert('monograph_specifications', $data);
+		$data2 = array(
+			'test_request_id' => $this->input->post('test_request'),
+			'test_type' => $test_type,
+			'specifications' => $this->input->post('components'),
+
+			);
+		$this->db->insert('test_results', $data2);
+		redirect('test/index/'.$assignment.'/'.$test_request);	
+
+	}
+	function save_thin_layer_monograph(){
+		$test_request=$this->input->post('test_request');
+		$assignment=$this->input->post('assignment');		
+		$analyst= $this->input->post('analyst');
+		// $test_type=$this->input->post('test_type');
+		$test_type=28;
 
 		$data=$this->db->select_max('id')->get('identification')->result();
         $test_id=$data[0]->id;

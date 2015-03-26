@@ -165,20 +165,21 @@ class Test_Dissolution extends CI_Controller{
 		$data['component_category'] = $results['component_category'];
 		$data['query_e'] = $results['equipment'];
 		$data['monograph'] = $results['full_monograph'];
-
-		foreach ($results['monograph_specs'] as $key => $value) {
+		$data['monograph_specs']=$results['monograph_specs'];
 		
-		if ($value['test_type']==38) {
-			$results_ = $value;
-		}
+		// foreach ($results['monograph_specs'] as $key => $value) {
+		
+		// if ($value['test_type']==38) {
+		// 	$results_ = $value;
+		// }
 
-		}
-		if (!empty($results_)) {
-			$data['specs'] = $results_;
-		}
-		else{
-			$data['specs'] = "No info";
-		}
+		// }
+		// if (!empty($results_)) {
+		// 	$data['specs'] = $results_;
+		// }
+		// else{
+		// 	$data['specs'] = "No info";
+		// }
 		// print_r($data['specs']);
 		// die;
 		// $this->load->view('header/header', $data);		
@@ -285,6 +286,7 @@ class Test_Dissolution extends CI_Controller{
 		$this->load->view('tests/dissolution/test_dissolution_delayed_release_second_view', $data);		
 	}
 	function index_delayed_release_third_stage(){
+
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
@@ -1072,6 +1074,37 @@ $data['monograph_specs']=	$this->db->select('*')->get_where('monograph_specifica
         $this->db->select('*')->get_where('components', array('test_request_id' => $test_request))->result_array();
 
 	    $query_determination=$this->db->get_where('diss_normal_hplc_determinations', array('test_request' =>$test_request));
+	    $results_determination=$query_determination->result_array();
+	    $data['query_determination']=$results_determination[0];
+
+	    
+	    $data['full_monograph'] = $this->db->get_where('full_monograph', array('test_request_id' => $test_request))->result_array();
+
+		$this->load->view('tests/dissolution/view_dissolution_hplc_normal_multi_worksheet', $data);	
+	}
+	function components(){
+
+		$data['assignment'] = $this->uri->segment(3);
+		$data['test_request'] = $this->uri->segment(4);
+		$data['component_name']=$this->uri->segment(5);
+		$test_request =$this->uri->segment(4);
+		$component_name =$this->uri->segment(5);
+
+		$sql = "SELECT * FROM test_request WHERE id =$test_request";
+		$query = $this->db->query($sql);
+		$result =$query->result_array();
+		$data['results']=$result[0];
+
+		$data['components']=
+        $this->db->select('*')->get_where('components', array('test_request_id' => $test_request,'component' => $component_name))->result_array();
+
+		
+		$data['query_e']=$this->db->get_where('diss_normal', array('test_request' =>$test_request,'component_name' => $component_name));
+	    $results_e=$data['query_e']->result_array();
+	    $data['query_e']=$results_e[0];
+
+	    
+	    $query_determination=$this->db->get_where('diss_normal_hplc_determinations', array('test_request' =>$test_request,'component_name' => $component_name));
 	    $results_determination=$query_determination->result_array();
 	    $data['query_determination']=$results_determination[0];
 

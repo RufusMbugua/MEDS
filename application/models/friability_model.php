@@ -6,10 +6,11 @@ class Friability_Model extends CI_Model{
     parent::__construct();
    }
    function process_specifications(){
+
     $assignment_id=$this->input->post('assignment_id');
     $test_request_id=$this->input->post('tr_id');
     $test_name="Friability";
-    $test_type="b";
+    $test_type=18;
 
     $sql=$this->db->select_max('id')->get('friability')->result();
     $test_id=$sql[0]->id;
@@ -44,7 +45,7 @@ class Friability_Model extends CI_Model{
     
      $assignment_id=$this->input->post('assignment_id');
      $test_request_id=$this->input->post('tr_id');
-     $test_type="b";
+     $test_type=18;
      $status=1;
     
      
@@ -71,9 +72,9 @@ class Friability_Model extends CI_Model{
     );
 
     $data_two = array(
-     'results'=>$this->input->post('results'),
+     'results'=>$this->input->post('loss_in_weight').'% Weight Loss',
      'method'=>$this->input->post('method'),
-     'remarks'=>$this->input->post('comment')
+     'remarks'=>$this->input->post('results')
 
     );
     

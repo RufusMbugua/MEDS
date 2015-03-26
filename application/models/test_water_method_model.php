@@ -12,7 +12,7 @@ class Test_Water_Method_Model extends CI_Model{
 		$status =1;
 		$test_name='Karl Fisher(Water)';  
 		$analyst= $this->input->post('analyst');
-		$test_type = 41;
+		$test_type = 50;
 
 		$data=$this->db->select_max('id')->get('identification')->result();
         $test_id=$data[0]->id;
@@ -171,7 +171,7 @@ class Test_Water_Method_Model extends CI_Model{
 		$assignment=$this->input->post('assignment');
 		$test_name='Karl Fisher';
 		$analyst= $this->input->post('analyst');
-		$test_type= '41';
+		$test_type= '50';
 
 		// $data=$this->db->select_max('id')->get('water_method')->result();
         $test_id=1;

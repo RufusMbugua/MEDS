@@ -2,22 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <title>MEDS</title>
-  <link rel="icon" href="" />
+  <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon">
   <link href="<?php echo base_url().'style/core.css';?>" rel="stylesheet" type="text/css" />
    <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
    
   <link href="<?php echo base_url().'style/jquery.tooltip.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/jquery-ui.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/demo_table.css';?>" rel="stylesheet" type="text/css"/>
-  
-  <!-- bootstrap reference links  
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.css.map';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.min.css';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap.css.map'; ?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.css';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap.min.css';?>" rel="stylesheet" type="text/css"/>  
-   -->
-  <!-- bootstrap reference library -->
+
   <link href="<?php echo base_url().'bootstrap/css/bootstrap.css'; ?>" rel="stylesheet" type="text/css"/>
 
   <script src="<?php echo base_url().'js/jquery.js';?>"></script>
@@ -34,11 +26,7 @@
   <script type="text/javascript" src="<?php echo base_url().'js/Jquery-datatables/jquery.dataTables.js';?>"></script>
   <script>
    $(document).ready(function() {
-    /* Init DataTables */
-    $('#list').dataTable({
-     "sScrollY":"270px",
-     "sScrollX":"100%"
-    });
+   
      tinymce.init({
     selector: "textarea"
    });
@@ -278,13 +266,15 @@
       </td>
      </tr>
      <tr> 
-      <td colspan ="6" align="center" style="text-align:center;background-color:#ffffff;padding-right:40px;border-bottom: solid 10px #f0f0ff;color: #0000fb;background-color: #e8e8ff;"> MEDS Karl Fisher (Water Method) Test Form</td>
+      <td colspan ="6" align="center" style="text-align:center;background-color:#ffffff;padding:8px;border-bottom: solid 1px #f0f0ff;color: #0000fb;"> MEDS Karl Fisher (Water Method) Test Form</td>
     </tr>    
       <tr>
-        <td colspan = "6"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color: #0000fb;"><b>Equipment to be used:</b></td>
+        <td colspan = "6"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color: #0000fb;"><b>Equipment Details:</b></td>
     </tr>
     <tr>
-        <td align="center" colspan = "2"style="background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Equipment Make:</td>
+        <td align="center" colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Equipment Make</td>
+        <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type = "text" size= "50" name = "equipment_number" id ="equipmentid"></td>
+        <td align="right" colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Equipment ID</td>
         <td style="background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> 
             <select  id = "equipment_make" name="equipment_make">
               <option selected></option>
@@ -299,14 +289,11 @@
               
             </select>
         </td>    
-      
-        <td align="center" colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Equipment Number:</td>
-        <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type = "text" size= "10" name = "equipment_number" id ="equipmentid">     </td>
       </tr>
       <tr>
-        <td align="center"colspan = "2" width ="10px" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Burette ID:</td>
+        <td align="center"colspan = "2" width ="10px" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Burette ID</td>
         <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">  <input type ="text" id ="burrette_id" name="burrette_id"> </td>
-        <td align="center" colspan = "2" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Burette Volume:</td>
+        <td align="right" colspan = "2" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Burette Volume</td>
         <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" id ="burette_volume" name="burette_volume"> </td>
       </tr>
       <tr>
@@ -325,24 +312,23 @@
       </td>
      </tr> 
       <tr>
-      <td align="center" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Balance Make:</td>
-        <td colspan = "2" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> 
-            <select  id = "make_id" name="balance_make">
-              <option selected></option>
-              <?php
-               foreach($query_e as $equipment):
-              ?>
-                
-               <option value="<?php echo $equipment['id_number'];?>"  data-equipmentmake="<?php echo $equipment['description']; ?>"><?php echo $equipment['id_number'];?></option>
-                <?php
-                endforeach
-                ?>              
+        <td align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Balance Make</td>
+        <td align="center" colspan="2" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" size="60" name ="balance_number" id="equipmentmake"></td>
+        <td align="right" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Balance ID</td>
+        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> 
+          <select  id = "make_id" name="balance_make">
+            <option selected></option>
+            <?php
+             foreach($query_e as $equipment):
+            ?>
               
-            </select>
+             <option value="<?php echo $equipment['id_number'];?>"  data-equipmentmake="<?php echo $equipment['description']; ?>"><?php echo $equipment['id_number'];?></option>
+              <?php
+              endforeach
+              ?>              
+            
+          </select>
         </td>    
-      
-        <td align="left" style="background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">ID Number:</td>
-        <td colspan = "2" style="background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="balance_number" id="equipmentmake"></td>
       </tr>
       <tr>
         <td align="left" colspan ="6"style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color:#0000fb;"><b>Standard Titers:</b></td>
@@ -702,6 +688,11 @@
                       <td>RSD %</td>
                       <td style="color:#0000ff;padding:8px;"></td>
                       <td style="color:#0000ff;padding:8px;"><input type="text" id="determination_rsd_2" name="determination_sd" disabled/></td>
+                     </tr>
+                     <tr>
+                      <td>Method</td>
+                      <td style="color:#0000ff;padding:8px;"></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" id="method" name="method" placeholder="eg. BP 2013"/></td>
                      </tr>
                   </table>
                 </td>

@@ -13,92 +13,92 @@
   
 	}
 
-	    $(document).ready(function(){
+	//     $(document).ready(function(){
 	
-        $('#requisition').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#requisition_1').show();
-            $('#requisition_r').hide();
-          }else{
-            $('#requisition_1').hide();
-            $('#requisition_r').show();
-          }
-        })
-	$('#lpo').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#lpo_1').show();
-            $('#lpo_r').hide();
-          }else{
-            $('#lpo_1').hide();
-            $('#lpo_r').show();
-          }
-        })
-        $('#received_by').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#received_by_1').show();
-            $('#received_by_r').hide();
-          }else{
-            $('#received_by_1').hide();
-            $('#received_by_r').show();
-          }
-        })
-	$('#issued_by').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#issued_by_1').show();
-            $('#issued_by_r').hide();
-          }
-          else{
-            $('#issued_by_1').hide();
-            $('#issued_by_r').show();
-          }
-        })
-	$('#quantity').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#quantity_1').show();
-            $('#quantity_r').hide();
-          }else{
-            $('#quantity_issued_1').hide();
-            $('#quantity_issued_r').show();
-          }
-        })
+ //        $('#requisition').change('live',function(){
+ //          if ($.trim(this.value)!=""){
+ //            $('#requisition_1').show();
+ //            $('#requisition_r').hide();
+ //          }else{
+ //            $('#requisition_1').hide();
+ //            $('#requisition_r').show();
+ //          }
+ //        })
+	// $('#lpo').change('live',function(){
+ //          if ($.trim(this.value)!=""){
+ //            $('#lpo_1').show();
+ //            $('#lpo_r').hide();
+ //          }else{
+ //            $('#lpo_1').hide();
+ //            $('#lpo_r').show();
+ //          }
+ //        })
+ //        $('#received_by').change('live',function(){
+ //          if ($.trim(this.value)!=""){
+ //            $('#received_by_1').show();
+ //            $('#received_by_r').hide();
+ //          }else{
+ //            $('#received_by_1').hide();
+ //            $('#received_by_r').show();
+ //          }
+ //        })
+	// $('#issued_by').change('live',function(){
+ //          if ($.trim(this.value)!=""){
+ //            $('#issued_by_1').show();
+ //            $('#issued_by_r').hide();
+ //          }
+ //          else{
+ //            $('#issued_by_1').hide();
+ //            $('#issued_by_r').show();
+ //          }
+ //        })
+	// $('#quantity').change('live',function(){
+ //          if ($.trim(this.value)!=""){
+ //            $('#quantity_1').show();
+ //            $('#quantity_r').hide();
+ //          }else{
+ //            $('#quantity_issued_1').hide();
+ //            $('#quantity_issued_r').show();
+ //          }
+ //        })
 	
-	$('#balance').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#balance_1').show();
-            $('#balance_r').hide();
-          }else{
-            $('#balance_1').hide();
-            $('#balance_r').show();
-          }
-        });
+	// $('#balance').change('live',function(){
+ //          if ($.trim(this.value)!=""){
+ //            $('#balance_1').show();
+ //            $('#balance_r').hide();
+ //          }else{
+ //            $('#balance_1').hide();
+ //            $('#balance_r').show();
+ //          }
+ //        });
 
-	$('#submit_i').click(function(){         
-            count =0;
-            $('.fieldinv').each(function(){
-               if ($.trim(this.value)=="")
-               count ++;
-            });
-            if(count >0){
-              alert( count+' All field as on this form are MANDATORY ')
-               return false;
-            }else{
+	// $('#submit_i').click(function(){         
+ //            count =0;
+ //            $('.fieldinv').each(function(){
+ //               if ($.trim(this.value)=="")
+ //               count ++;
+ //            });
+ //            if(count >0){
+ //              alert( count+' All field as on this form are MANDATORY ')
+ //               return false;
+ //            }else{
               
-            $.ajax({
-                type:"post",
-                url:"<?php echo base_url();?>inventory/save/",
-                data:$('#inventory_record_form').serialize(),
-                success:function(data){
-		    redirect_url = "<?php echo base_url();?>inventory_records/Get/"
-                    data='Success';
-                    window.location.href = redirect_url;
-                },
-                //error:function(){
-                  // alert('an error occured'); 
-               //}
-            })
-            }
-            })
-    })
+ //            $.ajax({
+ //                type:"post",
+ //                url:"<?php echo base_url();?>inventory/save/",
+ //                data:$('#inventory_record_form').serialize(),
+ //                success:function(data){
+	// 	    redirect_url = "<?php echo base_url();?>inventory_records/Get/"
+ //                    data='Success';
+ //                    window.location.href = redirect_url;
+ //                },
+ //                //error:function(){
+ //                  // alert('an error occured'); 
+ //               //}
+ //            })
+ //            }
+ //            })
+ //    })
 
 </script>
 <div id="form">
@@ -119,7 +119,7 @@
             <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><b>Document: Form</b></td>
             <td width="150px" height="25px" colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;color:#000000;"><b>REFERENCE NUMBER</b></td>
             <td colspan="3" style="padding:4px;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">
-              <input type="text" id="reference_number" name="reference_number" class="field"/>
+              <input type="text" id="reference_number" name="reference_number" value="MEDS/QC/RE/01-01" class="field"/>
               <span id="reference_number_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
               <span id="reference_number_r" style="color:red; display:none">Fill this field</span>
             </td>
@@ -139,7 +139,7 @@
     </td>
   </tr>
 	<tr>
-      <td colspan="8" align="center" style="text-align:center;background-color:#ffffff;padding-right:40px;border-bottom: solid 10px #d5d5ff;color: #0000fb;background-color: #e8e8ff;"><h5>Reagents Inventory Form</h5></td>
+      <td colspan="8" align="center" style="text-align:center;background-color:#ffffff;padding:8px;border-bottom: solid 1px #d5d5ff;color: #0000fb;"><b>Reagents Inventory Form</b></td>
 	</tr>
 	<tr>
 		<td height="5px" colspan="2" align="left"  style="background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>Requisition Number</b></td>

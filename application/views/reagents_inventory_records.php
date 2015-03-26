@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <title>MEDS</title>
-  <link rel="icon" href="" />
   <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon">
   <link href="<?php echo base_url().'style/core.css';?>" rel="stylesheet" type="text/css" />
   <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
@@ -305,36 +304,6 @@
                 
                 ?>
                 </tr>
-                <div id="<?php echo $row->id;?>" class="modal fade" role="dialog" aria-labelledby="print" aria-hidden="true">
-                  <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h5 class="modal-title" id="meds">Print Labels Form</h5>
-                        </div>
-                         <?php echo validation_errors(); ?>
-                         <?php echo form_open('reagents_inventory_record/print',array('id'=>'print_form'));?>
-                        
-                        <div class="modal-body">
-                         hi there 
-                          <label><?php echo $row->batch_number;?></lable><br>
-                          <label><?php echo $row->certificate_number;?></lable><br>
-                          <label><?php echo $row->card_number;?></lable><br>
-                          <label><?php echo $row->item_description;?></lable><br>
-                          <label><?php echo $row->msds;?></lable><br>
-                          <label><?php echo $row->location;?></label><br>
-                          <label><?php echo $row->expiry_date;?><label>
-                            
-                            <div class="modal-footer">
-                             
-                            </div>
-                             
-                         </div>
-                      </div>
-                    </div>
-                </div>
-    
-    
                 <?php endforeach; ?>
 
             </tbody>

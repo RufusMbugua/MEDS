@@ -11,6 +11,8 @@ class Content_Uniformity_Model extends CI_Model{
     $test_request_id=$this->input->post('tr_id');
     $assignment_id=$this->input->post('assignment_id');
     $method=$this->input->post('method');
+    $test_type=52;
+    $remark="COMPLIES";
     $status=1;
 
     if($method=='Weight Variation'){
@@ -54,8 +56,15 @@ class Content_Uniformity_Model extends CI_Model{
 
    
   );
+  $result_data = array(
+      'test_id'=>$test_id,
+      'remarks'=>$remark,
+      'method'=>$this->input->post('method_coa'),
+      'results'=>"Average Weight = ".$this->input->post('average')."g"
+      );  
   
- $this->db->update('uniformity_of_dosage', $data_two,array('method' => $method));
+  $this->db->update('uniformity_of_dosage', $data_two,array('method' => $method));
+  $this->db->update('test_results', $result_data, array('test_request_id'=>$test_request_id,'test_type'=>$test_type));
   redirect('test/index/'.$assignment_id.'/'.$test_request_id);
   }
 
@@ -99,7 +108,15 @@ class Content_Uniformity_Model extends CI_Model{
    'test_status'=>$status
   );
   
- $this->db->update('uniformity_of_dosage', $data_two,array('method' => $method));
+  $result_data = array(
+      'test_id'=>$test_id,
+      'remarks'=>$remark,
+      'method'=>$this->input->post('method_coa'),
+      'results'=>"Average Weight = ".$this->input->post('average')
+      );  
+  
+  $this->db->update('uniformity_of_dosage', $data_two,array('method' => $method));
+  $this->db->update('test_results', $result_data, array('test_request_id'=>$test_request_id,'test_type'=>$test_type));
   redirect('test/index/'.$assignment_id.'/'.$test_request_id);
       
     }
@@ -240,7 +257,7 @@ class Content_Uniformity_Model extends CI_Model{
 
     $assignment_id=$this->input->post('assignment_id');
     $test_request_id=$this->input->post('tr_id');
-    $test_name="Uniformity of Dosage";
+    $test_name="Mass uniformity";
     $test_type=52;
       
     $sql=$this->db->select_max('id')->get('uniformity_of_dosage')->result();

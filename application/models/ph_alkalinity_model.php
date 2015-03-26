@@ -10,8 +10,8 @@ class Ph_Alkalinity_Model extends CI_Model{
 
     $assignment_id=$this->input->post('assignment_id');
     $test_request_id=$this->input->post('tr_id');
-     $test_name="ph Alkalinity";
-    $test_type="d";
+    $test_name="ph";
+    $test_type="22";
 
 
     $data=$this->db->select_max('id')->get('ph_alkalinity')->result();

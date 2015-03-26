@@ -14,7 +14,6 @@ function save(){
 	
 	if($this->input->post('submit')){
 		$this->reagents_inventorymodel->process();
-	
 	}
 	redirect('reagents_inventory_record/Get');
 	}	

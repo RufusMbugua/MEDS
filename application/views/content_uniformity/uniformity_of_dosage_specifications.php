@@ -202,10 +202,16 @@
                 <table width="100%">
                   <tr>
                     <td style="padding:4px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">Subtype Description</td>
+                    <td align="left" style="padding:4px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">
+                      <input type="text" name="subtype" id="subtype">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:4px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">Mass Uniformity specifications</td>
                   </tr>
                   <tr>
                     <td align="center" style="padding:4px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">
-                      <textarea rows="8" cols="180" name="subtype"></textarea>
+                      <textarea rows="8" cols="180" name="monograph_specifications" id="monograph_specifications"></textarea>
                     </td>
                   </tr>
                 </table>

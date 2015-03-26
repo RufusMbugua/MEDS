@@ -14,20 +14,21 @@ class Test_Dissolution_Normal_Model extends CI_Model{
 		$analyst= $this->input->post('analyst');
 		$component=$this->input->post('component_z_name');
 		
-		$results =$component.':'.' Range'.$this->input->post('range_min').'% to '.$this->input->post('range_max').'%'.'. <br/>Average= '.$this->input->post('average').'of the stated amoount';
+		$results =$component.':'.' Range'.$this->input->post('range_min').'% to '.$this->input->post('range_max').'%'.'. <br/> Average= '.$this->input->post('average').' of the stated amoount';
 
 		$data=$this->db->select_max('id')->get('diss_normal')->result();
         $test_id=$data[0]->id;
         $test_id++;
 		
 		//Query that checks if there is any prexisting results data in the test_results table which then concatinates it with new data provided to update the table
-		$results_data=$this->db->select('*')->get_where('test_results', array('test_request_id' => $test_request))->result_array();
+		$results_data=$this->db->select('*')->get_where('test_results', array('test_request_id' => $test_request,'test_type'=>$test_type))->result_array();
 		$prev_test_results=$results_data[0]['results'];
 		//$prev_test_remarks=$results_data[0]['remarks'];
 
         $new_results =$prev_test_results." <br/>". $results;
 		
-		$data =array(			
+		$data =array(
+		'component_name'=>$component,			
 		'equipment_make'=>$this->input->post('equipment_make'),
 		'equipment_number'=>$this->input->post('equipment_number'),
 		'dissolution_prepaparation'=>$this->input->post('dissolution_prepaparation'),
@@ -53,13 +54,9 @@ class Test_Dissolution_Normal_Model extends CI_Model{
 		'standard_container'=>$this->input->post('standard_container'),
 		'container'=>$this->input->post('container'),
 		'standard_weight_1'=>$this->input->post('standard_weight_1'),
-
 		'standard_weight'=>$this->input->post('standard_weight'),
-					
 		'equivalent'=>$this->input->post('equivalent'),
 		'standard_dilution'=>$this->input->post('standard_dilution'),
-
-		
 
 		'standard_description_1'=>$this->input->post('standard_description_1'),
 		'potency_1'=>$this->input->post('potency_1'),
@@ -210,8 +207,6 @@ class Test_Dissolution_Normal_Model extends CI_Model{
 		$this->db->insert('diss_normal', $data);
 
 		$result_data = array(
-			'test_id'=>$test_id,
-			'test_name'=>$test_name,
 			'remarks'=>$this->input->post('conclusion'),
 			'method'=>$this->input->post('method'),
 			'results'=>$new_results
@@ -220,7 +215,7 @@ class Test_Dissolution_Normal_Model extends CI_Model{
 
 		$determination_data = array(
 			'test_request'=>$this->input->post('test_request'),
-			
+			'component_name'=>$component,
 			'det_1_pkt'=>$this->input->post('det_1_pkt'),
 			'det_1_wstd'=>$this->input->post('det_1_wstd'),
 			'det_1_df'=>$this->input->post('det_1_df'),

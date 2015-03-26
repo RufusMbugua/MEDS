@@ -148,10 +148,10 @@
                         <td>Label Claim (mg) <input type="text" name="single_lc_component" id="single_lc_component" class="id"></td>
                       </tr>
                       <tr>
-                          <td style="padding:8px;align-text:left;border-bottom:solid 1px #c0c0c0;">Sample Appearance</td>
+                          <td colspan="2" style="padding:8px;align-text:left;border-bottom:solid 1px #c0c0c0;"><b>Sample Appearance</b></td>
                       </tr>
                       <tr>
-                        <td style="padding:8px;align-text:center;"><textarea name="sample_apperance" id="sample_appearance" rows="4" cols="90"></textarea></td>
+                        <td colspan="2" style="padding:8px;align-text:center;"><textarea name="singlecomp_appearance" id="singlecomp_appearance" rows="4" cols="90"></textarea></td>
                       </tr>
                     </table>
                     <table class="" id="tbl_singlecomp" width="80%" border="0" align="center" cellpadding="4px">
@@ -180,22 +180,20 @@
                 </tr>
                 <tr>  
                   <td colspan="8" style="padding:8px;">
-                    <table id='tbl_components' align="center" cellpadding="4px">
-                      <tr>
-                          <td style="padding:8px;align-text:left;border-bottom:solid 1px #c0c0c0;">Sample Appearance</td>
-                      </tr>
-                      <tr>
-                        <td style="padding:8px;align-text:center;"><textarea name="sample_apperance" id="sample_appearance" rows="4" cols="90"></textarea></td>
-                      </tr>
-                    </table>
                     <table width="80%" id="tbl_components" class="dynatable" border="0" align="center" cellpadding="4px">
                       <thead>
                         <td colspan="2" align="right"><input type="button" id="add_row" class=" btn" value="Add"></td>
                       </thead>
                       <tbody>
+                        <tr>
+                          <td colspan="2" style="padding:8px;align-text:left;border-bottom:solid 1px #c0c0c0;"><b>Sample Appearance</b></td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="padding:8px;align-text:center;"><textarea name="multicomp_apperance" id="multicomp_apperance" rows="4" cols="90"></textarea></td>
+                        </tr>
                         <tr class="prototype">
-                          <td>Component 1 <input type="text" name="component[]" id="component_one" class="id"></td>
-                          <td>Label Claim (mg) <input type="text" name="lc_component[]" id="lc_component" class="id"></td>
+                          <td style="padding:8px;">Component 1 <input type="text" name="component[]" id="component_one" class="id"></td>
+                          <td style="padding:8px;">Label Claim (mg) <input type="text" name="lc_component[]" id="lc_component" class="id"></td>
                         </tr>
                     </tbody>
                   </table>
@@ -210,18 +208,13 @@
                             foreach ($subtests_multicomponent as $row):     
                           ?>
                            <td style="padding:8px;border-right: dotted 1px #c0c0c0;text-align: center;border-bottom: solid 1px #c0c0c0;" width="20px"><?php echo $i;?>.</td>
-                           <td style="padding:8px;text-align: left;border-bottom: solid 1px #c0c0c0;"><input type="checkbox" id="subtests[]" name="subtests[]" value="<?php echo $row['id'];?>"> <?php echo $row['name']." ".$row['id'];?></td>
+                           <td style="padding:8px;text-align: left;border-bottom: solid 1px #c0c0c0;"><input type="checkbox" id="subtests[]" name="subtests[]" value="<?php echo $row['id'];?>"> <?php echo $row['name'];?></td>
                            <?php
                              $i++;
                            ?>
                         </tr>
                         <?php endforeach; ?>
-                          <tr>
-                            <td style="padding:8px;align-text:left;border-bottom:solid 1px #c0c0c0;">Sample Appearance</td>
-                          </tr>
-                          <tr>
-                            <td style="padding:8px;align-text:center;"><textarea name="sample_apperance" id="sample_appearance" rows="4" cols="90"></textarea></td>
-                          </tr>
+                          
                       </tbody>
                     </table>
                   </td>  
@@ -319,7 +312,7 @@
     // Add button functionality
     $(document).on('click','#add_row',function () {
         
-        var html='<tr><td>Component '+id+' <input type="text" name="component[]" id="component_'+id+' class="id"></td><td>Label Claim (mg) <input type="text" name="lc_component[]" id="lc_component" class="id"></td></tr>';
+        var html='<tr><td style="padding:8px;">Component '+id+' <input type="text" name="component[]" id="component_'+id+' class="id"></td><td style="padding:8px;">Label Claim (mg) <input type="text" name="lc_component[]" id="lc_component" class="id"></td></tr>';
         var master = $(this).closest("table.dynatable");
      
          master.find("tbody").append(html);

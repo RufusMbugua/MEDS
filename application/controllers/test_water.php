@@ -9,7 +9,7 @@ class Test_Water extends CI_Controller{
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
 		$status =0;
-		$test_type='41';
+		$test_type='50';
 			
 		$data['component_category'] = $this->db->select('*')->get_where('full_monograph', array('test_request_id' => $test_request))->result_array();
 
@@ -24,8 +24,8 @@ class Test_Water extends CI_Controller{
 	    $data['sql_standards']=
     	$this->db->select('standard_register.reference_number,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
 
-		$q = "select * from monograph_specifications where test_request_id = $test_request and test_type = 41 ";
-		$data['specs']=$this->db->query($q)->result_array();
+		$data['specs'] = $this->db->select('*')->get_where('monograph_specifications', array('test_request_id' => $test_request,'test_type' => $test_type))->result_array();
+
 		
 		$this->load->view('tests/water_method/test_water_method', $data);
 	}
@@ -52,7 +52,10 @@ class Test_Water extends CI_Controller{
 		$result =$query->result_array();
 
 		$data['results']=$result[0];
-				
+
+		$data['full_monograph']=	
+		$this->db->select('*')->get_where('full_monograph', array('test_request_id' => $test_request))->result_array();
+
 		$this->load->view('tests/water_method/test_water_method_monograph_view',$data);
 	}
 	function save_monograph(){	

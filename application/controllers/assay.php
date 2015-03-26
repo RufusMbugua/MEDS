@@ -1787,6 +1787,9 @@ class Assay extends CI_Controller {
         $data['monograph']=
         $this->db->select('*')->get_where('full_monograph', array('test_request_id' => $test_request_id))->result_array();
         
+        $data['monograph_specifications']=
+        $this->db->select('*')->get_where('monograph_specifications', array('test_request_id' => $test_request_id))->result_array();
+        
         $data['reagents']=
         $this->db->select('*')->get_where('reagents_inventory_record', array('status' => $status))->result_array();
 
@@ -1795,6 +1798,10 @@ class Assay extends CI_Controller {
 
         $data['hplc_internal_method']=
         $this->db->select('assay_hplc_internal_method.test_status')->get_where('assay_hplc_internal_method', array('id' => $test_type_id))->result_array();
+
+        $data['uniformity_of_dosage']=
+        $this->db->select('*')->get_where('uniformity_of_dosage_multicomponent', array('test_request_id' => $test_request_id))->result_array();
+
 
         $data['request']=
         $this->db->select('assignment.id AS a,assignment.test_request_id,assignment.assigner_user_id,assignment.client_id,assignment.reference_number,assignment.assigner_name,assignment.analyst_name,assignment.sample_issued')->get_where('assignment', array('id' => $assignment_id))->result_array();
@@ -2085,11 +2092,11 @@ class Assay extends CI_Controller {
             $this->assay_model->process_monograph_hplc_internal_method();
         }                
     }
-    function save_monograph_hplc_internal_method_two_components(){
+    function save_hplc_internal_method_multicomponents(){
        
 
         if ($this->input->post('submit')) {
-            $this->assay_model->process_monograph_hplc_internal_method_two_components();
+            $this->assay_model->process_hplc_internal_method_multicomponents();
         }                
     }
     function save_monograph_hplc_area_method_single_component(){

@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <title>MEDS</title>
-  <link rel="icon" href="" />
   <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon">
   <link href="<?php echo base_url().'style/core.css';?>" rel="stylesheet" type="text/css" />
    <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
@@ -154,18 +153,84 @@
                <tr>
                   <td colspan="4" style="padding:8px;">
                     <table class="inner_table" width="100%" cellpadding="8px">
+                      <?php
+                        if($query['msds']=='Flammable'){
+                      ?>
                         <tr>
-                            <td colspan="4"style="padding:4px;"><input type = "checkbox" name="flamable" value ="Flammable"> Flammable</td>
+                            <td colspan="4"style="padding:4px;"><input type = "checkbox" name="msds[]" value ="Flammable" checked> Flammable</td>
                         </tr>
                         <tr>
-                            <td colspan="4"style="padding:4px;"><input type = "checkbox" name="toxic" value ="Toxic"> Toxic </td>   
+                            <td colspan="4"style="padding:4px;"><input type = "checkbox" name="msds[]" value ="Toxic"> Toxic </td>   
                         </tr>
                         <tr>
-                          <td colspan="4"style="padding:4px;"><input type = "checkbox" name="non_toxic" value ="Non-Toxic"> Non-Toxic</td>          
+                          <td colspan="4"style="padding:4px;"><input type = "checkbox" name="msds[]" value ="Non-Toxic"> Non-Toxic</td>          
                         </tr>
                         <tr>
-                          <td colspan="4"style="padding:4px;"><input type = "checkbox" name="corrosive" value = "Corrosive"> Corrosive</td>          
+                          <td colspan="4"style="padding:4px;"><input type = "checkbox" name="msds[]" value = "Corrosive"> Corrosive</td>          
                        </tr>
+                       <?php
+                        }else if($query['msds']=='Toxic'){
+                       ?>
+                        <tr>
+                            <td colspan="4"style="padding:4px;"><input type = "checkbox" name="msds[]" value ="Flammable"> Flammable</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"style="padding:4px;"><input type = "checkbox" name="msds[]" value ="Toxic" checked> Toxic </td>   
+                        </tr>
+                        <tr>
+                          <td colspan="4"style="padding:4px;"><input type = "checkbox" name="msds[]" value ="Non-Toxic"> Non-Toxic</td>          
+                        </tr>
+                        <tr>
+                          <td colspan="4"style="padding:4px;"><input type = "checkbox" name="msds[]" value = "Corrosive"> Corrosive</td>          
+                       </tr>
+                       <?php
+                        }else if($query['msds']=='Non-Toxic'){
+                       ?>
+                        <tr>
+                            <td colspan="4"style="padding:4px;"><input type = "checkbox" name="msds[]" value ="Flammable"> Flammable</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"style="padding:4px;"><input type = "checkbox" name="msds[]" value ="Toxic"> Toxic </td>   
+                        </tr>
+                        <tr>
+                          <td colspan="4"style="padding:4px;"><input type = "checkbox" name="msds[]" value ="Non-Toxic" checked> Non-Toxic</td>          
+                        </tr>
+                        <tr>
+                          <td colspan="4"style="padding:4px;"><input type = "checkbox" name="msds[]" value = "Corrosive"> Corrosive</td>          
+                       </tr>
+                       <?php
+                        }else if($query['msds']=='Corrosive'){
+                       ?>
+                        <tr>
+                            <td colspan="4"style="padding:4px;"><input type = "checkbox" name="msds[]" value ="Flammable"> Flammable</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"style="padding:4px;"><input type = "checkbox" name="msds[]" value ="Toxic"> Toxic </td>   
+                        </tr>
+                        <tr>
+                          <td colspan="4"style="padding:4px;"><input type = "checkbox" name="msds[]" value ="Non-Toxic"> Non-Toxic</td>          
+                        </tr>
+                        <tr>
+                          <td colspan="4"style="padding:4px;"><input type = "checkbox" name="msds[]" value = "Corrosive" checked> Corrosive</td>          
+                       </tr>
+                       <?php
+                       }else{
+                       ?>
+                        <tr>
+                            <td colspan="4"style="padding:4px;"><input type = "checkbox" name="msds[]" value ="Flammable"> Flammable</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"style="padding:4px;"><input type = "checkbox" name="msds[]" value ="Toxic"> Toxic </td>   
+                        </tr>
+                        <tr>
+                          <td colspan="4"style="padding:4px;"><input type = "checkbox" name="msds[]" value ="Non-Toxic"> Non-Toxic</td>          
+                        </tr>
+                        <tr>
+                          <td colspan="4"style="padding:4px;"><input type = "checkbox" name="msds[]" value = "Corrosive"> Corrosive</td>          
+                       </tr>
+                       <?php
+                        }
+                       ?>
                     </table>
                   </td>
                </tr>
@@ -238,8 +303,23 @@
                                       <td colspan="2" style="padding:4px;"><input type="radio" name="location" value="Fridge" checked/> Fridge</td>
                                   </tr>
                               <?php
-                              }
-                            ?>
+                              }else{
+                              ?>
+                              <tr>
+                                 <td colspan="2" style="padding:4px;"><input type="radio" name="location" value="Toxic Store" /> Toxic Store</td>
+                              </tr>
+                              <tr>
+                                  <td colspan="2" style="padding:4px;"><input type="radio" name="location" value="Non-Toxic Store" /> Non-Toxic Store</td>
+                              </tr>
+                              <tr>
+                                  <td colspan="2" style="padding:4px;"><input type="radio" name="location" value="Inflammable Store"/> Inflammable Store</td>
+                              </tr>
+                              <tr>
+                                  <td colspan="2" style="padding:4px;"><input type="radio" name="location" value="Fridge"/> Fridge</td>
+                              </tr>
+                              <?php
+                                }
+                              ?>
                         </table>
                     </td>
                   </tr>

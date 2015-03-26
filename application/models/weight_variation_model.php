@@ -59,7 +59,7 @@ function process(){
      'test_id'=>$test_id,
      'test_request_id'=>$test_request_id,
      'test_type'=>$test_type,
-     'results'=>$this->input->post('determination_average')." Average Weight ".$this->input->post('mean')." Acceptance Value ".$this->input->post('acceptance_value_of_ten'),
+     'results'=>$this->input->post('determination_average')." Average = ".$this->input->post('estmean')."% , Acceptance Value = ".$this->input->post('acceptance_value_of_ten'),
      'method'=>$this->input->post('method'),
      'remarks'=>$this->input->post('test_conclusion')
     );

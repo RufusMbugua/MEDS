@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <title>MEDS</title>
-  <link rel="icon" href="" />
+  <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon">
   <link href="<?php echo base_url().'style/core.css';?>" rel="stylesheet" type="text/css" />
    <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
    
@@ -128,12 +128,12 @@
             <tr>
                 <td colspan="8" style="padding:8px;">
                   <table border="0" width="100%" cellpadding="8px" align="center">
-                    <tr>
-                      <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;">Solution Specificationd Range</td>  
-                      <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;"><input type="text" range="tolerance_range" id="new_min_tolerance_det" name="range_minimum" placeholder="min%" size="5"> - <input type="text" name="range_maximum" placeholder="max%" size="5"/></td>
-                    </tr>
+                   
                   </table>
                 </td>
+            </tr>
+            <tr>
+              <td colspan="8" style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;">Solution Specification Range</td>  
             </tr>
             <tr>
               <td colspan="8" align="center" style="padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">

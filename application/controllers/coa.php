@@ -50,6 +50,9 @@ function records(){
     $data['monograph_specifications']=
     $this->db->select('*')->get_where('monograph_specifications', array('test_request_id' => $test_request_id))->result_array();
 
+    $data['full_monograph']=
+    $this->db->select('*')->get_where('full_monograph', array('test_request_id' => $test_request_id))->result_array();
+
     $data['test_results']=
     $this->db->select('*')->get_where('test_results', array('test_request_id' => $test_request_id))->result_array();
     
@@ -124,7 +127,9 @@ function records(){
         $approve_status=1;
 
         $data['tests'] =$this->db->select('*')->get_where('test_results', array('test_request_id' => $trid))->result_array();    
-       
+        
+        $data['full_monograph'] = $this->db->select('*')->get_where('full_monograph', array('test_request_id' => $trid))->result_array();
+
         $data['coa'] =  $this->db->select('*')->get_where('coa', array('test_request_id' => $trid, 'approve_status'=> $approve_status))->result_array();    
    
         $data['monograph_specifications']= $this->db->select('*')->get_where('monograph_specifications', array('test_request_id' => $trid))->result_array();
@@ -146,6 +151,8 @@ function coa_pdf(){
     $tests =$this->db->select('*')->get_where('test_results', array('test_request_id' => $trid))->result_array();    
    
     $coa =  $this->db->select('*')->get_where('coa', array('test_request_id' => $trid, 'approve_status'=> $approve_status))->result_array();    
+
+    $full_monograph = $this->db->select('*')->get_where('full_monograph', array('test_request_id' => $trid))->result_array();
 
     $monograph_specifications = $this->db->select('*')->get_where('monograph_specifications', array('test_request_id' => $trid))->result_array();
 
@@ -205,7 +212,7 @@ function coa_pdf(){
       <td colspan="6" align="left" style="font-family:Arial;font-size:11px;padding:8px;"><b><u>LABEL CLAIM:</u></b></td>
     </tr>
     <tr>
-      <td colspan="6" style ="font-family:Arial;text-align:left;font-size:10px;padding:8px;">'. $query['label_claim'].'&nbsp;,'. $query['batch_lot_number'].'&nbsp;,Manufactured '. $query['date_manufactured'].'&nbsp;,Expires '. $query['expiry_date'].'</td>
+      <td colspan="6" style ="font-family:Arial;text-align:left;font-size:10px;padding:8px;">'. $query['label_claim'].'&nbsp;,Batch Number:'. $query['batch_lot_number'].'&nbsp;,Manufactured-'. $query['date_manufactured'].'&nbsp;,Expires-'. $query['expiry_date'].'</td>
     </tr>
   </table>      
     
@@ -215,7 +222,7 @@ function coa_pdf(){
         <u><h2><b>RESULTS OF ANALYSIS</b></h2></u></td>      
     </tr>
     <tr>
-      <td align="left" style="font-family:Arial;font-size:12px;padding:8px;"><b>Appearance:</b>&nbsp;'.$query['active_ingredients'].'</td>
+      <td align="left" style="font-family:Arial;font-size:12px;padding:8px;text-transform: capitalize;"><b>Appearance:</b>&nbsp;'.$full_monograph[0]['appearance'].'</td>
     </tr>
     </table>
     <table width="100%" class="results" align="center" border="1">
@@ -246,7 +253,7 @@ function coa_pdf(){
       </table>     
       <table bgcolor="#ffffff" border="0"> 
       <tr>    
-        <td colspan="12" style="font-family:Arial;font-size:12px;padding-bottom:60px;background-color:#ffffff"><b>*Results given are specific to the indicated batch</b></td>
+        <td colspan="12" style="font-family:Arial;font-size:12px;padding-bottom:40px;background-color:#ffffff"><b>*Results given are specific to the indicated batch</b></td>
       </tr>
       </table>
       <table bgcolor="#ffffff" class="conclusion" border="0"> 

@@ -179,8 +179,8 @@
       <td colspan="6"align="left" style="padding:8px;background-color:#ffffff;border-top: dotted 1px #bfbfbf;border-bottom: solid 1px #bfbfbf;"><b>Appearance:</b>&nbsp;<?php echo $query['active_ingredients']?></td>
     </tr>
      <tr>
-      <td colspan="6">
-      <table width="950px" bgcolor="#c4c4ff" border="0" cellpadding="4px" align="center">
+      <td colspan="6" style="padding:8px;">
+      <table width="100%" bgcolor="#c4c4ff" border="0" cellpadding="4px" align="center">
 
         <thead>
           <th align="left" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;color:#0000ff;"></th>     

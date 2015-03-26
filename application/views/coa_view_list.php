@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <title>MEDS</title>
-  <link rel="icon" href="" />
+  <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon">
   <link href="<?php echo base_url().'style/core.css';?>" rel="stylesheet" type="text/css" />
    <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
    
@@ -101,15 +101,9 @@
           echo "style='display:none'>";
       }
      ?>
-        <a href="<?php echo base_url().'home';?>"class="sub_menu sub_menu_link first_link active">Analysis Test Request</a>
-        <a href="<?php echo base_url().'equipment_maintenance_records/Get';?>"class="sub_menu sub_menu_link first_link">Equipment & Maintenance</a>
-        <a href="<?php echo base_url().'reagents_inventory_record/Get';?>"class="sub_menu sub_menu_link first_link">Reagents & Inventory</a>
-        <a href="<?php echo base_url().'standard_register_records/Get';?>"class="sub_menu sub_menu_link first_link">Standard Register</a>
-        <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
-        <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a>
         <a href="<?php echo base_url().'complaints_list/records';?>" class="sub_menu sub_menu_link first_link">Complaints</a>
         <a href="<?php echo base_url().'coa_list/records';?>"class="current sub_menu sub_menu_link first_link">Certificate of Analysis</a>
-        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a>
+        <a href="<?php echo base_url().'client_billing/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a>
     </div>
     <?php
     echo"<div id='sub_menu'";
@@ -132,15 +126,9 @@
           echo "style='display:none'>";
       }
      ?>
-        <a href="<?php echo base_url().'home';?>"class="sub_menu sub_menu_link first_link active">Analysis Test Request</a>
-        <a href="<?php echo base_url().'equipment_maintenance_records/Get';?>"class="sub_menu sub_menu_link first_link">Equipment & Maintenance</a>
-        <a href="<?php echo base_url().'reagents_inventory_record/Get';?>"class="sub_menu sub_menu_link first_link">Reagents & Inventory</a>
-        <a href="<?php echo base_url().'standard_register_records/Get';?>"class="sub_menu sub_menu_link first_link">Standard Register</a>
-        <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
-        <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a>
-        <a href="<?php echo base_url().'complaints_list/records';?>"class="sub_menu sub_menu_link first_link">Complaints</a>
+        <a href="<?php echo base_url().'complaints_list/records';?>" class="sub_menu sub_menu_link first_link">Complaints</a>
         <a href="<?php echo base_url().'coa_list/records';?>"class="current sub_menu sub_menu_link first_link">Certificate of Analysis</a>
-        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a>
+        <a href="<?php echo base_url().'client_billing/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a>
     </div>
     <?php
     echo"<div id='sub_menu'";
@@ -196,8 +184,7 @@
     <thead bgcolor="#efefef">
       <tr>
         <th style="text-align:center;border-right: dotted 1px #ddddff;">No.</th>
-        <th style="text-align:center;border-right: dotted 1px #ddddff;">Test Type</th>
-        <th style="text-align:center;border-right: dotted 1px #ddddff;">Test Specification</th>
+        <th style="text-align:center;border-right: dotted 1px #ddddff;">Sample Name</th>
         <th style="text-align:center;border-right: dotted 1px #ddddff;">Conclusion</th>
         <th style="text-align:center;border-right: dotted 1px #ddddff;">Done By</th>
         <th style="text-align:center;border-right: dotted 1px #ddddff;">Date Done</th>
@@ -215,25 +202,24 @@
         }
       ?>
       
-        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $i;?>.</td>
-        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->test_request_name;?></td>
-        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->specification;?></td>
-        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->conclusions;?></td>
-        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->done_by;?></td>
-        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->timestamp;?></td>        
+        <td style="padding:4px;text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $i;?>.</td>
+        <td style="padding:4px;text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row->test_request_name;?></td>
+        <td style="padding:4px;text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row->conclusions;?></td>
+        <td style="padding:4px;text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row->done_by;?></td>
+        <td style="padding:4px;text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo $row->timestamp;?></td>        
         <td 
           <?php 
 
           if($row->approve_status == 0){
         
-              echo'style="text-align: center;"';
+              echo'style="padding:4px;text-align: center;border-bottom: solid 1px #c0c0c0;"';
               ?>>
 
               <a href="<?php echo base_url().'coa/approve/'.$row->id.'/'.$row->test_request_id?>" height="20px" width ="20px"><img src="<?php echo base_url().'images/icons/add_field.png';?>" height="10px" width="10px">Approve COA </a>
               <?php
 
          }else{
-             echo'style="text-align:center;"';
+             echo'style="padding:4px;text-align:center;border-bottom: solid 1px #c0c0c0;"';
              ?>>
              <a href="<?php echo base_url().'coa/final_coa/'.$row->id.'/'.$row->test_request_id?>" height="20px" width ="20px"><img src="<?php echo base_url().'images/icons/add_field.png';?>" height="10px" width="10px">View COA</a>
             <?php

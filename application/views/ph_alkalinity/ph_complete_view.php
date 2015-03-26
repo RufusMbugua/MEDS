@@ -129,7 +129,7 @@
                   <table width="100%" align="center">
                       <tr>
                         <td  align="left" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">Specifications</td>
-                        <td  align="left" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><input type="text" size="7" name="range_minimum" id="range_minimum" value="<?php echo $monograph_specifications[0]['range_minimum']?>"> - <input type="text" name="range_minimum" size="7" id="range_minimum" value="<?php echo $monograph_specifications[0]['range_minimum']?>"><input type="hidden" name="specification" value="<?php echo $monograph_specifications[0]['monograph_specifications']?>"></td>
+                        <td  align="left" style="padding:4px;border-bottom: solid 1px #c4c4ff;background-color: #ffffff;"><?php echo $monograph_specifications[0]['monograph_specifications']?></td>
                       </tr>
                       <tr>
                         <td align="left" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">Method Used</td>

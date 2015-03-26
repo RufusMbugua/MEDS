@@ -612,118 +612,53 @@
       var determination_one = (Math.abs(document.getElementById('d_one_pkt').value) * Math.abs(document.getElementById('d_one_wstd').value) * Math.abs(document.getElementById('d_one_awt').value) * 100 * Math.abs(document.getElementById('d_one_df').value) * Math.abs(document.getElementById('d_one_potency').value))/(Math.abs(document.getElementById('d_one_pkstd').value) * Math.abs(document.getElementById('d_one_wt').value) * Math.abs(document.getElementById('d_one_lc').value));
       var determination_two = (Math.abs(document.getElementById('d_two_pkt').value) * Math.abs(document.getElementById('d_two_wstd').value) * Math.abs(document.getElementById('d_two_awt').value) * 100 * Math.abs(document.getElementById('d_two_df').value) * Math.abs(document.getElementById('d_two_potency').value))/(Math.abs(document.getElementById('d_two_pkstd').value) * Math.abs(document.getElementById('d_two_wt').value) * Math.abs(document.getElementById('d_two_lc').value));
       var determination_three = (Math.abs(document.getElementById('d_three_pkt').value) * Math.abs(document.getElementById('d_three_wstd').value) * Math.abs(document.getElementById('d_three_awt').value) * 100 * Math.abs(document.getElementById('d_three_df').value) * Math.abs(document.getElementById('d_three_potency').value))/(Math.abs(document.getElementById('d_three_pkstd').value) * Math.abs(document.getElementById('d_three_wt').value) * Math.abs(document.getElementById('d_three_lc').value));
-      // var determination_four = (Math.abs(document.getElementById('d_four_pkt').value) * Math.abs(document.getElementById('d_four_wstd').value) * Math.abs(document.getElementById('d_four_awt').value) * 100 * Math.abs(document.getElementById('d_four_df').value) * Math.abs(document.getElementById('d_four_potency').value))/(Math.abs(document.getElementById('d_four_pkstd').value) * Math.abs(document.getElementById('d_four_wt').value) * Math.abs(document.getElementById('d_four_lc').value));
-      // var determination_five = (Math.abs(document.getElementById('d_five_pkt').value) * Math.abs(document.getElementById('d_five_wstd').value) * Math.abs(document.getElementById('d_five_awt').value) * 100 * Math.abs(document.getElementById('d_five_df').value) * Math.abs(document.getElementById('d_five_potency').value))/(Math.abs(document.getElementById('d_five_pkstd').value) * Math.abs(document.getElementById('d_five_wt').value) * Math.abs(document.getElementById('d_five_lc').value));
-      // var determination_six = (Math.abs(document.getElementById('d_six_pkt').value) * Math.abs(document.getElementById('d_six_wstd').value) * Math.abs(document.getElementById('d_six_awt').value) * 100 * Math.abs(document.getElementById('d_six_df').value) * Math.abs(document.getElementById('d_six_potency').value))/(Math.abs(document.getElementById('d_six_pkstd').value) * Math.abs(document.getElementById('d_six_wt').value) * Math.abs(document.getElementById('d_six_lc').value));
       
       document.getElementById('d_one_p_lc').value = determination_one.toFixed(5);
       document.getElementById('d_two_p_lc').value = determination_two.toFixed(5);
       document.getElementById('d_three_p_lc').value = determination_three.toFixed(5);
-      // document.getElementById('d_four_p_lc').value = determination_four.toFixed(5);
-      // document.getElementById('d_five_p_lc').value = determination_five.toFixed(5);
-      // document.getElementById('d_six_p_lc').value = determination_six.toFixed(5);
-
+      
       var average_det= (Math.abs(document.getElementById('d_one_p_lc').value)+ Math.abs(document.getElementById('d_two_p_lc').value)+ Math.abs(document.getElementById('d_three_p_lc').value))/3;
-      // var average_det_two= (Math.abs(document.getElementById('d_four_p_lc').value)+ Math.abs(document.getElementById('d_five_p_lc').value)+ Math.abs(document.getElementById('d_six_p_lc').value))/3;
        
       var determinations= [Math.abs(document.getElementById('d_one_p_lc').value), Math.abs(document.getElementById('d_two_p_lc').value), Math.abs(document.getElementById('d_three_p_lc').value)];
-      // var determinations_two= [Math.abs(document.getElementById('d_four_p_lc').value), Math.abs(document.getElementById('d_five_p_lc').value), Math.abs(document.getElementById('d_six_p_lc').value)];
       
       var highest_value =Math.max.apply(Math,determinations);
       var lowest_value =Math.min.apply(Math,determinations);
 
-      // var highest_value_two =Math.max.apply(Math,determinations_two);
-      // var lowest_value_two =Math.min.apply(Math,determinations_two);
-
       var variance_determinations=0;
-      // var variance_determinations_two=0; 
-      
-      // for(var i=0;i<determinations_two.length; i++){
-      //      variance_determinations_two += Math.pow((determinations_two [i]-average_det_two),2);       
-      // }
 
       for(var i=0;i<determinations.length; i++){
            variance_determinations += Math.pow((determinations [i]-average_det),2);       
       }
 
       var a=determinations.length;
-      // var b=determinations_two.length;
-
+      
       var determination_sd= Math.sqrt((variance_determinations)/(a-1));
       var determination_rsd=Math.abs((determination_sd/average_det)*100);
-      
-      // var determination_sd_two= Math.sqrt((variance_determinations_two)/(b-1));
-      // var determination_rsd_two=Math.abs((determination_sd_two/average_det_two)*100);
       
       document.getElementById('det_min').value = lowest_value.toFixed(2);
       document.getElementById('det_max').value = highest_value.toFixed(2);
 
-      // document.getElementById('nlt_min_tolerance_det').value = lowest_value.toFixed(2);
-      // document.getElementById('nlt_max_tolerance_det').value = highest_value.toFixed(2);
-
-      // document.getElementById('ngt_min_tolerance_det').value = lowest_value.toFixed(2);
-      // document.getElementById('ngt_max_tolerance_det').value = highest_value.toFixed(2);
-
-      // document.getElementById('range_min_tolerance_det').value = lowest_value.toFixed(2);
-      // document.getElementById('range_max_tolerance_det').value = highest_value.toFixed(2);
-
+      
       document.getElementById('determination_average').value = average_det.toFixed(5);
-      // document.getElementById('range_result').value = average_det.toFixed(5);
       document.getElementById('determination_sd').value = determination_sd.toFixed(5);
       document.getElementById('determination_rsd').value = determination_rsd.toFixed(5);
       document.getElementById('results_determination_sd').value = determination_sd.toFixed(5);
       document.getElementById('results_determination_rsd').value = determination_rsd.toFixed(5);
       
 
-      // document.getElementById('det_min_two').value = lowest_value_two.toFixed(2);
-      // document.getElementById('det_max_two').value = highest_value_two.toFixed(2);
-
-      // document.getElementById('nlt_min_tolerance_det_two').value = lowest_value_two.toFixed(2);
-      // document.getElementById('nlt_max_tolerance_det_two').value = highest_value_two.toFixed(2);
-
-      // document.getElementById('ngt_min_tolerance_det_two').value = lowest_value_two.toFixed(2);
-      // document.getElementById('ngt_max_tolerance_det_two').value = highest_value_two.toFixed(2);
-
-      // document.getElementById('range_min_tolerance_det_two').value = lowest_value_two.toFixed(2);
-      // document.getElementById('range_max_tolerance_det_two').value = highest_value_two.toFixed(2);
-
-      // document.getElementById('determination_average_two').value = average_det_two.toFixed(5);
-      // document.getElementById('determination_sd_two').value = determination_sd_two.toFixed(5);
-      // document.getElementById('determination_rsd_two').value = determination_rsd_two.toFixed(5);
-      // document.getElementById('results_determination_sd_two').value = determination_sd_two.toFixed(5);
-      // document.getElementById('results_determination_rsd_two').value = determination_rsd_two.toFixed(5);
-      
-
-
-
       var equivalent_to = (Math.abs(document.getElementById('equivalent_to_lc').value)*average_det)/100; 
       document.getElementById('determination_equivalent_to').value = equivalent_to.toFixed(5);
-
-      // var equivalent_to_two = (Math.abs(document.getElementById('equivalent_to_lc_two').value)*average_det_two)/100; 
-      // document.getElementById('determination_equivalent_to_two').value = equivalent_to_two.toFixed(5);
 
       var min_tolerance=0;
       var max_tolerance=0;
       var new_min_tolerance_det=0;
       var new_max_tolerance_det=0;
 
-      // var min_tolerance_two=0;
-      // var max_tolerance_two=0;
-      // var new_min_tolerance_det_two=0;
-      // var new_max_tolerance_det_two=0;
-
       var comment_conclusion= new String();
       var comment_a= new String();
       var comment_b= new String();
       var comment_c= new String();
       
-      // var comment_conclusion_two= new String();
-      // var comment_a_two= new String();
-      // var comment_b_two= new String();
-      // var comment_c_two= new String();
-      
-      //var comment_d= new string();
-
       min_tolerance=[document.getElementById('min_tolerance').value];
       max_tolerance=[document.getElementById('max_tolerance').value];
 
@@ -798,53 +733,6 @@
             document.getElementById('max_tolerance_comment').value =comment_b;
             document.getElementById('range_tolerance_comment').value =comment_c;
             document.getElementById('conclusion').value =comment_d;
-
-      
-      // if(max_tolerance_two==0 || max_tolerance_two==""){
-      //       comment_b_two= "";
-      // }else if(max_tolerance_two < lowest_value_two || max_tolerance_two > highest_value_two){
-      //       comment_b_two= "Not Ok";
-      //       comment_conclusion_two="Does Not Comply";
-      //        // comment_d="The sample supplied Does Not comply to";
-      //       document.getElementById('test_conclusion_two').value =comment_conclusion_two;
-      // }else{
-      //       comment_b_two="OK";
-      //       comment_conclusion_two="Complies";
-      //       // comment_d="The sample supplied Complies to";
-      //       document.getElementById('test_conclusion_two').value =comment_conclusion_two;
-      // }
-
-      // if(new_min_tolerance_det_two==0 || new_min_tolerance_det_two==""){
-      //       comment_c_two= "";
-      // }else if(new_min_tolerance_det_two < lowest_value_two || new_min_tolerance_det_two > highest_value_two){
-      //       comment_c_two= "Not Ok";
-      //       comment_conclusion_two="Does Not Comply";
-      //       comment_d_two="The sample supplied Does Not comply to";
-      //       document.getElementById('test_conclusion_two').value =comment_conclusion_two;
-      // }else{
-      //       comment_c_two="OK";
-      //       comment_conclusion_two="Complies";
-      //       comment_d_two="The sample supplied Complies to";
-      //       document.getElementById('test_conclusion_two').value =comment_conclusion_two;
-      // }
-      //       document.getElementById('min_tolerance_comment_two').value =comment_c_two;
-      // if(new_max_tolerance_det_two==0 || new_max_tolerance_det_two==""){
-      //       comment_c_two= "";
-      // }else if(new_max_tolerance_det_two < lowest_value_two || new_max_tolerance_det_two > highest_value_two){
-      //       comment_c_two= "Not Ok";
-      //       comment_d_two="The sample supplied Does Not comply to";
-      //       comment_conclusion_two="Does Not Comply";
-      //       document.getElementById('test_conclusion_two').value =comment_conclusion_two;
-      // }else{
-      //       comment_c_two="OK";
-      //       comment_conclusion_two="Complies";
-      //       comment_d_two="The sample supplied Complies to";
-      //       document.getElementById('test_conclusion_two').value =comment_conclusion_two;
-      // }     
-            // document.getElementById('min_tolerance_comment_two').value =comment_a_two;
-            // document.getElementById('max_tolerance_comment_two').value =comment_b_two;
-            // document.getElementById('range_tolerance_comment_two').value =comment_c_two;
-            // document.getElementById('conclusion_two').value =comment_d_two;
 
       }
 
@@ -1103,6 +991,7 @@ $(document).ready(function(){
       });
 
             $('.sample_one_average').val(average_rounded); 
+            $("#d_one_pkt").val(average_rounded);
 
 
       });

@@ -30,6 +30,30 @@ class Test_Identification extends CI_Controller{
 		$this->load->view('tests/identification/test_identification_view', $data);
 		
 	}
+	function index_meltingpoint(){			
+		$test_type = $this->uri->segment(5);
+        $results = $this->test_identification_model->general();
+		
+		$data['results'] = $results['test_request'][0];
+		$data['sql_standards'] = $results['standards'];
+		$data['sql_reagents'] = $results['reagents'];
+		$data['component_names'] = $results['component_names'];
+		$data['component_category'] = $results['component_category'];
+		$data['query_e'] = $results['equipment'];
+
+		foreach ($results['monograph_specs'] as $key => $value) {
+		if ($value['test_type']==$test_type) {
+
+			$data['specs'] = $value;
+
+		}else{
+			$data['specs'] = "No info";
+
+		}}		
+				
+		$this->load->view('tests/identification/test_identification_meltingpoint_view', $data);
+		
+	}
 	function index_chemical(){			
 
 		$test_type = $this->uri->segment(5);
@@ -163,6 +187,21 @@ class Test_Identification extends CI_Controller{
 
 		$this->load->view('tests/identification/test_identification_monograph_assay_view',$data);
 	}
+	function monograph_meltingpoint(){		
+
+		$test_request = $this->uri->segment(4);
+		$test_type = $this->uri->segment(5);
+		$results = $this->test_identification_model->general();
+		
+		
+		$data['results'] = $results['test_request'][0];	
+		$data['component_category'] = $results['component_category'];
+		$data['components'] = $results['components'];	
+		$data['monograph_specs']=
+		$this->db->select('*')->get_where('monograph_specifications', array('test_request_id' => $test_request,'test_type'=>$test_type))->result_array();
+
+		$this->load->view('tests/identification/test_identification_monograph_meltingpoint_view',$data);
+	}
 
 	function monograph_chemical(){
 
@@ -188,7 +227,7 @@ class Test_Identification extends CI_Controller{
 	}
 	function monograph_infrared(){
 		
-   $test_request = $this->uri->segment(4);
+        $test_request = $this->uri->segment(4);
 		$results = $this->test_identification_model->general();
 		
 		$data['results'] = $results['test_request'][0];		
@@ -199,12 +238,13 @@ class Test_Identification extends CI_Controller{
 	}
 	function monograph_thin_layer(){
 		
-   $test_request = $this->uri->segment(4);
+   		$test_request = $this->uri->segment(4);
 		$results = $this->test_identification_model->general();
 		
 		$data['results'] = $results['test_request'][0];		
-		$data['components'] = $results['components'];			
-		$data['monograph_specs']=	$this->db->select('*')->get_where('monograph_specifications', array('test_request_id' => $test_request,'test_type'=>'27'))->result_array();
+		$data['components'] = $results['components'];
+		$data['full_monograph']=	$this->db->select('*')->get_where('full_monograph', array('test_request_id' => $test_request))->result_array();
+		$data['monograph_specs']=	$this->db->select('*')->get_where('monograph_specifications', array('test_request_id' => $test_request,'test_type'=>'28'))->result_array();
 				
 		$this->load->view('tests/identification/test_identification_monograph_thin_layer_view',$data);
 	}
@@ -232,6 +272,9 @@ class Test_Identification extends CI_Controller{
 
 		$sql=$this->db->get_where('identification', array('test_request' =>$test_request))->result_array();	    
 	    $data['info']=$sql[0];
+
+	    $data['monograph_specifications']=
+	    $this->db->select('*')->get_where('monograph_specifications', array('test_request_id' => $test_request))->result_array();
 
 		$full_monograph=$this->db->select('*')->get_where('full_monograph', array('test_request_id' => $test_request))->result_array();
 		$data['full_monograph']=$full_monograph[0];
@@ -385,6 +428,12 @@ class Test_Identification extends CI_Controller{
 			$this->test_identification_model->save_assay();		
 		}
 	}
+	function worksheet_meltingpoint(){	
+		
+		if ($this->input->post()) {
+			$this->test_identification_model->save_assay();		
+		}
+	}
 
 	function worksheet_uv(){
 
@@ -429,6 +478,12 @@ class Test_Identification extends CI_Controller{
 
 		if ($this->input->post('save_assay_monograph')) {
 			$this->test_identification_model->save_assay_monograph();
+		}
+	}
+	function save_meltingpoint_monograph(){		
+
+		if ($this->input->post('save_meltingpoint_monograph')) {
+			$this->test_identification_model->save_meltingpoint_monograph();
 		}
 	}
 	function save_hplc_monograph(){	

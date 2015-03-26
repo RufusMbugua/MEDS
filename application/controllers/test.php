@@ -55,13 +55,8 @@ function index(){
     $data['assay_ultraviolet_single_component']=$this->db->select('assay_ultraviolet_single_component.test_status')->get_where('assay_ultraviolet_single_component', array('test_request_id' => $trid))->result_array();
     $data['assay_ultraviolet_two_components']=$this->db->select('assay_ultraviolet_two_components.test_status')->get_where('assay_ultraviolet_two_components', array('test_request_id' => $trid))->result_array();
     $data['water_method']=$this->db->select('*')->get_where('water_method', array('test_request_id' => $trid))->result_array();
-    $fri=$this->db->select('*')->get_where('friability', array('test_request_id' => $trid))->result_array();
-     $return= array();
-    foreach ($fri as $key => $value_c) {
-          $return[]=$value_c['test_status'];
-    }
-    $data['friability']=$return;
-
+    $data['friability']=$this->db->select('*')->get_where('friability', array('test_request_id' => $trid))->result_array();
+    
     $ph_alkalinity=$this->db->select('*')->get_where('ph_alkalinity', array('test_request_id' => $trid))->result_array();
     $return= array();
     foreach ($ph_alkalinity as $key => $value_b) {
@@ -231,7 +226,7 @@ function save_monograph(){
          
     $config['upload_path'] = './uploads/';
     $config['allowed_types'] = 'gif|jpg|png|pdf|doc';
-    $config['max_size'] = '100000';
+    $config['max_size'] = '3000000';
     $config['max_width']  = '1024';
     $config['max_height']  = '768';
 
@@ -262,7 +257,8 @@ function save_monograph(){
         }
     }
       
-  }  
+  }
+    
   function view_monograph(){
 
     $assignment_id= $this->uri->segment(3);
@@ -355,7 +351,7 @@ function edit_monograph(){
          
     $config['upload_path'] = './uploads/';
     $config['allowed_types'] = 'gif|jpg|png|pdf|doc';
-    $config['max_size'] = '100000';
+    $config['max_size'] = '3000000';
     $config['max_width']  = '1024';
     $config['max_height']  = '768';
 

@@ -3,139 +3,139 @@ function calc() {
     var total = document.getElementById('package_size').value * document.getElementById('quantity').value;
     document.getElementById('total_quantity').value = total;
 }
-    $(document).ready(function(){
+ //    $(document).ready(function(){
         
-        $('#batch_number').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#batch_number_1').show();
-            $('#batch_number_r').hide();
-          }else{
-            $('#batch_number_1').hide();
-            $('#batch_number_r').show();
-	    }
-	})
-	$('#certificate_number').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#certificate_number_1').show();
-            $('#certificate_number_r').hide();
-          }else{
-            $('#certificate_number_1').hide();
-            $('#certificate_number_r').show();
-          }
-        })
-	$('#card_number').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#card_number_1').show();
-            $('#card_number_r').hide();
-          }else{
-            $('#card_number_1').hide();
-            $('#card_number_r').show();
-          }
-        })
-	$('#manufacturer_supplier').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#manufacturer_supplier_1').show();
-            $('#manufacturer_supplier_r').hide();
-          }else{
-            $('#manufacturer_supplier_1').hide();
-            $('#manufacturer_supplier_r').show();
-          }
-        })
-	$('#item_description').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#item_description_1').show();
-            $('#item_description_r').hide();
-          }else{
-            $('#item_description_1').hide();
-            $('#item_description_r').show();
-          }
-        })
-	$('#msds').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#msds_1').show();
-            $('#msds_r').hide();
-          }else{
-            $('#msds_1').hide();
-            $('#msds_r').show();
-          }
-        })
-	$('#location').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#location_1').show();
-            $('#location_r').hide();
-          }else{
-            $('#location_1').hide();
-            $('#location_r').show();
-          }
-        })
+ //        $('#batch_number').change('live',function(){
+ //          if ($.trim(this.value)!=""){
+ //            $('#batch_number_1').show();
+ //            $('#batch_number_r').hide();
+ //          }else{
+ //            $('#batch_number_1').hide();
+ //            $('#batch_number_r').show();
+	//     }
+	// })
+	// $('#certificate_number').change('live',function(){
+ //          if ($.trim(this.value)!=""){
+ //            $('#certificate_number_1').show();
+ //            $('#certificate_number_r').hide();
+ //          }else{
+ //            $('#certificate_number_1').hide();
+ //            $('#certificate_number_r').show();
+ //          }
+ //        })
+	// $('#card_number').change('live',function(){
+ //          if ($.trim(this.value)!=""){
+ //            $('#card_number_1').show();
+ //            $('#card_number_r').hide();
+ //          }else{
+ //            $('#card_number_1').hide();
+ //            $('#card_number_r').show();
+ //          }
+ //        })
+	// $('#manufacturer_supplier').change('live',function(){
+ //          if ($.trim(this.value)!=""){
+ //            $('#manufacturer_supplier_1').show();
+ //            $('#manufacturer_supplier_r').hide();
+ //          }else{
+ //            $('#manufacturer_supplier_1').hide();
+ //            $('#manufacturer_supplier_r').show();
+ //          }
+ //        })
+	// $('#item_description').change('live',function(){
+ //          if ($.trim(this.value)!=""){
+ //            $('#item_description_1').show();
+ //            $('#item_description_r').hide();
+ //          }else{
+ //            $('#item_description_1').hide();
+ //            $('#item_description_r').show();
+ //          }
+ //        })
+	// $('#msds').change('live',function(){
+ //          if ($.trim(this.value)!=""){
+ //            $('#msds_1').show();
+ //            $('#msds_r').hide();
+ //          }else{
+ //            $('#msds_1').hide();
+ //            $('#msds_r').show();
+ //          }
+ //        })
+	// $('#location').change('live',function(){
+ //          if ($.trim(this.value)!=""){
+ //            $('#location_1').show();
+ //            $('#location_r').hide();
+ //          }else{
+ //            $('#location_1').hide();
+ //            $('#location_r').show();
+ //          }
+ //        })
         
-        $('#package_size').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#package_size_1').show();
-            $('#package_size_r').hide();
-          }else{
-            $('#package_size_1').hide();
-            $('#package_size_r').show();
-          }
-        })
-	$('#expiry_date').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#expiry_date_1').show();
-            $('#expiry_date_r').hide();
-          }else{
-            $('#expiry_date_1').hide();
-            $('#expiry_date_r').show();
-          }
-        })
-        $('#reorder_quantity').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#reorder_quantity_1').show();
-            $('#reorder_quantitymodel_r').hide();
-          }else{
-            $('#reorder_quantity_1').hide();
-            $('#reorder_quantity_r').show();
-          }
-        })
-	$('#comments').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#comments_1').show();
-            $('#comments_r').hide();
-          }else{
-            $('#comments_1').hide();
-            $('#comments_r').show();
-          }
-        })
-	;
-        $('#submit').click(function(){         
-            count =0;
-            $('.field').each(function(){
-               if ($.trim(this.value)=="")
-               count ++;
-            });
-            if(count>0){
-              alert(count+' Fields Have Not yet been filled, All fields on this form are MANDATORY')
-               return false;
-            }else{
+ //        $('#package_size').change('live',function(){
+ //          if ($.trim(this.value)!=""){
+ //            $('#package_size_1').show();
+ //            $('#package_size_r').hide();
+ //          }else{
+ //            $('#package_size_1').hide();
+ //            $('#package_size_r').show();
+ //          }
+ //        })
+	// $('#expiry_date').change('live',function(){
+ //          if ($.trim(this.value)!=""){
+ //            $('#expiry_date_1').show();
+ //            $('#expiry_date_r').hide();
+ //          }else{
+ //            $('#expiry_date_1').hide();
+ //            $('#expiry_date_r').show();
+ //          }
+ //        })
+ //        $('#reorder_quantity').change('live',function(){
+ //          if ($.trim(this.value)!=""){
+ //            $('#reorder_quantity_1').show();
+ //            $('#reorder_quantitymodel_r').hide();
+ //          }else{
+ //            $('#reorder_quantity_1').hide();
+ //            $('#reorder_quantity_r').show();
+ //          }
+ //        })
+	// $('#comments').change('live',function(){
+ //          if ($.trim(this.value)!=""){
+ //            $('#comments_1').show();
+ //            $('#comments_r').hide();
+ //          }else{
+ //            $('#comments_1').hide();
+ //            $('#comments_r').show();
+ //          }
+ //        })
+	// ;
+ //        $('#submit').click(function(){         
+ //            count =0;
+ //            $('.field').each(function(){
+ //               if ($.trim(this.value)=="")
+ //               count ++;
+ //            });
+ //            if(count>0){
+ //              alert(count+' Fields Have Not yet been filled, All fields on this form are MANDATORY')
+ //               return false;
+ //            }else{
               
-            $.ajax({
-                type:"post",
-                url:"<?php echo base_url();?>reagents_inventory/save",
-                data:$('#reagents_inventory_record_form').serialize(),
-                success:function(data){
-		    redirect_url = "<?php echo base_url();?>reagents_inventory_record/Get"
-                    data='Success';
-                    window.location.href = redirect_url;
-                },
-                //error:function(){
-                   //alert('an error occured'); 
-                //}
+ //            $.ajax({
+ //                type:"post",
+ //                url:"<?php echo base_url();?>reagents_inventory/save",
+ //                data:$('#reagents_inventory_record_form').serialize(),
+ //                success:function(data){
+	// 	    redirect_url = "<?php echo base_url();?>reagents_inventory_record/Get"
+ //                    data='Success';
+ //                    window.location.href = redirect_url;
+ //                },
+ //                //error:function(){
+ //                   //alert('an error occured'); 
+ //                //}
                 
-            })
+ //            })
            
-            }
+ //            }
            
-            })
-    })
+ //            })
+ //    })
 </script>
 <div class="modal-dialog">
 <div class="modal-content">
@@ -154,7 +154,7 @@ function calc() {
             <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><b>Document:Official Form</b></td>
             <td width="150px" height="25px" colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;color:#000000;"><b>REFERENCE NUMBER</b></td>
             <td colspan="3" style="padding:4px;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">
-              <input type="text" id="reference_number" name="reference_number" class="field"/>
+              <input type="text" id="reference_number" name="reference_number" value="MEDS/QC/RE/01-01" class="field"/>
               <span id="reference_number_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
               <span id="reference_number_r" style="color:red; display:none">Fill this field</span>
             </td>

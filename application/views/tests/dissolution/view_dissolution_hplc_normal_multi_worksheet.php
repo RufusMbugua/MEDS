@@ -80,7 +80,7 @@
      <input type="hidden" name ="assignment" value ="<?php echo $assignment;?>"><input type="hidden" name ="test_request" value ="<?php echo $test_request;?>">
       <input type="hidden" name ="analyst" value ="<?php echo $user['logged_in']['fname']." ".$user['logged_in']['lname'];?>"> 
       <tr>
-        <td colspan="6"  style="padding:8px;text-align:right;background-color:#fdfdfd;padding:8px;border-bottom:solid 1px #bfbfbf;"><a href="<?php echo base_url().'test/index/'.$assignment.'/'.$test_request?>"><img src="<?php echo base_url().'images/icons/assign.png';?>" height="20px" width="20px">Back to Test Lists</a>
+        <td colspan="6"  style="padding:8px;text-align:right;background-color:#fdfdfd;padding:8px;border-bottom:solid 1px #bfbfbf;"><a href="<?php echo base_url().'test/index/'.$assignment.'/'.$test_request;?>"><img src="<?php echo base_url().'images/icons/assign.png';?>" height="20px" width="20px">Back to Test Lists</a>
         </td>
     </tr>
     <tr>
@@ -162,7 +162,7 @@
                  
                foreach($components as $comps):
                 ?>       
-                 <a class="component_btn " href="<?php echo base_url().'test_dissolution/components'.$comps['component'];?>"><?php  echo '<b>'.$comps['component'].' RESULTS </b>';?>&nbsp</a>
+                 <a class="component_btn " href="<?php echo base_url().'test_dissolution/components/'.$assignment.'/'.$test_request.'/'.$comps['component'];?>"><?php  echo '<b>'.$comps['component'].' RESULTS </b>';?>&nbsp</a>
                 <?php    
                 endforeach;          
             }else{
@@ -636,35 +636,23 @@
               <td style="color:#000;padding:8px;"><?php echo $query_e['sample_injection_sequence'];?></td>
               <td style="color:#000;padding:8px;"><?php echo $query_e['sample_injection_sequence_comment'];?></td>
             </tr>
-            <tr>
-              <td style="color:#000;padding:8px;">Chromatograms Attached</td>
-              <td style="color:#000;padding:8px;"><?php echo $query_e['chromatograms_attached'];?></td>
-              <td style="color:#000;padding:8px;"><?php echo $query_e['chromatograms_attached_comment'];?></td>
-            </tr>
           </table>
         </td>
        </tr>         
       <tr>
-        <td colspan="8" align="left"  style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>Conclusion</b></td>
+        <td colspan="8" align="center"  style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>Conclusion</b></td>
       </tr>
       <tr>
-        <td colspan="8" style="padding:8px;border-bottom:solid 1px #c4c4ff;"><?php if ($query_e['choice'] = 0){echo "Failed";}elseif($query_e['choice'] = 1){echo "Passed";}?><tr>
-       <td colspan="8" style="padding:8px;">
-        <table border="0" width="90%" cellpadding="8px" align="center">
-          <tr>
-            <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:right;">Supervisor: <?php echo $query_e['supervisor'];?></td>
-            <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:left;">Date: <?php echo $query_e['date'];?></td>
-          </tr>
-          
-          <tr>
-            <td colspan="2" style="padding:4px;">Further Comments:</td>
-          </tr>
-          <tr>
-            <td colspan="2" style="padding:4px;text-align:center;"><?php echo $query_e['further_comments'];?></td>
-          </tr>
-        </table>
-      </td>
-    </tr>
+        <td colspan="8" align="center"  style="padding:8px;border-bottom:solid 1px #c4c4ff;">
+          <?php 
+            if($query_e['choice'] = 0){
+              echo "DOES NOT COMPLY";
+            }else if($query_e['choice'] = 1){
+              echo "COMPLIES";
+            }
+          ?>
+        </td>
+      </tr>
     </table>
    </form> 
  </div>

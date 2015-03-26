@@ -16,6 +16,10 @@ class Test_Model extends CI_Model{
 
   $s=$this->input->post('singlecomponent');
   $m=$this->input->post('multicomponent');
+
+  $amcmp=$this->input->post('multicomp_apperance');
+  $ascmp=$this->input->post('singlecomp_appearance');
+
   $testsa=$this->input->post('subtests');
   $tests= implode( ",", $testsa );
   
@@ -29,7 +33,7 @@ class Test_Model extends CI_Model{
    'assignment_id'=>$assignment_id,
    'test_request_id'=>$test_request_id,
    'serial_number'=>$this->input->post('serial_number'),
-   'appearance'=>$this->input->post('sample_appearance'),
+   'appearance'=>$amcmp,
    'components'=>$component,
    'monograph'=>$this->input->post('copypaste'),
    'monograph_path'=>$full_path,
@@ -63,7 +67,7 @@ class Test_Model extends CI_Model{
    'assignment_id'=>$assignment_id,
    'test_request_id'=>$test_request_id,
    'serial_number'=>$this->input->post('serial_number'),
-   'appearance'=>$this->input->post('sample_appearance'),
+   'appearance'=>$ascmp,
    'components'=>$component,
    'monograph'=>$this->input->post('copypaste'),
    'monograph_path'=>$full_path,

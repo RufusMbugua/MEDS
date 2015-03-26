@@ -345,6 +345,9 @@
               </td>
             </tr>
             <tr>
+                <td colspan="8" style="text-align:center;color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;border-left: solid 1px #c4c4ff;background-color: #ffffff;"> Method <input type="text" name="method_coa" id="method_coa" placeholder="eg. USP 2013"></td>
+            </tr>
+            <tr>
                 <td  height="25px" style="padding:4px;background-color:#ffffff;border-top: solid 1px #bfbfbf;text-align: center;" colspan="8" ><input class="btn" type="submit" name="submit" id="submit" value="Submit"></td>
             </tr>
        </table>

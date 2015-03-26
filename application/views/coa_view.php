@@ -140,7 +140,7 @@
         <u><h3><b>RESULTS OF ANALYSIS</b></h3></u></td>      
     </tr>
     <tr>
-      <td colspan="6"align="left" style="padding:8px;background-color:#ffffff;border-top: dotted 1px #bfbfbf;border-bottom: solid 1px #bfbfbf;"><b>Appearance:</b>&nbsp;<?php echo $query['active_ingredients']?></td>
+      <td colspan="6"align="left" style="padding:8px;background-color:#ffffff;border-top: dotted 1px #bfbfbf;border-bottom: solid 1px #bfbfbf;"><b>Appearance:</b>&nbsp;<?php echo $full_monograph[0]['appearance']?></td>
     </tr>
      <tr>
       <td colspan="6">
