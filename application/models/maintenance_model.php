@@ -12,13 +12,24 @@ class Maintenance_Model extends CI_Model{
   $comments=$this->input->post('comments');
   
   $data= array(
-   'equipment_maintenance_id'=>$id,
-   'maintenance_requirement'=>$this->input->post('maintenance_requirement'),
+   'id'=>$id,
+   'id_number'=>$this->input->post('id_number'),
+   'serial_number'=>$this->input->post('serial_number'),
+   'out_id'=>$this->input->post('out_id'),
+   'description'=>$this->input->post('description'),
+   'equipment_type'=>$this->input->post('equipment_type'),
+   'manufacturer'=>$this->input->post('manufacturer'),
+   'serial_number'=>$this->input->post('serial_number'),
+   'model'=>$this->input->post('model'),   
+   'std_range_from'=>$this->input->post('std_range_from'),  
+   'std_range_to'=>$this->input->post('std_range_to'), 
+   'requirement'=>$this->input->post('maintenance_requirement'),
    'maintenance_start'=>$this->input->post('maintenance_schedule_start'),
    'maintenance_next'=>$this->input->post('next_maintenance_schedule_start'),
-   'maintenance_interval_start'=>$this->input->post('maintenance_interval'),
-   'maintenance_specification'=>$this->input->post('maintenance_specification'),
-   'maintenance_comments'=>$this->input->post('maintenance_comments'),
+   'interval_start'=>$this->input->post('maintenance_interval'),
+   'specification'=>$this->input->post('maintenance_specification'),
+   'comments'=>$this->input->post('maintenance_comments'),
+
 
    'calibration_requirement'=>$this->input->post('calibration_requirement'),
    'calibration_start'=>$this->input->post('calibration_schedule_start'),
@@ -29,8 +40,8 @@ class Maintenance_Model extends CI_Model{
   
   );
   
-  $this->db->insert('maintenance',$data);
-  redirect('maintenance/index/'.$id);
+  $this->db->insert('equipment_maintenance',$data);
+  redirect('equipment_maintenance_records/Get'.$id);
  }
 
  function save_calibration_maintenance(){

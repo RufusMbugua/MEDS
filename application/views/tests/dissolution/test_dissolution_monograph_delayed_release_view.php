@@ -23,14 +23,23 @@
   <script type="text/javascript" src="<?php echo base_url().'js/Jquery-datatables/jquery.dataTables.js';?>"></script>
   <script>
    $(document).ready(function() {
-    /* Init DataTables */
-    $('#list').dataTable({
-     "sScrollY":"270px",
-     "sScrollX":"100%"
-    });
+
     tinymce.init({
     selector: "textarea"
-   });
+    });
+
+    // Add button functionality
+    var id=2;
+    $(document).on('click','#add_stage',function () {
+  
+        var html='<tr><td colspan="3" style="padding:8px;color: #0000fb;border-bottom:solid 1px #c4c4ff;background-color:#fdc4c8;">Stage '+id+'<input type="hidden" id="stage" name="stage'+id+'" value="'+id+'"/></td></tr><tr><td style="padding:8px;"><input type="checkbox" name="min'+id+'" id="min'+id+'" />Minimum Value</td><td style="padding:8px;"><input type="checkbox" name="max'+id+'" id="max'+id+'" />Maximum Value</td><td style="padding:8px;"><input type="checkbox" name="range" id="range'+id+'" />Range of Values</td></tr><tr><td style="color:#0000ff;padding:8px;"><input type="text" min'+id+'="min_tolerance'+id+'" id="min_tolerance'+id+'" name="min_tolerance'+id+'" placeholder="min%" size="5"/></td><td style="color:#0000ff;padding:8px;"><input type="text" max'+id+'="max_tolerance'+id+'" id="max_tolerance'+id+'" name="max_tolerance'+id+'" placeholder="max%" size="5"/></td><td style="color:#0000ff;padding:8px;"><input type="text" range'+id+'="tolerance_range'+id+'" id="tolerance_range_from'+id+'" name="tolerance_range_from'+id+'" placeholder="min%" size="5"> - <input type="text" range'+id+'="tolerance_range'+id+'" name="tolerance_range_to'+id+'" id ="tolerance_range_to'+id+'" placeholder="max%" size="5"></td></tr><tr><td align="left" style="padding:8px;border-bottom: solid 1px #c4c4ff;border-top: dotted 1px #c4c4ff;background-color: #ffffff;">Duration/Time</td><td colspan="2" align="left" style="padding:8px;border-bottom: solid 1px #c4c4ff;border-top: dotted 1px #c4c4ff;background-color: #ffffff;"><input type="text" size="7" name="time_value'+id+'" id="time" placeholder="eg. 60"> <select name="time_name'+id+'"><option value="Minutes">Minutes</option><option value="Hours">Hours</option></select></td></tr>';
+        var master = $(this).closest("table.spectable");
+     
+         master.find("tbody").append(html);
+        //alert('egfdeg')
+        id++;
+    });
+
    });
   </script>
  </head>
@@ -82,8 +91,8 @@
 </div>  
 <div id="form_wrapper">
 <div id="forms">
-<?php echo validation_errors(); ?>
-      <?php echo form_open('test_dissolution/save_delayed_release_monograph',array('id'=>'assay_view'));?>
+      <?php echo validation_errors(); ?>
+      <?php echo form_open('test_dissolution/save_delayed_release_monograph',array('id'=>'dissolution_delayed release'));?>
        
        <table class="table_form" width="75%" border="0" cellpadding="4px" align="center">
             <input type="hidden" name ="assignment" value ="<?php echo $assignment;?>"><input type="hidden" name ="test_request" value ="<?php echo $test_request;?>">
@@ -128,25 +137,39 @@
               </td>
             </tr>
             <tr>
-            <td colspan="8" style="padding:8px;">
-              <table border="0" width="80%" cellpadding="8px" align="center">
-              
-                <tr>
-                  <td><input type="checkbox" id="min" />Minimum Value</td>
-                  <td><input type="checkbox" id="max" />Maximum Value</td>
-                  <td><input type="checkbox" id="range" />Range of Values</td>
-                  </tr>
-                <tr>
-                  <td style="color:#0000ff;padding:8px;"><input type="text" min="min_tolerance" id="min_tolerance" name="min_tolerance" placeholder="min%" size="5"/></td>
-                  <td style="color:#0000ff;padding:8px;"><input type="text" max='max_tolerance' id="max_tolerance" name="max_tolerance" placeholder="max%" size="5"/></td>
-                  <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" id = "tolerance_range_from" name="tolerance_range_from" placeholder="min%" size="5"> - <input type="text" range="tolerance_range" name="tolerance_range_to" id = "tolerance_range_to" placeholder="max%" size="5" onChange="calculation_determinations()"></td>
-                  </tr>
-                <tr>
-                <tr>
-              </table>
-            <tr>
-              <td colspan="8" align="center" style="padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">
-                <textarea cols="90" rows="4" name="specification" id="specification"></textarea>
+              <td colspan="8" style="padding:8px;">
+                <table border="0" class="spectable" width="80%" cellpadding="8px" align="center">
+                  <thead>
+                    <td colspan="3" align="right"><input type="button" id="add_stage" class=" btn" value="Add"></td>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="3" style="padding:8px;color: #0000fb;border-bottom:solid 1px #c4c4ff;background-color:#fdc4c8;">Stage 1 <input type="hidden" id="stage" name="stage1" value="1"/></td>
+                    </tr>
+                    <tr>
+                      <td style="padding:8px;"><input type="checkbox" id="min" name="min"/>Minimum Value</td>
+                      <td style="padding:8px;"><input type="checkbox" id="max" name="max"/>Maximum Value</td>
+                      <td style="padding:8px;"><input type="checkbox" id="range" name="range"/>Range of Values</td>
+                    </tr>
+                    <tr>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" min="min_tolerance" id="min_tolerance" name="min_tolerance" placeholder="min%" size="5"/></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" max='max_tolerance' id="max_tolerance" name="max_tolerance" placeholder="max%" size="5"/></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" id = "tolerance_range_from" name="tolerance_range_from" placeholder="min%" size="5"> - <input type="text" range="tolerance_range" name="tolerance_range_to" id = "tolerance_range_to" placeholder="max%" size="5" ></td>
+                    </tr>
+                    <tr>
+                      <td align="left" style="padding:8px;border-bottom: solid 1px #c4c4ff;border-top: dotted 1px #c4c4ff;background-color: #ffffff;">
+                       Duration/Time
+                      </td>
+                      <td colspan="2" align="left" style="padding:8px;border-bottom: solid 1px #c4c4ff;border-top: dotted 1px #c4c4ff;background-color: #ffffff;">
+                       <input type="text" size="7" name="time_value" id="time_value" placeholder="eg. 60"> 
+                       <select name="time_name">
+                          <option value="Minutes">Minutes</option>
+                          <option value="Hours">Hours</option>
+                       </select>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </td>
             </tr>
             <tr>
@@ -169,6 +192,67 @@
        $('#range').prop('disabled', false);
     }
   }).change();
+
+  $('#min2').change(function() {
+    if($('#min2').is(':checked')){
+       $("input[min2='min_tolerance2']").show();
+       $('#max2').prop('disabled', true);
+       $('#range2').prop('disabled', true);
+    } else {
+        $("input[min2='min_tolerance2']").hide();
+       $('#max2').prop('disabled', false);
+       $('#range2').prop('disabled', false);
+    }
+  }).change();
+
+  $('#min3').change(function() {
+    if($('#min3').is(':checked')){
+       $("input[min3='min_tolerance3']").show();
+       $('#max3').prop('disabled', true);
+       $('#range3').prop('disabled', true);
+    } else {
+        $("input[min3='min_tolerance3']").hide();
+       $('#max3').prop('disabled', false);
+       $('#range3').prop('disabled', false);
+    }
+  }).change();
+
+    $('#min4').change(function() {
+    if($('#min4').is(':checked')){
+       $("input[min4='min_tolerance4']").show();
+       $('#max4').prop('disabled', true);
+       $('#range4').prop('disabled', true);
+    } else {
+        $("input[min4='min_tolerance4']").hide();
+       $('#max4').prop('disabled', false);
+       $('#range4').prop('disabled', false);
+    }
+  }).change();
+
+    $('#min5').change(function() {
+    if($('#min5').is(':checked')){
+       $("input[min5='min_tolerance5']").show();
+       $('#max5').prop('disabled', true);
+       $('#range5').prop('disabled', true);
+    } else {
+        $("input[min5='min_tolerance5']").hide();
+       $('#max5').prop('disabled', false);
+       $('#range5').prop('disabled', false);
+    }
+  }).change();
+
+  $('#min6').change(function() {
+    if($('#min6').is(':checked')){
+       $("input[min6='min_tolerance6']").show();
+       $('#max6').prop('disabled', true);
+       $('#range6').prop('disabled', true);
+    } else {
+        $("input[min6='min_tolerance6']").hide();
+       $('#max6').prop('disabled', false);
+       $('#range6').prop('disabled', false);
+    }
+  }).change();  
+
   $('#max').change(function() {
     if($('#max').is(':checked')){
        $("input[max='max_tolerance']").show();
@@ -180,6 +264,71 @@
         $('#range').prop('disabled', false);
     }
   }).change();
+
+  $('#max2').change(function() {
+    if($('#max2').is(':checked')){
+       $("input[max2='max_tolerance2']").show();
+       $('#min2').prop('disabled', true);
+       $('#range2').prop('disabled', true);
+    } else {
+        $("input[max2='max_tolerance2']").hide();
+        $('#min2').prop('disabled', false);
+        $('#range2').prop('disabled', false);
+    }
+  }).change();
+
+
+  $('#max3').change(function() {
+    if($('#max3').is(':checked')){
+       $("input[max3='max_tolerance3']").show();
+       $('#min3').prop('disabled', true);
+       $('#range3').prop('disabled', true);
+    } else {
+        $("input[max3='max_tolerance3']").hide();
+        $('#min3').prop('disabled', false);
+        $('#range3').prop('disabled', false);
+    }
+  }).change();
+
+
+  $('#max4').change(function() {
+    if($('#max4').is(':checked')){
+       $("input[max4='max_tolerance4']").show();
+       $('#min4').prop('disabled', true);
+       $('#range4').prop('disabled', true);
+    } else {
+        $("input[max4='max_tolerance4']").hide();
+        $('#min4').prop('disabled', false);
+        $('#range4').prop('disabled', false);
+    }
+  }).change();
+
+
+  $('#max5').change(function() {
+    if($('#max5').is(':checked')){
+       $("input[max5='max_tolerance5']").show();
+       $('#min5').prop('disabled', true);
+       $('#range5').prop('disabled', true);
+    } else {
+        $("input[max5='max_tolerance5']").hide();
+        $('#min5').prop('disabled', false);
+        $('#range5').prop('disabled', false);
+    }
+  }).change();
+
+
+  $('#max6').change(function() {
+    if($('#max6').is(':checked')){
+       $("input[max6='max_tolerance6']").show();
+       $('#min6').prop('disabled', true);
+       $('#range6').prop('disabled', true);
+    } else {
+        $("input[max6='max_tolerance6']").hide();
+        $('#min6').prop('disabled', false);
+        $('#range6').prop('disabled', false);
+    }
+  }).change();
+
   $('#range').change(function() {
     if($('#range').is(':checked')){
        $("input[range='tolerance_range']").show();
@@ -191,4 +340,65 @@
         $('#min').prop('disabled', false);
     }
   }).change();
+
+  $('#range2').change(function() {
+    if($('#range2').is(':checked')){
+       $("input[range2='tolerance_range2']").show();
+        $('#max2').prop('disabled', true);
+        $('#min2').prop('disabled', true);
+    } else {
+        $("input[range2='tolerance_range2']").hide();
+        $('#max2').prop('disabled', false);
+        $('#min2').prop('disabled', false);
+    }
+  }).change();
+
+  $('#range3').change(function() {
+    if($('#range3').is(':checked')){
+       $("input[range3='tolerance_range3']").show();
+        $('#max3').prop('disabled', true);
+        $('#min3').prop('disabled', true);
+    } else {
+        $("input[range3='tolerance_range3']").hide();
+        $('#max3').prop('disabled', false);
+        $('#min3').prop('disabled', false);
+    }
+  }).change();
+
+  $('#range4').change(function() {
+    if($('#range4').is(':checked')){
+       $("input[range4='tolerance_range4']").show();
+        $('#max4').prop('disabled', true);
+        $('#min4').prop('disabled', true);
+    } else {
+        $("input[range4='tolerance_range4']").hide();
+        $('#max4').prop('disabled', false);
+        $('#min4').prop('disabled', false);
+    }
+  }).change();
+
+  $('#range5').change(function() {
+    if($('#range5').is(':checked')){
+       $("input[range5='tolerance_range5']").show();
+        $('#max5').prop('disabled', true);
+        $('#min5').prop('disabled', true);
+    } else {
+        $("input[range5='tolerance_range5']").hide();
+        $('#max5').prop('disabled', false);
+        $('#min5').prop('disabled', false);
+    }
+  }).change();
+
+  $('#range6').change(function() {
+    if($('#range6').is(':checked')){
+       $("input[range6='tolerance_range6']").show();
+        $('#max6').prop('disabled', true);
+        $('#min6').prop('disabled', true);
+    } else {
+        $("input[range6='tolerance_range6']").hide();
+        $('#max6').prop('disabled', false);
+        $('#min6').prop('disabled', false);
+    }
+  }).change();
+
 </script></html

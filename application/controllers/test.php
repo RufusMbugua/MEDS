@@ -163,6 +163,7 @@ function index(){
     $data['disintegration']=$this->db->select('disintegration.status')->get_where('disintegration', array('disintegration.test_request' => $trid))->result_array();
     
     $data['identification_assay']=$this->db->select('identification.status')->get_where('identification', array('identification.test_request' => $trid))->result_array();
+    $data['identification_meltingpoint']=$this->db->select('identification_meltingpoint.status')->get_where('identification_meltingpoint', array('identification_meltingpoint.test_request' => $trid))->result_array();
     $data['identification_uv']=$this->db->select('identification_uv.status')->get_where('identification_uv', array('identification_uv.test_request' => $trid))->result_array();
     $data['identification_infrared']=$this->db->select('identification_infrared.status')->get_where('identification_infrared', array('identification_infrared.test_request' => $trid))->result_array();
     $data['identification_tlc']=$this->db->select('tlc.status')->get_where('tlc', array('tlc.test_request' => $trid))->result_array();

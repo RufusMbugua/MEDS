@@ -226,8 +226,22 @@
 				<input type ="date" name ="ht_date" value ="<?php echo $query['ht_date'];?>">
 			</td>
 			<td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Equipment Used</td>			
-			<td colspan="3"style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
+			<td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
 				<input type ="text" name ="equipment_used" value ="<?php echo $query['equipment_used'];?>">
+        <select id="theremometerused" name="theremometerused" >
+        <option selected></option>
+           <?php
+           foreach($sql_equipment as $bl_name):
+          ?>
+           
+           <option value="<?php  echo $bl_name['id_number'];?>" data-equipmentused="<?php echo $bl_name['description']; ?>"><?php  echo $bl_name['id_number'];?></option>
+            <?php
+            endforeach
+            ?>
+          </select>
+        <span id="equipment_used_g" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span>
+        <span id="equipment_used_r" style="color:white;background-color:red;padding:4px;display:none">field required</span></td>
+    
 			</td>
 	
 		</tr>

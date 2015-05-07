@@ -26,7 +26,8 @@ function Update($id){
     'comments'=>$this->input->post('comments'),
     'manufacturer_supplier'=>$this->input->post('manufacturer_supplier'),
     'reorder_quantity'=>$this->input->post('reorder_quantity'),
-    'reorder_units'=>$this->input->post('reorder_units')
+    'reorder_units'=>$this->input->post('reorder_units'),
+    'status'=>$this->input->post('status')
     );
     $this->db->update('reagents_inventory_record', $new_data,array('id' => $id));
     

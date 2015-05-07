@@ -70,6 +70,15 @@
             >Edit</th>
             <th
             <?php 
+              if($user['logged_in']['user_type']==6||$user['logged_in']['user_type']==7){
+                echo"style='dsiplay:block;text-align:center;border-right: dotted 1px #ddddff;'";
+              }else{
+                echo"style='display:none;'";
+              }
+            ?>
+            >Print</th>
+            <th
+            <?php 
               if($user['logged_in']['user_type']==6){
                 echo"style='dsiplay:block;text-align:center;border-right: dotted 1px #ddddff;'";
               }else{
@@ -175,6 +184,15 @@
           }
         ?>
        ><a href="<?php echo base_url().'update_request_record/Update/'.$row->id.'/'.$user_type_id.'/'.$department_id;?>">edit</a></td>
+       <td
+        <?php 
+          if($user['logged_in']['user_type']==6||$user['logged_in']['user_type']==7){
+            echo"style='dsiplay:block;text-align:center;border-bottom: solid 1px #c0c0c0;'";
+          }else{
+            echo"style='display:none;'";
+          }
+        ?>
+       ><a href="<?php echo base_url().'update_request_record/print_testrequestform/'.$row->id;?>">print</a></td>
        <td
         <?php 
           if($user['logged_in']['user_type']==6){

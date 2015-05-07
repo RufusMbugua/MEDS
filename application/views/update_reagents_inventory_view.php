@@ -22,6 +22,9 @@
   <script src="<?php echo base_url().'js/bootstrap.min.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/Jquery-datatables/jquery.dataTables.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'tinymce/tinymce.min.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'tinymce/textarea_script.js';?>"></script>
+ 
   <script>
    $(document).ready(function() {
     /* Init DataTables */
@@ -353,6 +356,18 @@
                                <td height="5px"  align="left" style="padding:4px;background-color:#ffffff;border-left: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><b>Expiry Date</b><span id="expiry_date_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="expiry_date_r" style="color:white;background-color:red;padding:4px;display:none">field required</span></td>
                                <td style="padding:4px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><input type="text" class="datepicker" id="expiry_date" name="expiry_date" class="field" value="<?php echo $query['expiry_date'];?>"/></td>
                                <td colspan ="2"style="padding:4px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><b>Quantity</b> <input type ="text" name="quantity" value ="<?php echo $query['quantity'];?>"></td>
+                           </tr>
+                           <tr>
+                               <td height="5px" align="left"  style="padding:4px;background-color:#ffffff;fbfbf; border-bottom: dotted 1px #bfbfbf;"><b>Status</b></td>
+                               <td style="padding:4px;border-bottom: dotted 1px #bfbfbf;border-right:solid 1px #bfbfbf;">
+                                 <select type="text" name="status">
+                                   <option value="<?php if($query['status']==0){echo "In Use";}elseif($query['status']==1){echo "Expired";}elseif($query['status']==2){echo "Damaged";}elseif($query['status']==3){echo "Exhausted";}?>"></option>
+                                   <option value="0">In Use</option>
+                                   <option value="1">Expired</option>
+                                   <option value="2">Damaged</option>
+                                   <option value="3">Exhausted</option>
+                                 </select>
+                                </td>
                            </tr>
                            <tr>
                                <td colspan="4" height="5px" style="padding:8px;text-align:left;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Comments</b><span id="comments_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="comments_r" style="color:white;background-color:red;padding:4px;display:none">field required</span></td>

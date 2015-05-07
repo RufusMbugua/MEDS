@@ -470,9 +470,9 @@
                                        
                  <?php              
 
-                  if(in_array('71', $monograph_specifications)){
+                  if(in_array('71', $monograph_specifications) && empty($identification_meltingpoint)){
                     ?>
-                    <td style='text-align:left;padding:4px;'><a href="<?php echo base_url().'test_identification/index_meltingpoint/'.$query['a'].'/'.$request[0]['tr'].'/'.$t;?>">Identification BY Melting Point Test</a>
+                    <td style='text-align:left;padding:4px;'><a href="<?php echo base_url().'test_identification/index_meltingpoint/'.$query['a'].'/'.$request[0]['tr'].'/'.$t;?>">Identification By Melting Point Test</a>
                  <?php     
                  }else{                         
                   ?>
@@ -482,7 +482,7 @@
                 ?>
                 </td>
                     <td <?php 
-                      if(empty($identification_assay)){
+                      if(empty($identification_meltingpoint)){
                     
                           echo"style='text-align:center;padding:4px;'>";
                           echo "View Worksheet";
@@ -495,7 +495,7 @@
                     </td>
                     <td 
                       <?php 
-                      if(empty($identification_assay)){
+                      if(empty($identification_meltingpoint)){
                     
                           echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
                           echo "Not Done";

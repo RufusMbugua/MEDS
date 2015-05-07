@@ -24,7 +24,8 @@
   <script>
    $(document).ready(function() {
      tinymce.init({
-    selector: "textarea"
+    selector: "textarea",
+    entity_encoding : "raw",
    });
    });
   </script>
@@ -155,7 +156,9 @@
             </tr>
             <tr>
               <td colspan="8" align="left" style="padding:8px;border-bottom: solid 1px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"> Acceptance Criteria: 
-               <textarea cols ="90" rows="3" name="specification" class="all_input_text_areas" ></textarea> 
+               Melting point of the residue obtained in test A, after recrystallisation from petroleum spirit( boiling range, 40&deg; to 60&deg; ), about
+               <input type="hidden" name="text" value="Melting point of the residue obtained in test A, after recrystallisation from petroleum spirit( boiling range, 40&&#176; to 60&#176; ), about" >
+               <input type="text" name="specification" class="all_input_text_areas" size="3" placeholder="eg. 75 &deg;"> 
               </td>
             </tr>
             <tr>

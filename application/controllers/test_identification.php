@@ -431,7 +431,7 @@ class Test_Identification extends CI_Controller{
 	function worksheet_meltingpoint(){	
 		
 		if ($this->input->post()) {
-			$this->test_identification_model->save_assay();		
+			$this->test_identification_model->save_meltingpoint();		
 		}
 	}
 

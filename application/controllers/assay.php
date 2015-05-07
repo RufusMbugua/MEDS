@@ -876,7 +876,7 @@ class Assay extends CI_Controller {
         $data['query']=$results[0];
         
         
-        $this->load->view('assay/assay_monograph_hplc_are_method_two_components',$data);
+        $this->load->view('assay/assay_specifications_multi',$data);
         $this->load->helper(array('form'));
     }
     

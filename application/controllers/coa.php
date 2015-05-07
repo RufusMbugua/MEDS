@@ -120,7 +120,9 @@ function records(){
             $this->coa_model->save_approval_model();
         }
     }
+
     function final_coa(){
+
         // $aid = $this->uri->segment(3);
         $data['test_request_id'] = $this->uri->segment(4);
         $trid = $this->uri->segment(4);
@@ -136,7 +138,7 @@ function records(){
 
         $results=$this->db->select('test_request.id AS tr,test_request.client_id,test_request.active_ingredients,test_request.manufacturer_name,test_request.manufacturer_address,test_request.batch_lot_number,
         test_request.sample_source,test_request.expiry_date,test_request.quantity_type,test_request.reference_number,test_request.applicant_address,test_request.date_time,test_request.date_manufactured,test_request.quantity_type,test_request.sample_source,test_request.laboratory_number,test_request.applicant_name,
-        test_request.quantity_remaining,test_request.quantity_submitted,test_request.applicant_ref_number,test_request.test_specification,test_request.label_claim,test_request.request_status')->get_where('test_request', array('id' => $trid))->result_array();
+        test_request.quantity_remaining,test_request.brand_name,test_request.quantity_submitted,test_request.applicant_ref_number,test_request.test_specification,test_request.label_claim,test_request.request_status')->get_where('test_request', array('id' => $trid))->result_array();
     
        $data['query']=$results[0];
        
@@ -145,6 +147,7 @@ function records(){
 
     }
 function coa_pdf(){
+
     $trid = $this->uri->segment(3);
     $approve_status=1;
 
@@ -158,7 +161,7 @@ function coa_pdf(){
 
     $results=$this->db->select('test_request.id AS tr,test_request.client_id,test_request.active_ingredients,test_request.manufacturer_name,test_request.manufacturer_address,test_request.batch_lot_number,
     test_request.sample_source,test_request.expiry_date,test_request.quantity_type,test_request.reference_number,test_request.applicant_address,test_request.date_time,test_request.brand_name,test_request.date_manufactured,test_request.quantity_type,test_request.sample_source,test_request.laboratory_number,test_request.applicant_name,
-    test_request.quantity_remaining,test_request.quantity_submitted,test_request.applicant_ref_number,test_request.test_specification,test_request.label_claim,test_request.request_status')->get_where('test_request', array('id' => $trid))->result_array();
+    test_request.quantity_remaining,test_request.brand_name,test_request.quantity_submitted,test_request.applicant_ref_number,test_request.test_specification,test_request.label_claim,test_request.request_status')->get_where('test_request', array('id' => $trid))->result_array();
     // print_r($results)
     $query=$results[0];
     	
@@ -166,7 +169,7 @@ function coa_pdf(){
   $print = "";
   $i=1;
 
-  $img=base_url().'images/meds_logo.png';// MEDS Logo
+  $img=base_url().'images/header.png';// MEDS Logo
   $style=base_url().'style/table.css';
   $date=$query['date_time'];
   $date_f=date_format($date,'d/m/y');
@@ -176,30 +179,21 @@ function coa_pdf(){
   <link href="'.$style.'" rel="stylesheet" type="text/css" />
 
    <table width="100%" bgcolor="#ffffff" cellpadding="8px" align="center" border="0">
-   <tr>
-        <td colspan="8" style="font-family:Arial;font-size:10px;text-align:right;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;">MEDS/QC/RE/04-01</td>
-   </tr>
-   <tr>
-        <td style="font-family:Arial;font-size:12px;padding:8px;border-left:solid 1px #bfbfbf;text-align:left;"><img src="'.$img.'" height="80px" width="90px"/></td>
-        <td colspan="5" height="15px" style="border-top:solid 1px #000;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #000;border-left:solid 1px #000;border-right:solid 1px #000;font-family:Arial;font-size:14px;padding:4px;text-align:center;background-color:#dfdfdf;color:#0000ff;"><b><h3>Quality Control Laboratory</h3><b></td>
-        <td  height="15px" style="border-right:solid 1px #bfbfbf;"></td>
-    </tr>
-    <tr>
-        <td height="25px" colspan="4" style="font-size:16px;padding:8px;border-left:solid 1px #bfbfbf;text-align:center;"><b><h4>MISSION FOR ESSENTIAL DRUGS & SUPPLIES</h4></b></td>
-        <td height="25px" colspan="4" style="font-size:12px;padding:8px;border-right:solid 1px #bfbfbf;text-align:center;color:#ff0000;"><b><h5><i>Assuring Quality of Medicines</i></h5></b></td>
-    </tr>
-    <tr>
-        <td colspan="8" align="center" style="font-size:16pxfont-family:Arial;padding:8px;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom: solid 1px #c4c4ff;background-color: #ffffff;"><h2><b><u>CERTIFICATE OF ANALYSIS</u></b></h2></td>
+     <tr>
+        <td colspan="8" style="padding:8px;text-align:center;">
+          <table width="100%" bgcolor="#ffffff" cellpadding="8px" align="center" border="1">
+             <tr>
+                <td colspan="8" style="padding:4px;"><img src="'.$img.'" height="280px" width="1000px"/></td>
+             </tr>
+            </table>
+        </td>
     </tr>
   </table>
   <table align="center" width="100%" bgcolor="#ffffff">
     <tr>
-        <td align="left" style="font-family:Arial;font-size:10px;padding:8px;"><b><u>REGISTRATION NUMBER:</u></b></td>
-        <td align="left" style="font-family:Arial;font-size:10px;padding:8px;">'. $query['laboratory_number'].' </td>
-        <td align="left" style="font-family:Arial;font-size:10px;padding:8px;"><b><u>Request Date:</u></b></td>
-        <td align="left" style="font-family:Arial;font-size:10px;padding:8px;">'.substr($date,0,10).'</td>
-        <td align="left" style="font-family:Arial;font-size:10px;padding:8px;"><b><u>Test Date:</u></b></td>
-        <td align="left" style="font-family:Arial;font-size:10px;padding:8px;">'. date("Y-m-d").'</td>
+        <td align="left" colspan="2" style="font-family:Arial;font-size:10px;padding:8px;"><b><u>REGISTRATION NUMBER:</u></b>'." ". $query['laboratory_number'].' </td>
+        <td align="left" colspan="2" style="font-family:Arial;font-size:10px;padding:8px;"><b><u>Request Date:</u></b>'." ".substr($date,0,10).'</td>
+        <td align="left" colspan="2" style="font-family:Arial;font-size:10px;padding:8px;"><b><u>Test Date:</u></b>'." ". date("Y-m-d").'</td>
     </tr>  
     <tr>
          <td colspan="6" align="left" style="font-family:Arial;font-size:11px;padding:8px;"><b><u>NAME OF PRODUCT:</u></b>&nbsp;&nbsp;&nbsp; <b>'. $query['active_ingredients'] .'['.$query['brand_name'].']'.'</b></td>       

@@ -106,7 +106,7 @@ class Test_Identification_Model extends CI_Model{
 		$component_name=$this->input->post('component_name');
 		$comment_assay=$this->input->post('comments');
 		$test_request=$this->input->post('test_request');
-		$test_type=$this->input->post('test_type');
+		$test_type=71;
 		$remarks = $this->input->post('choice');
 		$assignment=$this->input->post('assignment');
 		$status =1;
@@ -133,8 +133,8 @@ class Test_Identification_Model extends CI_Model{
         }
 		
 		$data_i =array(
-			'results_assay'=>$this->input->post('results'),
-			'comment_assay'=>$this->input->post('comments'),
+			'results_assay'=>$this->input->post('results_meltingpoint')."&#176;",
+			'comment_assay'=>$this->input->post('comments_meltingpoint'),
 			'choice'=>$this->input->post('conclusion'),
 			'date'=>$this->input->post('date_done'),
 			'status' =>$status,
@@ -645,6 +645,7 @@ class Test_Identification_Model extends CI_Model{
 		$assignment=$this->input->post('assignment');		
 		$analyst= $this->input->post('analyst');
 		$test_type=$this->input->post('test_type');
+		$text=$this->input->post('text');
 
 
 		$data=$this->db->select_max('id')->get('identification')->result();
@@ -661,7 +662,7 @@ class Test_Identification_Model extends CI_Model{
 			'test_id' => $test_id,
 			'test_type' => $test_type,
 			'monograph_id'=>$monograph_id,
-			'monograph_specifications' => $this->input->post('specification'),
+			'monograph_specifications' => $text." ".$this->input->post('specification')."",
 
 			);
 		$this->db->insert('monograph_specifications', $data);

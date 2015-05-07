@@ -86,30 +86,30 @@
           }
         });
 	$('#submit').click(function(){         
-            count =0;
-            $('.field').each(function(){
-               if ($.trim(this.value)=="")
-               count ++;
-            });
-            if(count >0){
-              alert( count+' All field as on this form are MANDATORY ')
-               return false;
-            }else{
+      //       count =0;
+      //       $('.field').each(function(){
+      //          if ($.trim(this.value)=="")
+      //          count ++;
+      //       });
+      //       if(count >0){
+      //         alert( count+' All field as on this form are MANDATORY ')
+      //          return false;
+      //       }else{
               
-            $.ajax({
-                type:"post",
-                url:"<?php echo base_url();?>equipment_maintenance/save",
-                data:$('#equipment_maintenance_form').serialize(),
-                success:function(data){
-		    redirect_url = "<?php echo base_url();?>equipment_maintenance_records/Get/"
-                    data='Success';
-                    window.location.href = redirect_url;
-                },
-                //error:function(){
-                   //alert('an error occured'); 
-               //}
-            })
-            }
+      //       $.ajax({
+      //           type:"post",
+      //           url:"<?php echo base_url();?>equipment_maintenance/save",
+      //           data:$('#equipment_maintenance_form').serialize(),
+      //           success:function(data){
+		    // redirect_url = "<?php echo base_url();?>equipment_maintenance_records/Get/"
+      //               data='Success';
+      //               window.location.href = redirect_url;
+      //           },
+      //           //error:function(){
+      //              //alert('an error occured'); 
+      //          //}
+      //       })
+      //       }
         })
     });
 </script>
@@ -120,7 +120,7 @@
   <h4 class="modal-title" id="equipment">MEDS Equipment Maintenance Form</h4>
 </div>
  <?php echo validation_errors(); ?>
- <?php echo form_open('equipment_maintenance/save',array('id'=>'equipment_maintenance_form'));?>
+ <?php echo form_open('maintenance/save',array('id'=>'equipment_maintenance_form'));?>
 <table bgcolor="#c4c4ff" width="100%" border="0" cellpadding="8px" align="center">
   <div class="modal-body">  
   <tr>
@@ -178,8 +178,8 @@
               <td style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><input type="text" name="std_range_from" id="std_range_from" size="10"> to <input type="text" name="std_range_to" id="std_range_to" size="10"></td>
           </tr>
           <tr>
-        	    <td colspan="2" align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;">Description<span id="description_g" style="color:Green; display:none;"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="description_r" style="color:white;background-color:red;padding:4px;display:none;">field required</span></td>
-        	    <td colspan="2" align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;">Comments<span id="comments_g" style="color:Green; display:none;"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="comments_r" style="color:white;background-color:red;padding:4px;display:none;">field required</span></td>
+        	    <td colspan="2" align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;">Description<span id="maintenance_description" style="color:Green; display:none;"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="description_r" style="color:white;background-color:red;padding:4px;display:none;">field required</span></td>
+        	    <td colspan="2" align="left"  style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;">Comments<span id="maintenance_comments" style="color:Green; display:none;"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="comments_r" style="color:white;background-color:red;padding:4px;display:none;">field required</span></td>
         	</tr>
         	<tr>
         	    <td colspan="2" style="padding:4px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><textarea type="text" cols="50" rows="4" id="description" class="field" name="description"></textarea></td>

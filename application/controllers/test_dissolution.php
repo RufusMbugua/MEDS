@@ -1,5 +1,6 @@
 <?php
 class Test_Dissolution extends CI_Controller{
+
 	function Test_Dissolution(){
 		parent::__construct();
 		$this->load->model('test_dissolution_model');		
@@ -8,7 +9,7 @@ class Test_Dissolution extends CI_Controller{
 	function index(){
 
 		$results = $this->test_dissolution_model->general();
-      $test_type = $this->uri->segment(5);
+      	$test_type = $this->uri->segment(5);
 		
 		$data['results'] = $results['test_request'][0];
 		$data['sql_standards'] = $results['standards'];
@@ -22,12 +23,12 @@ class Test_Dissolution extends CI_Controller{
 		
 		foreach ($results['monograph_specs'] as $key => $value) {
 		
-		if ($value['test_type']==$test_type) {
+		if ($value['test_type']==$test_type){
 			$results_ = $value;
 		}
 
 		}
-		if (!empty($results_)) {
+		if (!empty($results_)){
 			$data['specs'] = $results_;
 		}
 		else{
@@ -36,6 +37,7 @@ class Test_Dissolution extends CI_Controller{
 		}		
 		$this->load->view('tests/dissolution/test_dissolution_view', $data);		
 	}
+
 	function index_second_stage_uv(){
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
@@ -155,6 +157,7 @@ class Test_Dissolution extends CI_Controller{
 
     }
 	function index_delayed_release(){
+
 		$results = $this->test_dissolution_model->general();
 		
 		$data['results'] = $results['test_request'][0];
@@ -165,8 +168,10 @@ class Test_Dissolution extends CI_Controller{
 		$data['component_category'] = $results['component_category'];
 		$data['query_e'] = $results['equipment'];
 		$data['monograph'] = $results['full_monograph'];
-		$data['monograph_specs']=$results['monograph_specs'];
-		
+		$data['specs']=$results['monograph_specs'];
+		// $data['specs']=
+  //       $this->db->select('*')->get_where('monograph_specifications', array('test_request_id' => $test_request))->result_array();
+        
 		// foreach ($results['monograph_specs'] as $key => $value) {
 		
 		// if ($value['test_type']==38) {
@@ -300,6 +305,8 @@ class Test_Dissolution extends CI_Controller{
 		$data['results']=$result[0];		
 
 		$data['query_e']=$this->db->get_where('equipment_maintenance', array('status' =>0))->result_array();
+
+		$data['specs']=$this->db->get_where('monograph_specifications', array('test_request_id' =>$test_request))->result_array();
 
 	    $data['sql_columns']=
     	$this->db->select('columns.column_type,columns.serial_number,columns.column_dimensions,columns.manufacturer,columns.column_number')->get_where('columns', array('status' => $status))->result_array();
@@ -850,6 +857,7 @@ $data['monograph_specs']=	$this->db->select('*')->get_where('monograph_specifica
 		$this->load->view('tests/dissolution/test_dissolution_monograph_two_components_view',$data);
 	}
 	function monograph_delayed_release(){
+		
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);

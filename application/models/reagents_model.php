@@ -21,6 +21,7 @@ class Reagents_Model extends CI_Model{
 	     'manufacturer'=>$this->input->post('manufacturer'),
 	     'done_by'=>$this->input->post('done_by'),
 	     'date_done'=>$this->input->post('date_done')
+
 	     
 	    );
 	    

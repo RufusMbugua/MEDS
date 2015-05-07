@@ -292,9 +292,9 @@
                     <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->location;?></td>
                     <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->expiry_date;?></td>
                     <td style="text-align: center;border-bottom: solid 1px #c0c0c0;">
-                      <a data-target="#<?php echo $row->id;?>" class="btn" role="button" data-toggle="modal"><b>Print Label</b></a>
-                      <!-- <a href="<?php echo base_url().'reagents_inventory/print_labels/'.$row->id;?>"><b>Print Label</b></a> -->
-                    </td>
+                      <a href="<?php echo base_url().'print_label/generate_label/'.$row->id; ?>"><b>Print Label</b></a>
+
+                      </td>
                     <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><a href="<?php echo base_url().'log_reagents/Logs/'.$row->id;?>"><b>Log</b></a></td>
                     <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><a href="<?php echo base_url().'update_reagents_inventory_record/Update/'.$row->id;?>"><b>Edit</b></a></td>
                     <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><a href="<?php echo base_url().'inventory_record/Get/'.$row->id.'/'.$row->item_description;?>"><b>Inventory</b></a></td>

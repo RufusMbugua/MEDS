@@ -7,7 +7,7 @@
 	// Calculating the weights of standards
 	$(function() {
           $('#container').keyup(function() {
-            $('#standard_weight_1').val(($('#standard_container').val() -$('#container').val()).toFixed(4));
+            $('#standard_weight_1').val(($('#standard_container').val() -$('#container').val()).toFixed(5));
                 
             //$('#standard_weight_1').val((parseInt($('#standard_container').val())) - (parseInt($('#container').val())));
           });
@@ -20,25 +20,25 @@
    
           $('#container_3').keyup(function() {
                 
-            $('#standard_weight_3').val(($('#standard_container_3').val() -$('#container_3').val()).toFixed(4));
+            $('#standard_weight_3').val(($('#standard_container_3').val() -$('#container_3').val()).toFixed(5));
             // $('#standard_weight_3').val((parseInt($('#standard_container_3').val())) - (parseInt($('#container_3').val())));
           });
 
           $('#container_4').keyup(function() {
                 
-            $('#standard_weight_4').val(($('#standard_container_4').val() -$('#container_4').val()).toFixed(4));
+            $('#standard_weight_4').val(($('#standard_container_4').val() -$('#container_4').val()).toFixed(5));
             // $('#standard_weight_4').val((parseInt($('#standard_container_4').val())) - (parseInt($('#container_4').val())));
           });
   
           $('#container_5').keyup(function() {
                 
-            $('#standard_weight_5').val(($('#standard_container_5').val() -$('#container_5').val()).toFixed(4));
+            $('#standard_weight_5').val(($('#standard_container_5').val() -$('#container_5').val()).toFixed(5));
             // $('#standard_weight_5').val((parseInt($('#standard_container_5').val())) - (parseInt($('#container_5').val())));
           });
  
           $('#container_6').keyup(function() {
                 
-            $('#standard_weight_6').val(($('#standard_container_6').val() -$('#container_6').val()).toFixed(4));
+            $('#standard_weight_6').val(($('#standard_container_6').val() -$('#container_6').val()).toFixed(5));
             // $('#standard_weight_6').val((parseInt($('#standard_container_6').val())) - (parseInt($('#container_6').val())));
           });
 
@@ -46,7 +46,7 @@
     // Calculating the weights of samples
 
           $('#sample_container').keyup(function() {
-            values =($('#sample_weight_container').val() -$('#sample_container').val()).toFixed(4);
+            values =($('#sample_weight_container').val() -$('#sample_container').val()).toFixed(5);
 
             $('#sample_weight').val(values);
             $('#det_1_initial').val(values);
@@ -55,7 +55,7 @@
           });
   
           $('#sample_container_2').keyup(function() {
-            values_2 = ($('#sample_weight_container_2').val() -$('#sample_container_2').val()).toFixed(4)
+            values_2 = ($('#sample_weight_container_2').val() -$('#sample_container_2').val()).toFixed(5)
                 
             $('#sample_weight_2').val(values_2);
             $('#det_2_initial').val(values_2);
@@ -64,7 +64,7 @@
           });
   
           $('#sample_container_3').keyup(function() {
-            values_3 =($('#sample_weight_container_3').val() -$('#sample_container_3').val()).toFixed(4);            
+            values_3 =($('#sample_weight_container_3').val() -$('#sample_container_3').val()).toFixed(5);            
                 
             $('#sample_weight_3').val(values_3);
             $('#det_3_initial').val(values_3);
@@ -74,19 +74,19 @@
  
           $('#sample_container_4').keyup(function() {
                 
-            $('#sample_weight_4').val(($('#sample_weight_container_4').val() -$('#sample_container_4').val()).toFixed(4));
+            $('#sample_weight_4').val(($('#sample_weight_container_4').val() -$('#sample_container_4').val()).toFixed(5));
             // $('#sample_weight_4').val((parseInt($('#sample_weight_container_4').val())) - (parseInt($('#sample_container_4').val())));
           });
    
           $('#sample_container_5').keyup(function() {
                 
-            $('#sample_weight_5').val(($('#sample_weight_container_5').val() -$('#sample_container_5').val().toFixed(4)));
+            $('#sample_weight_5').val(($('#sample_weight_container_5').val() -$('#sample_container_5').val().toFixed(5)));
             // $('#sample_weight_5').val((parseInt($('#sample_weight_container_5').val())) - (parseInt($('#sample_container_5').val())));
           });
   
           $('#sample_container_6').keyup(function() {
                 
-            $('#sample_weight_6').val(($('#sample_weight_container_6').val() -$('#sample_container_6').val().toFixed(4)));
+            $('#sample_weight_6').val(($('#sample_weight_container_6').val() -$('#sample_container_6').val().toFixed(5)));
             // $('#sample_weight_6').val((parseInt($('#sample_weight_container_6').val())) - (parseInt($('#sample_container_6').val())));
           });
     
@@ -94,25 +94,25 @@
 
           $('#reagent_container_1').keyup(function() {
                 
-            $('#reagent_weight_1').val(($('#reagent_weight_container_1').val() -$('#reagent_container_1').val()).toFixed(4));
+            $('#reagent_weight_1').val(($('#reagent_weight_container_1').val() -$('#reagent_container_1').val()).toFixed(5));
             // $('#reagent_weight_1').val((parseInt($('#reagent_weight_container_1').val())) - (parseInt($('#reagent_container_1').val())));
           });
    
           $('#reagent_container_2').keyup(function() {
                 
-            $('#reagent_weight_2').val(($('#reagent_weight_container_2').val() -$('#reagent_container_2').val()).toFixed(4));
+            $('#reagent_weight_2').val(($('#reagent_weight_container_2').val() -$('#reagent_container_2').val()).toFixed(5));
             // $('#reagent_weight_2').val((parseInt($('#reagent_weight_container_2').val())) - (parseInt($('#reagent_container_2').val())));
           });
    
           $('#reagent_container_3').keyup(function() {
                 
-            $('#reagent_weight_3').val(($('#reagent_weight_container_3').val() -$('#reagent_container_3').val()).toFixed(4));
+            $('#reagent_weight_3').val(($('#reagent_weight_container_3').val() -$('#reagent_container_3').val()).toFixed(5));
             // $('#reagent_weight_3').val((parseInt($('#reagent_weight_container_3').val())) - (parseInt($('#reagent_container_3').val())));
           });
  
           $('#reagent_container_4').keyup(function() {
                 
-            $('#reagent_weight_4').val(($('#reagent_weight_container_4').val() -$('#reagent_container_4').val()).toFixed(4));
+            $('#reagent_weight_4').val(($('#reagent_weight_container_4').val() -$('#reagent_container_4').val()).toFixed(5));
             // $('#reagent_weight_4').val((parseInt($('#reagent_weight_container_4').val())) - (parseInt($('#reagent_container_4').val())));
           });
  
@@ -251,21 +251,21 @@
           $('#det_1_f').keyup(function() {
 
           	var determination_1 = ((($('#det_1_kfv').val())) * (($('#det_1_f').val()))*100)/((($('#det_1_wt').val()))*1000);               
-            $('#water_determination_1').val(determination_1.toFixed(4));
+            $('#water_determination_1').val(determination_1.toFixed(5));
             
           });
    
           $('#det_2_f').keyup(function() {
 
           	var determination_2 = ((($('#det_2_kfv').val())) * (($('#det_2_f').val()))*100)/((($('#det_2_wt').val()))*1000);               
-            $('#water_determination_2').val(determination_2.toFixed(4));
+            $('#water_determination_2').val(determination_2.toFixed(5));
             
           });
    
           $('#det_3_f').keyup(function() {
 
           	var determination_3 = ((($('#det_3_kfv').val())) * (($('#det_3_f').val()))*100)/((($('#det_3_wt').val()))*1000);               
-            $('#water_determination_3').val(determination_3.toFixed(4));
+            $('#water_determination_3').val(determination_3.toFixed(5));
           
       		var average_water =   (Math.abs(document.getElementById('water_determination_1').value) + Math.abs(document.getElementById('water_determination_2').value) + Math.abs(document.getElementById('water_determination_3').value) )/3;
       		$('#determination_avg_water').val(average_water.toFixed(5));
@@ -387,7 +387,7 @@
             }).length;
             $('.rt').each(function() {
                 sum += Number($(this).val());
-                sum_rounded = sum.toFixed(4);
+                sum_rounded = sum.toFixed(5);
                 answer = sum_rounded / boxes;
                 answer_rounded_std = answer.toFixed(3);
                 return answer_rounded;
@@ -432,7 +432,7 @@
             }).length;
             $('.peak_area').each(function() {
                 sum += Number($(this).val());
-                sum_rounded = sum.toFixed(4);
+                sum_rounded = sum.toFixed(5);
                 answer = sum_rounded / boxes;
                 answer_rounded_std = answer.toFixed(3);
                 return answer_rounded;
@@ -478,7 +478,7 @@
             }).length;
             $('.asymmetry').each(function() {
                 sum += Number($(this).val());
-                sum_rounded = sum.toFixed(4);
+                sum_rounded = sum.toFixed(5);
                 answer = sum_rounded / boxes;
                 answer_rounded_std = answer.toFixed(3);
                 return answer_rounded;
@@ -524,7 +524,7 @@
             }).length;
             $('.resolution').each(function() {
                 sum += Number($(this).val());
-                sum_rounded = sum.toFixed(4);
+                sum_rounded = sum.toFixed(5);
                 answer = sum_rounded / boxes;
                 answer_rounded_std = answer.toFixed(3);
                 return answer_rounded;
@@ -570,9 +570,9 @@
             }).length;
             $('.sample_rt').each(function() {
                 sum += Number($(this).val());
-                sum_rounded = sum.toFixed(4);
+                sum_rounded = sum.toFixed(5);
                 answer = sum_rounded / boxes;
-                answer_rounded_sample = answer.toFixed(4);
+                answer_rounded_sample = answer.toFixed(5);
             }); 
             var samples_rt = [$('#sample_rt_1').val(),$('#sample_rt_2').val(),$('#sample_rt_3').val(),$('#sample_rt_4').val(),$('#sample_rt_5').val(),$('#sample_rt_6').val()];
             // var samples_rt = [Math.abs(document.getElementById('sample_rt_1').value), Math.abs(document.getElementById('sample_rt_2').value), Math.abs(document.getElementById('sample_rt_3').value), Math.abs(document.getElementById('sample_rt_4').value), Math.abs(document.getElementById('sample_rt_5').value), Math.abs(document.getElementById('sample_rt_6').value)];
@@ -631,9 +631,9 @@ $('#sample_rt_ac').keyup(function() {
             }).length;
             $('.sample_peak_area').each(function() {
                 sum += Number($(this).val());
-                sum_rounded = sum.toFixed(4);
+                sum_rounded = sum.toFixed(5);
                 answer = sum_rounded / boxes;
-                answer_rounded = answer.toFixed(4);
+                answer_rounded = answer.toFixed(5);
             }); 
             var samples_peak_area = [$('#sample_peak_area_1').val(),$('#sample_peak_area_2').val(),$('#sample_peak_area_3').val(),$('#sample_peak_area_4').val(),$('#sample_peak_area_5').val(),$('#sample_peak_area_6').val()];
             // var samples_peak_area = [Math.abs(document.getElementById('sample_peak_area_1').value), Math.abs(document.getElementById('sample_peak_area_2').value), Math.abs(document.getElementById('sample_peak_area_3').value), Math.abs(document.getElementById('sample_peak_area_4').value), Math.abs(document.getElementById('sample_peak_area_5').value), Math.abs(document.getElementById('sample_peak_area_6').value)];
@@ -806,29 +806,29 @@ $('#sample_resolution_ac').keyup(function() {
   $(document).ready(function() {
 	$('#substance_std_1').keyup(function() {
 
-    $('#rf_std_1').val((($('#substance_std_1').val()) / ($('#solvent_std_1').val())).toFixed(4));
+    $('#rf_std_1').val((($('#substance_std_1').val()) / ($('#solvent_std_1').val())).toFixed(5));
   });
 	$('#substance_std_2').keyup(function() {
 
-    $('#rf_std_2').val((($('#substance_std_2').val()) / ($('#solvent_std_2').val())).toFixed(4));
+    $('#rf_std_2').val((($('#substance_std_2').val()) / ($('#solvent_std_2').val())).toFixed(5));
           	
   });
 	$('#substance_sample').keyup(function() {
 
-  	var solvent_sample = (($('#substance_sample').val()) / ($('#solvent_sample').val())).toFixed(4);
+  	var solvent_sample = (($('#substance_sample').val()) / ($('#solvent_sample').val())).toFixed(5);
 
     var rf_standard_1 = $('#rf_std_1').val(); 
-    var rr_value = (solvent_sample / rf_standard_1).toFixed(4);
+    var rr_value = (solvent_sample / rf_standard_1).toFixed(5);
     // alert("bfd")
     $('#rf_sample').val(solvent_sample);
     $('#rr_value').val(rr_value);            
   });
   $('#substance_sample_2').keyup(function() {
 
-    var solvent_sample = (($('#substance_sample_2').val()) / ($('#solvent_sample_2').val())).toFixed(4);
+    var solvent_sample = (($('#substance_sample_2').val()) / ($('#solvent_sample_2').val())).toFixed(5);
 
     var rf_standard_1 = $('#rf_std_2').val(); 
-    var rr_value = (solvent_sample / rf_standard_1).toFixed(4);
+    var rr_value = (solvent_sample / rf_standard_1).toFixed(5);
     // alert("bfd")
     $('#rf_sample_2').val(solvent_sample);
     $('#rr_value_2').val(rr_value);            
@@ -1543,20 +1543,20 @@ $('#sample_resolution_ac').keyup(function() {
           dilution_factor_initial = (df_1_base *df_2_base)/df_3_base;
           dilution_factor = (dilution_factor_initial * lower_factor)/higher_factor;
           
-          $('#dilution_factor_initial').val(dilution_factor_initial.toFixed(4));
+          $('#dilution_factor_initial').val(dilution_factor_initial.toFixed(5));
           // alert('ljkl')
-          $('#dilution_factor_final').val(dilution_factor.toFixed(4));
+          $('#dilution_factor_final').val(dilution_factor.toFixed(5));
        }else{
 
           dilution_factor = (df_1 *df_2)/df_3;
           
-          $('#dilution_factor').val(dilution_factor.toFixed(4));
+          $('#dilution_factor').val(dilution_factor.toFixed(5));
        }
 
-        // $('#dilution_factor').val(dilution_factor.toFixed(4));
-        $('#det_1_wstd').val(dilution_factor.toFixed(4)); $('#det_2_wstd').val(dilution_factor.toFixed(4)); $('#det_3_wstd').val(dilution_factor.toFixed(4)); $('#det_4_wstd').val(dilution_factor.toFixed(4)); $('#det_5_wstd').val(dilution_factor.toFixed(4)); $('#det_6_wstd').val(dilution_factor.toFixed(4)); 
-        $('#det_7_wstd').val(dilution_factor.toFixed(4)); $('#det_8_wstd').val(dilution_factor.toFixed(4)); $('#det_9_wstd').val(dilution_factor.toFixed(4)); $('#det_10_wstd').val(dilution_factor.toFixed(4)); $('#det_11_wstd').val(dilution_factor.toFixed(4)); $('#det_12_wstd').val(dilution_factor.toFixed(4)); 
-        $('#second_det_1_wstd').val(dilution_factor.toFixed(4)); $('#second_det_2_wstd').val(dilution_factor.toFixed(4)); $('#second_det_3_wstd').val(dilution_factor.toFixed(4)); $('#second_det_4_wstd').val(dilution_factor.toFixed(4)); $('#second_det_5_wstd').val(dilution_factor.toFixed(4)); $('#second_det_6_wstd').val(dilution_factor.toFixed(4)); 
+        // $('#dilution_factor').val(dilution_factor.toFixed(5));
+        $('#det_1_wstd').val(dilution_factor.toFixed(5)); $('#det_2_wstd').val(dilution_factor.toFixed(5)); $('#det_3_wstd').val(dilution_factor.toFixed(5)); $('#det_4_wstd').val(dilution_factor.toFixed(5)); $('#det_5_wstd').val(dilution_factor.toFixed(5)); $('#det_6_wstd').val(dilution_factor.toFixed(5)); 
+        $('#det_7_wstd').val(dilution_factor.toFixed(5)); $('#det_8_wstd').val(dilution_factor.toFixed(5)); $('#det_9_wstd').val(dilution_factor.toFixed(5)); $('#det_10_wstd').val(dilution_factor.toFixed(5)); $('#det_11_wstd').val(dilution_factor.toFixed(5)); $('#det_12_wstd').val(dilution_factor.toFixed(5)); 
+        $('#second_det_1_wstd').val(dilution_factor.toFixed(5)); $('#second_det_2_wstd').val(dilution_factor.toFixed(5)); $('#second_det_3_wstd').val(dilution_factor.toFixed(5)); $('#second_det_4_wstd').val(dilution_factor.toFixed(5)); $('#second_det_5_wstd').val(dilution_factor.toFixed(5)); $('#second_det_6_wstd').val(dilution_factor.toFixed(5)); 
         });
 
       //Pull potency value from the potency text box
@@ -1641,9 +1641,9 @@ $('#sample_resolution_ac').keyup(function() {
      var equivalent_to = (Math.abs(document.getElementById('label_claim').value)*average_determination)/100; 
 
 
-      document.getElementById('determination_avg').value = average_determination.toFixed(4);   
-      document.getElementById('determination_sd').value = standard_deviation_determinations.toFixed(4); 
-      document.getElementById('determination_rsd').value = rsd_determination.toFixed(4); 
+      document.getElementById('determination_avg').value = average_determination.toFixed(5);   
+      document.getElementById('determination_sd').value = standard_deviation_determinations.toFixed(5); 
+      document.getElementById('determination_rsd').value = rsd_determination.toFixed(5); 
       document.getElementById('equivalent').value = equivalent_to.toFixed(2);     
       document.getElementById('nlt_min_tolerance_det').value = lowest_value.toFixed(2);
       document.getElementById('nlt_max_tolerance_det').value = highest_value.toFixed(2);     

@@ -3,7 +3,7 @@
  <title>MEDS</title>
   <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon">
   <link href="<?php echo base_url().'style/core.css';?>" rel="stylesheet" type="text/css" />
-   <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
+  <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
    
   <link href="<?php echo base_url().'style/jquery.tooltip.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/jquery-ui.css';?>" rel="stylesheet" type="text/css"/>
@@ -94,53 +94,44 @@
     </tr>
     <tr>
         <td colspan="8" style="padding:8px;text-align:center;">
-          <table width="100%"  cellpadding="8px" align="center" border="0">
-            <tr>
-                <td colspan="2" style="padding:8px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="80px" width="90px"/></td>
-                <td colspan="2" height="25px" style="padding:4px;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"></td>
-                <td colspan="4" style="padding:8px;border-right:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;color:#000000;"><b><h3>QUALITY CONTROL LABORATORY</h3><b></td>
-            </tr>
+          <table width="100%" bgcolor="#ffffff" cellpadding="8px" align="center" border="1">
              <tr>
-                <td height="25px" colspan="4" style="padding:8px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><b><h4>MISSION FOR ESSENTIAL DRUGS & SUPPLIES</h4></b></td>
-                <td height="25px" colspan="4" style="padding:8px;border-bottom:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;color:#ff0000;"><b><h6>ASSURING QUALITY OF MEDICINES</h6></b></td>
-            </tr>
-          </table>
+                <td colspan="8" style="padding:4px;"><img src="<?php echo base_url().'images/header.png';?>" height="280px" width="1000px"/></td>
+             </tr>
+            </table>
         </td>
-    </tr>
-    <tr>
-        <td colspan="8" align="center" style="padding:8px;border-bottom: solid 10px #c4c4ff;color: #0000fb;background-color: #ffffff;"><h1><b><u>CERTIFICATE OF ANALYSIS DRAFT</u></b></h1></td>
     </tr>
     <tr>
       <td colspan="8" align="center" style="padding:8px;">
         <table align="center" width="100%">
           <tr>
               <td align="left" style="padding:8px;background-color:#ffffff;"><b><u>REGISTRATION NUMBER:</u></b></td>
-              <td align="left" style="padding:8px;background-color:#ffffff;"><?php echo $query['reference_number'] ?></td>
+              <td align="left" style="padding:8px;background-color:#ffffff;"><?php echo $query['laboratory_number'] ?></td>
               <td align="left" style="padding:8px;background-color:#ffffff;"><b><u>Request Date:</u></b></td>
-              <td align="left" style="padding:8px;background-color:#ffffff;"><?php echo $query['date_time']?></td>
+              <td align="left" style="padding:8px;background-color:#ffffff;"><?php echo substr($query['date_time'],0,10)?></td>
               <td align="left" style="padding:8px;background-color:#ffffff;"><b><u>Test Date:</u></b></td>
-              <td align="left" style="padding:8px;background-color:#ffffff;"><?php echo date("d/m/Y")?></td>
+              <td align="left" style="padding:8px;background-color:#ffffff;"><?php echo date("Y-m-d")?></td>
           </tr>  
           <tr>
                <td colspan="6" align="left" style="padding:8px;background-color:#ffffff;"><b><u>NAME OF PRODUCT:</u></b>&nbsp;&nbsp;&nbsp; <b><?php echo $query['active_ingredients'] ?> <input type="hidden" value="<?php echo $query['active_ingredients'] ?>" name="test_request_name"></b></td>       
           </tr>
           <tr>
-              <td colspan="3" align="left" style="padding:8px;background-color:#ffffff;border-left: solid 1px #bfbfbf;border-right: solid 1px #bfbfbf;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"><b><u>CLIENT:</u></b></br></br><?php echo $query['applicant_name']?></td>       
-              <td colspan="3" align="left" style="padding:8px;background-color:#ffffff;border-right: solid 1px #bfbfbf;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"><b><u>MANUFACTURER:</u></b></br></br><?php echo $query['manufacturer_name']?></td>
+              <td colspan="3" align="left" style="padding:8px;background-color:#ffffff;border-left: solid 1px #bfbfbf;border-right: solid 1px #bfbfbf;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"><b><u>CLIENT:</u></b></br></br><?php echo $query['applicant_name']?></br><?php echo $query['applicant_address']?></td>       
+              <td colspan="3" align="left" style="padding:8px;background-color:#ffffff;border-right: solid 1px #bfbfbf;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"><b><u>MANUFACTURER:</u></b></br></br><?php echo $query['manufacturer_name']?></br><?php echo $query['manufacturer_address']?></td>
           </tr>
           <tr>
-            <td colspan="6"style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;"><b><u>LABEL CLAIM:</u></b></td>
+            <td colspan="6" style="font-family:Arial;padding:8px;background-color:#ffffff;"><b><u>LABEL CLAIM:</u></b>
+              <?php echo $query['label_claim']?>&nbsp;Batch/Lot Number <?php echo $query['batch_lot_number']?>&nbsp;,Manufactured <?php echo $query['date_manufactured']?>&nbsp;,Expires <?php echo $query['expiry_date']?></td>
           </tr>
-          <tr><td colspan="6" style ="text-align:left;padding:8px;"><?php echo $query['label_claim']?>&nbsp;,<?php echo $query['batch_lot_number']?>&nbsp;,Manufactured <?php echo $query['date_manufactured']?>&nbsp;,Expires <?php echo $query['expiry_date']?></td></tr>
+          <tr>
+          <td align= "center" colspan ="6" style="font-family:Arial;font-size:24px;padding:8px;text-align:center;background-color:#ffffff;color: #0000fb;">
+            <u><b>RESULTS OF ANALYSIS</b></u></td>      
+        </tr>
+        <tr>
+          <td colspan="6"align="left" style="font-family:Arial;font-size:14px;padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;"><b>Appearance:</b>&nbsp;<?php echo $full_monograph[0]['appearance']?></td>
+        </tr>
         </table>
       </td>
-    </tr>
-    <tr>
-      <td align= "center" colspan ="6" style="padding:8px;text-align:center;background-color:#ffffff;padding-right:40px;border-bottom: solid 10px #f0f0ff;color: #0000fb;">
-        <u><h3><b>RESULTS OF ANALYSIS</b></h3></u></td>      
-    </tr>
-    <tr>
-      <td colspan="6"align="left" style="padding:8px;background-color:#ffffff;border-top: dotted 1px #bfbfbf;border-bottom: solid 1px #bfbfbf;"><b>Appearance:</b>&nbsp;<?php echo $full_monograph[0]['appearance']?></td>
     </tr>
      <tr>
       <td colspan="6">

@@ -14,115 +14,239 @@ class Content_Uniformity_Model extends CI_Model{
     $test_type=52;
     $remark="COMPLIES";
     $status=1;
+    
+    $form_a=$this->input->post('uniformity');
+    $form_b=$this->input->post('mass');
 
-    if($method=='Weight Variation'){
-      $data = array(
-        'method'=>$this->input->post('method'),
+    if($form_a=="1"){
+
+      if($method=='Weight Variation'){
+          
+          $data = array(
+            'method'=>$this->input->post('method'),
+          );
+          $this->db->insert('uniformity_of_dosage',$data);
+
+          $data_two = array(
+             'test_request_id'=>$test_request_id,
+             'balance_id'=>$this->input->post('balance_id'),
+             'equipmentbalance'=>$this->input->post('equipmentbalance'),
+             'weight_tablet_one'=>$this->input->post('weight_tablet_one'),
+             'weight_tablet_two'=>$this->input->post('weight_tablet_two'),
+             'weight_tablet_three'=>$this->input->post('weight_tablet_three'),
+             'weight_tablet_four'=>$this->input->post('weight_tablet_four'),
+             'weight_tablet_five'=>$this->input->post('weight_tablet_five'),
+             'weight_tablet_six'=>$this->input->post('weight_tablet_six'),
+             'weight_tablet_seven'=>$this->input->post('weight_tablet_seven'),
+             'weight_tablet_eight'=>$this->input->post('weight_tablet_eight'),
+             'weight_tablet_nine'=>$this->input->post('weight_tablet_nine'),
+             'weight_tablet_ten'=>$this->input->post('weight_tablet_ten'),
+             'weight_tablet_eleven'=>$this->input->post('weight_tablet_eleven'),
+             'weight_tablet_twelve'=>$this->input->post('weight_tablet_twelve'),
+             'weight_tablet_thirteen'=>$this->input->post('weight_tablet_thirteen'),
+             'weight_tablet_fourteen'=>$this->input->post('weight_tablet_fourteen'),
+             'weight_tablet_fifteen'=>$this->input->post('weight_tablet_fifteen'),
+             'weight_tablet_sixteen'=>$this->input->post('weight_tablet_sixteen'),
+             'weight_tablet_seventeen'=>$this->input->post('weight_tablet_seventeen'),
+             'weight_tablet_eighteen'=>$this->input->post('weight_tablet_eighteen'),
+             'weight_tablet_nineteen'=>$this->input->post('weight_tablet_nineteen'),
+             'weight_tablet_twenty'=>$this->input->post('weight_tablet_twenty'),
+             'dosage_form'=>$this->input->post('dosage_form'),
+             'lower_range'=>$this->input->post('lower_range'),
+             'upper_range'=>$this->input->post('upper_range'),
+             'subtype'=>$this->input->post('subtype'),
+             'method'=>$this->input->post('method'),
+             'average'=>$this->input->post('average'),
+             'dosage'=>$this->input->post('dosage'),
+             'ratio'=>$this->input->post('ratio'),
+             'test_status'=>$status
+          );
+          
+          $result_data = array(
+            'test_id'=>$test_id,
+            'remarks'=>$remark,
+            'method'=>$this->input->post('method_coa'),
+            'results'=>"Average Weight = ".$this->input->post('average')."g, Range: Lower".$this->input->post('upper_range')."%, Upper".$this->input->post('lower_range')."% from average weight."
+          );  
+        
+        $this->db->update('uniformity_of_dosage', $data_two,array('method' => $method));
+        $this->db->update('test_results', $result_data, array('test_request_id'=>$test_request_id,'test_type'=>$test_type));
+        redirect('test/index/'.$assignment_id.'/'.$test_request_id);
+      }
+
+      if($method=='Content Uniformity'){
+        $data = array(
+          'method'=>$this->input->post('method'),
+        );
+        $this->db->insert('uniformity_of_dosage',$data);
+
+        $data_two = array(
+
+         'test_request_id'=>$test_request_id,
+         'balance_id'=>$this->input->post('balance_id'),
+         'equipmentbalance'=>$this->input->post('equipmentbalance'),
+         'weight_tablet_one'=>$this->input->post('weight_tablet_one'),
+         'weight_tablet_two'=>$this->input->post('weight_tablet_two'),
+         'weight_tablet_three'=>$this->input->post('weight_tablet_three'),
+         'weight_tablet_four'=>$this->input->post('weight_tablet_four'),
+         'weight_tablet_five'=>$this->input->post('weight_tablet_five'),
+         'weight_tablet_six'=>$this->input->post('weight_tablet_six'),
+         'weight_tablet_seven'=>$this->input->post('weight_tablet_seven'),
+         'weight_tablet_eight'=>$this->input->post('weight_tablet_eight'),
+         'weight_tablet_nine'=>$this->input->post('weight_tablet_nine'),
+         'weight_tablet_ten'=>$this->input->post('weight_tablet_ten'),
+         'weight_tablet_eleven'=>$this->input->post('weight_tablet_eleven'),
+         'weight_tablet_twelve'=>$this->input->post('weight_tablet_twelve'),
+         'weight_tablet_thirteen'=>$this->input->post('weight_tablet_thirteen'),
+         'weight_tablet_fourteen'=>$this->input->post('weight_tablet_fourteen'),
+         'weight_tablet_fifteen'=>$this->input->post('weight_tablet_fifteen'),
+         'weight_tablet_sixteen'=>$this->input->post('weight_tablet_sixteen'),
+         'weight_tablet_seventeen'=>$this->input->post('weight_tablet_seventeen'),
+         'weight_tablet_eighteen'=>$this->input->post('weight_tablet_eighteen'),
+         'weight_tablet_nineteen'=>$this->input->post('weight_tablet_nineteen'),
+         'weight_tablet_twenty'=>$this->input->post('weight_tablet_twenty'),
+         'dosage_form'=>$this->input->post('dosage_form'),
+         'subtype'=>$this->input->post('subtype'),
+         'method'=>$this->input->post('method'),
+         'average'=>$this->input->post('average'),
+         'lower_range'=>$this->input->post('lower_range'),
+         'upper_range'=>$this->input->post('upper_range'),
+         'subtype'=>$this->input->post('subtype'),
+         'method'=>$this->input->post('method'),
+         'average'=>$this->input->post('average'),
+         'dosage'=>$this->input->post('dosage'),
+         'ratio'=>$this->input->post('ratio'),
+         'test_status'=>$status
+
+       
       );
-    $this->db->insert('uniformity_of_dosage',$data);
-
-    $data_two = array(
-
-   'test_request_id'=>$test_request_id,
-   'balance_id'=>$this->input->post('balance_id'),
-   'equipmentbalance'=>$this->input->post('equipmentbalance'),
-   'weight_tablet_one'=>$this->input->post('weight_tablet_one'),
-   'weight_tablet_two'=>$this->input->post('weight_tablet_two'),
-   'weight_tablet_three'=>$this->input->post('weight_tablet_three'),
-   'weight_tablet_four'=>$this->input->post('weight_tablet_four'),
-   'weight_tablet_five'=>$this->input->post('weight_tablet_five'),
-   'weight_tablet_six'=>$this->input->post('weight_tablet_six'),
-   'weight_tablet_seven'=>$this->input->post('weight_tablet_seven'),
-   'weight_tablet_eight'=>$this->input->post('weight_tablet_eight'),
-   'weight_tablet_nine'=>$this->input->post('weight_tablet_nine'),
-   'weight_tablet_ten'=>$this->input->post('weight_tablet_ten'),
-   'weight_tablet_eleven'=>$this->input->post('weight_tablet_eleven'),
-   'weight_tablet_twelve'=>$this->input->post('weight_tablet_twelve'),
-   'weight_tablet_thirteen'=>$this->input->post('weight_tablet_thirteen'),
-   'weight_tablet_fourteen'=>$this->input->post('weight_tablet_fourteen'),
-   'weight_tablet_fifteen'=>$this->input->post('weight_tablet_fifteen'),
-   'weight_tablet_sixteen'=>$this->input->post('weight_tablet_sixteen'),
-   'weight_tablet_seventeen'=>$this->input->post('weight_tablet_seventeen'),
-   'weight_tablet_eighteen'=>$this->input->post('weight_tablet_eighteen'),
-   'weight_tablet_nineteen'=>$this->input->post('weight_tablet_nineteen'),
-   'weight_tablet_twenty'=>$this->input->post('weight_tablet_twenty'),
-   'dosage_form'=>$this->input->post('dosage_form'),
-   'subtype'=>$this->input->post('subtype'),
-   'method'=>$this->input->post('method'),
-   'average'=>$this->input->post('average'),
-   'dosage'=>$this->input->post('dosage'),
-   'ratio'=>$this->input->post('ratio'),
-   'test_status'=>$status
-
-   
-  );
-  $result_data = array(
-      'test_id'=>$test_id,
-      'remarks'=>$remark,
-      'method'=>$this->input->post('method_coa'),
-      'results'=>"Average Weight = ".$this->input->post('average')."g"
-      );  
-  
-  $this->db->update('uniformity_of_dosage', $data_two,array('method' => $method));
-  $this->db->update('test_results', $result_data, array('test_request_id'=>$test_request_id,'test_type'=>$test_type));
-  redirect('test/index/'.$assignment_id.'/'.$test_request_id);
-  }
-
-    if($method=='Content Uniformity'){
-      $data = array(
-        'method'=>$this->input->post('method'),
+      $result_data = array(
+        'test_id'=>$test_id,
+        'remarks'=>$remark,
+        'method'=>$this->input->post('method_coa'),
+        'results'=>"Average Weight = ".$this->input->post('average')."g, Range: Lower".$this->input->post('lower_range')."%, Upper".$this->input->post('upper_range')."% from average weight."
       );
+      $this->db->update('uniformity_of_dosage', $data_two,array('method' => $method));
+      $this->db->update('test_results', $result_data, array('test_request_id'=>$test_request_id,'test_type'=>$test_type));
+      redirect('test/index/'.$assignment_id.'/'.$test_request_id);
+          
+    }  
+
+  }else{}
+
+  if($form_b=="2"){
+        
+      if($method=='Weight Variation'){
+        $data = array(
+          'method'=>$this->input->post('method'),
+        );
       $this->db->insert('uniformity_of_dosage',$data);
 
-    $data_two = array(
+      $data_two = array(
 
-   'test_request_id'=>$test_request_id,
-   'balance_id'=>$this->input->post('balance_id'),
-   'equipmentbalance'=>$this->input->post('equipmentbalance'),
-   'weight_tablet_one'=>$this->input->post('weight_tablet_one'),
-   'weight_tablet_two'=>$this->input->post('weight_tablet_two'),
-   'weight_tablet_three'=>$this->input->post('weight_tablet_three'),
-   'weight_tablet_four'=>$this->input->post('weight_tablet_four'),
-   'weight_tablet_five'=>$this->input->post('weight_tablet_five'),
-   'weight_tablet_six'=>$this->input->post('weight_tablet_six'),
-   'weight_tablet_seven'=>$this->input->post('weight_tablet_seven'),
-   'weight_tablet_eight'=>$this->input->post('weight_tablet_eight'),
-   'weight_tablet_nine'=>$this->input->post('weight_tablet_nine'),
-   'weight_tablet_ten'=>$this->input->post('weight_tablet_ten'),
-   'weight_tablet_eleven'=>$this->input->post('weight_tablet_eleven'),
-   'weight_tablet_twelve'=>$this->input->post('weight_tablet_twelve'),
-   'weight_tablet_thirteen'=>$this->input->post('weight_tablet_thirteen'),
-   'weight_tablet_fourteen'=>$this->input->post('weight_tablet_fourteen'),
-   'weight_tablet_fifteen'=>$this->input->post('weight_tablet_fifteen'),
-   'weight_tablet_sixteen'=>$this->input->post('weight_tablet_sixteen'),
-   'weight_tablet_seventeen'=>$this->input->post('weight_tablet_seventeen'),
-   'weight_tablet_eighteen'=>$this->input->post('weight_tablet_eighteen'),
-   'weight_tablet_nineteen'=>$this->input->post('weight_tablet_nineteen'),
-   'weight_tablet_twenty'=>$this->input->post('weight_tablet_twenty'),
-   'dosage_form'=>$this->input->post('dosage_form'),
-   'subtype'=>$this->input->post('subtype'),
-   'method'=>$this->input->post('method'),
-   'average'=>$this->input->post('average'),
-   'dosage'=>$this->input->post('dosage'),
-   'ratio'=>$this->input->post('ratio'),
-   'test_status'=>$status
-  );
-  
-  $result_data = array(
-      'test_id'=>$test_id,
-      'remarks'=>$remark,
-      'method'=>$this->input->post('method_coa'),
-      'results'=>"Average Weight = ".$this->input->post('average')
+       'test_request_id'=>$test_request_id,
+       'balance_id'=>$this->input->post('balance_id'),
+       'equipmentbalance'=>$this->input->post('equipmentbalance'),
+       'weight_tablet_one'=>$this->input->post('weight_tablet_one'),
+       'weight_tablet_two'=>$this->input->post('weight_tablet_two'),
+       'weight_tablet_three'=>$this->input->post('weight_tablet_three'),
+       'weight_tablet_four'=>$this->input->post('weight_tablet_four'),
+       'weight_tablet_five'=>$this->input->post('weight_tablet_five'),
+       'weight_tablet_six'=>$this->input->post('weight_tablet_six'),
+       'weight_tablet_seven'=>$this->input->post('weight_tablet_seven'),
+       'weight_tablet_eight'=>$this->input->post('weight_tablet_eight'),
+       'weight_tablet_nine'=>$this->input->post('weight_tablet_nine'),
+       'weight_tablet_ten'=>$this->input->post('weight_tablet_ten'),
+       'weight_tablet_eleven'=>$this->input->post('weight_tablet_eleven'),
+       'weight_tablet_twelve'=>$this->input->post('weight_tablet_twelve'),
+       'weight_tablet_thirteen'=>$this->input->post('weight_tablet_thirteen'),
+       'weight_tablet_fourteen'=>$this->input->post('weight_tablet_fourteen'),
+       'weight_tablet_fifteen'=>$this->input->post('weight_tablet_fifteen'),
+       'weight_tablet_sixteen'=>$this->input->post('weight_tablet_sixteen'),
+       'weight_tablet_seventeen'=>$this->input->post('weight_tablet_seventeen'),
+       'weight_tablet_eighteen'=>$this->input->post('weight_tablet_eighteen'),
+       'weight_tablet_nineteen'=>$this->input->post('weight_tablet_nineteen'),
+       'weight_tablet_twenty'=>$this->input->post('weight_tablet_twenty'),
+       'dosage_form'=>$this->input->post('dosage_form'),
+       'lower_range'=>$this->input->post('lower_range'),
+       'upper_range'=>$this->input->post('upper_range'),
+       'subtype'=>$this->input->post('subtype'),
+       'method'=>$this->input->post('method'),
+       'average'=>$this->input->post('average'),
+       'dosage'=>$this->input->post('dosage'),
+       'ratio'=>$this->input->post('ratio'),
+       'test_status'=>$status
+      );
+      $result_data = array(
+        'test_id'=>$test_id,
+        'remarks'=>$remark,
+        'method'=>$this->input->post('method_coa'),
+        'results'=>"Average Weight = ".$this->input->post('average')."g, Range: Lower".$this->input->post('upper_range')."%, Upper".$this->input->post('lower_range')."% from average weight."
       );  
-  
-  $this->db->update('uniformity_of_dosage', $data_two,array('method' => $method));
-  $this->db->update('test_results', $result_data, array('test_request_id'=>$test_request_id,'test_type'=>$test_type));
-  redirect('test/index/'.$assignment_id.'/'.$test_request_id);
-      
+    
+      $this->db->update('uniformity_of_dosage', $data_two,array('method' => $method));
+      $this->db->update('test_results', $result_data, array('test_request_id'=>$test_request_id,'test_type'=>$test_type));
+      redirect('test/index/'.$assignment_id.'/'.$test_request_id);
     }
 
-    
-     
+    if($method=='Content Uniformity'){
+        $data = array(
+          'method'=>$this->input->post('method'),
+        );
+        $this->db->insert('uniformity_of_dosage',$data);
+
+      $data_two = array(
+
+         'test_request_id'=>$test_request_id,
+         'balance_id'=>$this->input->post('balance_id'),
+         'equipmentbalance'=>$this->input->post('equipmentbalance'),
+         'weight_tablet_one'=>$this->input->post('weight_tablet_one'),
+         'weight_tablet_two'=>$this->input->post('weight_tablet_two'),
+         'weight_tablet_three'=>$this->input->post('weight_tablet_three'),
+         'weight_tablet_four'=>$this->input->post('weight_tablet_four'),
+         'weight_tablet_five'=>$this->input->post('weight_tablet_five'),
+         'weight_tablet_six'=>$this->input->post('weight_tablet_six'),
+         'weight_tablet_seven'=>$this->input->post('weight_tablet_seven'),
+         'weight_tablet_eight'=>$this->input->post('weight_tablet_eight'),
+         'weight_tablet_nine'=>$this->input->post('weight_tablet_nine'),
+         'weight_tablet_ten'=>$this->input->post('weight_tablet_ten'),
+         'weight_tablet_eleven'=>$this->input->post('weight_tablet_eleven'),
+         'weight_tablet_twelve'=>$this->input->post('weight_tablet_twelve'),
+         'weight_tablet_thirteen'=>$this->input->post('weight_tablet_thirteen'),
+         'weight_tablet_fourteen'=>$this->input->post('weight_tablet_fourteen'),
+         'weight_tablet_fifteen'=>$this->input->post('weight_tablet_fifteen'),
+         'weight_tablet_sixteen'=>$this->input->post('weight_tablet_sixteen'),
+         'weight_tablet_seventeen'=>$this->input->post('weight_tablet_seventeen'),
+         'weight_tablet_eighteen'=>$this->input->post('weight_tablet_eighteen'),
+         'weight_tablet_nineteen'=>$this->input->post('weight_tablet_nineteen'),
+         'weight_tablet_twenty'=>$this->input->post('weight_tablet_twenty'),
+         'dosage_form'=>$this->input->post('dosage_form'),
+         'subtype'=>$this->input->post('subtype'),
+         'method'=>$this->input->post('method'),
+         'average'=>$this->input->post('average'),
+         'lower_range'=>$this->input->post('lower_range'),
+         'upper_range'=>$this->input->post('upper_range'),
+         'subtype'=>$this->input->post('subtype'),
+         'method'=>$this->input->post('method'),
+         'average'=>$this->input->post('average'),
+         'dosage'=>$this->input->post('dosage'),
+         'ratio'=>$this->input->post('ratio'),
+         'test_status'=>$status
+
+         
+        );
+        $result_data = array(
+          'test_id'=>$test_id,
+          'remarks'=>$remark,
+          'method'=>$this->input->post('method_coa'),
+          'results'=>"Average Weight = ".$this->input->post('average')."g, Range: Lower".$this->input->post('lower_range')."%, Upper".$this->input->post('upper_range')."% from average weight."
+        );
+        $this->db->update('uniformity_of_dosage', $data_two,array('method' => $method));
+        $this->db->update('test_results', $result_data, array('test_request_id'=>$test_request_id,'test_type'=>$test_type));
+        redirect('test/index/'.$assignment_id.'/'.$test_request_id);
+            
+      }
+    }else{}
   }
 
   function process_uniformity_of_dosage_multicomponent(){
