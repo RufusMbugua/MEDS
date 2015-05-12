@@ -10,13 +10,10 @@
   <link href="<?php echo base_url().'style/jquery-ui.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/demo_table.css';?>" rel="stylesheet" type="text/css"/>
   <link href="datatables/extensions/Tabletools/css/dataTables.tableTools.css" type="text/css" rel="stylesheet"/>
-  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css"> -->
   <link rel="stylesheet" href="<?php echo base_url().'jquery-ui.css';?>">
-  
   
   <!-- bootstrap reference library -->
   <link href="<?php echo base_url().'bootstrap/css/bootstrap.css'; ?>" rel="stylesheet" type="text/css"/>
-
   <script src="<?php echo base_url().'js/jquery.js';?>"></script>
   <script src="<?php echo base_url().'js/jquery-1.11.0.js';?>"></script>
   <script src="<?php echo base_url().'js/jquery.js';?>"></script>
@@ -121,9 +118,9 @@
         <a href="<?php echo base_url().'reagents_inventory_record/Get';?>"class="sub_menu sub_menu_link first_link">Reagents & Inventory</a>
         <a href="<?php echo base_url().'standard_register_records/Get';?>"class="sub_menu sub_menu_link first_link">Standard Register</a>
         <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
-        <a href="<?php echo base_url().'complaints_list/records';?>" class="sub_menu sub_menu_link first_link">Complaints</a>
+       <!--  <a href="<?php echo base_url().'complaints_list/records';?>" class="sub_menu sub_menu_link first_link">Complaints</a>
         <a href="<?php echo base_url().'coapresentation/mypresentation.pdf';?>"class="sub_menu sub_menu_link first_link">Certificate of Analysis</a>
-        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a>
+        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a> -->
     </div>
     <?php
     echo"<div id='sub_menu'";
@@ -151,9 +148,9 @@
         <a href="<?php echo base_url().'reagents_inventory_record/Get';?>"class="sub_menu sub_menu_link first_link">Reagents & Inventory</a>
         <a href="<?php echo base_url().'standard_register_records/Get';?>"class="sub_menu sub_menu_link first_link">Standard Register</a>
         <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
-        <a href="<?php echo base_url().'complaints_list/records';?>"class="sub_menu sub_menu_link first_link">Complaints</a>
+        <!-- <a href="<?php echo base_url().'complaints_list/records';?>"class="sub_menu sub_menu_link first_link">Complaints</a>
         <a href="<?php echo base_url().'coapresentation/mypresentation.pdf';?>"class="sub_menu sub_menu_link first_link">Certificate of Analysis</a>
-        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a>
+        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a> -->
     </div>
     <?php
     echo"<div id='sub_menu'";
@@ -238,8 +235,8 @@
                   <th style="text-align:center;border-right: dotted 1px #ddddff;"></th>
                   <th style="text-align:center;border-right: dotted 1px #ddddff;">Lab Reg.No</th>
                   <th style="text-align:center;border-right: dotted 1px #ddddff;">Batch No</th>
-                  <th style="text-align:center;border-right: dotted 1px #ddddff;">Sample Name</th>
-                  <th style="text-align:center;border-right: dotted 1px #ddddff;">Client</th>
+                  <th style="text-align:left;border-right: dotted 1px #ddddff;">Sample Name</th>
+                  <th style="text-align:left;border-right: dotted 1px #ddddff;">Client</th>
                   <th
                   <?php 
                     if($user['logged_in']['user_type']==6||$user['logged_in']['user_type']==7){

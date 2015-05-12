@@ -32,7 +32,7 @@
     var id=2;
     $(document).on('click','#add_stage',function () {
   
-        var html='<tr><td colspan="3" style="padding:8px;color: #0000fb;border-bottom:solid 1px #c4c4ff;background-color:#fdc4c8;">Stage '+id+'<input type="hidden" id="stage" name="stage'+id+'" value="'+id+'"/></td></tr><tr><td style="padding:8px;"><input type="checkbox" name="min'+id+'" id="min'+id+'" />Minimum Value</td><td style="padding:8px;"><input type="checkbox" name="max'+id+'" id="max'+id+'" />Maximum Value</td><td style="padding:8px;"><input type="checkbox" name="range" id="range'+id+'" />Range of Values</td></tr><tr><td style="color:#0000ff;padding:8px;"><input type="text" min'+id+'="min_tolerance'+id+'" id="min_tolerance'+id+'" name="min_tolerance'+id+'" placeholder="min%" size="5"/></td><td style="color:#0000ff;padding:8px;"><input type="text" max'+id+'="max_tolerance'+id+'" id="max_tolerance'+id+'" name="max_tolerance'+id+'" placeholder="max%" size="5"/></td><td style="color:#0000ff;padding:8px;"><input type="text" range'+id+'="tolerance_range'+id+'" id="tolerance_range_from'+id+'" name="tolerance_range_from'+id+'" placeholder="min%" size="5"> - <input type="text" range'+id+'="tolerance_range'+id+'" name="tolerance_range_to'+id+'" id ="tolerance_range_to'+id+'" placeholder="max%" size="5"></td></tr><tr><td align="left" style="padding:8px;border-bottom: solid 1px #c4c4ff;border-top: dotted 1px #c4c4ff;background-color: #ffffff;">Duration/Time</td><td colspan="2" align="left" style="padding:8px;border-bottom: solid 1px #c4c4ff;border-top: dotted 1px #c4c4ff;background-color: #ffffff;"><input type="text" size="7" name="time_value'+id+'" id="time" placeholder="eg. 60"> <select name="time_name'+id+'"><option value="Minutes">Minutes</option><option value="Hours">Hours</option></select></td></tr>';
+        var html='<tr><td colspan="3" style="padding:8px;color: #0000fb;border-bottom:solid 1px #c4c4ff;background-color:#fdc4c8;">Stage '+id+'<input type="hidden" id="stage" name="stage[]" value="'+id+'"/></td></tr><tr><td style="padding:8px;"><input type="checkbox" name="min'+id+'" id="min'+id+'" />Minimum Value</td><td style="padding:8px;"><input type="checkbox" name="max'+id+'" id="max'+id+'" />Maximum Value</td><td style="padding:8px;"><input type="checkbox" name="range" id="range'+id+'" />Range of Values</td></tr><tr><td style="color:#0000ff;padding:8px;"><input type="text" min'+id+'="min_tolerance'+id+'" id="min_tolerance'+id+'" name="min_tolerance[]" placeholder="min%" size="5"/></td><td style="color:#0000ff;padding:8px;"><input type="text" max'+id+'="max_tolerance'+id+'" id="max_tolerance'+id+'" name="max_tolerance[]" placeholder="max%" size="5"/></td><td style="color:#0000ff;padding:8px;"><input type="text" range'+id+'="tolerance_range'+id+'" id="tolerance_range_from'+id+'" name="tolerance_range_from[]" placeholder="min%" size="5"> - <input type="text" range'+id+'="tolerance_range'+id+'" name="tolerance_range_to[]" id ="tolerance_range_to'+id+'" placeholder="max%" size="5"></td></tr><tr><td align="left" style="padding:8px;border-bottom: solid 1px #c4c4ff;border-top: dotted 1px #c4c4ff;background-color: #ffffff;">Duration/Time</td><td colspan="2" align="left" style="padding:8px;border-bottom: solid 1px #c4c4ff;border-top: dotted 1px #c4c4ff;background-color: #ffffff;"><input type="text" size="7" name="time_value[]" id="time" placeholder="eg. 60"> <select name="time_name[]"><option value="Minutes">Minutes</option><option value="Hours">Hours</option></select></td></tr>';
         var master = $(this).closest("table.spectable");
      
          master.find("tbody").append(html);
@@ -108,22 +108,22 @@
                     <td colspan="4" style="padding:4px;color:#0000ff;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;">MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</td>
                 </tr>
                 <tr>    
-                    <td colspan="" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">Document: Analytical Worksheet</td>
-                    <td colspan="" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;">Title: <?php echo $results['active_ingredients'];?> <?php echo $results['test_specification'] ;?></td>
-                    <td height="25px" colspan="" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;color:#000000;">REFERENCE NUMBER</td>
-                    <td colspan="" style="padding:4px;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><?php echo $results['reference_number'];?></td>
+                    <td height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">DISSOLUTION ANALYTICAL WORKSHEET</td>
+                    <td height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><?php echo $results['active_ingredients'];?> <?php echo $results['test_specification'] ;?></td>
+                    <td height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;color:#000000;">REFERENCE NUMBER</td>
+                    <td style="padding:4px;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><?php echo $results['reference_number'];?></td>
                 </tr>
                 <tr>
                       <td colspan="2" width ="80px"style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-left:solid 1px #bfbfbf;">EFFECTIVE DATE: <?php echo date("d/m/Y")?></td>
-                      <td colspan="" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-left:solid 1px #bfbfbf;">ISSUE/REV 2/2</td>
-                      <td height="25px"colspan="" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">SUPERSEDES: 2/1</td>
-                      <td height="25px" colspan="" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">PAGE 1 of 1</td>
+                      <td style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-left:solid 1px #bfbfbf;">ISSUE/REV 2/2</td>
+                      <td height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">SUPERSEDES: 2/1</td>
+                      <td height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">PAGE 1 of 1</td>
                 </tr>
                 <tr>
-                      <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">SERIAL No.</td>
-                      <td colspan="" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><?php echo $monograph[0]['serial_number'] ;?></input></td>
-                      <td colspan="" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;">Batch/Lot No.</td>
-                      <td colspan="" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><?php echo $results['batch_lot_number'] ;?></td>          
+                      <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">SERIAL NUMBER</td>
+                      <td height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><?php echo $monograph[0]['serial_number'] ;?></input></td>
+                      <td height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;">BATCH/LOT NUMBER</td>
+                      <td height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><?php echo $results['batch_lot_number'] ;?></td>          
                 </tr>
                </table>   
               </td>
@@ -144,7 +144,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td colspan="3" style="padding:8px;color: #0000fb;border-bottom:solid 1px #c4c4ff;background-color:#fdc4c8;">Stage 1 <input type="hidden" id="stage" name="stage1" value="1"/></td>
+                      <td colspan="3" style="padding:8px;color: #0000fb;border-bottom:solid 1px #c4c4ff;background-color:#fdc4c8;">Stage 1 <input type="hidden" id="stage" name="stage[]" value="1"/></td>
                     </tr>
                     <tr>
                       <td style="padding:8px;"><input type="checkbox" id="min" name="min"/>Minimum Value</td>
@@ -152,17 +152,17 @@
                       <td style="padding:8px;"><input type="checkbox" id="range" name="range"/>Range of Values</td>
                     </tr>
                     <tr>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" min="min_tolerance" id="min_tolerance" name="min_tolerance" placeholder="min%" size="5"/></td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" max='max_tolerance' id="max_tolerance" name="max_tolerance" placeholder="max%" size="5"/></td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" id = "tolerance_range_from" name="tolerance_range_from" placeholder="min%" size="5"> - <input type="text" range="tolerance_range" name="tolerance_range_to" id = "tolerance_range_to" placeholder="max%" size="5" ></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" min="min_tolerance" id="min_tolerance" name="min_tolerance[]" placeholder="min%" size="5"/></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" max='max_tolerance' id="max_tolerance" name="max_tolerance[]" placeholder="max%" size="5"/></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" id = "tolerance_range_from" name="tolerance_range_from[]" placeholder="min%" size="5"> - <input type="text" range="tolerance_range" name="tolerance_range_to[]" id = "tolerance_range_to" placeholder="max%" size="5" ></td>
                     </tr>
                     <tr>
                       <td align="left" style="padding:8px;border-bottom: solid 1px #c4c4ff;border-top: dotted 1px #c4c4ff;background-color: #ffffff;">
                        Duration/Time
                       </td>
                       <td colspan="2" align="left" style="padding:8px;border-bottom: solid 1px #c4c4ff;border-top: dotted 1px #c4c4ff;background-color: #ffffff;">
-                       <input type="text" size="7" name="time_value" id="time_value" placeholder="eg. 60"> 
-                       <select name="time_name">
+                       <input type="text" size="7" name="time_value[]" id="time_value" placeholder="eg. 60"> 
+                       <select name="time_name[]">
                           <option value="Minutes">Minutes</option>
                           <option value="Hours">Hours</option>
                        </select>

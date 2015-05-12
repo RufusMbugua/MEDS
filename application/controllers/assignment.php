@@ -11,6 +11,22 @@ function index(){
 
     $data['request']=
     $this->db->select('test_request.id AS tid,test_request.client_id,test_request.request_type,test_request.quantity_remaining,test_request.quantity_submitted,test_request.quantity_type,test_request.pack_size')->get_where('test_request', array('id' => $id))->result_array();
+    
+    $data['query']=$this->db->get_where('user', array('user_type' => $type_id))->result_array();
+    
+    $result=$this->db->select('test_request.tests')->get_where('test_request', array('id' => $id))->result_array();
+    $return= explode( ",", $result[0]['tests'] );
+    $data['tests']=$return;
+    
+    $this->load->view('assignment_form',$data);
+    $this->load->helper(array('form'));
+}
+function edit(){
+    $id= $this->uri->segment(3);
+    $type_id= 5;
+
+    $data['request']=
+    $this->db->select('test_request.id AS tid,test_request.client_id,test_request.request_type,test_request.quantity_remaining,test_request.quantity_submitted,test_request.quantity_type,test_request.pack_size')->get_where('test_request', array('id' => $id))->result_array();
     $query=$this->db->get_where('user', array('user_type' => $type_id));
     $results=$query->result_array();
     
@@ -20,7 +36,7 @@ function index(){
     $return= explode( ",", $result[0]['tests'] );
     $data['tests']=$return;
     
-    $this->load->view('assignment_form',$data);
+    $this->load->view('reassignment_form',$data);
     $this->load->helper(array('form'));
 }
 

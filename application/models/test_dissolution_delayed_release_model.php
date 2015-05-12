@@ -306,84 +306,73 @@ class Test_Dissolution_Delayed_Release_Model extends CI_Model{
         $monograph_id=$data_mon[0]->id;
         $monograph_id++; 
 
-        $specsmin=$this->input->post('min_tolerance');
+        
+  		$time_value=$this->input->post('time_value');
+  		$time_name=$this->input->post('time_name');
+  		$specsmin=$this->input->post('min_tolerance');
   		$specsmax=$this->input->post('max_tolerance');
   		$specsrangefrom=$this->input->post('tolerance_range_from');
   		$specsrangeto=$this->input->post('tolerance_range_to');
-  		$time_name=$this->input->post('time_name');
-  		$time_value=$this->input->post('time_value');
   		
-  		$specsmin2=$this->input->post('min_tolerance2');
-  		$specsmax2=$this->input->post('max_tolerance2');
-  		$specsrangefrom2=$this->input->post('tolerance_range_from2');
-  		$specsrangeto2=$this->input->post('tolerance_range_to2');
-  		$time_name2=$this->input->post('time_name2');
-  		$time_value2=$this->input->post('time_value2');
-
-  		$specsmin3=$this->input->post('min_tolerance3');
-  		$specsmax3=$this->input->post('max_tolerance3');
-  		$specsrangefrom3=$this->input->post('tolerance_range_from3');
-  		$specsrangeto3=$this->input->post('tolerance_range_to3');
-  		$time_name3=$this->input->post('time_name3');
-  		$time_value3=$this->input->post('time_value3');
-  		
-  		$specsmin4=$this->input->post('min_tolerance4');
-  		$specsmax4=$this->input->post('max_tolerance4');
-  		$specsrangefrom4=$this->input->post('tolerance_range_from4');
-  		$specsrangeto4=$this->input->post('tolerance_range_to4');
-  		$time_name4=$this->input->post('time_name4');
-  		$time_value4=$this->input->post('time_value4');
-  		
-  		$specsmin5=$this->input->post('min_tolerance5');
-  		$specsmax5=$this->input->post('max_tolerance5');
-  		$specsrangefrom5=$this->input->post('tolerance_range_from5');
-  		$specsrangeto5=$this->input->post('tolerance_range_to5');
-  		$time_name5=$this->input->post('time_name5');
-  		$time_value5=$this->input->post('time_value5');
-  		
-
-  		$specsmin6=$this->input->post('min_tolerance6');
-  		$specsmax6=$this->input->post('max_tolerance6');
-  		$specsrangefrom6=$this->input->post('tolerance_range_from6');
-  		$specsrangeto6=$this->input->post('tolerance_range_to6');
-  		$time_name6=$this->input->post('time_name6');
-  		$time_value6=$this->input->post('time_value6');
-  		
-
   		$stage=$this->input->post('stage');
-		  for ($j=0;$j<count($stage);$j++){
-		    $array = array(
-	          'test_request_id'=>$test_request_id,
-	          'diss_delayed_release_id'=>$test_id,
-	          'stage'=>$data_stage[$j]
-	          ''=>$during_time[$j]
-	          ''=>$during_name[$j]
-		    );
-
-		    $this->db->insert('dissolusion_timestages',$array);
-
-		    $data = array(
-			'test_request_id' => $this->input->post('test_request'),
-			'test_id' => $test_id,
-			'test_type' => $test_type,
-			'monograph_id'=>$monograph_id,
-			'monograph_specifications' => "Phase ".$data_stage[$j]."</br>".$time_value." ".$time_name." ".$specsmin."%  ".$specsmax."%  ".$specsrangefrom."% - ".$specsrangeto."% of the stated amount </br>".$time_value2." ".$time_name2." ".$specsmin2."% ".$specsmax2."% ".$specsrangefrom2." - ".$specsrangeto2."% of the stated amount </br>".$time_value3." ".$time_name3." ".$specsmin3."% ".$specsmax3."% ".$specsrangefrom3." - ".$specsrangeto3."% of the stated amount </br>".$time_value4." ".$time_name4." ".$specsmin4."% ".$specsmax4."% ".$specsrangefrom4." - ".$specsrangeto4."% of the stated amount</br>".$time_value5." ".$time_name5." ".$specsmin5."% ".$specsmax5."% ".$specsrangefrom5." - ".$specsrangeto5."% of the stated amount</br>".$time_value6." ".$time_name6." ".$specsmin6."% ".$specsmax6."% ".$specsrangefrom6." - ".$specsrangeto6."% of the stated amount" 
-			);
-
-			$this->db->insert('monograph_specifications', $data);
-
-			$data2 = array(
-				'test_request_id' => $this->input->post('test_request'),
-				'test_type' => $test_type,
-				'test_id'=>$test_id,
-				'specifications' => $time_value." ".$time_name." ".$specsmin."%  ".$specsmax."%  ".$specsrangefrom."% - ".$specsrangeto."% of the stated amount </br>".$time_value2." ".$time_name2." ".$specsmin2."% ".$specsmax2."% ".$specsrangefrom2." - ".$specsrangeto2."% of the stated amount </br>".$time_value3." ".$time_name3." ".$specsmin3."% ".$specsmax3."% ".$specsrangefrom3." - ".$specsrangeto3."% of the stated amount </br>".$time_value4." ".$time_name4." ".$specsmin4."% ".$specsmax4."% ".$specsrangefrom4." - ".$specsrangeto4."% of the stated amount</br>".$time_value5." ".$time_name5." ".$specsmin5."% ".$specsmax5."% ".$specsrangefrom5." - ".$specsrangeto5."% of the stated amount</br>".$time_value6." ".$time_name6." ".$specsmin6."% ".$specsmax6."% ".$specsrangefrom6." - ".$specsrangeto6."% of the stated amount"
-
-				);
-			$this->db->insert('test_results', $data2);
-		  }
+  		$during_time=$this->input->post('time_value');
+  		$during_name=$this->input->post('time_name');
 
 		
-		redirect('test/index/'.$assignment.'/'.$test_request);	
+
+
+		for($j=0;$j<count($stage);$j++){
+		    
+		    $array = array(
+	          'test_request_id'=>$test_request,
+	          'diss_delayed_release_id'=>$test_id,
+	          'stage'=>$stage[$j],
+	          'time_value'=>$during_time[$j],
+	          'time_name'=>$during_name[$j],
+	          'min_tolerance'=>$specsmin[$j],
+	          'max_tolerance'=>$specsmax[$j],
+	          'tolerance_range_from'=>$specsrangefrom[$j],
+	          'tolerance_range_to'=>$specsrangeto[$j]
+
+		    );
+
+		     $this->db->insert('dissolusion_timestages',$array);
+		     
+		     $time_value[$j];
+		     $time_name[$j];
+		     $specsmin[$j];
+  			 $specsmax[$j];
+  			 $specsrangefrom[$j];
+  			 $specsrangeto[$j];
+
+  			 $a=array_combine($time_value[$j], $time_name[$j]);
+  			 $b=array_combine($specsmin[$j], $specsmax[$j]);
+             $c=array_combine($specsrangefrom[$j],$specsrangeto[$j]);
+             $e=array_combine($a,$c);
+             var_dump($e);
+             // $stages= implode(";",$e);
+		}
+
+		 //    $data = array(
+			//  'test_request_id' => $this->input->post('test_request'),
+			//  'test_id' => $test_id,
+			//  'test_type' => $test_type,
+			//  'monograph_id'=>$monograph_id,
+			//  'monograph_specifications'=>$stages 
+			// );
+
+			// $this->db->insert('monograph_specifications', $data);
+
+		 //    $data2 = array(
+			//  'test_request_id' => $this->input->post('test_request'),
+			//  'test_type' => $test_type,
+			//  'test_id'=>$test_id,
+			//  'specifications'=>$stages
+			// );
+
+			// $this->db->insert('test_results', $data2);
+		
+		// redirect('test/index/'.$assignment.'/'.$test_request);	
 
 	}
 	function save_second_worksheet(){

@@ -7,54 +7,149 @@ function __construct() {
 }
 
 
-function update_data($trid){
-    //$test_request_id= $trid;
-    // $user_type_id = $utid;
-    $testsa=$this->input->post('tests');
-    $tests= implode( ",", $testsa );
+  function update_data($trid){
+    $status=1;
+    $data_query=$this->db->select('new_quantity')->get('test_request')->result();
+    $nw_qty= $data_query[0]->new_quantity;
+
+    $data_sub=$this->db->select('quantity_submitted')->get('test_request')->result();
+    $submitted_qty= $data_sub[0]->quantity_submitted;
+
+    $data_remaining=$this->db->select('quantity_remaining')->get_where('test_request',array('test_request.id' => $tr_id))->result_array();
+    $remaining_qty= $data_remaining[0]['quantity_remaining'];
+    //echo $remaining_qty;
+    //var_dump($data_remaining);
+    // echo $nw_qty;
+  
+
+    if($nw_qty==0 || $nw_qty=="" || $nw_qty=="NULL" ){
+
+      $difference="";
+      $reference_number= $this->input->post('reference_number');
+      $assignment_status=1;
+      $user_id = $this->input->post('user_id');
+      $analyst_assigned_id= $this->input->post('assigneruserid');
+      $test_request_id = $this->input->post('tr_id');
+      $analyst_name= $this->input->post('analyst');
+      $client_id= $this->input->post('client_id');
+      $request_type= $this->input->post('request_type');
+      $sample_quantity= $this->input->post('sample_quantity');
+      $samples_issued= $this->input->post('samples_issued');
+
+     //function that calculates the remainder
+      $difference=$submitted_qty-$samples_issued;
+      
+
+
+     //Data Insertion
+      $data = array( 
+       'reference_number'=>$reference_number,
+       'analyst_name'=>$analyst_name,
+       'assigner_name'=>$this->input->post('user_name'),
+       'test_request_id'=>$test_request_id,
+       'assigner_user_id'=>$user_id,
+       'analyst_assigned_id'=>$analyst_assigned_id,
+       'client_id'=>$client_id,
+       'sample_issued'=>$samples_issued
+       );
+      
+      $data_two = array(
+       'test_request_id'=>$test_request_id,
+       'assigner_id'=>$user_id
+      );
+      
+      $data_three = array(
+
+       'request_status'=>$status,
+       'quantity_remaining'=>$difference,
+       'assignment_status'=>$assignment_status,
+       'new_quantity'=>$difference
+       
+      );
+      // $data_four = array(
+      //  'analyst_name'=>$analyst_name
+       
+      // );
+     $this->db->insert('assignment',$data);
+     $this->db->update('test_request', $data_three,array('id' => $test_request_id));
+    }else if($remaining_qty!=0 || $remaining_qty!="" || $remaining_qty!="NULL" ){
+
+      $difference="";
+      $reference_number= $this->input->post('reference_number');
+      $assignment_status=1;
+      $user_id = $this->input->post('user_id');
+      $analyst_assigned_id= $this->input->post('assigneruserid');
+      $test_request_id = $this->input->post('tr_id');
+      $analyst_name= $this->input->post('analyst');
+      $client_id= $this->input->post('client_id');
+      $request_type= $this->input->post('request_type');
+      $sample_quantity= $this->input->post('sample_quantity');
+      $samples_issued= $this->input->post('samples_issued');
+
+     //function that calculates the remainder
+      $difference=$remaining_qty-$samples_issued;
+
+     //Data Insertion
+      $data = array( 
+       'reference_number'=>$reference_number,
+       'analyst_name'=>$analyst_name,
+       'assigner_name'=>$this->input->post('user_name'),
+       'test_request_id'=>$test_request_id,
+       'assigner_user_id'=>$user_id,
+       'analyst_assigned_id'=>$analyst_assigned_id,
+       'client_id'=>$client_id,
+       'sample_issued'=>$samples_issued
+       );
+      
+      $data_two = array(
+       'test_request_id'=>$test_request_id,
+       'assigner_id'=>$user_id
+      );
+      
+      $data_three = array(
+       'request_status'=>$status,
+       'quantity_remaining'=>$difference,
+       'assignment_status'=>$assignment_status,
+       'new_quantity'=>$difference
+       
+      );
+      // $data_four = array(
+      //  'analyst_name'=>$analyst_name
+       
+      // );
+
+     $this->db->insert('assignment',$data);
+     $this->db->update('test_request', $data_three,array('id' => $test_request_id));
+
+     //var_dump($data_three);
+      //var_dump ($data);
+     
+      redirect('home');
+    }
+  }
+
+  function reset($tr_id){
+    $sum=0;
+    $new=0;
+    $status=0;
+
+    $quantity_remaining= $this->input->post('quantity_remaining');
+    $samples_issued= $this->input->post('samples_issued');
+
+    $sum=$quantity_remaining+$samples_issued;
+
+     $data_two = array( 
+     'quantity_submitted'=>$sum,
+     'new_quantity'=>$new,
+     'quantity_remaining'=>$sum,
+     'request_status'=>$status,
+     'assignment_status'=>$status
+     );
     
-    $data = array(
-
-   'reference_number'=>$this->input->post('reference_number'),
-   'applicant_name'=>$this->input->post('applicant_name'),
-   'applicant_address'=>$this->input->post('applicant_address'),
-   'active_ingredients'=>$this->input->post('active_ingredients'),
-   'dosage_form'=>$this->input->post('dosage_form'),
-   'strength_concentration'=>$this->input->post('strength_concentration'),
-   'measure'=>$this->input->post('measure'),
-   'pack_size'=>$this->input->post('pack_size'),
-   'label_claim'=>$this->input->post('label_claim'),
-   'manufacturer_name'=>$this->input->post('manufacturer_name'),
-   'manufacturer_address'=>$this->input->post('manufacturer_address'),
-   'brand_name'=>$this->input->post('brand_name'),
-   'marketing_authorization_number'=>$this->input->post('marketing_authorization_number'),
-   'batch_lot_number'=>$this->input->post('batch_lot_number'),
-   'date_manufactured'=>$this->input->post('date_of_manufacture'),
-   'expiry_date'=>$this->input->post('expiry_retest_date'),
-   'storage_conditions'=>$this->input->post('storage_conditions'),
-   'quantity_submitted'=>$this->input->post('quantity_submitted'),
-   'quantity_remaining'=>$this->input->post('quantity_submitted'),
-   'quantity_type'=>$this->input->post('quantity_type'),
-   'applicant_ref_number'=>$this->input->post('applicant_reference_number'),
-   'sample_source'=>$this->input->post('sample_source'),
-   'testing_reason'=>$this->input->post('reason'),
-   'other_reason'=>$this->input->post('other_reason'),
-   'other_test_required'=>$this->input->post('other_test'),
-   'other_specification'=>$this->input->post('other_specification'),
-   'tests'=>$tests,
-   'test_specification'=>$this->input->post('specification'),
-   'authorizer_name'=>$this->input->post('authorizing_name'),
-   'authorizer_designation'=>$this->input->post('designation'),
-   'date_authorized'=>$this->input->post('date_authorized'),
-   'findings_comments'=>$this->input->post('findings_comment'),
-   'received_by'=>$this->input->post('received_by'),
-   'date_received'=>$this->input->post('date_received'),
-   'laboratory_number'=>$this->input->post('lab_reg_number')
-   );
-
-    $this->db->update('test_request', $data,array('id' => $trid));
-    //var_dump($data);
+   
+    $this->db->delete('assignment',array('test_request_id'=>$tr_id));
+    $this->db->update('test_request',$data_two,array('id' => $tr_id));
     redirect('home');
-}
+  }
 }
 ?>
