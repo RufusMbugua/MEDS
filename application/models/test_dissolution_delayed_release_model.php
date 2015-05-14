@@ -277,6 +277,7 @@ class Test_Dissolution_Delayed_Release_Model extends CI_Model{
 
 		redirect('test/index/'.$assignment.'/'.$test_request);	
 	}
+
 	function save_monograph(){
 
 		$test_request=$this->input->post('test_request');
@@ -318,8 +319,26 @@ class Test_Dissolution_Delayed_Release_Model extends CI_Model{
   		$during_time=$this->input->post('time_value');
   		$during_name=$this->input->post('time_name');
 
-		
+		$a=array_combine($time_value,$time_name);
+		$b=array_combine_incrusive($a,$specsmin);
+		$limits=array_combine($specsmin,$specsmax);
+		$range_limits=array_combine($specsrangefrom,$specsrangeto);
+		print_r($a);
+		//$d=array_combine($limits,$range_limits);
+		//$e=array_merge($d,$range_limits);
 
+		/*print_r("</br>");
+		var_dump($a);
+		print_r("</br>");
+		var_dump($specsmin);
+		print_r("</br>");
+		var_dump($b);*/
+		// print_r("</br>");
+  //       var_dump($range_limits);
+  //       print_r("</br>");
+  //       // var_dump($e);
+        // print_r("</br>");       
+        die;
 
 		for($j=0;$j<count($stage);$j++){
 		    
@@ -338,18 +357,14 @@ class Test_Dissolution_Delayed_Release_Model extends CI_Model{
 
 		     $this->db->insert('dissolusion_timestages',$array);
 		     
-		     $time_value[$j];
-		     $time_name[$j];
-		     $specsmin[$j];
-  			 $specsmax[$j];
-  			 $specsrangefrom[$j];
-  			 $specsrangeto[$j];
+		    //  $time_value[$j];
+		    //  $time_name[$j];
+		    //  $specsmin[$j];
+  			 // $specsmax[$j];
+  			 // $specsrangefrom[$j];
+  			 // $specsrangeto[$j];
 
-  			 $a=array_combine($time_value[$j], $time_name[$j]);
-  			 $b=array_combine($specsmin[$j], $specsmax[$j]);
-             $c=array_combine($specsrangefrom[$j],$specsrangeto[$j]);
-             $e=array_combine($a,$c);
-             var_dump($e);
+
              // $stages= implode(";",$e);
 		}
 

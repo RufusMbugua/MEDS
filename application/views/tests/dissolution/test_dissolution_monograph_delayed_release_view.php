@@ -32,7 +32,7 @@
     var id=2;
     $(document).on('click','#add_stage',function () {
   
-        var html='<tr><td colspan="3" style="padding:8px;color: #0000fb;border-bottom:solid 1px #c4c4ff;background-color:#fdc4c8;">Stage '+id+'<input type="hidden" id="stage" name="stage[]" value="'+id+'"/></td></tr><tr><td style="padding:8px;"><input type="checkbox" name="min'+id+'" id="min'+id+'" />Minimum Value</td><td style="padding:8px;"><input type="checkbox" name="max'+id+'" id="max'+id+'" />Maximum Value</td><td style="padding:8px;"><input type="checkbox" name="range" id="range'+id+'" />Range of Values</td></tr><tr><td style="color:#0000ff;padding:8px;"><input type="text" min'+id+'="min_tolerance'+id+'" id="min_tolerance'+id+'" name="min_tolerance[]" placeholder="min%" size="5"/></td><td style="color:#0000ff;padding:8px;"><input type="text" max'+id+'="max_tolerance'+id+'" id="max_tolerance'+id+'" name="max_tolerance[]" placeholder="max%" size="5"/></td><td style="color:#0000ff;padding:8px;"><input type="text" range'+id+'="tolerance_range'+id+'" id="tolerance_range_from'+id+'" name="tolerance_range_from[]" placeholder="min%" size="5"> - <input type="text" range'+id+'="tolerance_range'+id+'" name="tolerance_range_to[]" id ="tolerance_range_to'+id+'" placeholder="max%" size="5"></td></tr><tr><td align="left" style="padding:8px;border-bottom: solid 1px #c4c4ff;border-top: dotted 1px #c4c4ff;background-color: #ffffff;">Duration/Time</td><td colspan="2" align="left" style="padding:8px;border-bottom: solid 1px #c4c4ff;border-top: dotted 1px #c4c4ff;background-color: #ffffff;"><input type="text" size="7" name="time_value[]" id="time" placeholder="eg. 60"> <select name="time_name[]"><option value="Minutes">Minutes</option><option value="Hours">Hours</option></select></td></tr>';
+        var html='<tr><td colspan="3" style="padding:8px;color: #0000fb;border-bottom:solid 1px #c4c4ff;background-color:#fdc4c8;">Stage '+id+'<input type="hidden" id="stage" name="stage[]" value="'+id+'"/></td></tr><tr><td style="padding:8px;"><input type="checkbox" name="min'+id+'" id="min'+id+'" />Minimum Value</td><td style="padding:8px;"><input type="checkbox" name="max'+id+'" id="max'+id+'" />Maximum Value</td><td style="padding:8px;"><input type="checkbox" name="range" id="range'+id+'" />Range of Values</td></tr><tr><td style="color:#0000ff;padding:8px;"><input type="text" min'+id+'="min_tolerance'+id+'" id="min_tolerance'+id+'" name="min_tolerance[]" placeholder="min%" value="0" size="5"/></td><td style="color:#0000ff;padding:8px;"><input type="text" max'+id+'="max_tolerance'+id+'" id="max_tolerance'+id+'" name="max_tolerance[]" placeholder="max%" value="0" size="5"/></td><td style="color:#0000ff;padding:8px;"><input type="text" range'+id+'="tolerance_range'+id+'" id="tolerance_range_from'+id+'" name="tolerance_range_from[]" placeholder="min%" value="0" size="5"> - <input type="text" range'+id+'="tolerance_range'+id+'" name="tolerance_range_to[]" id ="tolerance_range_to'+id+'" placeholder="max%" value="0" size="5"></td></tr><tr><td align="left" style="padding:8px;border-bottom: solid 1px #c4c4ff;border-top: dotted 1px #c4c4ff;background-color: #ffffff;">Duration/Time</td><td colspan="2" align="left" style="padding:8px;border-bottom: solid 1px #c4c4ff;border-top: dotted 1px #c4c4ff;background-color: #ffffff;"><input type="text" size="7" name="time_value[]" id="time" placeholder="eg. 60"> <select name="time_name[]"><option value="Minutes">Minutes</option><option value="Hours">Hours</option></select></td></tr>';
         var master = $(this).closest("table.spectable");
      
          master.find("tbody").append(html);
@@ -152,9 +152,9 @@
                       <td style="padding:8px;"><input type="checkbox" id="range" name="range"/>Range of Values</td>
                     </tr>
                     <tr>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" min="min_tolerance" id="min_tolerance" name="min_tolerance[]" placeholder="min%" size="5"/></td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" max='max_tolerance' id="max_tolerance" name="max_tolerance[]" placeholder="max%" size="5"/></td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" id = "tolerance_range_from" name="tolerance_range_from[]" placeholder="min%" size="5"> - <input type="text" range="tolerance_range" name="tolerance_range_to[]" id = "tolerance_range_to" placeholder="max%" size="5" ></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" min="min_tolerance" id="min_tolerance" name="min_tolerance[]" placeholder="min%" value="0" size="5"/></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" max='max_tolerance' id="max_tolerance" name="max_tolerance[]" placeholder="max%" value="0" size="5"/></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" id = "tolerance_range_from" name="tolerance_range_from[]" placeholder="min%" value="0" size="5"> - <input type="text" range="tolerance_range" name="tolerance_range_to[]" id = "tolerance_range_to" placeholder="max%" value="0" size="5" ></td>
                     </tr>
                     <tr>
                       <td align="left" style="padding:8px;border-bottom: solid 1px #c4c4ff;border-top: dotted 1px #c4c4ff;background-color: #ffffff;">
@@ -401,4 +401,5 @@
     }
   }).change();
 
-</script></html
+</script>
+</html>
