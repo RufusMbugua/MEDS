@@ -4,8 +4,6 @@
   <link href="<?php echo base_url().'images/meds_logo_icon.png';?>" rel="shortcut icon">
   <link href="<?php echo base_url().'style/core.css';?>" rel="stylesheet" type="text/css" />
   <link href="<?php echo base_url().'style/forms.css';?>" rel="stylesheet" type="text/css" />
-  <link href="<?php echo base_url().'style/example.css';?>" rel="stylesheet" type="text/css"/>
-
    
   <link href="<?php echo base_url().'style/jquery.tooltip.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/jquery-ui.css';?>" rel="stylesheet" type="text/css"/>
@@ -16,25 +14,19 @@
 
   <script src="<?php echo base_url().'js/jquery.js';?>"></script>
   <script src="<?php echo base_url().'js/jquery-1.11.0.js';?>"></script>
-  <script src="<?php echo base_url().'js/jquery.mini.1.11.1.js';?>"></script>
   <script src="<?php echo base_url().'js/jquery-ui.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/tabs.js';?>"></script>  
   <script type="text/javascript" src="<?php echo base_url().'js/jquery.validate.js';?>"></script>
-  <script type="text/javascript" src="<?php echo base_url().'js/noty/js/noty/jquery.noty.js';?>"></script>
-  <script type="text/javascript" src="<?php echo base_url().'js/noty/js/noty/layouts/top.js';?>"></script>
-  <script type="text/javascript" src="<?php echo base_url().'js/noty/js/noty/themes/default.js';?>"></script>
   
   <!-- bootstrap reference library -->
   <script src="<?php echo base_url().'js/bootstrap.min.js';?>"></script>
-  <script src="<?php echo base_url().'js/bootstrap.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/example.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/Jquery-datatables/jquery.dataTables.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/equations.js';?>"></script>
-  <script type="text/javascript" src="<?php echo base_url().'js/example.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'tinymce/tinymce.min.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'tinymce/textarea_script.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/equipmentinfo.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
-  <script type="text/javascript" src="<?php echo base_url().'js/jquery.autosave.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/jquery.autosave.js';?>"></script>
 </head>
 <body>
@@ -95,7 +87,7 @@
   <div id="form_wrapper_lists">
      <div id="company_details">
      <?php echo validation_errors();?>
-     <?php echo form_open('company_profile/Save',array('id'=>'company_profile'));?>
+     <?php echo form_open('company_profile/Edit');?>
      <table width="80%" class="table_form" bgcolor="#c4c4ff" border="1" cellpadding="4px" align="center"> 
         <tr>
           <td style="padding:8px;text-align:center;">
@@ -132,31 +124,26 @@
                 </tr>
                 <tr>
                   <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;">Postal Address:</td>      
-                  <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><input type ="text" size="40" name ="address" id="address" value="<?php echo $query[0]['address'];?>"></td>
+                  <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><?php echo $query[0]['address'];?></td>
                   <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;">Telephone Number:</td>      
-                  <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><input type ="text" size="40" name ="phone" id="phone" value="<?php echo $query[0]['phone'];?>"></td>
+                  <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><?php echo $query[0]['phone'];?></td>
                 </tr>
                 <tr>
                   <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;">Region:</td>      
-                  <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><input type ="text" size="40" name ="region" id="region" value="<?php echo $query[0]['region'];?>"></td>
+                  <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><?php echo $query[0]['region'];?></td>
                   <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;">Wireless Number:</td>      
-                  <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><input type ="text" size="40" name ="wireless" id="wireless" value="<?php echo $query[0]['wireless'];?>"></td>
+                  <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><?php echo $query[0]['wireless'];?></td>
                 </tr>
                 <tr>
                   <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;">Website:</td>      
-                  <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><input type ="text" size="40" name ="website" id="website" value="<?php echo $query[0]['website'];?>"></td>
+                  <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><?php echo $query[0]['website'];?></td>
                   <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;">Email Address:</td>      
-                  <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><input type ="text" size="40" name ="email" id="email" value="<?php echo $query[0]['email'];?>"></td>
+                  <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><?php echo $query[0]['email'];?></td>
                 </tr>
-                <div id="noty-holder"></div><!-- HERE IS WHERE THE NOTY WILL APPEAR-->  
-                  <div class="container">
-                    <div class="starter-template">
-                      <tr>
-                        <td colspan="4" style="padding:8px;text-align:center;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;">
-                         <input type = "submit" onclick="myFunction()"class="btn" name ="submit" id ="submit" value ="Submit"></button></td>  
-                      </tr>
-                </div>
-              </div>
+                <tr>
+                  <td colspan="4" style="padding:8px;text-align:center;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;">
+                  <input type = "submit" class="btn" name ="submit" id ="submit" value ="Edit"></td>  
+                </tr>
             </table>
           </td>
          </tr>

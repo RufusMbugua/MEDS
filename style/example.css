@@ -1,0 +1,23 @@
+#noty-holder{    
+    width: 80%;    
+    top: 0;
+    font-weight: bold;    
+    z-index: 1031; /* Max Z-Index in Fixed Nav Menu is 1030*/
+    text-align: center;
+    position: fixed;
+}
+
+.alert{
+    margin: 0 auto;
+    margin-bottom: 2px;
+    border-radius: 0px;
+}
+
+#main{
+    min-height:900px;
+}
+
+.starter-template {
+  padding:10px 15px;
+  text-align: center;
+}

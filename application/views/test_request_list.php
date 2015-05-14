@@ -122,6 +122,7 @@
        echo "style='display:block;'>";
       }
      ?>
+     <a href="<?php echo base_url().'example';?>" class="system_nav system_nav_link">Example</a>
      <a href="<?php echo base_url().'company_profile/Get';?>" class="system_nav system_nav_link">Company profile</a>
      <a href="<?php echo base_url().'user_accounts/Get';?>" class="system_nav system_nav_link ">User Accounts</a>
      <a href="<?php echo base_url().'client_list/Get';?>" class="system_nav system_nav_link">Client List</a>

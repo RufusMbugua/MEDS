@@ -318,12 +318,14 @@ class Test_Dissolution_Delayed_Release_Model extends CI_Model{
   		$stage=$this->input->post('stage');
   		$during_time=$this->input->post('time_value');
   		$during_name=$this->input->post('time_name');
-
-		$a=array_combine($time_value,$time_name);
-		$b=array_combine_incrusive($a,$specsmin);
-		$limits=array_combine($specsmin,$specsmax);
-		$range_limits=array_combine($specsrangefrom,$specsrangeto);
-		print_r($a);
+  		// print_r($time_value);
+  		var_dump($time_value);
+  		die;
+		// $a=array_combine($time_value,$time_name);
+		// $b=array_combine_incrusive($a,$specsmin);
+		// $limits=array_combine($specsmin,$specsmax);
+		// $range_limits=array_combine($specsrangefrom,$specsrangeto);
+		// print_r($a);
 		//$d=array_combine($limits,$range_limits);
 		//$e=array_merge($d,$range_limits);
 
@@ -338,7 +340,7 @@ class Test_Dissolution_Delayed_Release_Model extends CI_Model{
   //       print_r("</br>");
   //       // var_dump($e);
         // print_r("</br>");       
-        die;
+     
 
 		for($j=0;$j<count($stage);$j++){
 		    
