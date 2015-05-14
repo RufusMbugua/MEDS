@@ -286,18 +286,6 @@ class Test_Dissolution_Delayed_Release_Model extends CI_Model{
 		$test_type ='38';
 
 		$monograph_specifications = $this->input->post('specification');
-		// $minimum = $this->input->post('min_tolerance');
-		// $maximum = $this->input->post('max_tolerance');
-		// $range_minimum = $this->input->post('tolerance_range_from');
-		// $range_maximum = $this->input->post('tolerance_range_to');
-		// if ($minimum!= '') {
-		// 	$monograph_specifications_final = $minimum.' '. $monograph_specifications;
-		// }else if ($minimum != '') {
-		// 	$monograph_specifications_final = $maximum.' '. $monograph_specifications;
-		// }else{
-		// 	$monograph_specifications_final = $range_minimum.' to '.$range_maximum .' '. $monograph_specifications;
-
-		// }
 
 		$data=$this->db->select_max('id')->get('diss_delayed_release')->result();
         $test_id=$data[0]->id;
@@ -307,7 +295,7 @@ class Test_Dissolution_Delayed_Release_Model extends CI_Model{
         $monograph_id=$data_mon[0]->id;
         $monograph_id++; 
 
-        
+        // the below references are arrays
   		$time_value=$this->input->post('time_value');
   		$time_name=$this->input->post('time_name');
   		$specsmin=$this->input->post('min_tolerance');
@@ -316,32 +304,21 @@ class Test_Dissolution_Delayed_Release_Model extends CI_Model{
   		$specsrangeto=$this->input->post('tolerance_range_to');
   		
   		$stage=$this->input->post('stage');
-  		$during_time=$this->input->post('time_value');
-  		$during_name=$this->input->post('time_name');
-  		// print_r($time_value);
+  		// $during_time=$this->input->post('time_value');
+  		// $during_name=$this->input->post('time_name');
+  		
+  		//var_dump displays the arrays from the input posts
   		var_dump($time_value);
+  		var_dump($time_name);
+  		var_dump($specsmin);
+  		var_dump($specsmax);
+  		var_dump($specsrangefrom);
+  		var_dump($specsrangeto);
   		die;
-		// $a=array_combine($time_value,$time_name);
-		// $b=array_combine_incrusive($a,$specsmin);
-		// $limits=array_combine($specsmin,$specsmax);
-		// $range_limits=array_combine($specsrangefrom,$specsrangeto);
-		// print_r($a);
-		//$d=array_combine($limits,$range_limits);
-		//$e=array_merge($d,$range_limits);
 
-		/*print_r("</br>");
-		var_dump($a);
-		print_r("</br>");
-		var_dump($specsmin);
-		print_r("</br>");
-		var_dump($b);*/
-		// print_r("</br>");
-  //       var_dump($range_limits);
-  //       print_r("</br>");
-  //       // var_dump($e);
-        // print_r("</br>");       
-     
+  		//Was attempting array combine
 
+  		//a loop that individualy inserts data from the array in individual rows
 		for($j=0;$j<count($stage);$j++){
 		    
 		    $array = array(
@@ -359,15 +336,6 @@ class Test_Dissolution_Delayed_Release_Model extends CI_Model{
 
 		     $this->db->insert('dissolusion_timestages',$array);
 		     
-		    //  $time_value[$j];
-		    //  $time_name[$j];
-		    //  $specsmin[$j];
-  			 // $specsmax[$j];
-  			 // $specsrangefrom[$j];
-  			 // $specsrangeto[$j];
-
-
-             // $stages= implode(";",$e);
 		}
 
 		 //    $data = array(
